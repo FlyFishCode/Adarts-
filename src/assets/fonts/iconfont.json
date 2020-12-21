@@ -1,0 +1,23 @@
+{
+  "id": "1994758",
+  "name": "test",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "16480880",
+      "name": "男人",
+      "font_class": "nanren",
+      "unicode": "e69f",
+      "unicode_decimal": 59039
+    },
+    {
+      "icon_id": "15282815",
+      "name": "女人",
+      "font_class": "nvren",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    }
+  ]
+}
