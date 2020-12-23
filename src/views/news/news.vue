@@ -95,7 +95,7 @@
         <el-table-column prop="display" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
-              <el-checkbox v-model="scope.row.display"></el-checkbox>
+              <el-checkbox v-model="scope.row.display" @change='checkboxChange(scope.row)'></el-checkbox>
             </div>
           </template>
         </el-table-column>
@@ -205,6 +205,11 @@ export default {
         break;
       }
       return str;
+    },
+    checkboxChange(item) {
+      this.$axios.post('/updatedisplay', this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
+        this.$message(res.data.msg);
+      });
     },
     save() {},
     dateChange(data) {

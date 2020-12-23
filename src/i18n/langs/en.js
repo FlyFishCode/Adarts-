@@ -603,15 +603,15 @@ const en = {
         tip571: "Please select a team",
         tip572: "Format error",
         tip573: "score",
-        tip574: 'Seed No',
-        tip575: 'The game has started. Are you sure you want to modify it?',
+        tip574: "Seed No",
+        tip575: "The game has started. Are you sure you want to modify it?",
         tip576: "Stage Game Option",
         tip577: "More Than",
         tip578: "Game Preparation",
-        tip579: 'Female players need at least',
+        tip579: "Female players need at least",
         tip580: "The current set player cannot be the same as the previous set player",
-        tip581: 'The maximum number of players participating in the disk is',
-        tip582: 'The maximum number of players participating in the mode is',
+        tip581: "The maximum number of players participating in the disk is",
+        tip582: "The maximum number of players participating in the mode is",
         tip583: "Male players need at least",
         tip584: "Player repeat",
         tip585: "Rating Maximum Limit",
@@ -631,7 +631,8 @@ const en = {
         tip599: "Views",
         tip600: "Display",
         tip601: "Hidden",
-        tip602: "Create news"
+        tip602: "Create news",
+        tip607: "Team(ID)"
     },
     ...enLocale
 };

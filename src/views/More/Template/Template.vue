@@ -42,18 +42,27 @@
         <el-table-column prop="description" :label="$t('all.tip138')" min-width="10%"> </el-table-column>
         <el-table-column :label="$t('all.tip433')" min-width="10%">
           <template slot-scope="scope">
-            <div>{{ scope.row.cdateInt  | showDate}}</div>
+            <div>{{ scope.row.cdateInt | showDate }}</div>
           </template>
         </el-table-column>
         <el-table-column min-width="10%">
           <template slot-scope="scope">
-              <el-button type="primary" size="mini" @click="del(scope.row.templateId)">{{ $t("all.tip130") }}</el-button>
+            <el-button type="primary" size="mini" @click="del(scope.row.templateId)">{{ $t("all.tip130") }}</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="1" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="1"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -92,7 +101,8 @@ export default {
     },
     search() {
       this.$axios.post('/gettemplatelist', this.$qs.stringify(this.templateVO)).then(res => {
-        this.tableData = res.data.data;
+        this.tableData = res.data.data.list;
+        this.total = res.data.data.total;
       });
     },
     del(id) {
@@ -101,11 +111,13 @@ export default {
         this.search(this.userId);
       });
     },
-    sizeChange(a) {
-      console.log(a);
+    sizeChange(size) {
+      this.templateVO.pageSize = size;
+      this.search();
     },
-    currentChange(a) {
-      console.log(a);
+    currentChange(num) {
+      this.templateVO.pageNum = num;
+      this.search();
     },
     push(id) {
       this.$router.push({

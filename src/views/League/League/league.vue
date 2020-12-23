@@ -219,6 +219,16 @@
         <el-row class="DialogButton">
           <el-button type="primary" size="mini" @click="TemplateConfirm">{{ $t("all.tip47") }}</el-button>
         </el-row>
+        <div class="page">
+          <el-pagination
+            @size-change="templateSizeChange"
+            @current-change="templateCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="templateTotal"
+          ></el-pagination>
+        </div>
       </el-dialog>
     </div>
     <div class="page">
@@ -252,6 +262,7 @@ export default {
       },
       total: 1,
       city: '',
+      templateTotal: 1,
       ModularVisible: false,
       TemplateVisible: false,
       ContinentArr: [],
@@ -380,7 +391,7 @@ export default {
       if (this.CreateValue === '1') {
         this.ModularVisible = true;
       } else {
-        this.getTemplateTopBoxData(this.LeagueMgmtVO.userId);
+        this.getTemplateTopBoxData();
         this.TemplateVisible = true;
       }
     },
@@ -439,15 +450,24 @@ export default {
         }
       });
     },
-    getTemplateTopBoxData(id) {
+    getTemplateTopBoxData(pageNum = 1, pageSize = 10) {
       const data = {
-        userId: id,
+        userId: this.LeagueMgmtVO.userId,
         name: this.template.TemplateName,
-        leagueType: this.template.TemplateType
+        leagueType: this.template.TemplateType,
+        pageNum,
+        pageSize
       };
       this.$axios.post('/gettemplatelist', this.$qs.stringify(data)).then(res => {
-        this.TemplateTopBoxData = res.data.data;
+        this.TemplateTopBoxData = res.data.data.list;
+        this.templateTotal = res.data.data.total;
       });
+    },
+    templateSizeChange(value) {
+      this.getTemplateTopBoxData(undefined, value);
+    },
+    templateCurrentChange(value) {
+      this.getTemplateTopBoxData(value);
     },
     change(a) {
       console.log(a);

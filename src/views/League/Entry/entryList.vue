@@ -124,7 +124,7 @@
         <div class="dialogTable">
           <el-table :data="topBoxTableData" @selection-change="SelectionChange">
             <el-table-column type="selection" width="55"> </el-table-column>
-            <el-table-column :label="$t('all.tip244')" min-width="15%">
+            <el-table-column :label="$t('all.tip607')" min-width="15%">
               <template slot-scope="scope">
                 <div>{{ scope.row.teamName }}</div>
                 <div>{{ `(${scope.row.teamId})` }}</div>
@@ -145,7 +145,16 @@
           </el-table>
         </div>
         <div class="page">
-          <el-pagination @size-change="topBoxTableDataSizeChange" @current-change="topBoxTableDataCurrentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="topBoxTableDataTotal"> </el-pagination>
+          <el-pagination
+            @size-change="topBoxTableDataSizeChange"
+            @current-change="topBoxTableDataCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 50, 100, 200]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="topBoxTableDataTotal"
+          >
+          </el-pagination>
         </div>
         <el-row style="display:flex;justify-content:center">
           <el-col :span="2">
@@ -157,7 +166,7 @@
     <div class="table">
       <el-table :data="tableData" style="width: 100%" @selection-change="tableDataSelection">
         <el-table-column width="55" type="selection" :selectable="isShowSelect"></el-table-column>
-        <el-table-column :label="$t('all.tip244')" min-width="10%">
+        <el-table-column :label="$t('all.tip607')" min-width="10%">
           <template slot-scope="scope">
             <div class="tableLink" @click="push(scope.row)">
               <div>{{ scope.row.teamName }}</div>
@@ -167,7 +176,8 @@
         </el-table-column>
         <el-table-column :label="$t('all.tip245')" min-width="8%">
           <template slot-scope="scope">
-            <span>{{ scope.row.entryMembers }}</span>/<span>{{ scope.row.teamMembers }}</span>
+            <span>{{ scope.row.entryMembers }}</span
+            >/<span>{{ scope.row.teamMembers }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="captainName" :label="$t('all.tip246')" min-width="7%"></el-table-column>
@@ -212,7 +222,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>

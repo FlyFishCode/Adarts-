@@ -22,7 +22,9 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="infoVO.opeatorName" :disabled="flag"></el-input>
+          <el-select v-model="infoVO.opeatorId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" :disabled="flag">
+            <el-option v-for="item in opeatorList" :key="item.operationId" :value="item.operationId" :label="item.operationName"> </el-option>
+          </el-select>
         </el-col>
       </el-row>
       <el-row>
@@ -87,10 +89,11 @@ export default {
       countryList: [],
       categoryList: [{ value: 1, label: 'all.tip603' }, { value: 2, label: 'all.tip604' }, { value: 3, label: 'all.tip605' }, { value: 4, label: 'all.tip606' }, { value: 5, label: 'all.tip1' }],
       fileList: [],
+      opeatorList: [],
       infoVO: {
         countryId: '',
         category: 1,
-        opeatorName: '',
+        opeatorId: '',
         registerDate: '',
         title: '',
         display: 0,
@@ -142,11 +145,10 @@ export default {
         // 过滤掉复制文本中自带的样式,默认开启
         editor.config.pasteFilterStyle = false;
         // 自定义处理粘贴的文本内容
-        // eslint-disable-next-line func-names
-        editor.config.pasteTextHandle = function (content) {
-          // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
-          return `<p style='text-align:center;color:red;border-bottom:1px solid #DCDFE6;border-top:1px solid #DCDFE6;'>以下内容来源于网络,或者复制过来</p>${content}<p style='text-align:center;color:red;border-bottom:1px solid #DCDFE6;border-top:1px solid #DCDFE6;'>以上内容来源于网络,或者复制过来</p>`;
-        };
+        // editor.config.pasteTextHandle = function (content) {
+        //   // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
+        //   return `<p style='text-align:center;color:red;border-bottom:1px solid #DCDFE6;border-top:1px solid #DCDFE6;'>以下内容来源于网络,或者复制过来</p>${content}<p style='text-align:center;color:red;border-bottom:1px solid #DCDFE6;border-top:1px solid #DCDFE6;'>以上内容来源于网络,或者复制过来</p>`;
+        // };
         // editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 限制图片大小为2M
         // eslint-disable-next-line func-names
         editor.config.linkImgCallback = function (url) {
@@ -185,8 +187,31 @@ export default {
       });
     },
     save() {
-      console.log(this.fileList);
-      this.$refs.upload.submit();
+      const obj = {
+        id: this.$route.query.newsId || '',
+        countryId: this.infoVO.countryId,
+        category: this.infoVO.category,
+        opeatorId: this.infoVO.opeatorId,
+        registerDate: this.infoVO.registerDate,
+        title: this.infoVO.title,
+        display: this.infoVO.display,
+        contents: this.infoVO.contents
+      };
+      this.$axios.post('/addleaguenews', this.$qs.stringify(obj)).then(res => {
+        if (res.data.msg === 'OK') {
+          this.$refs.upload.submit();
+          this.$message(res.data.msg);
+        }
+      });
+    },
+    remoteMethod(value) {
+      if (value) {
+        this.$axios.post('/searchOperation', this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem('userId') })).then(res => {
+          this.opeatorList = res.data.data;
+        });
+      } else {
+        this.opeatorList = [];
+      }
     },
     getNewsInfo(id) {
       this.$axios.post('/getleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
@@ -206,20 +231,20 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('countryId', this.infoVO.countryId);
-      formData.append('category', this.infoVO.category);
-      formData.append('opeatorId', this.infoVO.opeatorId);
-      formData.append('registerDate', this.infoVO.registerDate);
-      formData.append('title', this.infoVO.title);
-      formData.append('display', this.infoVO.display);
+      // formData.append('countryId', this.infoVO.countryId);
+      // formData.append('category', this.infoVO.category);
+      // formData.append('opeatorId', this.infoVO.opeatorId);
+      // formData.append('registerDate', this.infoVO.registerDate);
+      // formData.append('title', this.infoVO.title);
+      // formData.append('display', this.infoVO.display);
       formData.append('thumbnail', File);
-      formData.append('contents', this.infoVO.contents);
+      // formData.append('contents', this.infoVO.contents);
       this.$axios({
         method: 'POST',
-        url: '/addleaguenews',
+        url: '/uploadPictures',
         data: formData
       }).then(res => {
-        this.$message(res.data.msg);
+        console.dir(res);
       });
     },
     handleRemove(file, fileList) {
