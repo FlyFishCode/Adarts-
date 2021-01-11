@@ -344,7 +344,7 @@ export default {
       });
     },
     getCretetionData() {
-      this.$axios.post('/getcreatorlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
+      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
         this.creteList = res.data.data;
       });
     },

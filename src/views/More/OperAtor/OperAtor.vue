@@ -208,7 +208,7 @@ export default {
     },
     getCreatorList() {
       const userId = sessionStorage.getItem('userId');
-      this.$axios.post(`/getcreatorlist?userId=${userId}`).then(res => {
+      this.$axios.post(`/operation/getcreatorlist?userId=${userId}`).then(res => {
         this.creatorList = res.data.data;
         this.agentList = res.data.data;
       });

@@ -324,6 +324,27 @@ const routes = [{
                 component: () =>
                     import ( /* webpackChunkName: "createNews" */ "../views/news/createNews.vue"),
                 meta: [{ name: "all.tip595", url: "/news" }, { name: "all.tip602", url: "/createNews" }]
+            },
+            {
+                path: "/banner",
+                name: "Banner",
+                component: () =>
+                    import ( /* webpackChunkName: "banner" */ "../views/news/banner.vue"),
+                meta: [{ name: "all.tip608", url: "/banner" }]
+            },
+            {
+                path: "/createBanner",
+                name: "CreateBanner",
+                component: () =>
+                    import ( /* webpackChunkName: "createBanner" */ "../views/news/createBanner.vue"),
+                meta: [{ name: "all.tip608", url: "/banner" }, { name: "all.tip614", url: "/createBanner" }]
+            },
+            {
+                path: "/icon",
+                name: "Icon",
+                component: () =>
+                    import ( /* webpackChunkName: "icon" */ "../views/news/icon.vue"),
+                meta: [{ name: "all.tip619", url: "/icon" }]
             }
         ]
     }

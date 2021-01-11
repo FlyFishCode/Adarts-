@@ -234,7 +234,7 @@ export default {
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },

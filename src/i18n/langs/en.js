@@ -417,9 +417,9 @@ const en = {
         tip385: "LG",
         tip386: "SUM",
         tip387: "Instructions：",
-        tip3871: "1、Recommend Image Size：248px X 184px。",
-        tip3872: "2、The maximum file size of uploads is 2MB。",
-        tip3873: "3、Image files JPG,JPEG,PNG are allowed",
+        tip3871: "Recommend Image Size：248px X 184px。",
+        tip3872: "The maximum file size of uploads is 2MB。",
+        tip3873: "Image files JPG,JPEG,PNG are allowed",
         tip388: "Location",
         tip389: "Reg.Date",
         tip390: "Num of Player",
@@ -632,7 +632,8 @@ const en = {
         tip600: "Display",
         tip601: "Hidden",
         tip602: "Create news",
-        tip607: "Team(ID)"
+        tip607: "Team(ID)",
+        tip608: "Banner"
     },
     ...enLocale
 };

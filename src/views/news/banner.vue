@@ -11,19 +11,20 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip51") }}
-        </el-col>
-        <el-col :span="3">
-          <el-select v-model="infoVO.category" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in categoryList" :key="item.value" :value="item.value" :label="$t(item.label)"></el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.opeatorIdName" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
             <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
+          </el-select>
+        </el-col>
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip609") }}
+        </el-col>
+        <el-col :span="3">
+          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')">
+            <el-option :value="1" :label="$t('all.tip610')"></el-option>
+            <el-option :value="2" :label="$t('all.tip611')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -33,11 +34,11 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="11">
-            <el-date-picker v-model="infoVO.registerStartDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+            <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="infoVO.registerEndDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
+            <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
             </el-date-picker>
           </el-col>
         </el-col>
@@ -45,7 +46,7 @@
           {{ $t("all.tip597") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="infoVO.title"></el-input>
+          <el-input v-model="infoVO.name" clearable></el-input>
         </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip600") }}
@@ -70,32 +71,32 @@
       <el-table :data="tableData" border>
         <el-table-column type="index" :label="$t('all.tip257')" width="50"> </el-table-column>
         <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="5%"></el-table-column>
-        <el-table-column prop="sideBull" :label="$t('all.tip51')" min-width="5%">
+        <el-table-column prop="sideBull" :label="$t('all.tip609')" min-width="5%">
           <template slot-scope="scope">
-            <div>{{ $t(getCategoryType(scope.row.category)) }}</div>
+            <div>{{ scope.row.useType === '1'?$t('all.tip610'):$t('all.tip611') }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="title" :label="$t('all.tip596')" min-width="10%">
           <template slot-scope="scope">
-            <div class="imgBox"><img :src="scope.row.thumbnail" alt="" /></div>
+            <div class="imgBox"><img :src="scope.row.image" alt="" /></div>
           </template>
         </el-table-column>
-        <el-table-column prop="title" :label="$t('all.tip597')" min-width="20%">
+        <el-table-column prop="name" :label="$t('all.tip597')" min-width="20%">
           <template slot-scope="scope">
-            <div class="link" @click="entryPage(scope.row.id)">{{ scope.row.title }}</div>
+            <div class="link" @click="entryPage(scope.row.id)">{{ scope.row.name }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="opeatorName" :label="$t('all.tip9')" min-width="10%"> </el-table-column>
-        <el-table-column prop="registerDate" :label="$t('all.tip598')" min-width="10%">
+        <el-table-column prop="registerDate" :label="$t('all.tip612')" min-width="10%">
           <template slot-scope="scope">
             <div>{{ scope.row.registerDate | showDate }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="visitCount" :label="$t('all.tip599')" min-width="10%"> </el-table-column>
-        <el-table-column prop="display" :label="$t('all.tip600')" min-width="5%">
+        <el-table-column prop="cdateInt" :label="$t('all.tip613')" min-width="10%"> </el-table-column>
+        <el-table-column prop="status" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
-              <el-checkbox v-model="scope.row.display" @change='checkboxChange(scope.row)'></el-checkbox>
+              <el-checkbox v-model="scope.row.status" @change='checkboxChange(scope.row)'></el-checkbox>
             </div>
           </template>
         </el-table-column>
@@ -127,7 +128,7 @@ export default {
     return {
       pickerOptions: {
         disabledDate(time) {
-          const date1 = new Date(vm.infoVO.registerStartDate);
+          const date1 = new Date(vm.infoVO.startDate);
           return time.getTime() < date1;
         }
       },
@@ -135,50 +136,51 @@ export default {
       tableData: [],
       countryList: [],
       operatorList: [],
-      categoryList: [{ value: 1, label: 'all.tip603' }, { value: 2, label: 'all.tip604' }, { value: 3, label: 'all.tip605' }, { value: 4, label: 'all.tip606' }, { value: 5, label: 'all.tip1' }],
       infoVO: {
         countryId: '',
-        category: 1,
-        operatorId: '',
-        registerStartDate: '',
-        registerEndDate: '',
-        opeatorIdName: '',
-        title: '',
-        display: 1
+        userId: '',
+        useType: 1,
+        startDate: '',
+        endDate: '',
+        name: '',
+        display: 1,
+        pageNum: 1,
+        pageSize: 10
       },
       dialogInfo: {},
       playerList: []
     };
   },
   mounted() {
-    this.search();
-    this.getCountryList();
-    this.getOoperatorList();
+    this.init();
   },
   methods: {
+    init() {
+      this.getCountryList();
+      this.getOoperatorList();
+    },
     create() {
-      this.$router.push('/createNews');
+      this.$router.push('/createBanner');
     },
     entryPage(id) {
       this.$router.push({
-        path: '/createNews',
+        path: '/createBanner',
         query: {
-          newsId: id
+          bannerId: id
         }
       });
     },
     search() {
-      this.$axios.post('/getLeagueNewsList', this.infoVO).then(res => {
-        res.data.data.forEach(i => {
+      this.$axios.post('/getBannerList', this.infoVO).then(res => {
+        res.data.data.list.forEach(i => {
           // eslint-disable-next-line no-param-reassign
-          i.display = Boolean(i.display);
+          i.status = Boolean(i.status);
         });
-        this.tableData = res.data.data;
+        this.tableData = res.data.data.list;
       });
-      console.log(this.infoVO);
     },
     deleteNews(id) {
-      this.$axios.post('/delleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post('/delbannerbyid', this.$qs.stringify({ id })).then(res => {
         if (res.data.msg) {
           this.$message(res.data.msg);
           this.search();
@@ -211,10 +213,9 @@ export default {
         this.$message(res.data.msg);
       });
     },
-    save() {},
     dateChange(data) {
-      if (this.infoVO.registerEndDate && this.infoVO.registerEndDate < data) {
-        this.infoVO.registerEndDate = '';
+      if (this.infoVO.endDate && this.infoVO.endDate < data) {
+        this.infoVO.endDate = '';
       }
     },
     sizeChange() {},
@@ -229,6 +230,7 @@ export default {
       this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
+        this.search();
       });
     },
     remoteMethod(value) {

@@ -14,9 +14,9 @@
           <div class="labelBox">
             <label for="upload" class="label">{{ $t("all.tip338") }}</label>
             <div slot="tip" class="el-upload__tip">{{ $t("all.tip387") }}</div>
-            <div slot="tip" class="el-upload__tip">{{ $t("all.tip3871") }}</div>
-            <div slot="tip" class="el-upload__tip">{{ $t("all.tip3872") }}</div>
-            <div slot="tip" class="el-upload__tip">{{ $t("all.tip3873") }}</div>
+            <div slot="tip" class="el-upload__tip">{{ `1：${$t("all.tip3871")}` }}</div>
+            <div slot="tip" class="el-upload__tip">{{ `2：${$t("all.tip3872")}` }}</div>
+            <div slot="tip" class="el-upload__tip">{{ `3：${$t("all.tip3873")}` }}</div>
           </div>
           <el-upload :http-request="uploadImg"  list-type="picture-card" action=" " :on-preview="handlePreview" :on-change="fileChange" :on-remove="handleRemove" :file-list="fileList">
             <div>

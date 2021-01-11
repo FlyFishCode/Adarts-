@@ -263,12 +263,12 @@
         </el-col>
         <el-col :span="4">
           <el-select v-model="AddCompetitionRequest.competitionOption.entryFee" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip83')"></el-option>
-            <el-option :value="2" :label="$t('all.tip84')"></el-option>
+            <el-option :value="1" :label="$t('all.tip84')"></el-option>
+            <el-option :value="2" :label="$t('all.tip83')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="6">
-          <div v-if="AddCompetitionRequest.competitionOption.entryFee === 2">
+          <div v-if="AddCompetitionRequest.competitionOption.entryFee === 1">
             <el-input v-model="AddCompetitionRequest.competitionOption.entryFeePay" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
           </div>
         </el-col>
@@ -968,7 +968,7 @@ export default {
       });
     },
     getOperationdata() {
-      this.$axios.post('/getcreatorlist', this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
+      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
         this.agentList = res.data.data;
         this.Shop.agentId = Number(sessionStorage.getItem('userId'));
         this.shopSearch();

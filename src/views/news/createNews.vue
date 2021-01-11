@@ -22,9 +22,14 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.opeatorId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" :disabled="flag">
-            <el-option v-for="item in opeatorList" :key="item.operationId" :value="item.operationId" :label="item.operationName"> </el-option>
-          </el-select>
+          <div v-if="flag">
+            <el-input v-model="infoVO.opeatorName" disabled></el-input>
+          </div>
+          <div v-else>
+            <el-select v-model="infoVO.opeatorId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+              <el-option v-for="item in opeatorList" :key="item.operationId" :value="item.operationId" :label="item.operationName"> </el-option>
+            </el-select>
+          </div>
         </el-col>
       </el-row>
       <el-row>
@@ -58,21 +63,14 @@
       <div id="editorElem"></div>
     </el-row>
     <el-row>
-      <el-col class="label-g" :span="4">
-        {{ $t("all.tip498") }}
+      <el-col :span="6">
+        <div class="label-g">{{ $t("all.tip498") }}</div>
+        <div>{{ `1：${$t("all.tip3871")}` }}</div>
+        <div>{{ `2：${$t("all.tip3872")}` }}</div>
+        <div>{{ `3：${$t("all.tip3873")}` }}</div>
       </el-col>
-      <el-col :span="20">
-        <el-upload
-          :http-request="uploadImg"
-          class="uploadBg"
-          action=" "
-          ref="upload"
-          :auto-upload="false"
-          list-type="picture-card"
-          :on-remove="handleRemove"
-          :file-list="fileList"
-          :multiple="false"
-        >
+      <el-col :span="18">
+        <el-upload :http-request="uploadImg" class="uploadBg" action=" " ref="upload" :auto-upload="false" list-type="picture-card" :on-remove="handleRemove" :file-list="fileList" :limit='1' :multiple="false">
           <i class="el-icon-plus"></i>
         </el-upload>
       </el-col>
@@ -91,6 +89,7 @@ export default {
       fileList: [],
       opeatorList: [],
       infoVO: {
+        id: '',
         countryId: '',
         category: 1,
         opeatorId: '',
@@ -106,6 +105,7 @@ export default {
     this.getCountryList();
     if (this.$route.query.newsId) {
       this.flag = true;
+      this.infoVO.id = this.$route.query.newsId;
       this.getNewsInfo(this.$route.query.newsId);
     } else {
       this.init();
@@ -187,22 +187,15 @@ export default {
       });
     },
     save() {
-      const obj = {
-        id: this.$route.query.newsId || '',
-        countryId: this.infoVO.countryId,
-        category: this.infoVO.category,
-        opeatorId: this.infoVO.opeatorId,
-        registerDate: this.infoVO.registerDate,
-        title: this.infoVO.title,
-        display: this.infoVO.display,
-        contents: this.infoVO.contents
-      };
-      this.$axios.post('/addleaguenews', this.$qs.stringify(obj)).then(res => {
-        if (res.data.msg === 'OK') {
-          this.$refs.upload.submit();
-          this.$message(res.data.msg);
-        }
-      });
+      if (this.infoVO.thumbnail) {
+        this.$axios.post('/addleaguenews', this.$qs.stringify(this.infoVO)).then(res => {
+          if (res.data.msg === 'OK') {
+            this.$message(res.data.msg);
+          }
+        });
+      } else {
+        this.$refs.upload.submit();
+      }
     },
     remoteMethod(value) {
       if (value) {
@@ -231,20 +224,27 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      // formData.append('countryId', this.infoVO.countryId);
-      // formData.append('category', this.infoVO.category);
-      // formData.append('opeatorId', this.infoVO.opeatorId);
-      // formData.append('registerDate', this.infoVO.registerDate);
-      // formData.append('title', this.infoVO.title);
-      // formData.append('display', this.infoVO.display);
       formData.append('thumbnail', File);
-      // formData.append('contents', this.infoVO.contents);
-      this.$axios({
-        method: 'POST',
-        url: '/uploadPictures',
-        data: formData
-      }).then(res => {
-        console.dir(res);
+      const P1 = new Promise((resolve, reject) => {
+        this.$axios({
+          method: 'POST',
+          url: '/uploadPictures',
+          data: formData
+        }).then(res => {
+          if (res.data.data) {
+            resolve(res.data.data);
+          } else {
+            reject(res.data.data);
+          }
+        });
+      });
+      P1.then(value => {
+        this.infoVO.thumbnail = value;
+        this.$axios.post('/addleaguenews', this.$qs.stringify(this.infoVO)).then(res => {
+          if (res.data.msg === 'OK') {
+            this.$message(res.data.msg);
+          }
+        });
       });
     },
     handleRemove(file, fileList) {
