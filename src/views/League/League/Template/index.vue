@@ -493,7 +493,7 @@ export default {
           }
         });
       }
-      this.$axios.post('/addcompetitiontemplate', data).then(res => {
+      this.$axios.post('/template/addcompetitiontemplate', data).then(res => {
         this.$message(res.data.msg);
         this.dialogTableVisible = false;
       });

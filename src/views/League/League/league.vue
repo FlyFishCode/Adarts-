@@ -339,7 +339,7 @@ export default {
       });
     },
     getOperationdata() {
-      this.$axios.post('/getoperationlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
@@ -458,7 +458,7 @@ export default {
         pageNum,
         pageSize
       };
-      this.$axios.post('/gettemplatelist', this.$qs.stringify(data)).then(res => {
+      this.$axios.post('/template/addcompetitiontemplate', this.$qs.stringify(data)).then(res => {
         this.TemplateTopBoxData = res.data.data.list;
         this.templateTotal = res.data.data.total;
       });

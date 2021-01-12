@@ -69,7 +69,7 @@
     <div class="table">
       <el-table :data="tableData" border>
         <el-table-column type="index" :label="$t('all.tip257')" width="50"> </el-table-column>
-        <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="5%"></el-table-column>
+        <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="10%"></el-table-column>
         <el-table-column prop="sideBull" :label="$t('all.tip51')" min-width="5%">
           <template slot-scope="scope">
             <div>{{ $t(getCategoryType(scope.row.category)) }}</div>

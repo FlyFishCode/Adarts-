@@ -939,7 +939,7 @@ export default {
             vm.fileList = [{ url: `${data.competition.localhostImg}${data.competition.image}` }];
           }
           // 设置操作员数据
-          this.$axios.post('/getoperationlist', vm.$qs.stringify(vm.searchOperator)).then(operRes => {
+          this.$axios.post('/operation/getoperationlist', vm.$qs.stringify(vm.searchOperator)).then(operRes => {
             vm.OperatorList = operRes.data.data.list;
             operRes.data.data.list.forEach(i => {
               data.operatorList.forEach(j => {
@@ -1129,7 +1129,7 @@ export default {
       // 如果是模板页面进来
       if (this.$route.query.isTemplate) {
         p1 = new Promise(resolve => {
-          this.$axios.post(`/foundCompByTemp?competitionId=${id}`).then(res => {
+          this.$axios.post(`/template/delcompetitiontemplatebyid?competitionId=${id}`).then(res => {
             resolve(res.data.data);
           });
         });
@@ -1262,21 +1262,21 @@ export default {
       });
     },
     OperAtorSearch() {
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });
     },
     operatorCurrentChange(val) {
       this.searchOperator.pageNo = val;
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });
     },
     operatorSizeChange(val) {
       this.searchOperator.pageSize = val;
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });

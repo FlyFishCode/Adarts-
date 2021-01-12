@@ -52,9 +52,9 @@
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')">
-            <el-option :value="0" :label="$t('all.tip600')"></el-option>
-            <el-option :value="1" :label="$t('all.tip601')"></el-option>
+          <el-select v-model="infoVO.status" :placeholder="$t('placeholder.select')">
+            <el-option :value="0" :label="$t('all.tip601')"></el-option>
+            <el-option :value="1" :label="$t('all.tip600')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
@@ -73,7 +73,7 @@
         <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="5%"></el-table-column>
         <el-table-column prop="sideBull" :label="$t('all.tip609')" min-width="5%">
           <template slot-scope="scope">
-            <div>{{ scope.row.useType === '1'?$t('all.tip610'):$t('all.tip611') }}</div>
+            <div>{{ scope.row.useType === 1?$t('all.tip610'):$t('all.tip611') }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="title" :label="$t('all.tip596')" min-width="10%">
@@ -93,6 +93,11 @@
           </template>
         </el-table-column>
         <el-table-column prop="cdateInt" :label="$t('all.tip613')" min-width="10%"> </el-table-column>
+        <el-table-column :label="$t('all.tip594')" min-width="8%">
+          <template slot-scope="scope">
+            <div>{{ scope.row.useType === 1?scope.row.mainOrderNo:scope.row.viceOrderNo }}</div>
+          </template>
+        </el-table-column>
         <el-table-column prop="status" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
@@ -143,7 +148,7 @@ export default {
         startDate: '',
         endDate: '',
         name: '',
-        display: 1,
+        status: 1,
         pageNum: 1,
         pageSize: 10
       },
@@ -223,7 +228,6 @@ export default {
     getOoperatorList() {
       this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
         this.operatorList = res.data.data;
-        this.infoVO.operatorId = res.data.data[0].creatorId;
       });
     },
     getCountryList() {

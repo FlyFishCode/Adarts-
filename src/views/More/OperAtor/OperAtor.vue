@@ -201,7 +201,7 @@ export default {
   },
   methods: {
     deleteOper(id) {
-      this.$axios.post(`/deloperationtestbyid?id=${id}`).then(res => {
+      this.$axios.post(`/operation/deloperationtestbyid?id=${id}`).then(res => {
         this.$message(res.data.msg);
         this.search();
       });
@@ -223,7 +223,7 @@ export default {
       this.CreatDialog = true;
     },
     modify(id) {
-      this.$axios.post(`/operationDetails?operationId=${id}`).then(res => {
+      this.$axios.post(`/operation/getcreatorlist?operationId=${id}`).then(res => {
         this.changeVo.operationId = res.data.data.operationId;
         this.changeVo.operAccount = res.data.data.operAccount;
         this.changeVo.operPassword = res.data.data.operPassword;
@@ -234,7 +234,7 @@ export default {
       this.changeDiolog = true;
     },
     changeCreator() {
-      this.$axios.post('/updateoperationbyid', this.$qs.stringify(this.changeVo)).then(res => {
+      this.$axios.post('/operation/updateoperationbyid', this.$qs.stringify(this.changeVo)).then(res => {
         this.$message(res.data.msg);
         this.changeVo.operAccount = '';
         this.changeVo.operPassword = '';
@@ -247,7 +247,7 @@ export default {
     },
     save() {
       this.creatorVo.createId = sessionStorage.getItem('userId');
-      this.$axios.post('/addoperation', this.creatorVo).then(res => {
+      this.$axios.post('/operation/addoperation', this.creatorVo).then(res => {
         this.$message(res.data.msg);
         this.creatorVo.operAccount = '';
         this.creatorVo.operPassword = '';
@@ -260,21 +260,21 @@ export default {
     },
     delete() {},
     search() {
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     currentChange(val) {
       this.operatorVO.pageNo = val;
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     sizeChange(val) {
       this.operatorVO.pageSize = val;
-      this.$axios.post('/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });

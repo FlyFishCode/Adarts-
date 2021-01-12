@@ -95,18 +95,18 @@ export default {
   },
   methods: {
     getOperationdata(userId) {
-      this.$axios.post('/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     search() {
-      this.$axios.post('/gettemplatelist', this.$qs.stringify(this.templateVO)).then(res => {
+      this.$axios.post('/template/addcompetitiontemplate', this.$qs.stringify(this.templateVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     del(id) {
-      this.$axios.post(`/delcompetitiontemplatebyid?id=${id}`).then(res => {
+      this.$axios.post(`/template/delcompetitiontemplatebyid?id=${id}`).then(res => {
         this.$message(res.data.msg);
         this.search(this.userId);
       });

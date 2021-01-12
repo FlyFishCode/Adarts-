@@ -151,7 +151,7 @@ export default {
     },
     search() {
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/getholiday', this.holidayVO).then(res => {
+      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
         this.holidayVO.countryId = '';
@@ -169,10 +169,10 @@ export default {
     save() {
       let url = '';
       if (this.flag === 1) {
-        url = 'addholiday';
+        url = 'holiday/addholiday';
         delete this.holidayDialogVO.id;
       } else {
-        url = 'modifyholiday';
+        url = 'holiday/modifyholiday';
         this.holidayDialogVO.id = this.id;
         this.holidayDialogVO.userId = sessionStorage.getItem('userId');
       }
@@ -201,7 +201,7 @@ export default {
         userId: sessionStorage.getItem('userId'),
         id
       };
-      this.$axios.post('/delholidaybyid', this.$qs.stringify(data)).then(res => {
+      this.$axios.post('/holiday/delholidaybyid', this.$qs.stringify(data)).then(res => {
         this.$message(res.data.msg);
         this.search();
       });
@@ -209,7 +209,7 @@ export default {
     currentChange(value) {
       this.holidayVO.pageNo = value;
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/getholiday', this.holidayVO).then(res => {
+      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
       });
@@ -217,7 +217,7 @@ export default {
     sizeChange(value) {
       this.holidayVO.pageSize = value;
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/getholiday', this.holidayVO).then(res => {
+      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
       });

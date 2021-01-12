@@ -137,6 +137,7 @@ export default {
         link: '',
         name: '',
         target: 1,
+        typeOrder: '',
         status: 0
       }
     };
@@ -187,15 +188,22 @@ export default {
       this.$axios.post('/getbannerbyid', this.$qs.stringify({ id })).then(res => {
         if (res.data.data) {
           this.infoVO = res.data.data;
+          this.infoVO.typeOrder = '';
+          if (res.data.data.useType === 1) {
+            this.infoVO.useType = 1;
+            this.infoVO.typeOrder = res.data.data.mainOrderNo;
+          } else {
+            this.infoVO.useType = 2;
+            this.infoVO.typeOrder = res.data.data.viceOrderNo;
+          }
           this.fileList.push({ url: res.data.data.image });
-          this.init(true);
+          this.init();
         }
       });
     },
     getCountryList() {
       this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
         this.countryList = res.data.data;
-        this.infoVO.countryId = res.data.data[0].id;
       });
     },
     uploadImg(data) {

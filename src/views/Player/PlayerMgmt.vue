@@ -585,7 +585,7 @@ export default {
       this.searchByCompetition.areaId = '';
     },
     getOperationdata(userId) {
-      this.$axios.post('/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
