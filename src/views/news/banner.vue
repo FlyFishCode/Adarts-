@@ -22,7 +22,7 @@
           {{ $t("all.tip609") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')" clearable>
             <el-option :value="1" :label="$t('all.tip610')"></el-option>
             <el-option :value="2" :label="$t('all.tip611')"></el-option>
           </el-select>
@@ -86,10 +86,10 @@
             <div class="link" @click="entryPage(scope.row.id)">{{ scope.row.name }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="opeatorName" :label="$t('all.tip9')" min-width="10%"> </el-table-column>
+        <el-table-column prop="userName" :label="$t('all.tip9')" min-width="10%"></el-table-column>
         <el-table-column prop="registerDate" :label="$t('all.tip612')" min-width="10%">
           <template slot-scope="scope">
-            <div>{{ scope.row.registerDate | showDate }}</div>
+            <div>{{ `${scope.row.startDate || '-'} ~ ${scope.row.endDate || '-'}` }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="cdateInt" :label="$t('all.tip613')" min-width="10%"> </el-table-column>
@@ -144,11 +144,11 @@ export default {
       infoVO: {
         countryId: '',
         userId: '',
-        useType: 1,
+        useType: null,
         startDate: '',
         endDate: '',
         name: '',
-        status: 1,
+        status: null,
         pageNum: 1,
         pageSize: 10
       },
@@ -214,7 +214,8 @@ export default {
       return str;
     },
     checkboxChange(item) {
-      this.$axios.post('/updatedisplay', this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
+      const obj = Object.assign({}, item, { status: Number(item.status) });
+      this.$axios.post('/operationbanner', obj).then(res => {
         this.$message(res.data.msg);
       });
     },

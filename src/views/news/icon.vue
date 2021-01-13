@@ -2,7 +2,7 @@
   <div class="content">
     <el-row class="search">
       <el-row class="center-Row">
-        <el-col class="label-g" :span="3">
+        <el-col class="label-g" :span="2">
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="3">
@@ -10,49 +10,25 @@
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip9") }}
-        </el-col>
-        <el-col :span="3">
-          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
-            <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip609") }}
-        </el-col>
-        <el-col :span="3">
-          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip610')"></el-option>
-            <el-option :value="2" :label="$t('all.tip611')"></el-option>
-          </el-select>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip436") }}
-        </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
-          </el-col>
-        </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip597") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="infoVO.name"></el-input>
+          <el-input v-model="infoVO.name" clearable></el-input>
+        </el-col>
+        <el-col class="label-g" :span="2">
+          {{ $t("all.tip9") }}
+        </el-col>
+        <el-col :span="3">
+          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
+            <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
+          </el-select>
         </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')" clearable>
             <el-option :value="0" :label="$t('all.tip600')"></el-option>
             <el-option :value="1" :label="$t('all.tip601')"></el-option>
           </el-select>
@@ -71,11 +47,6 @@
       <el-table :data="tableData" border>
         <el-table-column type="index" :label="$t('all.tip257')" width="50"> </el-table-column>
         <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="5%"></el-table-column>
-        <el-table-column prop="sideBull" :label="$t('all.tip609')" min-width="5%">
-          <template slot-scope="scope">
-            <div>{{ $t(getCategoryType(scope.row.category)) }}</div>
-          </template>
-        </el-table-column>
         <el-table-column prop="title" :label="$t('all.tip596')" min-width="10%">
           <template slot-scope="scope">
             <div class="imgBox"><img :src="scope.row.thumbnail" alt="" /></div>
@@ -87,11 +58,6 @@
           </template>
         </el-table-column>
         <el-table-column prop="opeatorName" :label="$t('all.tip9')" min-width="10%"> </el-table-column>
-        <el-table-column prop="registerDate" :label="$t('all.tip612')" min-width="10%">
-          <template slot-scope="scope">
-            <div>{{ scope.row.registerDate | showDate }}</div>
-          </template>
-        </el-table-column>
         <el-table-column prop="visitCount" :label="$t('all.tip613')" min-width="10%"> </el-table-column>
         <el-table-column prop="display" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
@@ -143,7 +109,7 @@ export default {
         startDate: '',
         endDate: '',
         name: '',
-        display: 0,
+        display: null,
         pageNum: 1,
         pageSize: 10
       },
@@ -161,13 +127,13 @@ export default {
       this.getOoperatorList();
     },
     create() {
-      this.$router.push('/createBanner');
+      this.$router.push('/createIcon');
     },
     entryPage(id) {
       this.$router.push({
-        path: '/createNews',
+        path: '/createIcon',
         query: {
-          newsId: id
+          iconId: id
         }
       });
     },
@@ -179,7 +145,6 @@ export default {
         });
         this.tableData = res.data.data;
       });
-      console.log(this.infoVO);
     },
     deleteNews(id) {
       this.$axios.post('/delleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
@@ -188,27 +153,6 @@ export default {
           this.search();
         }
       });
-    },
-    getCategoryType(type) {
-      let str = '';
-      switch (type) {
-      case 1:
-        str = 'all.tip603';
-        break;
-      case 2:
-        str = 'all.tip604';
-        break;
-      case 3:
-        str = 'all.tip605';
-        break;
-      case 4:
-        str = 'all.tip606';
-        break;
-      default:
-        str = 'all.tip1';
-        break;
-      }
-      return str;
     },
     checkboxChange(item) {
       this.$axios.post('/updatedisplay', this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {

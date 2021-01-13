@@ -345,6 +345,13 @@ const routes = [{
                 component: () =>
                     import ( /* webpackChunkName: "icon" */ "../views/news/icon.vue"),
                 meta: [{ name: "all.tip619", url: "/icon" }]
+            },
+            {
+                path: "/createIcon",
+                name: "CreateIcon",
+                component: () =>
+                    import ( /* webpackChunkName: "createIcon" */ "../views/news/createIcon.vue"),
+                meta: [{ name: "all.tip619", url: "/icon" }, { name: "all.tip620", url: "/createIcon" }]
             }
         ]
     }

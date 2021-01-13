@@ -5,7 +5,7 @@
         <el-col class="label-g" :span="3">
           {{ $t("all.tip17") }}
         </el-col>
-        <el-col :span="6">
+        <el-col :span="3">
           <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
@@ -19,36 +19,6 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip609") }}
-        </el-col>
-        <el-col :span="3">
-          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip610')"></el-option>
-            <el-option :value="2" :label="$t('all.tip611')"></el-option>
-          </el-select>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip612") }}
-        </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.startDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="2" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
-          </el-col>
-        </el-col>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip597") }}
-        </el-col>
-        <el-col :span="3">
-          <el-input v-model="infoVO.name"></el-input>
-        </el-col>
-        <el-col class="label-g" :span="3">
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
@@ -57,12 +27,18 @@
             <el-option :value="1" :label="$t('all.tip600')"></el-option>
           </el-select>
         </el-col>
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip597") }}
+        </el-col>
+        <el-col :span="3">
+          <el-input v-model="infoVO.name"></el-input>
+        </el-col>
       </el-row>
       <el-row>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip615") }}
         </el-col>
-        <el-col :span="6">
+        <el-col :span="3">
           <el-input v-model="infoVO.link"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -74,10 +50,10 @@
             <el-option :value="2" :label="$t('all.tip618')"></el-option>
           </el-select>
         </el-col>
-        <el-col v-if="flag" class="label-g" :span="3">
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip594") }}
         </el-col>
-        <el-col v-if="flag" :span="3">
+        <el-col :span="3">
           <el-input v-model="typeOrder"></el-input>
         </el-col>
         <el-col :span="2" class="lineClass">
@@ -144,10 +120,10 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.query.bannerId) {
+    if (this.$route.query.iconId) {
       this.flag = true;
-      this.infoVO.id = this.$route.query.bannerId;
-      this.getBannerInfo(this.$route.query.bannerId);
+      this.infoVO.id = this.$route.query.iconId;
+      this.getBannerInfo(this.$route.query.iconId);
     }
     this.init();
   },
