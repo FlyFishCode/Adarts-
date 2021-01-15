@@ -179,6 +179,7 @@ export default {
         creatorId: '',
         StartTime: '',
         EndTime: '',
+        userId: sessionStorage.getItem('userId'),
         pageNum: 1,
         pageSize: 10
       },

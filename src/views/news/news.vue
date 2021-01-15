@@ -144,7 +144,9 @@ export default {
         registerEndDate: '',
         opeatorIdName: '',
         title: '',
-        display: 1
+        display: 1,
+        pageNum: 1,
+        pageSize: 10
       },
       dialogInfo: {},
       playerList: []
@@ -217,8 +219,14 @@ export default {
         this.infoVO.registerEndDate = '';
       }
     },
-    sizeChange() {},
-    currentChange() {},
+    sizeChange(value) {
+      this.infoVO.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.infoVO.pageNum = value;
+      this.search();
+    },
     getOoperatorList() {
       this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
         this.operatorList = res.data.data;

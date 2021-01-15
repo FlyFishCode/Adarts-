@@ -271,22 +271,28 @@
           <!-- https://www.cnblogs.com/layaling/p/10962858.html 查看循环列表-->
           <!--MatchTableView-->
           <div v-show="MatchTableView" class="matchTableBox">
-            <div v-for="(item,itemIndex) in MatchTableData" :key="itemIndex">
+            <div v-for="(item, itemIndex) in MatchTableData" :key="itemIndex">
               <el-table border :data="item">
-                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="String(index)" min-width="110px">
+                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="header.visitingTeamName" min-width="110px">
                   <template slot-scope="scope">
                     <template v-if="index === 0">
-                      <div>{{ scope.$index+1 }}</div>
+                      <div>{{ scope.row.homeTeamName }}</div>
                     </template>
                     <template v-if="index !== 0">
-                      <div>{{ showData(index, scope.$index+1,itemIndex).confrontationDate.split(" ")[0] }}</div>
-                      <div>{{ showData(index, scope.$index+1,itemIndex).homeTeamName }}</div>
-                      <div>{{ showData(index, scope.$index+1,itemIndex).visitingTeamName }}</div>
-                      <div>{{ showData(index, scope.$index+1,itemIndex).week }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).confrontationDate.split(" ")[0] }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).homeTeamName }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).visitingTeamName }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).week }}</div>
                       <div>
-                        <el-button v-if="showData(index, scope.$index+1,itemIndex).state === 1" size="mini" @click="showTopBox(showData(index, scope.$index+1,itemIndex))">{{ $t("all.tip334") }}</el-button>
-                        <el-button v-if="showData(index, scope.$index+1,itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(index, scope.$index+1,itemIndex))">{{ $t("all.tip288") }}</el-button>
-                        <el-button v-if="showData(index, scope.$index+1,itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(index, scope.$index+1,itemIndex))">{{ $t("all.tip333") }}</el-button>
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 1" size="mini" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip334")
+                        }}</el-button>
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip288")
+                        }}</el-button>
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip333")
+                        }}</el-button>
                       </div>
                     </template>
                   </template>
@@ -304,14 +310,14 @@
           <el-col :span="6" class="lineClass">{{ this.lineUpTopBoxDetialData.date }}</el-col>
           <el-col class="label-g" :span="4">{{ $t("all.tip25") }}</el-col>
           <el-col :span="5" class="lineClass">
-            <div v-if="this.lineUpTopBoxDetialData.HomeType === 0">{{ $t('all.tip329') }}</div>
-            <div v-if="this.lineUpTopBoxDetialData.HomeType === 1">{{ $t('all.tip330') }}</div>
-            <div v-if="this.lineUpTopBoxDetialData.HomeType === 2">{{ $t('all.tip328') }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.HomeType === 0">{{ $t("all.tip329") }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.HomeType === 1">{{ $t("all.tip330") }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.HomeType === 2">{{ $t("all.tip328") }}</div>
           </el-col>
           <el-col :span="5" class="lineClass">
-            <div v-if="this.lineUpTopBoxDetialData.AwayType === 0">{{ $t('all.tip329') }}</div>
-            <div v-if="this.lineUpTopBoxDetialData.AwayType === 1">{{ $t('all.tip330') }}</div>
-            <div v-if="this.lineUpTopBoxDetialData.AwayType === 2">{{ $t('all.tip328') }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.AwayType === 0">{{ $t("all.tip329") }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.AwayType === 1">{{ $t("all.tip330") }}</div>
+            <div v-if="this.lineUpTopBoxDetialData.AwayType === 2">{{ $t("all.tip328") }}</div>
           </el-col>
         </el-row>
         <div class="dialogTable">
@@ -353,8 +359,13 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event,scope,index,jndex,1)" :placeholder="$t('placeholder.select')">
-                        <el-option v-for="item in homeTeamPlayers" :key="item.jndex" :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'" :value="item.playerId">
+                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('placeholder.select')">
+                        <el-option
+                          v-for="item in homeTeamPlayers"
+                          :key="item.jndex"
+                          :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'"
+                          :value="item.playerId"
+                        >
                           <span style="float: left">{{ item.playerName }}</span>
                           <span v-if="item.playerGender === 1" style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip209") }}</span>
                           <span v-else style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip210") }}</span>
@@ -371,8 +382,13 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event,scope,index,jndex,2)" :placeholder="$t('placeholder.select')">
-                        <el-option v-for="item in awayTeamPlayers" :key="item.jndex" :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'" :value="item.playerId">
+                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('placeholder.select')">
+                        <el-option
+                          v-for="item in awayTeamPlayers"
+                          :key="item.jndex"
+                          :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'"
+                          :value="item.playerId"
+                        >
                           <span style="float: left">{{ item.playerName }}</span>
                           <span v-if="item.playerGender === 1" style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip209") }}</span>
                           <span v-else style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip210") }}</span>
@@ -437,7 +453,7 @@
                   <div v-if="scope.row.homeCaptainName">{{ scope.row.homeCaptainName }}</div>
                   <!--  出席 -->
                   <div v-if="scope.row.button === '1'">
-                    <el-button size="mini" type="danger" @click="isAttend(scope.row.id,1)">{{ $t("all.tip296") }}</el-button>
+                    <el-button size="mini" type="danger" @click="isAttend(scope.row.id, 1)">{{ $t("all.tip296") }}</el-button>
                   </div>
                   <!--  比赛店铺 -->
                   <div v-if="scope.row.select === '1'" id="divBoxWidth">
@@ -475,7 +491,7 @@
                   <div v-if="scope.row.awayCaptainName">{{ scope.row.awayCaptainName }}</div>
                   <!--  出席 -->
                   <div v-if="scope.row.button === '1'">
-                    <el-button size="mini" type="danger" @click="isAttend(scope.row.id,2)">{{ $t("all.tip296") }}</el-button>
+                    <el-button size="mini" type="danger" @click="isAttend(scope.row.id, 2)">{{ $t("all.tip296") }}</el-button>
                   </div>
                   <!--  比赛店铺 -->
                   <div v-if="scope.row.select === '1'" id="divBoxWidth">
@@ -682,9 +698,7 @@ export default {
       activeName: '',
       HourArr: [],
       MinuteArr: [],
-      tableHeader: [
-        { index: 0 }
-      ],
+      tableHeader: [{ index: 0 }],
       allMatchTableData: [],
       TemplatelReadyData: [],
       TemplatelInPlayData: [],
@@ -1034,11 +1048,9 @@ export default {
       this.TimeTable = true;
       this.MatchTableView = false;
       this.TemplatelView = false;
-      this.isTimeTable = false;
     },
     MatchTableClick() {
       this.MatchTableView = true;
-      this.isTimeTable = true;
       this.TimeTable = false;
       this.TemplatelView = false;
     },
@@ -1094,12 +1106,10 @@ export default {
       });
       // 当前leg人员重复校验
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList.forEach(i => {
-        CurrentLegPlayerList.push(
-          {
-            homePlayer: i.homePlayerId,
-            awayPlayer: i.visitingPlayerId
-          }
-        );
+        CurrentLegPlayerList.push({
+          homePlayer: i.homePlayerId,
+          awayPlayer: i.visitingPlayerId
+        });
         if (type === 1) {
           LegAllSelect.push(i.homePlayerId);
         } else {

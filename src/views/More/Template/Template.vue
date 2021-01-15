@@ -100,7 +100,7 @@ export default {
       });
     },
     search() {
-      this.$axios.post('/template/addcompetitiontemplate', this.$qs.stringify(this.templateVO)).then(res => {
+      this.$axios.post('/template/gettemplatelist', this.$qs.stringify(this.templateVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });

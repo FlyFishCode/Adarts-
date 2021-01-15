@@ -39,11 +39,26 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionStartTime"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.competitionStartPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="00:00:00"
+              @change="competitionStartTime"
+            >
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="competitionEndPeriodPickerOptions" @change="competitionEndTime"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.competitionEndPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="competitionEndPeriodPickerOptions"
+              @change="competitionEndTime"
+            >
+            </el-date-picker>
           </el-col>
         </el-col>
       </el-row>
@@ -53,11 +68,19 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryDateChange"> </el-date-picker>
+            <el-date-picker v-model="AddCompetitionRequest.competition.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryDateChange">
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.entryEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryEndPeriodPickerOptions"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.entryEndPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="entryEndPeriodPickerOptions"
+            >
+            </el-date-picker>
           </el-col>
         </el-col>
       </el-row>
@@ -67,11 +90,25 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.advertisementStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="advertisementDateChange"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.advertisementStartPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="00:00:00"
+              @change="advertisementDateChange"
+            >
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.advertisementEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="advertisementEndPeriodPickerOptions"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.advertisementEndPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="advertisementEndPeriodPickerOptions"
+            >
+            </el-date-picker>
           </el-col>
         </el-col>
       </el-row>
@@ -81,11 +118,25 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.resultStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="resultDateChange"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.resultStartPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="00:00:00"
+              @change="resultDateChange"
+            >
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.resultEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="resultEndPeriodPickerOptions"> </el-date-picker>
+            <el-date-picker
+              v-model="AddCompetitionRequest.competition.resultEndPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="resultEndPeriodPickerOptions"
+            >
+            </el-date-picker>
           </el-col>
         </el-col>
       </el-row>
@@ -102,7 +153,15 @@
           {{ $t("all.tip59") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="AddCompetitionRequest.competition.competitionDescription" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model="AddCompetitionRequest.competition.competitionDescription"
+            type="textarea"
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -110,7 +169,15 @@
           {{ $t("all.tip60") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="AddCompetitionRequest.competition.rewardDescription" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model="AddCompetitionRequest.competition.rewardDescription"
+            type="textarea"
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -118,7 +185,15 @@
           {{ $t("all.tip61") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="AddCompetitionRequest.competition.gameTypeDescription" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model="AddCompetitionRequest.competition.gameTypeDescription"
+            type="textarea"
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -126,7 +201,20 @@
           {{ $t("all.tip62") }}
         </el-col>
         <el-col :span="20">
-          <el-upload :http-request="uploadImg" class="uploadBg" action=" " ref="upload" :auto-upload="false" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :on-success="handleSuccess" :file-list="fileList" :multiple="false" :before-upload="beforeAvatarUpload">
+          <el-upload
+            :http-request="uploadImg"
+            class="uploadBg"
+            action=" "
+            ref="upload"
+            :auto-upload="false"
+            list-type="picture-card"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :on-success="handleSuccess"
+            :file-list="fileList"
+            :multiple="false"
+            :before-upload="beforeAvatarUpload"
+          >
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-dialog :visible.sync="dialogVisible">
@@ -468,8 +556,8 @@
         </el-col>
         <el-col :span="20">
           <el-select v-model="AddCompetitionRequest.competitionBasicOption.lineUpType" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip295')"></el-option>
-            <el-option :value="2" :label="$t('all.tip118')"></el-option>
+            <el-option :value="1" :label="$t('all.tip118')"></el-option>
+            <el-option :value="2" :label="$t('all.tip295')"></el-option>
             <el-option :value="3" :label="$t('all.tip474')"></el-option>
           </el-select>
         </el-col>
@@ -573,7 +661,15 @@
         <el-table-column prop="operName" :label="$t('all.tip63')" min-width="6%"> </el-table-column>
       </el-table>
       <div class="page">
-        <el-pagination @size-change="operatorSizeChange" @current-change="operatorCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="operatorTotal"> </el-pagination>
+        <el-pagination
+          @size-change="operatorSizeChange"
+          @current-change="operatorCurrentChange"
+          :current-page="1"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="operatorTotal"
+        >
+        </el-pagination>
       </div>
       <div slot="footer" class="DialogButton">
         <el-button size="mini" @click="Select" type="primary">{{ $t("all.tip135") }}</el-button>
@@ -636,7 +732,15 @@
         <el-button size="mini" @click="AddCompetition" type="primary">{{ $t("all.tip143") }}</el-button>
       </div>
       <div class="page">
-        <el-pagination @size-change="showShopListSizeChange" @current-change="showShopListCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="showShopListTotal"> </el-pagination>
+        <el-pagination
+          @size-change="showShopListSizeChange"
+          @current-change="showShopListCurrentChange"
+          :current-page="1"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="showShopListTotal"
+        >
+        </el-pagination>
       </div>
     </el-dialog>
     <!-- // shoplist -->
@@ -694,7 +798,6 @@
   </div>
 </template>
 <script>
-
 import { changeMEenuList, changeCurrentObj, changeHash } from '@/components/common/Utils';
 
 export default {
@@ -743,12 +846,7 @@ export default {
         pageNo: 1,
         pageSize: 10
       },
-      giveUpList: [
-        { value: 0, label: 'all.tip587' },
-        { value: 1, label: 'all.tip588' },
-        { value: 2, label: 'all.tip589' },
-        { value: 3, label: 'all.tip590' }
-      ],
+      giveUpList: [{ value: 0, label: 'all.tip587' }, { value: 1, label: 'all.tip588' }, { value: 2, label: 'all.tip589' }, { value: 3, label: 'all.tip590' }],
       timeRangeBefore: 0,
       timeRangeAfter: 0,
       timeRangeBeforehours: 4,
@@ -879,7 +977,13 @@ export default {
     if (this.$route.query.type === '1') {
       this.setFirstList = [{ value: 1, label: 'all.tip111' }, { value: 2, label: 'all.tip112' }, { value: 3, label: 'all.tip113' }];
     } else {
-      this.setFirstList = [{ value: 1, label: 'all.tip111' }, { value: 2, label: 'all.tip112' }, { value: 3, label: 'all.tip113' }, { value: 4, label: 'all.tip517' }, { value: 5, label: 'all.tip518' }];
+      this.setFirstList = [
+        { value: 1, label: 'all.tip111' },
+        { value: 2, label: 'all.tip112' },
+        { value: 3, label: 'all.tip113' },
+        { value: 4, label: 'all.tip517' },
+        { value: 5, label: 'all.tip518' }
+      ];
     }
     this.AddCompetitionRequest.competition.type = this.$route.query.type;
     // 获取保存的阶段数据
@@ -1209,9 +1313,11 @@ export default {
             confirmButtonText: this.$t('all.tip47'),
             cancelButtonText: this.$t('all.tip30'),
             type: 'warning'
-          }).then(() => {
-            saveMethods();
-          }).catch(() => false);
+          })
+            .then(() => {
+              saveMethods();
+            })
+            .catch(() => false);
         } else {
           saveMethods();
         }

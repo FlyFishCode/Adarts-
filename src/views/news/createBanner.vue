@@ -38,8 +38,7 @@
           </el-col>
           <el-col :span="2" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
+            <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
           </el-col>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -90,6 +89,8 @@
         <div class="label-g">{{ $t("all.tip498") }}</div>
         <div>{{ `1：${$t("all.tip3872")}` }}</div>
         <div>{{ `2：${$t("all.tip3873")}` }}</div>
+        <div>{{ `3：(${$t("all.tip610")})${$t("all.tip621")} 1000px X 250px` }}</div>
+        <div>{{ `4：(${$t("all.tip611")})${$t("all.tip621")} 330px X 250px` }}</div>
       </el-col>
       <el-col :span="18">
         <el-upload
@@ -97,7 +98,7 @@
           class="uploadBg"
           action=" "
           ref="upload"
-          :limit='1'
+          :limit="1"
           :auto-upload="false"
           list-type="picture-card"
           :on-remove="handleRemove"
@@ -111,7 +112,6 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     const vm = this;

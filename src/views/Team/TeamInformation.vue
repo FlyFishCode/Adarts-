@@ -862,14 +862,12 @@ export default {
       this.scheduleResultVO.pageNum = val;
       this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
       });
     },
     scheduleResultListSizeChange(val) {
       this.scheduleResultVO.pageSize = val;
       this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
       });
     },
     getPlayerList() {
@@ -902,21 +900,18 @@ export default {
       this.scheduleResultVO.year = value;
       this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
       });
     },
     competitionIdChange(value) {
       this.scheduleResultVO.competitionId = value;
       this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
       });
     },
     matchStatusChange(value) {
       this.scheduleResultVO.matchStatus = value;
       this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
       });
     },
     getCompetitionList(id) {
@@ -925,6 +920,7 @@ export default {
       });
     },
     addMember() {
+      this.addMemberSearch();
       this.addMemberTopBox = true;
     },
     addMemberSelectionChange(val) {

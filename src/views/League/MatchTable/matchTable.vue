@@ -181,6 +181,7 @@ export default {
         competitionStartPeriod: null,
         competitionEndPeriod: null,
         competitionName: '',
+        userId: sessionStorage.getItem('userId'),
         operId: '',
         createId: '',
         pageNum: 1,

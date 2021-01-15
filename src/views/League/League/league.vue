@@ -279,7 +279,7 @@ export default {
         competitionName: '',
         operatorId: '',
         creatorId: '',
-        userId: '',
+        userId: sessionStorage.getItem('userId'),
         pageNum: 1,
         pageSize: 10
       },
@@ -458,7 +458,7 @@ export default {
         pageNum,
         pageSize
       };
-      this.$axios.post('/template/addcompetitiontemplate', this.$qs.stringify(data)).then(res => {
+      this.$axios.post('/template/gettemplatelist', this.$qs.stringify(data)).then(res => {
         this.TemplateTopBoxData = res.data.data.list;
         this.templateTotal = res.data.data.total;
       });

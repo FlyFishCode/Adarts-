@@ -165,6 +165,7 @@ export default {
         operatorId: '',
         competitionStartPeriod: '',
         competitionEndPeriod: '',
+        userId: sessionStorage.getItem('userId'),
         pageNum: 1,
         pageSize: 10
       },

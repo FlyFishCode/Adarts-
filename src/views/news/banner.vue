@@ -182,6 +182,7 @@ export default {
           i.status = Boolean(i.status);
         });
         this.tableData = res.data.data.list;
+        this.total = res.data.data.total;
       });
     },
     deleteNews(id) {
@@ -191,27 +192,6 @@ export default {
           this.search();
         }
       });
-    },
-    getCategoryType(type) {
-      let str = '';
-      switch (type) {
-      case 1:
-        str = 'all.tip603';
-        break;
-      case 2:
-        str = 'all.tip604';
-        break;
-      case 3:
-        str = 'all.tip605';
-        break;
-      case 4:
-        str = 'all.tip606';
-        break;
-      default:
-        str = 'all.tip1';
-        break;
-      }
-      return str;
     },
     checkboxChange(item) {
       const obj = Object.assign({}, item, { status: Number(item.status) });
@@ -224,8 +204,14 @@ export default {
         this.infoVO.endDate = '';
       }
     },
-    sizeChange() {},
-    currentChange() {},
+    sizeChange(value) {
+      this.infoVO.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.infoVO.pageNum = value;
+      this.search();
+    },
     getOoperatorList() {
       this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
         this.operatorList = res.data.data;
