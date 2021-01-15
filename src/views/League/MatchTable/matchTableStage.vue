@@ -273,24 +273,25 @@
           <div v-show="MatchTableView" class="matchTableBox">
             <div v-for="(item, itemIndex) in MatchTableData" :key="itemIndex">
               <el-table border :data="item">
-                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="header.visitingTeamName" min-width="110px">
+                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="header.homeTeamName" min-width="110px">
                   <template slot-scope="scope">
                     <template v-if="index === 0">
-                      <div>{{ scope.row.homeTeamName }}</div>
+                      <div>{{ scope.row.visitingTeamName }}</div>
                     </template>
                     <template v-if="index !== 0">
-                      <div>{{ showData(index, scope.$index + 1, itemIndex).confrontationDate.split(" ")[0] }}</div>
-                      <div>{{ showData(index, scope.$index + 1, itemIndex).homeTeamName }}</div>
-                      <div>{{ showData(index, scope.$index + 1, itemIndex).visitingTeamName }}</div>
-                      <div>{{ showData(index, scope.$index + 1, itemIndex).week }}</div>
+                      <!-- <div>{{ `${index}${scope.$index + 1}` }}</div> -->
+                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).confrontationDate.split(" ")[0] }}</div>
+                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).homeTeamName }}</div>
+                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).visitingTeamName }}</div>
+                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).week }}</div>
                       <div>
-                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 1" size="mini" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 1" size="mini" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
                           $t("all.tip334")
                         }}</el-button>
-                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
                           $t("all.tip288")
                         }}</el-button>
-                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
                           $t("all.tip333")
                         }}</el-button>
                       </div>
@@ -991,9 +992,10 @@ export default {
       });
     },
     showData(x, y, index) {
+      debugger;
       // 横坐标，纵坐标，第几个数组
       let obj = {};
-      obj = this.allMatchTableData[index].find(i => i.homeSeedNumber === x && i.visitingSeedNumber === y);
+      obj = this.allMatchTableData[index].find(i => i.homeTeamId === x && i.visitingTeamId === y);
       if (obj) {
         return obj;
       }
@@ -1013,6 +1015,7 @@ export default {
           const homeObj = {};
           const awayObj = {};
           const list = [];
+          this.tableHeader = [{ index: 0 }];
           res.data.data.loopSurfaceList.forEach(i => {
             const arr = Object.assign(i.matchTableList, []);
             i.matchTableList.forEach(j => {
@@ -1028,7 +1031,7 @@ export default {
             vm.MatchTableData.push(list);
             vm.allMatchTableData.push(arr);
           });
-          console.log(vm.allMatchTableData);
+          console.log(vm.tableHeader);
         }
       });
     },
