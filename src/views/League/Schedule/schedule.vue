@@ -125,6 +125,7 @@ export default {
         leagueType: '',
         agentUserId: '',
         operUserId: '',
+        userId: sessionStorage.getItem('userId'),
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1
       },
@@ -157,7 +158,7 @@ export default {
       this.scheduleVO.areaId = null;
     },
     getAllCompetitionName() {
-      this.$axios.post('/getAllCompetitionName').then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },

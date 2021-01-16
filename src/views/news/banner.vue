@@ -14,7 +14,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
+          <el-select v-model="infoVO.operationId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
             <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
           </el-select>
         </el-col>
@@ -38,8 +38,7 @@
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
+            <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
           </el-col>
         </el-col>
         <el-col class="label-g" :span="2">
@@ -73,7 +72,7 @@
         <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="5%"></el-table-column>
         <el-table-column prop="sideBull" :label="$t('all.tip609')" min-width="5%">
           <template slot-scope="scope">
-            <div>{{ scope.row.useType === 1?$t('all.tip610'):$t('all.tip611') }}</div>
+            <div>{{ scope.row.useType === 1 ? $t("all.tip610") : $t("all.tip611") }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="title" :label="$t('all.tip596')" min-width="10%">
@@ -89,19 +88,19 @@
         <el-table-column prop="userName" :label="$t('all.tip9')" min-width="10%"></el-table-column>
         <el-table-column prop="registerDate" :label="$t('all.tip612')" min-width="10%">
           <template slot-scope="scope">
-            <div>{{ `${scope.row.startDate || '-'} ~ ${scope.row.endDate || '-'}` }}</div>
+            <div>{{ `${scope.row.startDate || "-"} ~ ${scope.row.endDate || "-"}` }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="cdateInt" :label="$t('all.tip613')" min-width="10%"> </el-table-column>
         <el-table-column :label="$t('all.tip594')" min-width="8%">
           <template slot-scope="scope">
-            <div>{{ scope.row.useType === 1?scope.row.mainOrderNo:scope.row.viceOrderNo }}</div>
+            <div>{{ scope.row.useType === 1 ? scope.row.mainOrderNo : scope.row.viceOrderNo }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="status" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
-              <el-checkbox v-model="scope.row.status" @change='checkboxChange(scope.row)'></el-checkbox>
+              <el-checkbox v-model="scope.row.status" @change="checkboxChange(scope.row)"></el-checkbox>
             </div>
           </template>
         </el-table-column>
@@ -143,7 +142,8 @@ export default {
       operatorList: [],
       infoVO: {
         countryId: '',
-        userId: '',
+        userId: sessionStorage.getItem('userId'),
+        operationId: '',
         useType: null,
         startDate: '',
         endDate: '',

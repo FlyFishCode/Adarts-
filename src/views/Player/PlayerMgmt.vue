@@ -556,7 +556,7 @@ export default {
       }
     },
     getAllCompetitionName() {
-      this.$axios.post('/getAllCompetitionName').then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
