@@ -223,7 +223,7 @@ export default {
       this.CreatDialog = true;
     },
     modify(id) {
-      this.$axios.post(`/operation/getcreatorlist?operationId=${id}`).then(res => {
+      this.$axios.post(`/operation/operationDetails?operationId=${id}`).then(res => {
         this.changeVo.operationId = res.data.data.operationId;
         this.changeVo.operAccount = res.data.data.operAccount;
         this.changeVo.operPassword = res.data.data.operPassword;

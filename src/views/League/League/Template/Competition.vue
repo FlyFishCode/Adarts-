@@ -1052,6 +1052,7 @@ export default {
                 }
               });
             });
+            debugger;
           });
           // 设置店铺地址
           vm.Shop.pageSize = 100;
