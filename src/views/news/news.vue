@@ -171,13 +171,12 @@ export default {
     },
     search() {
       this.$axios.post('/getLeagueNewsList', this.infoVO).then(res => {
-        res.data.data.forEach(i => {
+        res.data.data.list.forEach(i => {
           // eslint-disable-next-line no-param-reassign
           i.display = Boolean(i.display);
         });
-        this.tableData = res.data.data;
+        this.tableData = res.data.data.list;
       });
-      console.log(this.infoVO);
     },
     deleteNews(id) {
       this.$axios.post('/delleaguenewsbyid', this.$qs.stringify({ id })).then(res => {

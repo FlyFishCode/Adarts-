@@ -1234,7 +1234,7 @@ export default {
       // 如果是模板页面进来
       if (this.$route.query.isTemplate) {
         p1 = new Promise(resolve => {
-          this.$axios.post(`/template/delcompetitiontemplatebyid?competitionId=${id}`).then(res => {
+          this.$axios.post(`/template/foundCompByTemp?competitionId=${id}`).then(res => {
             resolve(res.data.data);
           });
         });

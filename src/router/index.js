@@ -354,6 +354,10 @@ const routes = [{
                 meta: [{ name: "all.tip619", url: "/icon" }, { name: "all.tip620", url: "/createIcon" }]
             }
         ]
+    },
+    {
+        path: "*",
+        redirect: "/"
     }
 ];
 

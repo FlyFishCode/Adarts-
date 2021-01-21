@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     init() {
-      this.search();
+      // this.search();
       this.getCountryList();
       this.getOoperatorList();
     },

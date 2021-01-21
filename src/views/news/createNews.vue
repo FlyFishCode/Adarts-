@@ -70,7 +70,7 @@
         <div>{{ `3：${$t("all.tip3873")}` }}</div>
       </el-col>
       <el-col :span="18">
-        <el-upload :http-request="uploadImg" class="uploadBg" action=" " ref="upload" :auto-upload="false" list-type="picture-card" :on-remove="handleRemove" :file-list="fileList" :limit='1' :multiple="false">
+        <el-upload :http-request="uploadImg" class="uploadBg" action=" " ref="upload" :auto-upload="false" list-type="picture-card" :on-change='handleChange' :on-remove="handleRemove" :file-list="fileList" :limit='1' :multiple="false">
           <i class="el-icon-plus"></i>
         </el-upload>
       </el-col>
@@ -250,6 +250,9 @@ export default {
     handleRemove(file, fileList) {
       this.fileList = fileList;
       this.infoVO.thumbnail = '';
+    },
+    handleChange(response, file) {
+      this.fileList = file;
     }
   }
 };

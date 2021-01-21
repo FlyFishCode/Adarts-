@@ -106,7 +106,7 @@ export default {
       });
     },
     del(id) {
-      this.$axios.post(`/template/delcompetitiontemplatebyid?id=${id}`).then(res => {
+      this.$axios.post(`/template/delcompetitiontemplatebyid?competitionId=${id}`).then(res => {
         this.$message(res.data.msg);
         this.search(this.userId);
       });
