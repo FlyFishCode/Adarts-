@@ -75,14 +75,14 @@
           <el-option :value="3" :label="$t('all.tip253')"></el-option>
         </el-select>
       </el-col>
-      <el-col :span="4" class="btnClass">
+      <el-col :span="2" class="buttonBox">
         <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
         <el-button type="primary" size="mini" @click="upload">{{ $t("all.tip338") }}</el-button>
         <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="4" class="btnClass">
+      <el-col :span="4" class="buttonBox">
         <el-button type="primary" size="mini" @click="agree">{{ $t("all.tip24") }}</el-button>
         <el-button type="primary" size="mini" @click="reject">{{ $t("all.tip251") }}</el-button>
         <el-button type="primary" size="mini" @click="addTeam">{{ $t("all.tip254") }}</el-button>
@@ -382,7 +382,6 @@ export default {
       }
       this.$axios.post('/approve', { ids, status: 2 }).then(res => {
         if (res.data) {
-          debugger;
           this.$message(res.data.msg);
           this.search();
         }
@@ -422,7 +421,6 @@ export default {
     },
     TopboxSearch() {
       this.$axios.post('/getNoEntryTeamList', this.topBoxData).then(res => {
-        debugger;
         this.topBoxTableData = res.data.data.list;
         this.topBoxTableDataTotal = res.data.data.total;
       });

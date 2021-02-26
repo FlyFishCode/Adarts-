@@ -636,7 +636,9 @@ const en = {
         tip601: "Hidden",
         tip602: "Create news",
         tip607: "Team(ID)",
-        tip608: "Banner"
+        tip608: "Banner",
+
+        tip622: 'Line-Up Deadline'
     },
     ...enLocale
 };

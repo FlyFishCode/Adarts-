@@ -70,8 +70,8 @@
       </el-row>
     </div>
     <el-row class="center">
-      <el-form label-width="145px">
-        <el-col :span="6">
+      <el-form label-width="100px">
+        <el-col :span="4">
           <el-form-item :label="$t('all.tip12')">
             <el-select v-model="CreateValue" :placeholder="$t('placeholder.select')">
               <el-option value="1" :label="$t('all.tip13')"></el-option>
@@ -130,17 +130,16 @@
             <div v-if="scope.row.status === 3">{{ $t("all.tip28") }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="date" min-width="16%">
+        <el-table-column prop="date" :label="$t('all.tip2')" min-width="25%">
           <template slot-scope="scope">
             <div v-if="scope.row.status === 1">
-              <el-button size="mini" @click="close(scope.row)">{{ $t("form.Closebutton") }}</el-button>
-              <el-button size="mini" type="primary" @click="cancel(scope.row)">{{ $t("form.Cancelbutton") }}</el-button>
+              <el-button size="mini" @click="close(scope.row.competitionId)">{{ $t("form.Closebutton") }}</el-button>
+              <el-button size="mini" type="primary" @click="cancel(scope.row.competitionId)">{{ $t("form.Cancelbutton") }}</el-button>
+              <el-button size="mini" type="danger" @click="deleteLeague(scope.row.competitionId)">{{ $t("all.tip130") }}</el-button>
             </div>
-            <!-- <div v-if="scope.row.status === 2">
-              <el-button size="mini" @click="open(scope.row)">{{ $t("all.tip31") }}</el-button>
-            </div>-->
             <div v-else>
-              <el-button size="mini" @click="open(scope.row)">{{ $t("all.tip31") }}</el-button>
+              <el-button size="mini" @click="open(scope.row.competitionId)">{{ $t("all.tip31") }}</el-button>
+              <el-button size="mini" type="danger" @click="deleteLeague(scope.row.competitionId)">{{ $t("all.tip130") }}</el-button>
             </div>
           </template>
         </el-table-column>
@@ -395,21 +394,24 @@ export default {
         this.TemplateVisible = true;
       }
     },
-    close(data) {
-      const competitionId = data.competitionId;
+    close(competitionId) {
       this.$axios.post('/close', this.$qs.stringify({ competitionId })).then(() => {
         this.search();
       });
     },
-    cancel(data) {
-      const competitionId = data.competitionId;
+    cancel(competitionId) {
       this.$axios.post('/cancel', this.$qs.stringify({ competitionId })).then(() => {
         this.search();
       });
     },
-    open(data) {
-      const competitionId = data.competitionId;
+    open(competitionId) {
       this.$axios.post('/open', this.$qs.stringify({ competitionId })).then(res => {
+        this.$message(res.data.msg);
+        this.search();
+      });
+    },
+    deleteLeague(id) {
+      this.$axios.post('/delcompetitionbyid', this.$qs.stringify({ id })).then(res => {
         this.$message(res.data.msg);
         this.search();
       });

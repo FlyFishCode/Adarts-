@@ -82,9 +82,6 @@
                 <el-select v-model="TeamInformationVO.shopId" filterable remote :remote-method="getShopList" @change="$forceUpdate()" :placeholder="$t('placeholder.input')">
                   <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"> </el-option>
                 </el-select>
-                <!-- <el-select v-model="TeamInformationVO.shopId" @change="$forceUpdate()" :placeholder="$t('placeholder.select')">
-                  <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"></el-option>
-                </el-select> -->
               </el-col>
               <el-col class="label-g" :span="6">{{ $t("all.tip465") }}</el-col>
               <el-col :span="6" class="lineClass">
@@ -514,7 +511,7 @@
         </el-col>
       </el-row>
       <div class="dialogtable">
-        <el-table :data="addMemberList" @selection-change="addMemberSelectionChange" :row-key="getRowKey">
+        <el-table ref="dialogTableRef" :data="addMemberList" @selection-change="addMemberSelectionChange" :row-key="getRowKey">
           <el-table-column type="selection" width="55" :reserve-selection="true"> </el-table-column>
           <el-table-column :label="$t('all.tip456')" min-width="14%">
             <template slot-scope="scope">
@@ -569,7 +566,7 @@ export default {
       competitionList: [],
       addMemberListTotal: 1,
       playerListTotal: 1,
-      yearList: [{ id: 2020, yaer: 2020 }],
+      yearList: [{ id: 2020, year: 2020 }],
       rating: {
         type: 0,
         year: 2020
@@ -669,8 +666,8 @@ export default {
       upLoad.style.visibility = 'hidden';
       if (new Date().getFullYear() !== this.yearList[0].id) {
         this.yearList.push({
-          id: new Date().getFullYear,
-          year: new Date().getFullYear
+          id: new Date().getFullYear(),
+          year: new Date().getFullYear()
         });
       }
       this.captainSearch();
@@ -702,7 +699,11 @@ export default {
         }
         vm.fileList.push({ url: imgUrl });
         vm.TeamInformationVO = res.data.data;
-        vm.TeamInformationVO.shopId = vm.TeamInformationVO.homeShopId;
+        if (this.shopList.find(i => i.shopId === vm.TeamInformationVO.homeShopId)) {
+          vm.TeamInformationVO.shopId = vm.TeamInformationVO.homeShopId;
+        } else {
+          vm.TeamInformationVO.shopId = vm.TeamInformationVO.homeShopName;
+        }
         vm.TeamInformationVO.captainId = `${vm.TeamInformationVO.captainAccount}/${vm.TeamInformationVO.captainName}`;
       });
     },
@@ -931,6 +932,7 @@ export default {
       this.$axios.post('/playerIntoTeam', { playerIds: data, teamId: this.playerVO.teamId }).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
+        this.$refs.dialogTableRef.clearSelection();
       });
       this.addMemberTopBox = false;
     },
@@ -980,7 +982,7 @@ export default {
         this.getPlayerList();
       });
     },
-    getShopList(value = ' ') {
+    getShopList(value = '') {
       this.$axios.post(`/getshopByName?shopName=${value}`).then(res => {
         this.shopList = res.data.data;
       });
@@ -1055,6 +1057,11 @@ export default {
       this.editTeamInfo.creatorId = this.TeamInformationVO.creatorId;
       this.editTeamInfo.shopId = this.TeamInformationVO.shopId;
       this.editTeamInfo.teamName = this.TeamInformationVO.teamName;
+      if (this.shopList.find(i => i.shopId === this.TeamInformationVO.homeShopId)) {
+        this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
+      } else {
+        this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
+      }
       this.$axios.post('/editorTeamInfo', this.editTeamInfo).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();

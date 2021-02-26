@@ -135,6 +135,7 @@ export default {
         startDate: '',
         endDate: '',
         link: '',
+        image: '',
         name: '',
         target: 1,
         status: 1,
@@ -156,12 +157,12 @@ export default {
       this.getCountryList();
     },
     save() {
-      if (this.infoVO.useType === 1 && this.flag) {
+      if (this.infoVO.useType === 1) {
         this.infoVO.mainOrderNo = this.typeOrder;
       } else {
         this.infoVO.viceOrderNo = this.typeOrder;
       }
-      if (this.flag) {
+      if (this.infoVO.image) {
         this.$axios.post('/operationbanner', this.infoVO).then(res => {
           if (res.data.msg) {
             this.$message(res.data.msg);
@@ -210,7 +211,7 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('thumbnail', File);
+      formData.append('image', File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
           method: 'POST',

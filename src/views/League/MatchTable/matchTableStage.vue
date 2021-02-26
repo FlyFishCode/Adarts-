@@ -279,21 +279,31 @@
                       <div>{{ scope.row.visitingTeamName }}</div>
                     </template>
                     <template v-if="index !== 0">
-                      <!-- <div>{{ `${index}${scope.$index + 1}` }}</div> -->
                       <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).confrontationDate.split(" ")[0] }}</div>
                       <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).homeTeamName }}</div>
                       <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).visitingTeamName }}</div>
                       <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).week }}</div>
                       <div>
-                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 1" size="mini" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
-                          $t("all.tip334")
-                        }}</el-button>
-                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
-                          $t("all.tip288")
-                        }}</el-button>
-                        <el-button v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))">{{
-                          $t("all.tip333")
-                        }}</el-button>
+                        <el-button
+                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 1"
+                          size="mini"
+                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          >{{ $t("all.tip334") }}</el-button
+                        >
+                        <el-button
+                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 2"
+                          size="mini"
+                          type="primary"
+                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          >{{ $t("all.tip288") }}</el-button
+                        >
+                        <el-button
+                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 3"
+                          size="mini"
+                          type="danger"
+                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          >{{ $t("all.tip333") }}</el-button
+                        >
                       </div>
                     </template>
                   </template>
@@ -307,15 +317,17 @@
     <div>
       <el-dialog :title="$t('all.tip234')" :visible.sync="lineUpTopBoxVisible" top="5vh">
         <el-row class="center-Row">
-          <el-col class="label-g" :span="4">{{ $t("all.tip235") }}</el-col>
-          <el-col :span="6" class="lineClass">{{ this.lineUpTopBoxDetialData.date }}</el-col>
-          <el-col class="label-g" :span="4">{{ $t("all.tip25") }}</el-col>
-          <el-col :span="5" class="lineClass">
+          <el-col class="label-g" :span="2">{{ $t("all.tip235") }}</el-col>
+          <el-col :span="4" class="lineClass">{{ this.lineUpTopBoxDetialData.date }}</el-col>
+          <el-col class="label-g" :span="3">{{ $t("all.tip622") }}</el-col>
+          <el-col :span="4" class="lineClass">{{ this.lineUpTopBoxDetialData.deadlineTime }}</el-col>
+          <el-col class="label-g" :span="2">{{ $t("all.tip25") }}</el-col>
+          <el-col :span="2" class="lineClass">
             <div v-if="this.lineUpTopBoxDetialData.HomeType === 0">{{ $t("all.tip329") }}</div>
             <div v-if="this.lineUpTopBoxDetialData.HomeType === 1">{{ $t("all.tip330") }}</div>
             <div v-if="this.lineUpTopBoxDetialData.HomeType === 2">{{ $t("all.tip328") }}</div>
           </el-col>
-          <el-col :span="5" class="lineClass">
+          <el-col :span="7" class="lineClass">
             <div v-if="this.lineUpTopBoxDetialData.AwayType === 0">{{ $t("all.tip329") }}</div>
             <div v-if="this.lineUpTopBoxDetialData.AwayType === 1">{{ $t("all.tip330") }}</div>
             <div v-if="this.lineUpTopBoxDetialData.AwayType === 2">{{ $t("all.tip328") }}</div>
@@ -992,7 +1004,6 @@ export default {
       });
     },
     showData(x, y, index) {
-      debugger;
       // 横坐标，纵坐标，第几个数组
       let obj = {};
       obj = this.allMatchTableData[index].find(i => i.homeTeamId === x && i.visitingTeamId === y);
@@ -1204,7 +1215,7 @@ export default {
             }
           });
           for (const [key, value] of Object.entries(LegObj)) {
-            if (key && value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
+            if (key && key !== 'null' && value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
               this.$message(this.$t('all.tip581') + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
               vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
               return;
@@ -1280,6 +1291,7 @@ export default {
       const vm = this;
       this.lineUpTopBoxDetialData = {
         date: data.time,
+        deadlineTime: data.manageAbortTime,
         HomeType: data.homeManageStatus,
         AwayType: data.visitingManageStatus,
         homeTeam: data.homeTeamName,
@@ -1417,7 +1429,6 @@ export default {
       }
       this.$axios.post('/matchTable/playerIntoLeg', data).then(res => {
         this.$message(res.data.msg);
-        this.lineUpTopBoxVisible = false;
         this.getTimeTableData(this.matchTableId);
       });
     },

@@ -448,6 +448,8 @@
           <el-col :span="4">
             <el-select v-model="AddCompetitionRequest.competitionBasicOption.playerChangeType" :placeholder="$t('placeholder.select')">
               <el-option :value="0" :label="$t('all.tip523')"></el-option>
+              <el-option :value="1" label="Set"></el-option>
+              <el-option :value="2" label="Leg"></el-option>
             </el-select>
           </el-col>
         </div>
@@ -922,7 +924,7 @@ export default {
           minimum: 1,
           participationType: 1,
           playerChangeAvaila: '',
-          playerChangeNumber: 1,
+          playerChangeNumber: 0,
           playerChangeType: 0,
           setFirst: 1,
           timeRangeBefore: 0,

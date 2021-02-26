@@ -106,18 +106,18 @@
           <el-table-column prop="homeResult" :label="$t('all.tip309')" min-width="5%"> </el-table-column>
           <el-table-column :label="$t('all.tip327')" min-width="5%">
             <template slot-scope="scope">
-              <div v-if="scope.row.homeManageStatus === 0">{{ $t('all.tip329') }}</div>
-              <div v-if="scope.row.homeManageStatus === 1">{{ $t('all.tip330') }}</div>
-              <div v-if="scope.row.homeManageStatus === 2">{{ $t('all.tip328') }}</div>
+              <div v-if="scope.row.homeManageStatus === 0">{{ $t("all.tip329") }}</div>
+              <div v-if="scope.row.homeManageStatus === 1">{{ $t("all.tip330") }}</div>
+              <div v-if="scope.row.homeManageStatus === 2">{{ $t("all.tip328") }}</div>
             </template>
           </el-table-column>
         </el-table-column>
         <el-table-column :label="$t('all.tip326')">
           <el-table-column :label="$t('all.tip327')" min-width="5%">
             <template slot-scope="scope">
-              <div v-if="scope.row.visitingManageStatus === 0">{{ $t('all.tip329') }}</div>
-              <div v-if="scope.row.visitingManageStatus === 1">{{ $t('all.tip330') }}</div>
-              <div v-if="scope.row.visitingManageStatus === 2">{{ $t('all.tip328') }}</div>
+              <div v-if="scope.row.visitingManageStatus === 0">{{ $t("all.tip329") }}</div>
+              <div v-if="scope.row.visitingManageStatus === 1">{{ $t("all.tip330") }}</div>
+              <div v-if="scope.row.visitingManageStatus === 2">{{ $t("all.tip328") }}</div>
             </template>
           </el-table-column>
           <el-table-column prop="visitingResult" :label="$t('all.tip309')" min-width="5%"> </el-table-column>
@@ -149,7 +149,15 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
       </el-pagination>
     </div>
     <div>
@@ -158,8 +166,8 @@
           <el-col class="label-g" :span="4">{{ $t("all.tip235") }}</el-col>
           <el-col :span="6" class="lineClass">{{ this.lineUpTopBoxDetialData.date }}</el-col>
           <el-col class="label-g" :span="4">{{ $t("all.tip25") }}</el-col>
-          <el-col :span="5" class="lineClass">{{ this.lineUpTopBoxDetialData.HomeType === 1?$t('all.tip330'):$t('all.tip328') }}</el-col>
-          <el-col :span="5" class="lineClass">{{ this.lineUpTopBoxDetialData.AwayType === 1?$t('all.tip330'):$t('all.tip328') }}</el-col>
+          <el-col :span="5" class="lineClass">{{ this.lineUpTopBoxDetialData.HomeType === 1 ? $t("all.tip330") : $t("all.tip328") }}</el-col>
+          <el-col :span="5" class="lineClass">{{ this.lineUpTopBoxDetialData.AwayType === 1 ? $t("all.tip330") : $t("all.tip328") }}</el-col>
         </el-row>
         <div class="dialogTable">
           <el-table :data="lineUpTopBoxTableList" border style="width: 100%">
@@ -201,8 +209,13 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event,scope,index,jndex,1)" :placeholder="$t('placeholder.select')">
-                        <el-option v-for="item in homeTeamPlayers" :key="item.jndex" :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'" :value="item.playerId">
+                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('placeholder.select')">
+                        <el-option
+                          v-for="item in homeTeamPlayers"
+                          :key="item.jndex"
+                          :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'"
+                          :value="item.playerId"
+                        >
                           <span style="float: left">{{ item.playerName }}</span>
                           <span v-if="item.playerGender === 1" style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip209") }}</span>
                           <span v-else style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip210") }}</span>
@@ -219,8 +232,13 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event,scope,index,jndex,2)" :placeholder="$t('placeholder.select')">
-                        <el-option v-for="item in awayTeamPlayers" :key="item.jndex" :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'" :value="item.playerId">
+                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('placeholder.select')">
+                        <el-option
+                          v-for="item in awayTeamPlayers"
+                          :key="item.jndex"
+                          :label="item.playerGender === 1 ? item.playerName + '(' + $t('all.tip209') + ')' : item.playerName + '(' + $t('all.tip210') + ')'"
+                          :value="item.playerId"
+                        >
                           <span style="float: left">{{ item.playerName }}</span>
                           <span v-if="item.playerGender === 1" style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip209") }}</span>
                           <span v-else style="float: right; color: #8492a6; font-size: 13px;line-height:34px">{{ $t("all.tip210") }}</span>
@@ -518,12 +536,10 @@ export default {
       });
       // 当前leg人员重复校验
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList.forEach(i => {
-        CurrentLegPlayerList.push(
-          {
-            homePlayer: i.homePlayerId,
-            awayPlayer: i.visitingPlayerId
-          }
-        );
+        CurrentLegPlayerList.push({
+          homePlayer: i.homePlayerId,
+          awayPlayer: i.visitingPlayerId
+        });
         if (type === 1) {
           LegAllSelect.push(i.homePlayerId);
         } else {
@@ -813,8 +829,8 @@ export default {
         }
       });
     },
-    down() { },
-    upload() { },
+    down() {},
+    upload() {},
     result(data) {
       this.$router.push({
         name: 'resultInformation',
