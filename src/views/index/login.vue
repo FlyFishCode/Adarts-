@@ -13,7 +13,7 @@
         <i class="el-icon-warning"></i>
         <span>{{ tipsText }}</span>
       </div>
-      <el-row class="LoginButton" ref="button">
+      <el-row class="LoginButton" ref="button" @keyup.enter="login">
         <el-button type="primary" size="mini" @click="login">{{ $t("message.login") }}</el-button>
       </el-row>
     </div>
@@ -38,6 +38,14 @@ export default {
       flag: true
     };
   },
+  // created() {
+  //   const vm = this;
+  //   document.addEventListener('keydown', vm.login);
+  // },
+  // destroyed() {
+  //   const vm = this;
+  //   document.removeEventListener('keydown', vm.login);
+  // },
   methods: {
     login() {
       const vm = this;

@@ -255,13 +255,13 @@ export default {
     };
   },
   mounted() {
-    // let data = '';
-    // try {
-    //   data = JSON.parse(this.$route.query.data);
-    // } catch {
-    //   data = this.$route.query.data;
-    // }
-    // this.init(data);
+    let data = '';
+    try {
+      data = JSON.parse(this.$route.query.data);
+    } catch {
+      data = this.$route.query.data;
+    }
+    this.init(data);
     this.getMatchList();
   },
   methods: {
@@ -270,6 +270,7 @@ export default {
       this.match.competition = data.competition;
       this.match.start = data.start;
       this.match.end = data.end;
+      this.match.teamName = data.teamName;
       this.match.competitionId = data.competitionId;
       this.matchVO.teamId = data.teamId;
       this.match.area = data.Area;

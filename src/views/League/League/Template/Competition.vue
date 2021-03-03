@@ -1047,6 +1047,8 @@ export default {
           // 设置操作员数据
           this.$axios.post('/operation/getoperationlist', vm.$qs.stringify(vm.searchOperator)).then(operRes => {
             vm.OperatorList = operRes.data.data.list;
+            console.log('操作员接口：', operRes.data.data.list);
+            console.log('联赛接口：', data.operatorList);
             operRes.data.data.list.forEach(i => {
               data.operatorList.forEach(j => {
                 if (i.id === j) {
@@ -1054,7 +1056,6 @@ export default {
                 }
               });
             });
-            debugger;
           });
           // 设置店铺地址
           vm.Shop.pageSize = 100;

@@ -73,7 +73,7 @@
           class="uploadBg"
           action=" "
           ref="upload"
-          :limit='1'
+          :limit="1"
           :auto-upload="false"
           list-type="picture-card"
           :on-remove="handleRemove"
@@ -87,7 +87,6 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     const vm = this;
@@ -186,7 +185,7 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('thumbnail', File);
+      formData.append('image', File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
           method: 'POST',

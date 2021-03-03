@@ -67,7 +67,10 @@
                 <el-option :label="$t('all.tip154')" :value="3"></el-option>
               </el-select>
             </el-col>
-            <el-col :span="4" class="lineInputClass"> <el-input v-model.number="Competition.min" clearable :placeholder="$t('placeholder.input')"></el-input> _ <el-input v-model.number="Competition.max" clearable :placeholder="$t('placeholder.input')"></el-input> </el-col>
+            <el-col :span="4" class="lineInputClass">
+              <el-input v-model.number="Competition.min" clearable :placeholder="$t('placeholder.input')"></el-input> _
+              <el-input v-model.number="Competition.max" clearable :placeholder="$t('placeholder.input')"></el-input>
+            </el-col>
             <el-col :span="5" class="lineClass">
               <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
               <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button>
@@ -127,7 +130,16 @@
           </el-table>
         </div>
         <div class="page">
-          <el-pagination @size-change="SearchTeamSizeChange" @current-change="SearchTeamCurrentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="SearchTeamPageTotal"> </el-pagination>
+          <el-pagination
+            @size-change="SearchTeamSizeChange"
+            @current-change="SearchTeamCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 50, 100, 200]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="SearchTeamPageTotal"
+          >
+          </el-pagination>
         </div>
       </el-tab-pane>
       <el-tab-pane :label="$t('all.tip447')" name="two">
@@ -213,7 +225,7 @@
         <div class="table">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="date" :sortable="true" :label="$t('all.tip458')" min-width="3%">
-              <template  slot-scope="scope">
+              <template slot-scope="scope">
                 <div class="formImgBox">
                   <img v-if="scope.row.imgUrl" :src="scope.row.imgUrl" alt="" />
                   <img v-else :src="team" alt="" />
@@ -257,7 +269,16 @@
           </el-table>
         </div>
         <div class="page">
-          <el-pagination @size-change="TeamSizeChange" @current-change="TeamCurrentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="TeamPageTotal"> </el-pagination>
+          <el-pagination
+            @size-change="TeamSizeChange"
+            @current-change="TeamCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 50, 100, 200]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="TeamPageTotal"
+          >
+          </el-pagination>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -274,7 +295,7 @@
         </el-col>
         <el-col :span="8" id="divBoxWidth">
           <el-select v-model="Dialog.captainId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
-            <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
+            <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -382,7 +403,7 @@ export default {
   methods: {
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/getplayerlist', this.$qs.stringify({ label: value })).then(res => {
+        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {

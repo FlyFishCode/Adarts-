@@ -23,7 +23,7 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="infoVO.opeatorIdName" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
-            <el-option v-for="item in playerList" :key="item.id" :label="item.label" :value="item.id"> </el-option>
+            <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -240,7 +240,7 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/getplayerlist', this.$qs.stringify({ label: value })).then(res => {
+        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {

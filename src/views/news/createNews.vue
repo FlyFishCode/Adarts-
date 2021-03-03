@@ -70,7 +70,19 @@
         <div>{{ `3：${$t("all.tip3873")}` }}</div>
       </el-col>
       <el-col :span="18">
-        <el-upload :http-request="uploadImg" class="uploadBg" action=" " ref="upload" :auto-upload="false" list-type="picture-card" :on-change='handleChange' :on-remove="handleRemove" :file-list="fileList" :limit='1' :multiple="false">
+        <el-upload
+          :http-request="uploadImg"
+          class="uploadBg"
+          action=" "
+          ref="upload"
+          :auto-upload="false"
+          list-type="picture-card"
+          :on-change="handleChange"
+          :on-remove="handleRemove"
+          :file-list="fileList"
+          :limit="1"
+          :multiple="false"
+        >
           <i class="el-icon-plus"></i>
         </el-upload>
       </el-col>
@@ -224,7 +236,7 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('thumbnail', File);
+      formData.append('image', File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
           method: 'POST',
