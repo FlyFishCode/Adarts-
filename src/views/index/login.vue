@@ -63,6 +63,7 @@ export default {
         } else {
           sessionStorage.setItem('token', res.data.data.token);
           sessionStorage.setItem('userId', res.data.data.id);
+          sessionStorage.setItem('userType', res.data.data.userType);
           vm.$router.push({
             path: '/index'
           });

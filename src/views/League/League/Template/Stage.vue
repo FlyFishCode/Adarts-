@@ -886,16 +886,16 @@ export default {
         obj.round = `${this.gameList.timming}S`;
       }
       this.$axios.post('/addstagegame', Dobj).then(res => {
-        if (res.data.data) {
+        if (!res.data.errorCode) {
           const flag = this.saveGameList.every(i => i.gameName !== saveObj.gameName);
           if (flag) {
             obj.stageGameId = res.data.data;
             this.saveGameList.push(saveObj);
             this.stageGameData.push(obj);
             this.stage.gameList = this.saveGameList;
-          } else {
-            this.$message(this.$t('all.tip568'));
           }
+        } else {
+          this.$message(res.data.msg);
         }
       });
     },

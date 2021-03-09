@@ -65,7 +65,7 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination  @current-change="currentChange" @size-change="sizeChange" :current-page='1' :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
     </div>
   </div>
 </template>
@@ -85,8 +85,6 @@ export default {
           return time.getTime() < date1;
         }
       },
-      ContinentArr: [],
-      CountryArr: [],
       total: 1,
       teamVO: {
         competitionType: 0,
@@ -96,6 +94,8 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
+      ContinentArr: [],
+      CountryArr: [],
       tableData: [],
       competitionNameList: []
     };
@@ -117,6 +117,7 @@ export default {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
+          debugger;
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
         }
@@ -134,10 +135,9 @@ export default {
       });
     },
     currentChange(value) {
-      const vm = this;
       this.teamVO.pageNum = value;
       this.$axios.post('/teamaward', this.teamVO).then((res) => {
-        vm.tableData = res.data.data.list;
+        this.tableData = res.data.data.list;
       });
     },
     getAllCompetitionName() {

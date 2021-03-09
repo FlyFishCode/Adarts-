@@ -62,6 +62,8 @@ export default {
       })
         .then(() => {
           sessionStorage.removeItem('token');
+          sessionStorage.removeItem('userId');
+          sessionStorage.removeItem('userType');
           vm.$router.push({ path: '/' });
         })
         .catch(() => {

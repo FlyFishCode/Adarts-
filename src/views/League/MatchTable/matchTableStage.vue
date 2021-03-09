@@ -273,35 +273,37 @@
           <div v-show="MatchTableView" class="matchTableBox">
             <div v-for="(item, itemIndex) in MatchTableData" :key="itemIndex">
               <el-table border :data="item">
-                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="header.homeTeamName" min-width="110px">
+                <!-- X 轴展示客队 -->
+                <!-- Y 轴展示主队 -->
+                <el-table-column v-for="(header, index) in tableHeader" :key="index" :property="String(header.id)" :label="header.teamName" min-width="110px">
                   <template slot-scope="scope">
                     <template v-if="index === 0">
-                      <div>{{ scope.row.visitingTeamName }}</div>
+                      <div>{{ scope.row.teamName }}</div>
                     </template>
                     <template v-if="index !== 0">
-                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).confrontationDate.split(" ")[0] }}</div>
-                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).homeTeamName }}</div>
-                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).visitingTeamName }}</div>
-                      <div>{{ showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).week }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).confrontationDate.split(" ")[0] }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).homeTeamName }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).visitingTeamName }}</div>
+                      <div>{{ showData(index, scope.$index + 1, itemIndex).week }}</div>
                       <div>
                         <el-button
-                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 1"
+                          v-if="showData(index, scope.$index + 1, itemIndex).state === 1"
                           size="mini"
-                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
                           >{{ $t("all.tip334") }}</el-button
                         >
                         <el-button
-                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 2"
+                          v-if="showData(index, scope.$index + 1, itemIndex).state === 2"
                           size="mini"
                           type="primary"
-                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
                           >{{ $t("all.tip288") }}</el-button
                         >
                         <el-button
-                          v-if="showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex).state === 3"
+                          v-if="showData(index, scope.$index + 1, itemIndex).state === 3"
                           size="mini"
                           type="danger"
-                          @click="showTopBox(showData(header.homeTeamId, scope.row.visitingTeamId, itemIndex))"
+                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
                           >{{ $t("all.tip333") }}</el-button
                         >
                       </div>
@@ -1006,7 +1008,7 @@ export default {
     showData(x, y, index) {
       // 横坐标，纵坐标，第几个数组
       let obj = {};
-      obj = this.allMatchTableData[index].find(i => i.homeTeamId === x && i.visitingTeamId === y);
+      obj = this.allMatchTableData[index].find(i => i.x === x && i.y === y);
       if (obj) {
         return obj;
       }
@@ -1023,26 +1025,21 @@ export default {
       const vm = this;
       this.$axios.get(`/matchTable/getMatchTableFightInfo?matchTableId=${id}`).then(res => {
         if (res.data.data) {
-          const homeObj = {};
-          const awayObj = {};
-          const list = [];
-          this.tableHeader = [{ index: 0 }];
+          // const homeObj = {};
+          // const list = [];
+          this.tableHeader.push(...res.data.data.positionList);
           res.data.data.loopSurfaceList.forEach(i => {
             const arr = Object.assign(i.matchTableList, []);
-            i.matchTableList.forEach(j => {
-              if (!awayObj[j.homeTeamId]) {
-                awayObj[j.homeTeamId] = true;
-                vm.tableHeader.push(j);
-              }
-              if (!homeObj[j.visitingTeamId]) {
-                homeObj[j.visitingTeamId] = true;
-                list.push(j);
-              }
-            });
-            vm.MatchTableData.push(list);
+            // i.matchTableList.forEach(j => {
+            //   if (!homeObj[j.visitingTeamId]) {
+            //     homeObj[j.visitingTeamId] = true;
+            //     list.push(j);
+            //   }
+            // });
+            vm.MatchTableData.push(res.data.data.positionList);
             vm.allMatchTableData.push(arr);
           });
-          console.log(vm.tableHeader);
+          // console.log(vm.allMatchTableData);
         }
       });
     },

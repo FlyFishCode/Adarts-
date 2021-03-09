@@ -196,7 +196,7 @@
               {{ $t("all.tip8") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.name" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.name" clearable filterable :placeholder="$t('placeholder.select')">
                 <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
               </el-select>
             </el-col>

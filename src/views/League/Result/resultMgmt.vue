@@ -42,7 +42,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.SerchList.Category" :placeholder="$t('placeholder.select')" clearable @change="categoryChange">
+          <el-select v-model="resultMgmtVO.serchList.categoryId" :placeholder="$t('placeholder.select')" clearable @change="categoryChange">
             <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -50,7 +50,7 @@
           {{ $t("all.tip52") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.SerchList.Division" :placeholder="$t('placeholder.select')" clearable @change="divisionChange">
+          <el-select v-model="resultMgmtVO.serchList.divisionId" :placeholder="$t('placeholder.select')" clearable @change="divisionChange">
             <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -58,7 +58,7 @@
           {{ $t("all.tip21") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.SerchList.Stage" :placeholder="$t('placeholder.select')" clearable @change="change">
+          <el-select v-model="resultMgmtVO.serchList.stageId" :placeholder="$t('placeholder.select')" clearable @change="change">
             <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -68,14 +68,14 @@
           {{ $t("all.tip315") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="ResultMgmtVO.SerchList.TeamID" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="resultMgmtVO.serchList.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip316") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.SerchList.TeamName" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in teamList" :key="item.teamId" :label="item.teamName" :value="item.teamId"></el-option>
+          <el-select v-model="resultMgmtVO.serchList.teamName" :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in teamList" :key="item.teamId" :label="item.teamName" :value="item.teamName"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
@@ -87,13 +87,13 @@
           {{ $t("all.tip317") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-checkbox v-model="ResultMgmtVO.SerchList.ResultGame">{{ $t("all.tip318") }}</el-checkbox>
+          <el-checkbox v-model="resultMgmtVO.serchList.isResult">{{ $t("all.tip318") }}</el-checkbox>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip319") }}
         </el-col>
         <el-col :span="3" class="lineClass">
-          <el-checkbox v-model="ResultMgmtVO.SerchList.Line_upGame">{{ $t("all.tip320") }}</el-checkbox>
+          <el-checkbox v-model="resultMgmtVO.serchList.isMatch">{{ $t("all.tip320") }}</el-checkbox>
         </el-col>
       </el-row>
     </div>
@@ -289,20 +289,19 @@ export default {
         type: '',
         date: ''
       },
-      ResultMgmtVO: {
-        SerchList: {
-          Competition: '',
-          CompetitionStatus: '',
-          CompetitionArea: '',
-          CompetitionType: '',
-          EntryNumber: '',
-          Category: '',
-          Division: '',
-          Stage: '',
-          TeamID: '',
-          TeamName: '',
-          ResultGame: '',
-          Line_upGame: ''
+      resultMgmtVO: {
+        serchList: {
+          competitionId: '',
+          categoryId: '',
+          divisionId: '',
+          stageId: '',
+          teamId: '',
+          teamName: '',
+          state: '',
+          isResult: false,
+          isMatch: false,
+          pageNum: 1,
+          pageSize: 10
         },
         topBox: {
           MatchDate: '1',
@@ -322,10 +321,7 @@ export default {
     };
   },
   mounted() {
-    const id = this.$route.query.id;
     this.init(this.$route.query);
-    this.getTableData(id);
-    this.getSelectList(id);
   },
   methods: {
     init(data) {
@@ -352,6 +348,10 @@ export default {
           this.detail.area += `${i.countryName}${str};`;
         });
       }
+      this.resultMgmtVO.serchList.competitionId = data.id;
+      this.search();
+      this.getEntryTeam(data.id);
+      this.getSelectList(data.id);
     },
     returnType(id) {
       let type = '';
@@ -413,11 +413,19 @@ export default {
       }
       return type;
     },
-    getTableData(id) {
-      const vm = this;
-      this.$axios.post(`/getconfrontationresult?competitionId=${id}`).then(res => {
+    getEntryTeam(id) {
+      this.$axios.post(`/entryTeam?competitionId=${id}`).then(res => {
         if (!res.data.errorCode) {
-          vm.tableData = res.data.data.list;
+          this.teamList = res.data.data;
+        } else {
+          this.$message(res.data.msg);
+        }
+      });
+    },
+    search() {
+      this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
+        if (!res.data.errorCode) {
+          this.tableData = res.data.data.list;
         } else {
           this.$message(res.data.msg);
         }
@@ -464,22 +472,22 @@ export default {
       });
     },
     categoryChange() {
-      this.ResultMgmtVO.SerchList.Division = '';
-      this.ResultMgmtVO.SerchList.Stage = '';
+      this.resultMgmtVO.serchList.divisionId = '';
+      this.resultMgmtVO.serchList.stageId = '';
     },
     divisionChange() {
-      this.ResultMgmtVO.SerchList.Stage = '';
+      this.resultMgmtVO.serchList.stageId = '';
     },
     change(value) {
       console.log(value);
     },
     SubmittedChange(a) {
       console.log(a.Submitted);
-      console.log(this.ResultMgmtVO.topBox.Submitted);
+      console.log(this.resultMgmtVO.topBox.Submitted);
     },
     SavedChange(a) {
       console.log(a.Saved);
-      console.log(this.ResultMgmtVO.topBox.Saved);
+      console.log(this.resultMgmtVO.topBox.Saved);
     },
     SubmittedSave(res) {
       console.log(res);
@@ -492,9 +500,6 @@ export default {
     },
     SavedSubmit(res) {
       console.log(res);
-    },
-    search() {
-      console.log(this.select);
     },
     setStyle(value) {
       return {

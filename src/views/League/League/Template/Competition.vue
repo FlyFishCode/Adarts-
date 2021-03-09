@@ -145,7 +145,14 @@
           {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model.trim="AddCompetitionRequest.competition.competitionName" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model.trim="AddCompetitionRequest.competition.competitionName"
+            filterable
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -238,11 +245,11 @@
           {{ $t("all.tip63") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button type="primary" size="mini" @click="AssignOperatorer">{{ $t("all.tip476") }}</el-button>
+          <el-button type="primary" size="mini" @click="AssignOperatorer" :disabled="userType === '5'">{{ $t("all.tip476") }}</el-button>
         </el-col>
         <el-col :span="14" style="display:flex" class="lineClass">
           <div v-for="item in operatorSelectionList" :key="item.index">
-            <span>{{ item.operName }}{{ ";" }}</span>
+            <span>{{ item.operName || item.operatorName }}{{ ";" }}</span>
           </div>
         </el-col>
       </el-row>
@@ -808,6 +815,7 @@ export default {
   data() {
     const vm = this;
     return {
+      userType: sessionStorage.getItem('userType'),
       competitionEndPeriodPickerOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.AddCompetitionRequest.competition.competitionStartPeriod);
@@ -1016,7 +1024,7 @@ export default {
       const vm = this;
       this.$axios.post(`/getcompetitionbyid?id=${id}`).then(res => {
         if (res.data.data) {
-          const data = res.data.data;
+          const data = Object.assign({}, res.data.data);
           const list = [];
           vm.AddCompetitionRequest = res.data.data;
           vm.timeRangeBeforehours = data.competitionBasicOption.timeRangeBefore % 24;
@@ -1047,15 +1055,18 @@ export default {
           // 设置操作员数据
           this.$axios.post('/operation/getoperationlist', vm.$qs.stringify(vm.searchOperator)).then(operRes => {
             vm.OperatorList = operRes.data.data.list;
-            console.log('操作员接口：', operRes.data.data.list);
-            console.log('联赛接口：', data.operatorList);
-            operRes.data.data.list.forEach(i => {
-              data.operatorList.forEach(j => {
-                if (i.id === j) {
-                  vm.operatorSelectionList.push(i);
-                }
+            if (vm.userType === '5') {
+              vm.operatorSelectionList = data.operatorList;
+            } else {
+              operRes.data.data.list.forEach(i => {
+                data.operatorList.forEach(j => {
+                  if (i.id === j.operatorId) {
+                    vm.operatorSelectionList.push(i);
+                  }
+                });
               });
-            });
+            }
+            console.log(vm.operatorSelectionList);
           });
           // 设置店铺地址
           vm.Shop.pageSize = 100;
@@ -1443,13 +1454,13 @@ export default {
           });
         });
         // this.AddCompetitionRequest.shopIdList = [...new Set([...this.AddCompetitionRequest.shopIdList, ...this.removeList])];
-        debugger;
       }
     },
     ShopDialogClick() {
       const vm = this;
       this.ShopDialog = true;
       this.$nextTick(() => {
+        debugger;
         if (!this.$refs.ShopListRef.selection.length) {
           this.CompetitionOptionShopList.forEach((i, index) => {
             vm.showShopList.forEach(j => {

@@ -57,7 +57,7 @@
           {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="ResultMgmtVO.competitionName" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
             <el-option v-for="(item,index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
