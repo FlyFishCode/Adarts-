@@ -58,7 +58,7 @@
           {{ $t("all.tip21") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.stageId" :placeholder="$t('placeholder.select')" clearable @change="change">
+          <el-select v-model="resultMgmtVO.serchList.stageId" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -426,10 +426,19 @@ export default {
       this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
         if (!res.data.errorCode) {
           this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
         } else {
           this.$message(res.data.msg);
         }
       });
+    },
+    sizeChange(value) {
+      this.resultMgmtVO.serchList.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.resultMgmtVO.serchList.pageNum = value;
+      this.search();
     },
     getIntoSet(id, type) {
       console.log(id, type);
@@ -477,29 +486,6 @@ export default {
     },
     divisionChange() {
       this.resultMgmtVO.serchList.stageId = '';
-    },
-    change(value) {
-      console.log(value);
-    },
-    SubmittedChange(a) {
-      console.log(a.Submitted);
-      console.log(this.resultMgmtVO.topBox.Submitted);
-    },
-    SavedChange(a) {
-      console.log(a.Saved);
-      console.log(this.resultMgmtVO.topBox.Saved);
-    },
-    SubmittedSave(res) {
-      console.log(res);
-    },
-    SubmittedSubmit(res) {
-      console.log(res);
-    },
-    SavedSave(res) {
-      console.log(res);
-    },
-    SavedSubmit(res) {
-      console.log(res);
     },
     setStyle(value) {
       return {
@@ -841,22 +827,9 @@ export default {
         name: 'resultInformation',
         query: {
           id: String(data.competitionId),
-          competition: data.competitionName,
-          status: data.status,
-          area: JSON.stringify(data.countryList),
-          type: String(data.type),
-          start: data.competitionStartPeriod,
-          end: data.competitionEndPeriod,
-          number: data.matchTableCount,
           name: '2'
         }
       });
-    },
-    sizeChange(a) {
-      console.log(a);
-    },
-    currentChange(a) {
-      console.log(a);
     }
   }
 };

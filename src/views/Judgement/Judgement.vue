@@ -126,7 +126,7 @@
         <el-table-column prop="categoryCount" :label="$t('all.tip51')" min-width="5%"> </el-table-column>
         <el-table-column prop="divisionCount" :label="$t('all.tip52')" min-width="5%"> </el-table-column>
         <el-table-column prop="stageCount" :label="$t('all.tip21')" min-width="5%"> </el-table-column>
-        <el-table-column prop="address" :label="$t('all.tip310')" min-width="5%"> </el-table-column>
+        <el-table-column prop="entryCount" :label="$t('all.tip310')" min-width="5%"> </el-table-column>
         <el-table-column :label="$t('all.tip25')" min-width="5%">
           <template slot-scope="scope">
             <div v-if="scope.row.status === 1">

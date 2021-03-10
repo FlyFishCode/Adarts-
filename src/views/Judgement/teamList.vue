@@ -40,7 +40,7 @@
           {{ $t("all.tip310") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          {{ teamList.number }}
+          {{ teamList.entryCount }}
         </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip364") }}

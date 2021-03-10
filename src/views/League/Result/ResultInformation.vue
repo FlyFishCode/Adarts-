@@ -3,19 +3,19 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">{{ $t("all.tip3") }}</el-col>
-        <el-col :span="3" :title="detail.competition" class="overFlowStyle lineClass">{{ detail.competition }}</el-col>
+        <el-col :span="3" :title="detail.competitionName" class="overFlowStyle lineClass">{{ detail.competitionName }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip6") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.status }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.status === '1'?$t('all.tip26'):$t('all.tip27') }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip4") }}</el-col>
         <el-col :span="9" class="overFlowStyle lineClass">{{ detail.area }}</el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">{{ $t("all.tip5") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ $t(detail.type) }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.type === 1?$t('all.tip40'):$t('all.tip41') }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip7") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.start | showDate }}-{{ detail.end | showDate }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.competitionStartPeriod.split(' ')[0] }}-{{ detail.competitionEndPeriod.split(' ')[0] }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip310") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.number }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.entryCount }}</el-col>
       </el-row>
     </div>
 
@@ -48,7 +48,10 @@
               <el-form-item :label="$t('all.tip71')">{{ rankingValue.rankingDecision === 1 ? $t("all.tip73") : $t("all.tip72") + $t("all.tip73") }}</el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item :label="$t('all.tip72')">{{ this.$t("all.tip107") }}{{ rankingValue.winningPointWin + "," }}{{ this.$t("all.tip108") }}{{ rankingValue.winningPointDrawn + "," }}{{ this.$t("all.tip109") }}{{ rankingValue.winningPointLose + "," }}</el-form-item>
+              <el-form-item :label="$t('all.tip72')"
+                >{{ this.$t("all.tip107") }}{{ rankingValue.winningPointWin + "," }}{{ this.$t("all.tip108") }}{{ rankingValue.winningPointDrawn + "," }}{{ this.$t("all.tip109")
+                }}{{ rankingValue.winningPointLose + "," }}</el-form-item
+              >
             </el-col>
             <el-col :span="8" class="lineClass">
               <el-button type="primary" size="mini" @click="getRankingList">{{ $t("form.SearchButton") }}</el-button>
@@ -89,6 +92,16 @@
               <el-table-column prop="penaltyPoint" :label="$t('all.tip223')" min-width="8%"></el-table-column>
               <el-table-column prop="finalPoint" :label="$t('all.tip314')" min-width="6%"></el-table-column>
             </el-table>
+          </div>
+          <div class="page">
+            <el-pagination
+              @size-change="rankingsizeChange"
+              @current-change="rankingcurrentChange"
+              :current-page="1"
+              :page-sizes="[10, 20, 50, 100]"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="rankingtotal"
+            ></el-pagination>
           </div>
         </el-row>
       </el-tab-pane>
@@ -146,19 +159,19 @@
                   <div class="result">
                     <div style="width:60%">
                       <div class="resultDetail">
-                        <div>{{ 'Set Win' }}</div>
+                        <div>{{ "Set Win" }}</div>
                         <div>{{ scope.row.homeSetWin }}</div>
                       </div>
                       <div class="resultDetail">
-                        <div>{{ 'Set Point' }}</div>
+                        <div>{{ "Set Point" }}</div>
                         <div>{{ scope.row.homeSetPoint }}</div>
                       </div>
                       <div class="resultDetail">
-                        <div>{{ 'Penalty Point' }}</div>
+                        <div>{{ "Penalty Point" }}</div>
                         <div>{{ scope.row.homePenaltyPoint }}</div>
                       </div>
                       <div class="resultDetail">
-                        <div>{{ 'WinningPoint' }}</div>
+                        <div>{{ "WinningPoint" }}</div>
                         <div>{{ scope.row.homeWinningPoint }}</div>
                       </div>
                     </div>
@@ -175,19 +188,19 @@
                     <div style="width:60%">
                       <div class="resultDetail">
                         <div>{{ scope.row.visitingSetWin }}</div>
-                        <div>{{ 'Set Win' }}</div>
+                        <div>{{ "Set Win" }}</div>
                       </div>
                       <div class="resultDetail">
                         <div>{{ scope.row.visitingSetPoint }}</div>
-                        <div>{{ 'Set Point' }}</div>
+                        <div>{{ "Set Point" }}</div>
                       </div>
                       <div class="resultDetail">
                         <div>{{ scope.row.visitingPenaltyPoint }}</div>
-                        <div>{{ 'Penalty Point' }}</div>
+                        <div>{{ "Penalty Point" }}</div>
                       </div>
                       <div class="resultDetail">
                         <div>{{ scope.row.visitingWinningPoint }}</div>
-                        <div>{{ 'WinningPoint' }}</div>
+                        <div>{{ "WinningPoint" }}</div>
                       </div>
                     </div>
                   </div>
@@ -210,7 +223,14 @@
             </el-table-column>
           </el-table>
           <div class="page">
-            <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"></el-pagination>
+            <el-pagination
+              @size-change="sizeChange"
+              @current-change="currentChange"
+              :current-page="1"
+              :page-sizes="[10, 20, 50, 100]"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+            ></el-pagination>
           </div>
         </div>
         <div v-show="showDetail" class="showDetailStyle">
@@ -383,7 +403,7 @@
             </el-row>
             <el-row style="border:1px solid #eee;">
               <el-row class="allBox">
-                <el-col :span="6" :title="homeTeamName" class="overFlowStyle">{{ $t('all.tip323') + "：" }}{{ homeTeamName }}</el-col>
+                <el-col :span="6" :title="homeTeamName" class="overFlowStyle">{{ $t("all.tip323") + "：" }}{{ homeTeamName }}</el-col>
                 <el-col :span="2">{{ $t("all.tip225") }}</el-col>
                 <el-col :span="15">
                   <el-input v-model="gameResultTextarea" clearable></el-input>
@@ -487,7 +507,7 @@
           <!-- Away Team -->
           <el-row style="border:1px solid #eee;">
             <el-row class="allBox">
-              <el-col :span="6" :title="awayTeamName" class="overFlowStyle">{{ $t('all.tip326') + "：" }}{{ awayTeamName }}</el-col>
+              <el-col :span="6" :title="awayTeamName" class="overFlowStyle">{{ $t("all.tip326") + "：" }}{{ awayTeamName }}</el-col>
               <el-col :span="2">{{ $t("all.tip225") }}</el-col>
               <el-col :span="15">
                 <el-input v-model="gameResultTextarea" clearable></el-input>
@@ -606,13 +626,17 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="10">
+            <el-col :span="6">
               <el-form-item :label="$t('all.tip21')">
                 <el-select v-model="PlayerVO.stageId" :placeholder="$t('placeholder.select')" clearable>
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
+          </el-form>
+        </el-row>
+        <el-row>
+          <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip445')">
                 <el-input v-model="PlayerVO.playerName" clearable :placeholder="$t('placeholder.input')"></el-input>
@@ -696,7 +720,14 @@
           </div>
         </el-row>
         <div class="page">
-          <el-pagination @size-change="playerSizeChange" @current-change="playerCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="PlayerTotal"></el-pagination>
+          <el-pagination
+            @size-change="playerSizeChange"
+            @current-change="playerCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="PlayerTotal"
+          ></el-pagination>
         </div>
       </el-tab-pane>
       <el-tab-pane :label="$t('all.tip343')" name="fourth">
@@ -716,13 +747,17 @@
                 </el-select>
               </el-form-item>
             </el-col>
-            <el-col :span="10">
+            <el-col :span="6">
               <el-form-item :label="$t('all.tip21')">
                 <el-select v-model="PlayerAwardVO.stageId" :placeholder="$t('placeholder.select')" clearable @change="change">
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
+          </el-form>
+        </el-row>
+        <el-row>
+          <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip445')">
                 <el-input v-model="PlayerAwardVO.playerName" clearable :placeholder="$t('placeholder.input')"></el-input>
@@ -745,36 +780,46 @@
               <el-button type="primary" size="mini" @click="getPlayerAwardList">{{ $t("form.SearchButton") }}</el-button>
             </el-col>
           </el-form>
-          <div class="table">
-            <el-table :data="playerAwardList" border style="width: 100%">
-              <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
-              <el-table-column :label="$t('all.tip340')" min-width="10%">
-                <template slot-scope="scope">
-                  <div>{{ `${scope.row.playerName}` }}</div>
-                  <div>{{ `(${scope.row.playerId})` }}</div>
-                </template>
-              </el-table-column>
-              <el-table-column prop="gender" :label="$t('all.tip208')" min-width="6%"></el-table-column>
-              <el-table-column prop="teamName" :label="$t('all.tip244')" min-width="6%"></el-table-column>
-              <el-table-column prop="sideBull" :label="$t('all.tip344')" min-width="5%"></el-table-column>
-              <el-table-column prop="doubleBull" :label="$t('all.tip345')" min-width="6%"></el-table-column>
-              <el-table-column prop="lowTon" :label="$t('all.tip346')" min-width="6%"></el-table-column>
-              <el-table-column prop="hatTrick" :label="$t('all.tip347')" min-width="6%"></el-table-column>
-              <el-table-column prop="highTon" :label="$t('all.tip348')" min-width="7%"></el-table-column>
-              <el-table-column prop="highTonOut" :label="$t('all.tip349')" min-width="7%"></el-table-column>
-              <el-table-column prop="lowTonOut" :label="$t('all.tip350')" min-width="7%"></el-table-column>
-              <el-table-column prop="threeInABed" :label="$t('all.tip351')" min-width="7%"></el-table-column>
-              <el-table-column prop="ton80" :label="$t('all.tip352')" min-width="7%"></el-table-column>
-              <el-table-column prop="threeInTheBlack" :label="$t('all.tip353')" min-width="7%"></el-table-column>
-              <el-table-column prop="fiveMarks" :label="$t('all.tip354')" min-width="7%"></el-table-column>
-              <el-table-column prop="sixMarks" :label="$t('all.tip355')" min-width="7%"></el-table-column>
-              <el-table-column prop="sevenMarks" :label="$t('all.tip356')" min-width="7%"></el-table-column>
-              <el-table-column prop="eightMarks" :label="$t('all.tip357')" min-width="7%"></el-table-column>
-              <el-table-column prop="nineMarks" :label="$t('all.tip358')" min-width="7%"></el-table-column>
-              <el-table-column prop="whiteHorse" :label="$t('all.tip359')" min-width="7%"></el-table-column>
-            </el-table>
-          </div>
         </el-row>
+        <div class="table">
+          <el-table :data="playerAwardList" border style="width: 100%">
+            <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
+            <el-table-column :label="$t('all.tip340')" min-width="10%">
+              <template slot-scope="scope">
+                <div>{{ `${scope.row.playerName}` }}</div>
+                <div>{{ `(${scope.row.playerId})` }}</div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="gender" :label="$t('all.tip208')" min-width="6%"></el-table-column>
+            <el-table-column prop="teamName" :label="$t('all.tip244')" min-width="6%"></el-table-column>
+            <el-table-column prop="sideBull" :label="$t('all.tip344')" min-width="5%"></el-table-column>
+            <el-table-column prop="doubleBull" :label="$t('all.tip345')" min-width="6%"></el-table-column>
+            <el-table-column prop="lowTon" :label="$t('all.tip346')" min-width="6%"></el-table-column>
+            <el-table-column prop="hatTrick" :label="$t('all.tip347')" min-width="6%"></el-table-column>
+            <el-table-column prop="highTon" :label="$t('all.tip348')" min-width="7%"></el-table-column>
+            <el-table-column prop="highTonOut" :label="$t('all.tip349')" min-width="7%"></el-table-column>
+            <el-table-column prop="lowTonOut" :label="$t('all.tip350')" min-width="7%"></el-table-column>
+            <el-table-column prop="threeInABed" :label="$t('all.tip351')" min-width="7%"></el-table-column>
+            <el-table-column prop="ton80" :label="$t('all.tip352')" min-width="7%"></el-table-column>
+            <el-table-column prop="threeInTheBlack" :label="$t('all.tip353')" min-width="7%"></el-table-column>
+            <el-table-column prop="fiveMarks" :label="$t('all.tip354')" min-width="7%"></el-table-column>
+            <el-table-column prop="sixMarks" :label="$t('all.tip355')" min-width="7%"></el-table-column>
+            <el-table-column prop="sevenMarks" :label="$t('all.tip356')" min-width="7%"></el-table-column>
+            <el-table-column prop="eightMarks" :label="$t('all.tip357')" min-width="7%"></el-table-column>
+            <el-table-column prop="nineMarks" :label="$t('all.tip358')" min-width="7%"></el-table-column>
+            <el-table-column prop="whiteHorse" :label="$t('all.tip359')" min-width="7%"></el-table-column>
+          </el-table>
+        </div>
+        <div class="page">
+          <el-pagination
+            @size-change="playerAwardSizeChange"
+            @current-change="playerAwardCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="playerAwardTotal"
+          ></el-pagination>
+        </div>
       </el-tab-pane>
       <el-tab-pane :label="$t('all.tip360')" name="five">
         <el-row>
@@ -835,6 +880,16 @@
             <el-table-column prop="whiteHorse" :label="$t('all.tip359')" min-width="10%"></el-table-column>
           </el-table>
         </div>
+        <div class="page">
+          <el-pagination
+            @size-change="teamAwardSizeChange"
+            @current-change="teamAwardCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="teamAwardTotal"
+          ></el-pagination>
+        </div>
       </el-tab-pane>
     </el-tabs>
     <div>
@@ -848,8 +903,8 @@
           <el-table-column property="teamName" :label="$t('all.tip244')" min-width="10%"></el-table-column>
           <el-table-column :label="$t('all.tip230')" min-width="10%">
             <template slot-scope="scope">
-              <div v-if="scope.row.afterModification === 1">{{ $t('all.tip309') }}</div>
-              <div v-if="scope.row.afterModification === 2">{{ $t('all.tip223') }}</div>
+              <div v-if="scope.row.afterModification === 1">{{ $t("all.tip309") }}</div>
+              <div v-if="scope.row.afterModification === 2">{{ $t("all.tip223") }}</div>
             </template>
           </el-table-column>
           <el-table-column property="original" :label="$t('all.tip231')" min-width="10%"></el-table-column>
@@ -858,7 +913,14 @@
           <el-table-column property="userName" :label="$t('all.tip233')" min-width="10%"></el-table-column>
         </el-table>
         <div class="page">
-          <el-pagination @size-change="diaLogSizeChange" @current-change="diaLogCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="diaLogTotal"></el-pagination>
+          <el-pagination
+            @size-change="diaLogSizeChange"
+            @current-change="diaLogCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="diaLogTotal"
+          ></el-pagination>
         </div>
       </el-dialog>
     </div>
@@ -881,11 +943,7 @@ export default {
       defaultImg: require('@/assets/person.jpg'),
       allScore: '',
       matchId: '',
-      gameResultList: [
-        { id: 1, label: 'all.tip107' },
-        { id: 2, label: 'all.tip108' },
-        { id: 3, label: 'all.tip109' }
-      ],
+      gameResultList: [{ id: 1, label: 'all.tip107' }, { id: 2, label: 'all.tip108' }, { id: 3, label: 'all.tip109' }],
       gameScoreList: [],
       penaltyScoreList: [],
       ResultsHiotory: [],
@@ -893,19 +951,16 @@ export default {
       awayResultId: '',
       gameResultTextarea: '',
       detail: {
-        competition: '',
-        status: '',
-        area: '',
-        type: '',
-        start: '',
-        end: '',
-        number: ''
+        competitionStartPeriod: '',
+        competitionEndPeriod: ''
       },
       rankingVO: {
         competitionId: '',
         categoryId: '',
         divisionId: '',
-        stageId: ''
+        stageId: '',
+        pageNum: 1,
+        pageSize: 10
       },
       allResultMgmt: [],
       penaltyMgmt: [],
@@ -927,7 +982,6 @@ export default {
         pageSize: 10,
         competitionId: this.$route.query.id
       },
-      total: 1,
       PlayerVO: {
         competitionId: '',
         categoryId: '',
@@ -944,7 +998,11 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
+      total: 1,
+      rankingtotal: 1,
       PlayerTotal: 1,
+      teamAwardTotal: 1,
+      playerAwardTotal: 1,
       PlayerAwardVO: {
         competitionId: '',
         categoryId: '',
@@ -952,14 +1010,18 @@ export default {
         stageId: '',
         playerName: '',
         teamName: '',
-        gender: ''
+        gender: '',
+        pageNum: 1,
+        pageSize: 10
       },
       TeamAwardVO: {
         competitionId: '',
         categoryId: '',
         divisionId: '',
         stageId: '',
-        teamName: ''
+        teamName: '',
+        pageNum: 1,
+        pageSize: 10
       },
       resultList: [],
       setList: [],
@@ -998,7 +1060,6 @@ export default {
       this.TeamAwardVO.competitionId = id;
       this.init(id);
     }
-    this.showDetails(this.$route.query);
   },
   methods: {
     init(id) {
@@ -1008,35 +1069,25 @@ export default {
       this.getPlayerAwardList();
       this.getTeamAwardList();
       this.getResultList();
+      this.showDetails(id);
     },
-    showDetails(data) {
-      if (data.name === '2') {
-        this.activeName = 'second';
-      }
-      if (data.type === '1') {
-        this.detail.type = 'all.tip40';
-      } else {
-        this.detail.type = 'all.tip41';
-      }
-      if (data.status === '1') {
-        this.detail.status = this.$t('all.tip26');
-      } else if (data.status === '2') {
-        this.detail.status = this.$t('all.tip27');
-      } else {
-        this.detail.status = this.$t('all.tip28');
-      }
-      if (!data.area) return;
-      JSON.parse(data.area).forEach(i => {
-        let str = '';
-        if (i.areaName) {
-          str = `,${i.areaName}`;
+    showDetails(id) {
+      const vm = this;
+      this.$axios.post(`/fixedBarInfo?competitionId=${id}`).then(res => {
+        if (!res.data.errorCode) {
+          this.detail = res.data.data;
+          this.detail.area = '';
+          vm.detail.countryList.forEach(i => {
+            let str = '';
+            if (i.areaName) {
+              str = `,${i.areaName}`;
+            }
+            vm.detail.area += `${i.countryName}${str};`;
+          });
+        } else {
+          this.$message(res.data.msg);
         }
-        this.detail.area += `${i.countryName}${str};`;
       });
-      this.detail.competition = data.competition;
-      this.detail.start = data.start;
-      this.detail.end = data.end;
-      this.detail.number = data.number;
     },
     getRankingList() {
       this.$axios.post('/ranking', this.$qs.stringify(this.rankingVO)).then(res => {
@@ -1047,6 +1098,14 @@ export default {
           this.$message(res.data.msg);
         }
       });
+    },
+    rankingsizeChange(value) {
+      this.rankingVO.pageNum = value;
+      this.getRankingList();
+    },
+    rankingcurrentChange(value) {
+      this.rankingVO.pageSize = value;
+      this.getRankingList();
     },
     getResultList() {
       this.result.state = this.result.state ? 1 : 0;
@@ -1061,25 +1120,39 @@ export default {
     },
     sizeChange(value) {
       this.result.pageNum = value;
-      this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.result)).then(res => {
-        if (!res.data.errorCode) {
-          this.resultList = res.data.data.list;
-        } else {
-          this.$message(res.data.msg);
-        }
-      });
-      this.result.state = !!this.result.state;
+      this.getResultList();
     },
     currentChange(value) {
       this.result.pageSize = value;
-      this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.result)).then(res => {
-        if (!res.data.errorCode) {
-          this.resultList = res.data.data.list;
-        } else {
-          this.$message(res.data.msg);
-        }
-        this.result.state = !!this.result.state;
+      this.getResultList();
+    },
+    getTeamAwardList() {
+      this.$axios.post('/teamawardresult', this.$qs.stringify(this.TeamAwardVO)).then(res => {
+        this.teamAwardList = res.data.data;
+        this.teamAwardTotal = res.data.data.total;
       });
+    },
+    teamAwardSizeChange(value) {
+      this.TeamAwardVO.pageSize = value;
+      this.getTeamAwardList();
+    },
+    teamAwardCurrentChange(value) {
+      this.TeamAwardVO.pageNum = value;
+      this.getTeamAwardList();
+    },
+    getPlayerAwardList() {
+      this.$axios.post('/playerawardresult', this.$qs.stringify(this.PlayerAwardVO)).then(res => {
+        this.playerAwardList = res.data.data;
+        this.playerAwardTotal = res.data.data.total;
+      });
+    },
+    playerAwardSizeChange(value) {
+      this.PlayerAwardVO.pageSize = value;
+      this.getPlayerAwardList();
+    },
+    playerAwardCurrentChange(value) {
+      this.PlayerAwardVO.pageNum = value;
+      this.getPlayerAwardList();
     },
     playerSearch() {
       this.$axios.post('/playerresult', this.$qs.stringify(this.PlayerVO)).then(res => {
@@ -1090,22 +1163,16 @@ export default {
         }
       });
     },
-    diaLogCurrentChange() {
-
+    playerSizeChange(val) {
+      this.PlayerVO.pageSize = val;
+      this.playerSearch();
     },
-    diaLogSizeChange() {
-
+    playerCurrentChange(val) {
+      this.PlayerVO.pageNum = val;
+      this.playerSearch();
     },
-    getPlayerAwardList() {
-      this.$axios.post('/playerawardresult', this.$qs.stringify(this.PlayerAwardVO)).then(res => {
-        this.playerAwardList = res.data.data;
-      });
-    },
-    getTeamAwardList() {
-      this.$axios.post('/teamawardresult', this.$qs.stringify(this.TeamAwardVO)).then(res => {
-        this.teamAwardList = res.data.data;
-      });
-    },
+    diaLogCurrentChange() {},
+    diaLogSizeChange() {},
     getSelectList(id) {
       this.$axios.post(`/allsubset?competitionId=${id}`).then(res => {
         this.findObj(res.data.data);
@@ -1178,7 +1245,7 @@ export default {
           this.allScore = data.homeResult + data.visitingResult;
           this.homeResultId = data.homeConfrontationResultId;
           this.awayResultId = data.visitingConfrontationResultId;
-          for (let index = -1; index < (data.homeSetPoint + data.visitingSetPoint); index += 1) {
+          for (let index = -1; index < data.homeSetPoint + data.visitingSetPoint; index += 1) {
             this.gameScoreList.push({ id: index + 1, label: index + 1 });
           }
           for (let i = -1; i < 99; i += 1) {
@@ -1288,7 +1355,7 @@ export default {
         this.LeagueResultsDialog = true;
       });
     },
-    showBox() { },
+    showBox() {},
     tabClick(value) {
       if (value.index === '2') {
         this.getResultList();
@@ -1326,26 +1393,6 @@ export default {
     },
     TeamAwardDivisionChange() {
       this.TeamAwardVO.stageId = '';
-    },
-    playerSizeChange(val) {
-      this.PlayerVO.pageSize = val;
-      this.$axios.post('/playerresult', this.$qs.stringify(this.PlayerVO)).then(res => {
-        if (!res.data.errorCode) {
-          this.playerList = res.data.data;
-        } else {
-          this.$message(res.data.msg);
-        }
-      });
-    },
-    playerCurrentChange(val) {
-      this.PlayerVO.pageNum = val;
-      this.$axios.post('/playerresult', this.$qs.stringify(this.PlayerVO)).then(res => {
-        if (!res.data.errorCode) {
-          this.playerList = res.data.data;
-        } else {
-          this.$message(res.data.msg);
-        }
-      });
     }
   }
 };
@@ -1396,5 +1443,8 @@ export default {
 .resultDetail {
   display: flex;
   justify-content: space-between;
+}
+.el-form-item__content div {
+  width: 100%;
 }
 </style>
