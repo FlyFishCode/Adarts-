@@ -1430,13 +1430,12 @@ export default {
       });
     },
     result(id) {
-      const data = {
-        id,
-        name: '2'
-      };
       this.$router.push({
         name: 'resultInformation',
-        query: data
+        query: {
+          id,
+          name: '2'
+        }
       });
     },
     showTopBox(data) {

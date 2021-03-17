@@ -20,7 +20,7 @@
     </div>
 
     <el-tabs v-model="activeName" type="card" :stretch="stretch" @tab-click="tabClick">
-      <el-tab-pane :label="$t('all.tip214')" name="first">
+      <el-tab-pane :label="$t('all.tip214')" name="1">
         <el-row>
           <el-form label-width="145px">
             <el-col :span="8">
@@ -105,7 +105,7 @@
           </div>
         </el-row>
       </el-tab-pane>
-      <el-tab-pane :label="$t('all.tip309')" name="second">
+      <el-tab-pane :label="$t('all.tip309')" name="2">
         <el-row>
           <el-form label-width="160px">
             <el-col>
@@ -320,34 +320,31 @@
                       <div v-if="scope.row.gameMode === 6">{{ "Team2" }}</div>
                     </template>
                   </el-table-column>
-                  <el-table-column :label="$t('all.tip227')" min-width="6%">
+                  <el-table-column  prop="drawFirst" :label="$t('all.tip227')" min-width="6%">
                     <template slot-scope="scope">
-                      <div v-for="(item, index) in scope.row.playerList" :key="index">
-                        <div v-if="item.drawFirst === 1">{{ $t("all.tip323") }}</div>
-                        <div v-else>{{ $t("all.tip326") }}</div>
-                      </div>
+                      <div>{{ scope.row.drawFirst === 1?$t("all.tip323"):$t("all.tip326") }}</div>
                     </template>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip111')" min-width="10%">
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
-                        <div v-for="(item, index) in scope.row.playerList" :key="index">
-                          <el-select v-model="item.homePlayerId" :placeholder="$t('placeholder.select')">
-                            <el-option v-for="item in scope.row.playerList" :key="item.homePlayerId" :label="item.homePlayerName" :value="item.homePlayerId"></el-option>
+                        <div v-for="(item, index) in scope.row.homePlayerList" :key="index">
+                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')">
+                            <el-option v-for="item in scope.row.homePlayerList" :key="item.playerId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
                       </template>
                     </el-table-column>
                     <el-table-column :label="$t('all.tip228')" min-width="7%">
                       <template slot-scope="scope">
-                        <div v-for="(item, index) in scope.row.playerList" :key="index">
-                          <el-input v-model="item.homePpdMpr" clearable></el-input>
+                        <div v-for="(item, index) in scope.row.homePlayerList" :key="index">
+                          <el-input v-model="item.ppdMpr" clearable></el-input>
                         </div>
                       </template>
                     </el-table-column>
                     <el-table-column :label="$t('all.tip229')" min-width="7%">
                       <template slot-scope="scope">
-                        <el-input v-model="scope.row.score" clearable></el-input>
+                        <el-input v-model="scope.row.homeScore" clearable></el-input>
                       </template>
                     </el-table-column>
                   </el-table-column>
@@ -370,21 +367,21 @@
                   <el-table-column :label="$t('all.tip326')" min-width="10%">
                     <el-table-column :label="$t('all.tip229')" min-width="7%">
                       <template slot-scope="scope">
-                        <el-input v-model="scope.row.score" clearable></el-input>
+                        <el-input v-model="scope.row.visitingScore" clearable></el-input>
                       </template>
                     </el-table-column>
                     <el-table-column :label="$t('all.tip228')" min-width="7%">
                       <template slot-scope="scope">
-                        <div v-for="(item, index) in scope.row.playerList" :key="index">
-                          <el-input v-model="item.visitingPpdMpr" clearable></el-input>
+                        <div v-for="(item, index) in scope.row.visitingPlayerList" :key="index">
+                          <el-input v-model="item.ppdMpr" clearable></el-input>
                         </div>
                       </template>
                     </el-table-column>
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
-                        <div v-for="(item, index) in scope.row.playerList" :key="index">
-                          <el-select v-model="item.visitingPlayerId" :placeholder="$t('placeholder.select')">
-                            <el-option v-for="item in scope.row.playerList" :key="item.visitingPlayerId" :label="item.visitingPlayerName" :value="item.visitingPlayerId"></el-option>
+                        <div v-for="(item, index) in scope.row.visitingPlayerList" :key="index">
+                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')">
+                            <el-option v-for="item in scope.row.visitingPlayerList" :key="item.playerId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
                       </template>
@@ -396,7 +393,7 @@
                 <el-col :span="1">{{ "Leg" }}</el-col>
                 <el-col :span="2">
                   <el-select v-model="defaultLeg" :placeholder="$t('placeholder.select')" @change="legChange">
-                    <el-option v-for="item in legList" :key="item.legId" :label="item.legName" :value="item.legId"></el-option>
+                    <el-option v-for="item in legList" :key="item.legResultId" :label="item.legName" :value="item.legResultId"></el-option>
                   </el-select>
                 </el-col>
               </div>
@@ -417,12 +414,13 @@
                   <el-table-column prop="id" :label="$t('all.tip257')" min-width="2%"></el-table-column>
                   <el-table-column :label="$t('all.tip340')" min-width="4%">
                     <template slot-scope="scope">
-                      <div>{{ `${scope.row.playerName}(${scope.row.playerId})` }}</div>
+                      <div>{{ `${scope.row.playerName}` }}</div>
+                      <div>{{ `(${scope.row.playerId})` }}</div>
                     </template>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip344')" min-width="3%">
                     <template slot-scope="scope">
-                      <el-input v-model="scope.row.sideBu"></el-input>
+                      <el-input v-model="scope.row.sideBull"></el-input>
                     </template>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip345')" min-width="3%">
@@ -521,12 +519,13 @@
                 <el-table-column prop="id" :label="$t('all.tip257')" min-width="2%"></el-table-column>
                 <el-table-column :label="$t('all.tip340')" min-width="4%">
                   <template slot-scope="scope">
-                    <div>{{ `${scope.row.playerName}(${scope.row.playerId})` }}</div>
+                    <div>{{ `${scope.row.playerName}` }}</div>
+                    <div>{{ `(${scope.row.playerId})` }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip344')" min-width="3%">
                   <template slot-scope="scope">
-                    <el-input v-model="scope.row.sideBu"></el-input>
+                    <el-input v-model="scope.row.sideBull"></el-input>
                   </template>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip345')" min-width="3%">
@@ -609,7 +608,7 @@
           </el-row>
         </div>
       </el-tab-pane>
-      <el-tab-pane :label="$t('all.tip445')" name="third">
+      <el-tab-pane :label="$t('all.tip445')" name="3">
         <el-row>
           <el-form label-width="110px">
             <el-col :span="6">
@@ -730,7 +729,7 @@
           ></el-pagination>
         </div>
       </el-tab-pane>
-      <el-tab-pane :label="$t('all.tip343')" name="fourth">
+      <el-tab-pane :label="$t('all.tip343')" name="4">
         <el-row>
           <el-form label-width="110px">
             <el-col :span="6">
@@ -821,7 +820,7 @@
           ></el-pagination>
         </div>
       </el-tab-pane>
-      <el-tab-pane :label="$t('all.tip360')" name="five">
+      <el-tab-pane :label="$t('all.tip360')" name="5">
         <el-row>
           <el-form label-width="110px">
             <el-col :span="5">
@@ -938,7 +937,7 @@ export default {
       stretch: true,
       showDetail: false,
       LeagueResultsDialog: false,
-      activeName: 'first',
+      activeName: '1',
       diaLogTotal: 0,
       defaultImg: require('@/assets/person.jpg'),
       allScore: '',
@@ -962,47 +961,6 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      allResultMgmt: [],
-      penaltyMgmt: [],
-      categoryList: [],
-      divisionList: [],
-      stageList: [],
-      rankingValue: {
-        rankingDecision: '',
-        winningPointWin: '',
-        winningPointDrawn: '',
-        winningPointLose: ''
-      },
-      result: {
-        state: false,
-        ategoryId: '',
-        divisionId: '',
-        stageId: '',
-        pageNum: 1,
-        pageSize: 10,
-        competitionId: this.$route.query.id
-      },
-      PlayerVO: {
-        competitionId: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
-        playerName: '',
-        teamName: '',
-        minRating: '',
-        maxRating: '',
-        minPpd: '',
-        maxPpd: '',
-        minMpr: '',
-        maxMpr: '',
-        pageNum: 1,
-        pageSize: 10
-      },
-      total: 1,
-      rankingtotal: 1,
-      PlayerTotal: 1,
-      teamAwardTotal: 1,
-      playerAwardTotal: 1,
       PlayerAwardVO: {
         competitionId: '',
         categoryId: '',
@@ -1023,6 +981,48 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
+      result: {
+        state: false,
+        competitionId: '',
+        ategoryId: '',
+        divisionId: '',
+        stageId: '',
+        pageNum: 1,
+        pageSize: 10
+      },
+      PlayerVO: {
+        competitionId: '',
+        categoryId: '',
+        divisionId: '',
+        stageId: '',
+        playerName: '',
+        teamName: '',
+        minRating: '',
+        maxRating: '',
+        minPpd: '',
+        maxPpd: '',
+        minMpr: '',
+        maxMpr: '',
+        pageNum: 1,
+        pageSize: 10
+      },
+      allResultMgmt: [],
+      penaltyMgmt: [],
+      categoryList: [],
+      divisionList: [],
+      stageList: [],
+      rankingValue: {
+        teamList: [],
+        rankingDecision: '',
+        winningPointWin: '',
+        winningPointDrawn: '',
+        winningPointLose: ''
+      },
+      total: 1,
+      rankingtotal: 1,
+      PlayerTotal: 1,
+      teamAwardTotal: 1,
+      playerAwardTotal: 1,
       resultList: [],
       setList: [],
       legList: [],
@@ -1053,16 +1053,17 @@ export default {
   },
   mounted() {
     if (this.$route.query.id) {
-      const id = this.$route.query.id;
-      this.rankingVO.competitionId = id;
-      this.PlayerVO.competitionId = id;
-      this.PlayerAwardVO.competitionId = id;
-      this.TeamAwardVO.competitionId = id;
-      this.init(id);
+      this.activeName = this.$route.query.name;
+      this.init(this.$route.query.id);
     }
   },
   methods: {
     init(id) {
+      this.rankingVO.competitionId = id;
+      this.result.competitionId = id;
+      this.PlayerVO.competitionId = id;
+      this.PlayerAwardVO.competitionId = id;
+      this.TeamAwardVO.competitionId = id;
       this.getSelectList(id);
       this.getRankingList();
       this.playerSearch();
@@ -1100,11 +1101,11 @@ export default {
       });
     },
     rankingsizeChange(value) {
-      this.rankingVO.pageNum = value;
+      this.rankingVO.pageSize = value;
       this.getRankingList();
     },
     rankingcurrentChange(value) {
-      this.rankingVO.pageSize = value;
+      this.rankingVO.pageNum = value;
       this.getRankingList();
     },
     getResultList() {
@@ -1119,16 +1120,16 @@ export default {
       });
     },
     sizeChange(value) {
-      this.result.pageNum = value;
+      this.result.pageSize = value;
       this.getResultList();
     },
     currentChange(value) {
-      this.result.pageSize = value;
+      this.result.pageNum = value;
       this.getResultList();
     },
     getTeamAwardList() {
       this.$axios.post('/teamawardresult', this.$qs.stringify(this.TeamAwardVO)).then(res => {
-        this.teamAwardList = res.data.data;
+        this.teamAwardList = res.data.data.list;
         this.teamAwardTotal = res.data.data.total;
       });
     },
@@ -1142,7 +1143,7 @@ export default {
     },
     getPlayerAwardList() {
       this.$axios.post('/playerawardresult', this.$qs.stringify(this.PlayerAwardVO)).then(res => {
-        this.playerAwardList = res.data.data;
+        this.playerAwardList = res.data.data.list;
         this.playerAwardTotal = res.data.data.total;
       });
     },
@@ -1247,16 +1248,17 @@ export default {
           this.awayResultId = data.visitingConfrontationResultId;
           for (let index = -1; index < data.homeSetPoint + data.visitingSetPoint; index += 1) {
             this.gameScoreList.push({ id: index + 1, label: index + 1 });
+            this.penaltyScoreList.push({ id: index + 1, label: index + 1 });
           }
-          for (let i = -1; i < 99; i += 1) {
-            this.penaltyScoreList.push({ id: i + 1, label: i + 1 });
-          }
+          // for (let i = -1; i < 99; i += 1) {
+          //   this.penaltyScoreList.push({ id: i + 1, label: i + 1 });
+          // }
           // 联赛结果管理 添加数据
-          this.allResultMgmt.push({ teamName: this.homeTeamName, num: 0, value: '' });
-          this.allResultMgmt.push({ teamName: this.awayTeamName, num: 0, value: '' });
+          this.allResultMgmt.push({ teamName: this.homeTeamName, num: data.homeResult, value: '' });
+          this.allResultMgmt.push({ teamName: this.awayTeamName, num: data.visitingResult, value: '' });
           // 联赛处罚管理 添加数据
-          this.penaltyMgmt.push({ teamName: this.homeTeamName, num: 0, value: '' });
-          this.penaltyMgmt.push({ teamName: this.awayTeamName, num: 0, value: '' });
+          this.penaltyMgmt.push({ teamName: this.homeTeamName, num: data.homePenaltyPoint, value: '' });
+          this.penaltyMgmt.push({ teamName: this.awayTeamName, num: data.visitingPenaltyPoint, value: '' });
         }
       });
       // 获取set/setData
@@ -1275,7 +1277,7 @@ export default {
           });
           vm.defaultSet = vm.setList[0].setResultId;
           vm.legList = vm.setList[0].legResultList;
-          vm.defaultLeg = vm.setList[0].legResultList[0].legId;
+          vm.defaultLeg = vm.setList[0].legResultList[0].legResultId;
           vm.getLegData(vm.defaultLeg, 1);
           vm.getLegData(vm.defaultLeg, 2);
         }
@@ -1285,12 +1287,12 @@ export default {
     saveScore() {
       for (let i = 0; i < 2; i += 1) {
         const data = {};
-        if (i === 0) {
-          data.confrontationResultId = this.homeResultId;
+        if (i) {
+          data.confrontationResultId = this.awayResultId;
           data.reason = this.allResultMgmt[i].value;
           data.result = this.allResultMgmt[i].num;
         } else {
-          data.confrontationResultId = this.awayResultId;
+          data.confrontationResultId = this.homeResultId;
           data.reason = this.allResultMgmt[i].value;
           data.result = this.allResultMgmt[i].num;
         }
@@ -1319,6 +1321,7 @@ export default {
     },
     setChange(value) {
       this.setList.forEach(i => {
+        debugger;
         if (i.setResultId === value) {
           this.legList = i.legResultList;
           this.defaultLeg = this.legList[0].legId;

@@ -37,6 +37,10 @@ export default {
   data() {
     return {
       total: 1,
+      info: {
+        pageNum: 1,
+        pageSize: 10
+      },
       tableData: []
     };
   },
@@ -45,19 +49,23 @@ export default {
   },
   methods: {
     getData() {
-      this.$axios.post('/leaguestats').then(res => {
+      this.$axios.post('/leaguestats', this.info).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
-          this.tableData = res.data.data;
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
         }
-        // this.tableData = res.data.data;
       });
     },
-    sizeChange() {
-
+    sizeChange(value) {
+      this.info.pageSize = value;
+      this.getData();
     },
-    currentChange() {}
+    currentChange(value) {
+      this.info.pageNum = value;
+      this.getData();
+    }
   }
 };
 </script>

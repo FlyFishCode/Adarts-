@@ -20,10 +20,10 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="ResultMgmtVO.status" :placeholder="$t('placeholder.select')" clearable>
-            <el-option :value=0 :label="$t('all.tip0')"></el-option>
-            <el-option :value=1 :label="$t('all.tip27')"></el-option>
-            <el-option :value=2 :label="$t('all.tip26')"></el-option>
-            <el-option :value=3 :label="$t('all.tip28')"></el-option>
+            <el-option :value="0" :label="$t('all.tip0')"></el-option>
+            <el-option :value="1" :label="$t('all.tip27')"></el-option>
+            <el-option :value="2" :label="$t('all.tip26')"></el-option>
+            <el-option :value="3" :label="$t('all.tip28')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -34,9 +34,9 @@
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="ResultMgmtVO.type" :placeholder="$t('placeholder.select')" clearable>
-            <el-option :value=0 :label="$t('all.tip0')"></el-option>
-            <el-option :value=1 :label="$t('all.tip42')"></el-option>
-            <el-option :value=2 :label="$t('all.tip43')"></el-option>
+            <el-option :value="0" :label="$t('all.tip0')"></el-option>
+            <el-option :value="1" :label="$t('all.tip42')"></el-option>
+            <el-option :value="2" :label="$t('all.tip43')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -44,13 +44,15 @@
         </el-col>
         <el-col :span="7">
           <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange" clearable> </el-date-picker>
+            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange" clearable>
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions" clearable> </el-date-picker>
+            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions" clearable>
+            </el-date-picker>
           </el-col>
-          </el-col>
+        </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
@@ -58,7 +60,7 @@
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="ResultMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
-            <el-option v-for="(item,index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
+            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -66,11 +68,11 @@
         </el-col>
         <el-col :span="4">
           <el-select v-model="ResultMgmtVO.operatorId" :placeholder="$t('placeholder.select')" clearable>
-             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
+            <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">
-          {{ $t('all.tip382') }}
+          {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="ResultMgmtVO.creatorId" :placeholder="$t('placeholder.select')" clearable>
@@ -88,7 +90,7 @@
         <el-table-column :label="$t('all.tip5')" min-width="7%">
           <template slot-scope="scope">
             <div>
-              {{scope.row.type === 1?$t('all.tip40'):$t('all.tip41')}}
+              {{ scope.row.type === 1 ? $t("all.tip40") : $t("all.tip41") }}
             </div>
           </template>
         </el-table-column>
@@ -99,7 +101,7 @@
         </el-table-column>
         <el-table-column :label="$t('all.tip7')" min-width="7%">
           <template slot-scope="scope">
-            {{scope.row.competitionStartPeriod | showDate}}-{{scope.row.competitionEndPeriod | showDate}}
+            {{ scope.row.competitionStartPeriod | showDate }}-{{ scope.row.competitionEndPeriod | showDate }}
           </template>
         </el-table-column>
         <el-table-column :label="$t('all.tip9')" min-width="5%">
@@ -112,7 +114,7 @@
           </template>
         </el-table-column>
         <el-table-column :label="$t('all.tip25')" min-width="8%">
-           <template slot-scope="scope">
+          <template slot-scope="scope">
             <div v-if="scope.row.status === 1">
               {{ $t("all.tip26") }}
             </div>
@@ -131,7 +133,8 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -181,11 +184,11 @@ export default {
   methods: {
     init() {
       const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then((res) => {
+      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then((res) => {
+      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
         this.ContinentArr = res.data.data;
       });
       this.getOperationdata(userId);
@@ -209,7 +212,7 @@ export default {
     },
     change(value) {
       const vm = this;
-      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: value })).then((res) => {
+      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: value })).then(res => {
         vm.CountryArr = res.data.data;
       });
       this.ResultMgmtVO.areaId = null;
@@ -223,28 +226,28 @@ export default {
       const vm = this;
       this.ResultMgmtVO.pageSize = value;
       // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === '0' ? this.ResultMgmtVO.status = null : this.ResultMgmtVO.status;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then((res) => {
+      this.ResultMgmtVO.status === '0' ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
+      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? this.ResultMgmtVO.status = '0' : this.ResultMgmtVO.status;
+        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = '0') : this.ResultMgmtVO.status;
       });
     },
     currentChange(value) {
       const vm = this;
       this.ResultMgmtVO.pageNum = value;
       // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === '0' ? this.ResultMgmtVO.status = null : this.ResultMgmtVO.status;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then((res) => {
+      this.ResultMgmtVO.status === '0' ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
+      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? this.ResultMgmtVO.status = '0' : this.ResultMgmtVO.status;
+        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = '0') : this.ResultMgmtVO.status;
       });
     },
     search() {
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then((res) => {
+      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
@@ -254,13 +257,7 @@ export default {
         name: 'resultInformation',
         query: {
           id: String(data.id),
-          competition: data.competitionName,
-          status: String(data.status),
-          area: JSON.stringify(data.countryList),
-          type: String(data.type),
-          start: data.competitionStartPeriod,
-          end: data.competitionEndPeriod,
-          number: data.individualNumber
+          name: '1'
         }
       });
     }

@@ -299,7 +299,7 @@ export default {
       this.detial.competitionEndPeriod = data.competitionEndPeriod;
       this.detial.entryStartPeriod = data.entryStartPeriod;
       this.detial.entryEndPeriod = data.entryEndPeriod;
-      if (data.type === '1') {
+      if (data.type === 1) {
         this.detial.type = 'all.tip40';
       } else {
         this.detial.type = 'all.tip41';
