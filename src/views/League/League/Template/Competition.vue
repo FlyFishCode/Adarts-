@@ -1227,7 +1227,7 @@ export default {
     // eslint-disable-next-line consistent-return
     Save() {
       const vm = this;
-      const id = this.$route.query.id || this.$route.query.currentId;
+      const id = vm.$route.query.id || vm.$route.query.currentId;
       let url = '';
       let p1 = '';
       if (this.A1 && !this.W1) {
@@ -1246,25 +1246,27 @@ export default {
         this.AddCompetitionRequest.countryList.push(obj);
       });
       // 如果是模板页面进来
-      if (this.$route.query.isTemplate) {
+      if (vm.$route.query.isTemplate) {
+        // window.location.href = window.location.href.split('&')[0];
         p1 = new Promise(resolve => {
-          this.$axios.post(`/template/foundCompByTemp?competitionId=${id}`).then(res => {
+          vm.$axios.post(`/template/foundCompByTemp?competitionId=${id}`).then(res => {
             resolve(res.data.data);
           });
         });
       }
-      const p2 = new Promise(resolve => {
-        resolve('');
-      });
-      const PALL = Promise.all([p1, p2]);
+      const PALL = Promise.all([p1]);
       // eslint-disable-next-line consistent-return
       PALL.then(list => {
-        // 判断不等于1，第一个进来是调用add
-        if (String(this.$route.query.id) !== '1' || this.$route.query.isTemplate || this.$route.query.showData) {
+        if (!vm.AddCompetitionRequest.competition.competitionName) {
+          this.$message(this.$t('all.tip552'));
+          return false;
+        }
+        // 不等于1，第一个进来是调用add
+        if (String(vm.$route.query.id) !== '1' || vm.$route.query.isTemplate || vm.$route.query.showData) {
           url = 'updatecompetition';
-          this.AddCompetitionRequest.competitionId = list[0] || id;
+          vm.AddCompetitionRequest.competitionId = list[0] || id;
           // 上传图片接口需要id
-          this.uploadCompetitionId = this.AddCompetitionRequest.competitionId;
+          vm.uploadCompetitionId = vm.AddCompetitionRequest.competitionId;
         } else {
           url = 'addcompetition';
         }
@@ -1275,21 +1277,17 @@ export default {
           // 保存 结果查询时间
           sessionStorage.setItem('time', JSON.stringify({ begin: this.AddCompetitionRequest.competition.competitionStartPeriod, end: this.AddCompetitionRequest.competition.competitionEndPeriod }));
           this.$axios.post(`/${url}`, vm.AddCompetitionRequest).then(res => {
+            debugger;
             if (res.data) {
               const stage = 'competitionId';
-              let type = '';
+              const type = res.data.data;
               let item = {};
               vm.$message({
                 message: res.data.msg,
                 type: 'success',
                 duration: 2000
               });
-              if (res.data.data) {
-                for (const value of Object.values(res.data.data)) {
-                  // stage = `${key}`;
-                  type = `${value}`;
-                }
-                // vm.isCurrentSave = type;
+              if (type) {
                 vm.uploadCompetitionId = type;
                 sessionStorage.setItem('competitionId', type);
                 item = {
@@ -1305,10 +1303,8 @@ export default {
               }
               this.$refs.upload.submit();
               changeMEenuList(window.treeList, id, item);
-              this.getList();
-              if (type) {
-                changeHash(window.location.hash, 'competition', type);
-              }
+              this.getList(id);
+              changeHash(window.location.hash.split('&')[0], 'competition', list[0] || id);
             } else {
               vm.$message({
                 message: res.data.msg,
@@ -1318,10 +1314,6 @@ export default {
             }
           });
         };
-        if (!vm.AddCompetitionRequest.competition.competitionName) {
-          this.$message(this.$t('all.tip552'));
-          return false;
-        }
         // 判断比赛是否已经开打？
         if (url === 'updatecompetition' && vm.AddCompetitionRequest.numFight) {
           this.$confirm(this.$t('all.tip575'), {
@@ -1338,8 +1330,8 @@ export default {
         }
       });
     },
-    getList() {
-      this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
+    getList(id = window.treeList[0].id) {
+      this.$axios.post(`/allsubset?competitionId=${id}`).then(response => {
         this.bus.$emit('change', response.data.data);
       });
     },
