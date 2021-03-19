@@ -1110,7 +1110,7 @@ export default {
       this.AddCompetitionRequest.competition.advertisementStartPeriod = this.AddCompetitionRequest.competition.competitionStartPeriod || '';
       this.AddCompetitionRequest.competition.entryEndPeriod = data;
       this.AddCompetitionRequest.competition.advertisementEndPeriod = data;
-      const [Syear, SMM, SDD] = this.AddCompetitionRequest.competition.competitionStartPeriod.toLocaleDateString().split('/');
+      const [Syear, SMM, SDD] = new Date(this.AddCompetitionRequest.competition.competitionStartPeriod).toLocaleDateString().split('/');
       const [Eyear, EMM, EDD] = data.toLocaleDateString().split('/');
       this.AddCompetitionRequest.competition.resultStartPeriod = new Date(Syear, Number(SMM) + 2, SDD);
       this.AddCompetitionRequest.competition.resultEndPeriod = new Date(Eyear, Number(EMM) + 2, EDD, Number(23), Number(59), Number(59));
