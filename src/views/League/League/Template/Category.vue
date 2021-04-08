@@ -28,7 +28,15 @@
           {{ $t("all.tip147") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="AddCategoryRequest.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model="AddCategoryRequest.description"
+            type="textarea"
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
     </div>
@@ -107,27 +115,26 @@
   </div>
 </template>
 <script>
-
-import { changeMEenuList, changeCurrentObj, changeHash } from '@/components/common/Utils';
+import { changeMenus, changeCurrentObj, changeHash } from "@/components/common/Utils";
 
 export default {
-  name: 'Category',
+  name: "Category",
   data() {
     return {
-      id: '',
+      id: "",
       list: [],
       showLimit: true,
       radio: true,
-      Name: '',
-      WomenNums: '',
+      Name: "",
+      WomenNums: "",
       ratingDisabled: true,
       ppdDisabled: true,
       mprDisabled: true,
-      isCurrentSave: '',
+      isCurrentSave: "",
       AddCategoryRequest: {
-        competitionId: '',
-        name: '',
-        description: '',
+        competitionId: "",
+        name: "",
+        description: "",
         ratingLimit: 0,
         mprLimit: 0,
         ppdLimit: 0,
@@ -144,7 +151,7 @@ export default {
   },
   watch: {
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ratingLimit': function (newValue) {
+    "AddCategoryRequest.ratingLimit": function(newValue) {
       debugger;
       if (newValue === 1) {
         this.ratingDisabled = false;
@@ -160,7 +167,7 @@ export default {
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.mprLimit': function (newValue) {
+    "AddCategoryRequest.mprLimit": function(newValue) {
       debugger;
       if (newValue === 1) {
         this.mprDisabled = false;
@@ -176,7 +183,7 @@ export default {
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ppdLimit': function (newValue) {
+    "AddCategoryRequest.ppdLimit": function(newValue) {
       debugger;
       if (newValue === 1) {
         this.ppdDisabled = false;
@@ -192,7 +199,7 @@ export default {
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.unlimited': function (newValue) {
+    "AddCategoryRequest.unlimited": function(newValue) {
       debugger;
       if (newValue === 1) {
         this.ratingDisabled = true;
@@ -212,13 +219,15 @@ export default {
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ratingMin': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.ratingMin": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -229,20 +238,22 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.ratingMin = oldValue;
         }
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ratingMax': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.ratingMax": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -253,20 +264,22 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.ratingMax = oldValue;
         }
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ppdMin': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.ppdMin": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -277,20 +290,22 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.ppdMin = oldValue;
         }
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.ppdMax': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.ppdMax": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -301,20 +316,22 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.ppdMax = oldValue;
         }
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.mprMin': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.mprMin": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -325,20 +342,22 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.mprMin = oldValue;
         }
       }
     },
     // eslint-disable-next-line func-names
-    'AddCategoryRequest.mprMax': function (newValue, oldValue) {
-      if (!newValue) { return; }
+    "AddCategoryRequest.mprMax": function(newValue, oldValue) {
+      if (!newValue) {
+        return;
+      }
       // 解决数字键盘可以输入输入多个小数点问题
       const value = newValue.toString();
       let index = 0;
       for (const key of value) {
-        if (key === '.') {
+        if (key === ".") {
           index += 1;
         }
       }
@@ -349,7 +368,7 @@ export default {
       // 保留两位小数
       if (newValue) {
         // eslint-disable-next-line no-param-reassign
-        const pointIndex = newValue.toString().indexOf('.');
+        const pointIndex = newValue.toString().indexOf(".");
         if (pointIndex > 0 && newValue.length - pointIndex > 3) {
           this.AddCategoryRequest.mprMax = oldValue;
         }
@@ -374,32 +393,32 @@ export default {
       this.$axios.post(`/getcategorybyid?id=${id}`).then(res => {
         if (res.data.data) {
           this.AddCategoryRequest = res.data.data;
-          changeCurrentObj(id, 'category', window.treeList, this.AddCategoryRequest);
+          changeCurrentObj(id, "category", this.$store.state.menuList, this.AddCategoryRequest);
         }
       });
     },
     getDivisionList() {
       const vm = this;
       const categoryId = this.$route.query.id;
-      this.$axios.post('/divisionlist', vm.$qs.stringify({ categoryId })).then(res => {
+      this.$axios.post("/divisionlist", vm.$qs.stringify({ categoryId })).then(res => {
         vm.divisionlist = res.data.data;
       });
     },
     Save() {
       const vm = this;
-      let url = '';
+      let href = "";
       const id = this.$route.query.id;
       if (this.$route.query.id || this.isCurrentSave) {
-        url = 'updatecategory';
+        href = "updatecategory";
         this.AddCategoryRequest.categoryId = id || this.isCurrentSave;
       } else {
-        url = 'addcategory';
+        href = "addcategory";
       }
       const saveMethods = () => {
-        this.$axios.post(`/${url}`, vm.AddCategoryRequest).then(res => {
+        this.$axios.post(`/${href}`, vm.AddCategoryRequest).then(res => {
           if (res.data) {
-            const stage = 'categoryId';
-            let type = '';
+            const url = "category";
+            let type = "";
             let item = {};
             vm.$message({
               message: res.data.msg
@@ -407,58 +426,60 @@ export default {
             debugger;
             if (res.data.data) {
               for (const value of Object.values(res.data.data)) {
-                // stage = `${key}`;
                 type = `${value}`;
               }
               vm.isCurrentSave = type;
               item = {
                 label: vm.AddCategoryRequest.name,
                 id: type,
-                stage
+                url
               };
             } else {
               item = {
                 label: vm.AddCategoryRequest.name,
-                stage
+                url
               };
             }
-            changeMEenuList(window.treeList, id, item);
-            vm.getList();
+            this.$store.commit("changeMenuList", changeMenus(this.$store.state.menuList, id, item));
+            // changeMEenuList(window.treeList, id, item);
+            // vm.getList();
             if (type) {
-              changeHash(window.location.hash, 'category', type);
+              changeHash(window.location.hash, "category", type);
             }
           } else {
             vm.$message({
               message: res.data.msg,
-              type: 'warning',
+              type: "warning",
               duration: 2000
             });
           }
         });
       };
       // 如果比賽已經開打，需確認是否修改
-      if (url === 'updatecategory' && vm.AddCategoryRequest.numFight) {
-        this.$confirm(this.$t('all.tip575'), {
-          confirmButtonText: this.$t('all.tip47'),
-          cancelButtonText: this.$t('all.tip30'),
-          type: 'warning'
-        }).then(() => {
-          saveMethods();
-        }).catch(() => false);
+      if (href === "updatecategory" && vm.AddCategoryRequest.numFight) {
+        this.$confirm(this.$t("all.tip575"), {
+          confirmButtonText: this.$t("all.tip47"),
+          cancelButtonText: this.$t("all.tip30"),
+          type: "warning"
+        })
+          .then(() => {
+            saveMethods();
+          })
+          .catch(() => false);
       } else {
         saveMethods();
       }
     },
-    getList() {
-      this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-        this.bus.$emit('change', response.data.data);
-      });
-    },
+    // getList() {
+    //   this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
+    //     this.bus.$emit("change", response.data.data);
+    //   });
+    // },
     Delete(id) {
       this.$axios.post(`/deldivisionbyid?id=${id}`).then(res => {
         this.$message(res.data.msg);
         this.getDivisionList();
-        this.getList();
+        // this.getList();
       });
     }
   }

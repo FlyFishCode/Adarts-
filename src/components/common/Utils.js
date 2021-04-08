@@ -1,10 +1,4 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable object-curly-newline */
-/* eslint-disable quotes */
-/* eslint-disable arrow-parens */
-/* eslint-disable func-names */
-/* eslint-disable eol-last */
-/* eslint-disable indent */
 function findCity(list, id, level) {
     const Rarr = [];
     if (id) {
@@ -50,21 +44,17 @@ function downloadFile(data) {
     window.location.href = url;
 }
 
-function findIndexItem(list, currentId, item) {
+function changeMenus(list, currentId, item) {
     let newList = [];
     list.forEach(i => {
-        if (String(i.id) === String(currentId) && i.stage === item.stage) {
+        if (String(i.id) === String(currentId) && i.url === item.url) {
             i = Object.assign(i, item);
         } else if (i.children) {
-            findIndexItem(i.children, currentId, item);
+            changeMenus(i.children, currentId, item);
         }
     });
     newList = list;
     return newList;
-}
-
-function changeMEenuList(list, id, item) {
-    window.treeList = findIndexItem(list, id, item);
 }
 
 function deleteStage(id, list) {
@@ -102,8 +92,9 @@ function handle(value) {
 }
 
 function changeCurrentObj(id, name, list, data) {
-    // 当前阶段id，当前阶段名称，当前阶段数据，遍历数据
+    // 当前阶段id，当前阶段名称，数据，遍历数据
     list.forEach(i => {
+        debugger;
         if ((Number(i.id) === Number(id) && i.url === name) || (Number(i.id) === Number(id) && i.url === "set")) {
             i.current = data;
         } else if (i.children) {
@@ -113,16 +104,16 @@ function changeCurrentObj(id, name, list, data) {
 }
 
 function changeHash(hash, type, id) {
-    const locationList = hash.split('&');
+    const locationList = hash.split("&");
     let newHash = `#/${type}?id=${id}`;
     locationList.forEach((i, index) => {
         if (index > 0) {
             // eslint-disable-next-line no-multi-assign
-            newHash += '&';
+            newHash += "&";
             newHash += i;
         }
     });
     window.location.hash = newHash;
 }
 
-export { findCity, downloadFile, returnType, changeMEenuList, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash };
+export { findCity, downloadFile, returnType, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash, changeMenus };

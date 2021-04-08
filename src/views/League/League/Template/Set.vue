@@ -96,7 +96,7 @@
     <div class="box">
       <el-row>
         <el-col class="title-g">
-          {{ $t('all.tip576') }}
+          {{ $t("all.tip576") }}
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -113,11 +113,11 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.gameIn" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip31')"></el-option>
-            <el-option :value=2 :label="$t('all.tip165')"></el-option>
-            <el-option :value=3 :label="$t('all.tip167')"></el-option>
-            <el-option :value=4 :label="$t('all.tip169')"></el-option>
-            <el-option :value=5 :label="$t('all.tip168')"></el-option>
+            <el-option :value="1" :label="$t('all.tip31')"></el-option>
+            <el-option :value="2" :label="$t('all.tip165')"></el-option>
+            <el-option :value="3" :label="$t('all.tip167')"></el-option>
+            <el-option :value="4" :label="$t('all.tip169')"></el-option>
+            <el-option :value="5" :label="$t('all.tip168')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -125,11 +125,11 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.gameOut" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip31')"></el-option>
-            <el-option :value=3 :label="$t('all.tip165')"></el-option>
-            <el-option :value=2 :label="$t('all.tip167')"></el-option>
-            <el-option :value=4 :label="$t('all.tip169')"></el-option>
-            <el-option :value=5 :label="$t('all.tip168')"></el-option>
+            <el-option :value="1" :label="$t('all.tip31')"></el-option>
+            <el-option :value="3" :label="$t('all.tip165')"></el-option>
+            <el-option :value="2" :label="$t('all.tip167')"></el-option>
+            <el-option :value="4" :label="$t('all.tip169')"></el-option>
+            <el-option :value="5" :label="$t('all.tip168')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -139,8 +139,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.freezeOption" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip175')"></el-option>
-            <el-option :value=2 :label="$t('all.tip176')"></el-option>
+            <el-option :value="1" :label="$t('all.tip175')"></el-option>
+            <el-option :value="2" :label="$t('all.tip176')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -148,8 +148,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.bull" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip479')"></el-option>
-            <el-option :value=2 :label="$t('all.tip478')"></el-option>
+            <el-option :value="1" :label="$t('all.tip479')"></el-option>
+            <el-option :value="2" :label="$t('all.tip478')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -159,8 +159,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.outTips" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip87')"></el-option>
-            <el-option :value=2 :label="$t('all.tip86')"></el-option>
+            <el-option :value="1" :label="$t('all.tip87')"></el-option>
+            <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -175,8 +175,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.inCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip179')"></el-option>
-            <el-option :value=2 :label="$t('all.tip180')"></el-option>
+            <el-option :value="1" :label="$t('all.tip179')"></el-option>
+            <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -184,8 +184,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.overkill" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip87')"></el-option>
-            <el-option :value=2 :label="$t('all.tip86')"></el-option>
+            <el-option :value="1" :label="$t('all.tip87')"></el-option>
+            <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -195,8 +195,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="set.setGameOption.outCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip179')"></el-option>
-            <el-option :value=2 :label="$t('all.tip180')"></el-option>
+            <el-option :value="1" :label="$t('all.tip179')"></el-option>
+            <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
         </el-col>
         <div v-show="set.setGameOption.overkill === 1">
@@ -239,7 +239,7 @@
           <el-table-column type="index" :label="$t('all.tip54')" min-width="9%"> </el-table-column>
           <el-table-column :label="$t('all.tip213')" min-width="9%">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.stageGameId" :placeholder="$t('placeholder.select')" @change="stageGameChange($event,scope.row)">
+              <el-select v-model="scope.row.stageGameId" :placeholder="$t('placeholder.select')" @change="stageGameChange($event, scope.row)">
                 <el-option v-for="item in stageGameIdList" :key="item.stageGameId" :label="$t(item.label)" :value="item.value"> </el-option>
               </el-select>
             </template>
@@ -285,58 +285,51 @@
   </div>
 </template>
 <script>
-import {
-  deleteStage
-} from '@/components/common/Utils';
+import { deleteStage, changeCurrentObj } from "@/components/common/Utils";
 
 export default {
-  name: 'Set',
+  name: "Set",
   data() {
     return {
-      id: '',
+      id: "",
       list: [],
       howMany: 0,
       maxRating: 0,
       modeList: [
-        { id: 1, label: 'all.tip200' },
-        { id: 2, label: 'all.tip201' },
-        { id: 3, label: 'all.tip202' },
-        { id: 4, label: 'all.tip203' },
-        { id: 5, label: 'all.tip204' },
-        { id: 6, label: 'all.tip205' }
+        { id: 1, label: "all.tip200" },
+        { id: 2, label: "all.tip201" },
+        { id: 3, label: "all.tip202" },
+        { id: 4, label: "all.tip203" },
+        { id: 5, label: "all.tip204" },
+        { id: 6, label: "all.tip205" }
       ],
       contrastData: [
-        { id: 1, label: 'all.tip499' },
-        { id: 2, label: 'all.tip500' },
-        { id: 3, label: 'all.tip501' },
-        { id: 4, label: 'all.tip502' },
-        { id: 5, label: 'all.tip503' },
-        { id: 6, label: 'all.tip504' },
-        { id: 7, label: 'all.tip505' },
-        { id: 8, label: 'all.tip506' },
-        { id: 9, label: 'all.tip507' },
-        { id: 10, label: 'all.tip508' },
-        { id: 11, label: 'all.tip509' },
-        { id: 12, label: 'all.tip510' },
-        { id: 13, label: 'all.tip511' },
-        { id: 14, label: 'all.tip512' }
+        { id: 1, label: "all.tip499" },
+        { id: 2, label: "all.tip500" },
+        { id: 3, label: "all.tip501" },
+        { id: 4, label: "all.tip502" },
+        { id: 5, label: "all.tip503" },
+        { id: 6, label: "all.tip504" },
+        { id: 7, label: "all.tip505" },
+        { id: 8, label: "all.tip506" },
+        { id: 9, label: "all.tip507" },
+        { id: 10, label: "all.tip508" },
+        { id: 11, label: "all.tip509" },
+        { id: 12, label: "all.tip510" },
+        { id: 13, label: "all.tip511" },
+        { id: 14, label: "all.tip512" }
       ],
-      stageGameIdList: [
-        { value: 0, label: this.$t('all.tip521') }
-      ],
-      choicesList: [
-        { id: 2, label: 'all.tip513' },
-        { id: 3, label: 'all.tip514' }
-      ],
+      stageGameIdList: [{ value: 0, label: this.$t("all.tip521") }],
+      choicesList: [{ id: 2, label: "all.tip513" }, { id: 3, label: "all.tip514" }],
       copyRadio: 0,
       copyBox: false,
       copyBoxData: [],
       choicesData: [],
       maxPlayer: 1,
       set: {
-        setId: '',
-        stageId: '',
-        nub: '',
+        setId: "",
+        stageId: "",
+        nub: "",
         mode: 1,
         point: 1,
         number: 1,
@@ -361,27 +354,27 @@ export default {
       idDisabled: false,
       order: 0,
       value: 0,
-      setId: 'set',
+      setId: "set",
       allGameList: [
-        { value: 1, label: 'all.tip499' },
-        { value: 2, label: 'all.tip500' },
-        { value: 3, label: 'all.tip501' },
-        { value: 4, label: 'all.tip502' },
+        { value: 1, label: "all.tip499" },
+        { value: 2, label: "all.tip500" },
+        { value: 3, label: "all.tip501" },
+        { value: 4, label: "all.tip502" },
         // { value: 5, label: 'all.tip503' },
         // { value: 6, label: 'all.tip504' },
-        { value: 5, label: 'all.tip505' },
-        { value: 6, label: 'all.tip506' },
-        { value: 7, label: 'all.tip507' },
-        { value: 8, label: 'all.tip508' },
-        { value: 9, label: 'all.tip509' },
-        { value: 10, label: 'all.tip177' },
-        { value: 11, label: 'all.tip554' },
-        { value: 12, label: 'all.tip555' },
-        { value: 13, label: 'all.tip556' },
-        { value: 14, label: 'all.tip557' },
-        { value: 20, label: 'all.tip511' },
-        { value: 21, label: 'all.tip510' },
-        { value: 22, label: 'all.tip558' }
+        { value: 5, label: "all.tip505" },
+        { value: 6, label: "all.tip506" },
+        { value: 7, label: "all.tip507" },
+        { value: 8, label: "all.tip508" },
+        { value: 9, label: "all.tip509" },
+        { value: 10, label: "all.tip177" },
+        { value: 11, label: "all.tip554" },
+        { value: 12, label: "all.tip555" },
+        { value: 13, label: "all.tip556" },
+        { value: 14, label: "all.tip557" },
+        { value: 20, label: "all.tip511" },
+        { value: 21, label: "all.tip510" },
+        { value: 22, label: "all.tip558" }
       ],
       legId: 0,
       setGameList: {}
@@ -390,8 +383,8 @@ export default {
   beforeRouteUpdate(to, from, next) {
     this.legId = Number(to.query.legId);
     this.setData(to.query.id, false, this.legId);
-    this.setOrderIndex(window.treeList, to.query.legId);
-    // changeCurrentObj(from.query.id, 'category', window.treeList, this.set);
+    this.setOrderIndex(this.$store.state.menuList, to.query.legId);
+    // changeCurrentObj(from.query.id, 'category', this.$store.state.menuList, this.set);
     next();
   },
   mounted() {
@@ -401,7 +394,7 @@ export default {
     } else {
       this.setData(this.$route.query.id, false, 0);
     }
-    this.setOrderIndex(window.treeList, this.$route.query.legId);
+    this.setOrderIndex(this.$store.state.menuList, this.$route.query.legId);
     this.getCopyList();
   },
   watch: {
@@ -448,9 +441,9 @@ export default {
             vm.maxRating = 1;
             vm.set.ratingMaximum = res.data.data.ratingMaximum;
           }
-          vm.set.stageId = vm.$route.query.parentId || '';
+          vm.set.stageId = vm.$route.query.parentId || "";
           if (newValue) {
-            vm.idDisabled = (res.data.data.isDefaultStage === 1);
+            vm.idDisabled = res.data.data.isDefaultStage === 1;
           }
           res.data.data.legList.forEach(i => {
             const flag = vm.stageGameIdList.every(j => i.stageGameId !== j.value);
@@ -460,27 +453,27 @@ export default {
             }
           });
           switch (vm.set.mode) {
-          case 1:
-            this.maxPlayer = 1;
-            break;
-          case 2:
-            this.maxPlayer = 2;
-            break;
-          case 3:
-            this.maxPlayer = 3;
-            break;
-          case 4:
-            this.maxPlayer = 4;
-            break;
-          case 5:
-            this.maxPlayer = 2;
-            break;
-          default:
-            this.maxPlayer = 4;
-            break;
+            case 1:
+              this.maxPlayer = 1;
+              break;
+            case 2:
+              this.maxPlayer = 2;
+              break;
+            case 3:
+              this.maxPlayer = 3;
+              break;
+            case 4:
+              this.maxPlayer = 4;
+              break;
+            case 5:
+              this.maxPlayer = 2;
+              break;
+            default:
+              this.maxPlayer = 4;
+              break;
           }
           // this.getLegGameList();
-          // changeCurrentObj(id, 'set', window.treeList, vm.set);
+          changeCurrentObj(id, "set", this.$store.state.menuList, vm.set);
         }
       });
     },
@@ -534,8 +527,8 @@ export default {
     Save() {
       const vm = this;
       let setIndex = 0;
-      let name = '';
-      let url = '';
+      let name = "";
+      let url = "";
       const id = this.$route.query.id;
       const saveMethods = () => {
         this.modeList.forEach(i => {
@@ -544,16 +537,16 @@ export default {
           }
         });
         if (id) {
-          url = 'updateSet';
+          url = "updateSet";
           this.set.setId = id;
         } else {
-          url = 'addset';
+          url = "addset";
         }
         this.set.nub = `${vm.setId}${(setIndex += 1)}(${vm.legList.length})[${name}]`;
-        this.setOrderIndex(window.treeList, this.$route.query.legId);
+        this.setOrderIndex(this.$store.state.menuList, this.$route.query.legId);
         // vm.set.number = vm.order;
         // eslint-disable-next-line no-unused-expressions
-        this.idDisabled ? this.set.isDefaultStage = 1 : this.set.isDefaultStage = 2;
+        this.idDisabled ? (this.set.isDefaultStage = 1) : (this.set.isDefaultStage = 2);
         if (this.legId) {
           // 保存此leg的gameoptions选项
           const currentLeg = vm.legList.find(i => i.legId === Number(vm.$route.query.legId));
@@ -585,88 +578,84 @@ export default {
           } else {
             vm.$message({
               message: res.data.msg,
-              type: 'warning',
+              type: "warning",
               duration: 2000
             });
           }
           vm.getCopyList();
         });
-        this.$axios.post('/updateLeg', vm.legList).then(res => {
+        this.$axios.post("/updateLeg", vm.legList).then(res => {
           res.data.data.forEach((i, index) => {
             vm.legList[index].legId = i;
           });
-          const SaveP = new Promise((resolve) => {
-            if (res.data.data.length) {
-              resolve();
-            }
-          });
-          SaveP.then(() => {
-            // 获取节点，以及获取当前节点数据
-            let num = 0;
-            if (this.$route.query.legId) {
-              num = this.$route.query.legId;
-            } else {
-              num = this.$route.query.id;
-            }
-            vm.bus.$emit('setNode', num);
-            vm.setData(vm.$route.query.id, false, 1);
-          });
+          vm.setData(vm.$route.query.id, false, 1);
+          // 添加leg之后更新原始数据
+          // this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(response => {
+          //   if(response.data.data){
+          //     this.$store.commit("changeMenuList", response.data.data);
+          //   }
+          //   this.treeDataList = res.data.data;
+          //   vm.returnFatherNode(vm.getNode(res.data.data[0], data));
+          // });
+          this.bus.$emit("setNode", this.$route.query.id);
         });
       };
       // 如果比賽已經開打，需確認是否修改
-      if (url === 'updateSet' && vm.set.numFight) {
-        this.$confirm(this.$t('all.tip575'), {
-          confirmButtonText: this.$t('all.tip47'),
-          cancelButtonText: this.$t('all.tip30'),
-          type: 'warning'
-        }).then(() => {
-          saveMethods();
-        }).catch(() => false);
+      if (url === "updateSet" && vm.set.numFight) {
+        this.$confirm(this.$t("all.tip575"), {
+          confirmButtonText: this.$t("all.tip47"),
+          cancelButtonText: this.$t("all.tip30"),
+          type: "warning"
+        })
+          .then(() => {
+            saveMethods();
+          })
+          .catch(() => false);
       } else {
         saveMethods();
       }
     },
-    getList() {
-      this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-        this.bus.$emit('change', response.data.data);
-      });
-    },
+    // getList() {
+    //   this.$axios.post(`/allsubset?competitionId=${this.$store.state.menuList[0].id}`).then(response => {
+    //     this.bus.$emit('change', response.data.data);
+    //   });
+    // },
     maxRatingChange(value) {
       if (!value) {
         this.set.ratingMaximum = 0;
       }
     },
     getCopyList() {
-      const id = sessionStorage.getItem('competitionId');
+      const id = sessionStorage.getItem("competitionId");
       const data = {
         competitionId: id
       };
-      this.$axios.post('/getcompetitionallset', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/getcompetitionallset", this.$qs.stringify(data)).then(res => {
         if (res.data.data) {
-          this.copyBoxData = res.data.data.map(i => ({ ...i, number: '' }));
+          this.copyBoxData = res.data.data.map(i => ({ ...i, number: "" }));
         }
       });
     },
     modeChange(value) {
       switch (value) {
-      case 1:
-        this.maxPlayer = 1;
-        break;
-      case 2:
-        this.maxPlayer = 2;
-        break;
-      case 3:
-        this.maxPlayer = 3;
-        break;
-      case 4:
-        this.maxPlayer = 4;
-        break;
-      case 5:
-        this.maxPlayer = 2;
-        break;
-      default:
-        this.maxPlayer = 4;
-        break;
+        case 1:
+          this.maxPlayer = 1;
+          break;
+        case 2:
+          this.maxPlayer = 2;
+          break;
+        case 3:
+          this.maxPlayer = 3;
+          break;
+        case 4:
+          this.maxPlayer = 4;
+          break;
+        case 5:
+          this.maxPlayer = 2;
+          break;
+        default:
+          this.maxPlayer = 4;
+          break;
       }
     },
     deleteLeg(index, id) {
@@ -676,8 +665,8 @@ export default {
         });
       }
       this.legList.splice(index, 1);
-      this.getList();
-      this.bus.$emit('setNode', this.$route.query.id);
+      // this.getList();
+      // this.bus.$emit("setNode", this.$route.query.id);
     },
     CopyFrom() {
       this.copyBox = true;
@@ -689,16 +678,16 @@ export default {
         setId: this.copyRadio,
         number: Number(copyNumber)
       };
-      this.$axios.post('/copyset', this.$qs.stringify(data)).then((res) => {
+      this.$axios.post("/copyset", this.$qs.stringify(data)).then(res => {
         this.$message(res.data.msg);
-        this.getList();
+        // this.getList();
       });
       this.copyBox = false;
     },
     getLegGameList() {
       const vm = this;
       const pro = new Promise((resolve, reject) => {
-        this.$axios.post('/getgamelist', vm.$qs.stringify({ stageId: this.set.stageId })).then(res => {
+        this.$axios.post("/getgamelist", vm.$qs.stringify({ stageId: this.set.stageId })).then(res => {
           if (res.data.data) {
             resolve(res.data.data);
           }
@@ -728,27 +717,25 @@ export default {
       }
       for (let index = 0; index < this.howMany; index += 1) {
         this.value += 1;
-        this.legList.push(
-          {
-            number: this.value,
-            stageGameId: '',
-            setId: this.$route.query.id,
-            legId: 0,
-            choices: 1,
-            isDefaultSet: this.idDisabled ? 1 : 2,
-            legGameOption: {
-              gameIn: this.set.setGameOption.gameIn,
-              gameOut: this.set.setGameOption.gameOut,
-              freezeOption: this.set.setGameOption.freezeOption,
-              bull: this.set.setGameOption.bull,
-              outTips: this.set.setGameOption.outTips,
-              inCriteria: this.set.setGameOption.inCriteria,
-              overkill: this.set.setGameOption.overkill,
-              outCriteria: this.set.setGameOption.outCriteria,
-              scoreGap: this.set.setGameOption.scoreGap
-            }
+        this.legList.push({
+          number: this.value,
+          stageGameId: "",
+          setId: this.$route.query.id,
+          legId: 0,
+          choices: 1,
+          isDefaultSet: this.idDisabled ? 1 : 2,
+          legGameOption: {
+            gameIn: this.set.setGameOption.gameIn,
+            gameOut: this.set.setGameOption.gameOut,
+            freezeOption: this.set.setGameOption.freezeOption,
+            bull: this.set.setGameOption.bull,
+            outTips: this.set.setGameOption.outTips,
+            inCriteria: this.set.setGameOption.inCriteria,
+            overkill: this.set.setGameOption.overkill,
+            outCriteria: this.set.setGameOption.outCriteria,
+            scoreGap: this.set.setGameOption.scoreGap
           }
-        );
+        });
       }
       this.getLegGameList();
     }

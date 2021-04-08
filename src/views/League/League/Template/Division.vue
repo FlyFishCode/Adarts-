@@ -27,7 +27,15 @@
           {{ $t("all.tip160") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="division.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input
+            v-model="division.description"
+            type="textarea"
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            :show-word-limit="showLimit"
+            clearable
+            maxlength="100"
+            :placeholder="$t('placeholder.input')"
+          ></el-input>
         </el-col>
       </el-row>
     </div>
@@ -43,11 +51,11 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.gameIn" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip31')"></el-option>
-            <el-option :value=2 :label="$t('all.tip165')"></el-option>
-            <el-option :value=3 :label="$t('all.tip167')"></el-option>
-            <el-option :value=4 :label="$t('all.tip169')"></el-option>
-            <el-option :value=5 :label="$t('all.tip168')"></el-option>
+            <el-option :value="1" :label="$t('all.tip31')"></el-option>
+            <el-option :value="2" :label="$t('all.tip165')"></el-option>
+            <el-option :value="3" :label="$t('all.tip167')"></el-option>
+            <el-option :value="4" :label="$t('all.tip169')"></el-option>
+            <el-option :value="5" :label="$t('all.tip168')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -55,22 +63,22 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.gameOut" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip31')"></el-option>
-            <el-option :value=3 :label="$t('all.tip165')"></el-option>
-            <el-option :value=2 :label="$t('all.tip167')"></el-option>
-            <el-option :value=4 :label="$t('all.tip169')"></el-option>
-            <el-option :value=5 :label="$t('all.tip168')"></el-option>
+            <el-option :value="1" :label="$t('all.tip31')"></el-option>
+            <el-option :value="3" :label="$t('all.tip165')"></el-option>
+            <el-option :value="2" :label="$t('all.tip167')"></el-option>
+            <el-option :value="4" :label="$t('all.tip169')"></el-option>
+            <el-option :value="5" :label="$t('all.tip168')"></el-option>
           </el-select>
         </el-col>
       </el-row>
-      <el-row  class="center-Row">
+      <el-row class="center-Row">
         <el-col class="label-g" :span="4">
           {{ $t("all.tip172") }}
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.freezeOption" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip175')"></el-option>
-            <el-option :value=2 :label="$t('all.tip176')"></el-option>
+            <el-option :value="1" :label="$t('all.tip175')"></el-option>
+            <el-option :value="2" :label="$t('all.tip176')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -78,8 +86,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.bull" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip479')"></el-option>
-            <el-option :value=2 :label="$t('all.tip478')"></el-option>
+            <el-option :value="1" :label="$t('all.tip479')"></el-option>
+            <el-option :value="2" :label="$t('all.tip478')"></el-option>
             <!-- <el-option :value=3 :label="$t('all.tip480')"></el-option> -->
           </el-select>
         </el-col>
@@ -90,15 +98,15 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.outTips" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip87')"></el-option>
-            <el-option :value=2 :label="$t('all.tip86')"></el-option>
+            <el-option :value="1" :label="$t('all.tip87')"></el-option>
+            <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-row class="center-Row">
           <el-col>
-            {{$t('all.tip177')}}
+            {{ $t("all.tip177") }}
           </el-col>
         </el-row>
         <el-col class="label-g" :span="4">
@@ -106,8 +114,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.inCriteria" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip179')"></el-option>
-            <el-option :value=2 :label="$t('all.tip180')"></el-option>
+            <el-option :value="1" :label="$t('all.tip179')"></el-option>
+            <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -115,8 +123,8 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.overkill" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip87')"></el-option>
-            <el-option :value=2 :label="$t('all.tip86')"></el-option>
+            <el-option :value="1" :label="$t('all.tip87')"></el-option>
+            <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -126,17 +134,17 @@
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-select v-model="division.outCriteria" :placeholder="$t('placeholder.select')">
-            <el-option :value=1 :label="$t('all.tip179')"></el-option>
-            <el-option :value=2 :label="$t('all.tip180')"></el-option>
+            <el-option :value="1" :label="$t('all.tip179')"></el-option>
+            <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
         </el-col>
         <div v-show="division.overkill === 1">
           <el-col class="label-g" :span="4">
-          {{ $t("all.tip182") }}
-        </el-col>
-        <el-col :span="4" class="lineClass">
-          <el-input v-model.number="division.scoreGap" clearable :placeholder="$t('placeholder.input')"></el-input>
-        </el-col>
+            {{ $t("all.tip182") }}
+          </el-col>
+          <el-col :span="4" class="lineClass">
+            <el-input v-model.number="division.scoreGap" clearable :placeholder="$t('placeholder.input')"></el-input>
+          </el-col>
         </div>
       </el-row>
     </div>
@@ -193,29 +201,29 @@
   </div>
 </template>
 <script>
-import { changeMEenuList, changeCurrentObj, changeHash } from '@/components/common/Utils';
+import { changeMenus, changeCurrentObj, changeHash } from "@/components/common/Utils";
 
 export default {
-  name: 'Division',
+  name: "Division",
   data() {
     return {
-      id: '',
+      id: "",
       list: [],
       showLimit: true,
       copyBox: false,
-      copyName: '',
+      copyName: "",
       copyRadio: 1,
-      copyBoxInput: '',
-      isCurrentSave: '',
+      copyBoxInput: "",
+      isCurrentSave: "",
       division: {
-        categoryId: '',
+        categoryId: "",
         bull: 1,
-        description: '',
+        description: "",
         freezeOption: 1,
         gameIn: 1,
         gameOut: 1,
         inCriteria: 2,
-        name: '',
+        name: "",
         outCriteria: 2,
         outTips: 1,
         overkill: 1,
@@ -247,48 +255,48 @@ export default {
       this.$axios.post(`/getdivisionbyid?id=${id}`).then(res => {
         if (res.data.data) {
           this.division = res.data.data;
-          changeCurrentObj(id, 'division', window.treeList, this.division);
+          changeCurrentObj(id, "division", this.$store.state.menuList, this.division);
         }
       });
     },
     getCopyList() {
-      const id = sessionStorage.getItem('competitionId');
+      const id = sessionStorage.getItem("competitionId");
       const data = {
         competitionId: id,
         divisionName: this.copyName
       };
-      this.$axios.post('/alldivision', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/alldivision", this.$qs.stringify(data)).then(res => {
         if (res.data.data) {
-          this.copyBoxData = res.data.data.map(i => ({ ...i, number: '' }));
+          this.copyBoxData = res.data.data.map(i => ({ ...i, number: "" }));
         }
       });
     },
     getStageList() {
       const vm = this;
       const divisionId = this.$route.query.id;
-      this.$axios.post('/getstageList', vm.$qs.stringify({ divisionId })).then(res => {
+      this.$axios.post("/getstageList", vm.$qs.stringify({ divisionId })).then(res => {
         vm.stageList = res.data.data;
       });
     },
     Save() {
       const vm = this;
       const id = this.$route.query.id;
-      let url = '';
+      let href = "";
       if (id || this.isCurrentSave) {
-        url = 'updatedivision';
+        href = "updatedivision";
         this.division.divisionId = id || this.isCurrentSave;
       } else {
-        url = 'adddivision';
+        href = "adddivision";
       }
       const saveMethods = () => {
-        this.$axios.post(`/${url}`, vm.division).then((res) => {
+        this.$axios.post(`/${href}`, vm.division).then(res => {
           if (res.data) {
-            const stage = 'divisionId';
-            let type = '';
+            const url = "division";
+            let type = "";
             let item = {};
             vm.$message({
               message: res.data.msg,
-              type: 'success',
+              type: "success",
               duration: 2000
             });
             if (res.data.data) {
@@ -300,23 +308,24 @@ export default {
               item = {
                 label: vm.division.name,
                 id: type,
-                stage
+                url
               };
             } else {
               item = {
                 label: vm.division.name,
-                stage
+                url
               };
             }
-            changeMEenuList(window.treeList, id, item, vm);
-            vm.getList();
+            this.$store.commit("changeMenuList", changeMenus(this.$store.state.menuList, id, item));
+            // changeMEenuList(window.treeList, id, item, vm);
+            // vm.getList();
             if (type) {
-              changeHash(window.location.hash, 'division', type);
+              changeHash(window.location.hash, "division", type);
             }
           } else {
             vm.$message({
               message: res.data.msg,
-              type: 'warning',
+              type: "warning",
               duration: 2000
             });
           }
@@ -324,14 +333,16 @@ export default {
         });
       };
       // 如果比賽已經開打，需確認是否修改
-      if (url === 'updatedivision' && vm.division.numFight) {
-        this.$confirm(this.$t('all.tip575'), {
-          confirmButtonText: this.$t('all.tip47'),
-          cancelButtonText: this.$t('all.tip30'),
-          type: 'warning'
-        }).then(() => {
-          saveMethods();
-        }).catch(() => false);
+      if (href === "updatedivision" && vm.division.numFight) {
+        this.$confirm(this.$t("all.tip575"), {
+          confirmButtonText: this.$t("all.tip47"),
+          cancelButtonText: this.$t("all.tip30"),
+          type: "warning"
+        })
+          .then(() => {
+            saveMethods();
+          })
+          .catch(() => false);
       } else {
         saveMethods();
       }
@@ -352,22 +363,22 @@ export default {
         divisionId: this.copyRadio,
         number: Number(copyNumber)
       };
-      this.$axios.post('/copydivision', this.$qs.stringify(data)).then((res) => {
+      this.$axios.post("/copydivision", this.$qs.stringify(data)).then(res => {
         this.$message(res.data.msg);
-        this.getList();
+        // this.getList();
       });
       this.copyBox = false;
     },
-    getList() {
-      this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-        this.bus.$emit('change', response.data.data);
-      });
-    },
+    // getList() {
+    //   this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
+    //     this.bus.$emit("change", response.data.data);
+    //   });
+    // },
     Delete(id) {
       this.$axios.post(`/delestage?id=${id}`).then(res => {
         this.$message(res.data.msg);
         this.getStageList();
-        this.getList();
+        // this.getList();
       });
     }
   }

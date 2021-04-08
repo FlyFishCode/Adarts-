@@ -807,15 +807,15 @@
   </div>
 </template>
 <script>
-import { changeMEenuList, changeCurrentObj, changeHash } from '@/components/common/Utils';
+import { changeMenus, changeCurrentObj, changeHash } from "@/components/common/Utils";
 
 export default {
-  name: 'Competition',
+  name: "Competition",
   components: {},
   data() {
     const vm = this;
     return {
-      userType: sessionStorage.getItem('userType'),
+      userType: sessionStorage.getItem("userType"),
       competitionEndPeriodPickerOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.AddCompetitionRequest.competition.competitionStartPeriod);
@@ -840,23 +840,40 @@ export default {
           return time.getTime() < date1;
         }
       },
-      uploadCompetitionId: '',
-      countryId: '',
-      areaId: '',
+      uploadCompetitionId: "",
+      countryId: "",
+      areaId: "",
       showShopListTotal: 0,
       operatorSelectionList: [],
       removeList: [],
       setFirstList: [],
       operatorTotal: 1,
       searchOperator: {
-        userId: '',
-        operId: '',
-        operName: '',
-        agentId: '',
+        userId: "",
+        operId: "",
+        operName: "",
+        agentId: "",
         pageNo: 1,
         pageSize: 10
       },
-      giveUpList: [{ value: 0, label: 'all.tip587' }, { value: 1, label: 'all.tip588' }, { value: 2, label: 'all.tip589' }, { value: 3, label: 'all.tip590' }],
+      giveUpList: [
+        {
+          value: 0,
+          label: "all.tip587"
+        },
+        {
+          value: 1,
+          label: "all.tip588"
+        },
+        {
+          value: 2,
+          label: "all.tip589"
+        },
+        {
+          value: 3,
+          label: "all.tip590"
+        }
+      ],
       timeRangeBefore: 0,
       timeRangeAfter: 0,
       timeRangeBeforehours: 4,
@@ -866,7 +883,7 @@ export default {
       fromMatchTimeBeforeMinute: 45,
       // isCurrentSave: '',
       showLimit: true,
-      dialogImageUrl: '',
+      dialogImageUrl: "",
       dialogVisible: false,
       showPhotoDialog: false,
       OperAtorDialog: false,
@@ -881,40 +898,40 @@ export default {
       AddCompetitionRequest: {
         countryList: [],
         competition: {
-          userId: '',
-          userName: '',
-          type: '',
-          competitionStartPeriod: '',
-          competitionEndPeriod: '',
-          entryStartPeriod: '',
-          entryEndPeriod: '',
-          advertisementStartPeriod: '',
-          advertisementEndPeriod: '',
-          resultStartPeriod: '',
-          resultEndPeriod: '',
-          competitionName: '',
-          competitionDescription: '',
-          rewardDescription: '',
-          gameTypeDescription: '',
-          image: '',
+          userId: "",
+          userName: "",
+          type: "",
+          competitionStartPeriod: "",
+          competitionEndPeriod: "",
+          entryStartPeriod: "",
+          entryEndPeriod: "",
+          advertisementStartPeriod: "",
+          advertisementEndPeriod: "",
+          resultStartPeriod: "",
+          resultEndPeriod: "",
+          competitionName: "",
+          competitionDescription: "",
+          rewardDescription: "",
+          gameTypeDescription: "",
+          image: "",
           application: 0
         },
         competitionOption: {
           approveEntry: 1,
           cardType: 1,
           ratingType: 1,
-          cdateInt: '',
+          cdateInt: "",
           entryFee: 1,
           entryFeePay: 100,
           entryPhotoShooting: 1,
-          id: '',
-          machineType: '',
+          id: "",
+          machineType: "",
           photoRecord: 1,
           rankingCalculationScope: 2,
           rankingDecision: 2
         },
         competitionBasicOption: {
-          cdateInt: '',
+          cdateInt: "",
           // entryMaxLegCount: '',
           // entryMaxModeCount: '',
           entryMaxSetCount: 9,
@@ -923,7 +940,7 @@ export default {
           forceAttend: 2,
           forceAttendNumber: 1,
           fromMatchTimeBefore: 0,
-          id: '',
+          id: "",
           includeWoman: 2,
           legScoreDraw: 1,
           lineUpDeadline: 1,
@@ -931,7 +948,7 @@ export default {
           maximum: 99,
           minimum: 1,
           participationType: 1,
-          playerChangeAvaila: '',
+          playerChangeAvaila: "",
           playerChangeNumber: 0,
           playerChangeType: 0,
           setFirst: 1,
@@ -953,7 +970,7 @@ export default {
         shopName: null,
         shopId: null,
         agentId: null,
-        userId: '',
+        userId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -968,31 +985,59 @@ export default {
       categoryList: [],
       getShopList: [],
       afterRomeveList: [],
-      imgId: ''
+      imgId: ""
     };
   },
   beforeRouteLeave(to, from, next) {
     const id = this.$route.query.id;
-    changeCurrentObj(id, 'competition', window.treeList, this.AddCompetitionRequest);
+    changeCurrentObj(id, "competition", this.$store.state.menuList, this.AddCompetitionRequest);
     next();
   },
   mounted() {
-    this.bus.$emit('change', window.treeList);
     this.uploadCompetitionId = this.$route.query.id || this.$route.query.currentId;
-    sessionStorage.setItem('competitionId', this.uploadCompetitionId);
-    const userId = sessionStorage.getItem('userId');
+    sessionStorage.setItem("competitionId", this.uploadCompetitionId);
+    const userId = sessionStorage.getItem("userId");
     this.searchOperator.userId = userId;
     this.AddCompetitionRequest.competition.userId = userId;
     this.Shop.userId = userId;
-    if (this.$route.query.type === '1') {
-      this.setFirstList = [{ value: 1, label: 'all.tip111' }, { value: 2, label: 'all.tip112' }, { value: 3, label: 'all.tip113' }];
+    debugger;
+    if (this.$route.query.type === "1") {
+      this.setFirstList = [
+        {
+          value: 1,
+          label: "all.tip111"
+        },
+        {
+          value: 2,
+          label: "all.tip112"
+        },
+        {
+          value: 3,
+          label: "all.tip113"
+        }
+      ];
     } else {
       this.setFirstList = [
-        { value: 1, label: 'all.tip111' },
-        { value: 2, label: 'all.tip112' },
-        { value: 3, label: 'all.tip113' },
-        { value: 4, label: 'all.tip517' },
-        { value: 5, label: 'all.tip518' }
+        {
+          value: 1,
+          label: "all.tip111"
+        },
+        {
+          value: 2,
+          label: "all.tip112"
+        },
+        {
+          value: 3,
+          label: "all.tip113"
+        },
+        {
+          value: 4,
+          label: "all.tip517"
+        },
+        {
+          value: 5,
+          label: "all.tip518"
+        }
       ];
     }
     this.AddCompetitionRequest.competition.type = this.$route.query.type;
@@ -1014,9 +1059,9 @@ export default {
   },
   methods: {
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
+      const isJPG = file.type === "image/jpeg";
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+        this.$message.error("上传头像图片只能是 JPG 格式!");
       }
       return isJPG;
     },
@@ -1053,9 +1098,9 @@ export default {
             vm.fileList = [{ url: `${data.competition.localhostImg}${data.competition.image}` }];
           }
           // 设置操作员数据
-          this.$axios.post('/operation/getoperationlist', vm.$qs.stringify(vm.searchOperator)).then(operRes => {
+          this.$axios.post("/operation/getoperationlist", vm.$qs.stringify(vm.searchOperator)).then(operRes => {
             vm.OperatorList = operRes.data.data.list;
-            if (vm.userType === '5') {
+            if (vm.userType === "5") {
               vm.operatorSelectionList = data.operatorList;
             } else {
               operRes.data.data.list.forEach(i => {
@@ -1070,7 +1115,7 @@ export default {
           });
           // 设置店铺地址
           vm.Shop.pageSize = 100;
-          this.$axios.post('/getshop', vm.$qs.stringify(vm.Shop)).then(operRes => {
+          this.$axios.post("/getshop", vm.$qs.stringify(vm.Shop)).then(operRes => {
             if (data.shopIdList.length > 0) {
               operRes.data.data.list.forEach(i => {
                 data.shopIdList.forEach(j => {
@@ -1087,52 +1132,52 @@ export default {
       });
     },
     getOperationdata() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
         this.agentList = res.data.data;
-        this.Shop.agentId = Number(sessionStorage.getItem('userId'));
+        this.Shop.agentId = Number(sessionStorage.getItem("userId"));
         this.shopSearch();
       });
     },
     getCategoryList() {
       const vm = this;
       const competitionId = this.$route.query.id;
-      this.$axios.post('/categorylist', vm.$qs.stringify({ competitionId })).then(res => {
+      this.$axios.post("/categorylist", vm.$qs.stringify({ competitionId })).then(res => {
         vm.categoryList = res.data.data;
       });
     },
     competitionStartTime(data) {
       if (this.AddCompetitionRequest.competition.competitionEndPeriod && this.AddCompetitionRequest.competition.competitionEndPeriod < data) {
-        this.AddCompetitionRequest.competition.competitionEndPeriod = '';
+        this.AddCompetitionRequest.competition.competitionEndPeriod = "";
       }
     },
     competitionEndTime(data) {
-      this.AddCompetitionRequest.competition.entryStartPeriod = this.AddCompetitionRequest.competition.competitionStartPeriod || '';
-      this.AddCompetitionRequest.competition.advertisementStartPeriod = this.AddCompetitionRequest.competition.competitionStartPeriod || '';
+      this.AddCompetitionRequest.competition.entryStartPeriod = this.AddCompetitionRequest.competition.competitionStartPeriod || "";
+      this.AddCompetitionRequest.competition.advertisementStartPeriod = this.AddCompetitionRequest.competition.competitionStartPeriod || "";
       this.AddCompetitionRequest.competition.entryEndPeriod = data;
       this.AddCompetitionRequest.competition.advertisementEndPeriod = data;
-      const [Syear, SMM, SDD] = new Date(this.AddCompetitionRequest.competition.competitionStartPeriod).toLocaleDateString().split('/');
-      const [Eyear, EMM, EDD] = data.toLocaleDateString().split('/');
+      const [Syear, SMM, SDD] = new Date(this.AddCompetitionRequest.competition.competitionStartPeriod).toLocaleDateString().split("/");
+      const [Eyear, EMM, EDD] = data.toLocaleDateString().split("/");
       this.AddCompetitionRequest.competition.resultStartPeriod = new Date(Syear, Number(SMM) + 2, SDD);
       this.AddCompetitionRequest.competition.resultEndPeriod = new Date(Eyear, Number(EMM) + 2, EDD, Number(23), Number(59), Number(59));
     },
     entryDateChange(data) {
       if (this.AddCompetitionRequest.competition.entryEndPeriod && this.AddCompetitionRequest.competition.entryEndPeriod < data) {
-        this.AddCompetitionRequest.competition.entryEndPeriod = '';
+        this.AddCompetitionRequest.competition.entryEndPeriod = "";
       }
     },
     advertisementDateChange(data) {
       if (this.AddCompetitionRequest.competition.advertisementEndPeriod && this.AddCompetitionRequest.competition.advertisementEndPeriod < data) {
-        this.AddCompetitionRequest.competition.advertisementEndPeriod = '';
+        this.AddCompetitionRequest.competition.advertisementEndPeriod = "";
       }
     },
     resultDateChange(data) {
       if (this.AddCompetitionRequest.competition.resultEndPeriod && this.AddCompetitionRequest.competition.resultEndPeriod < data) {
-        this.AddCompetitionRequest.competition.resultEndPeriod = '';
+        this.AddCompetitionRequest.competition.resultEndPeriod = "";
       }
     },
     shopSearch() {
       const vm = this;
-      this.$axios.post('/getshop', vm.$qs.stringify(vm.Shop)).then(res => {
+      this.$axios.post("/getshop", vm.$qs.stringify(vm.Shop)).then(res => {
         vm.CompetitionOptionShopList = res.data.data.list;
         vm.showShopListTotal = res.data.data.total;
       });
@@ -1150,23 +1195,23 @@ export default {
     SaveCompetitionAreaDialog() {
       this.CompetitionAreaDialog = true;
       const vm = this;
-      this.$axios.post('/getcountry', vm.$qs.stringify({ creatorId: this.searchOperator.userId })).then(res => {
+      this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: this.searchOperator.userId })).then(res => {
         vm.ContinentArr = res.data.data;
       });
     },
     ContinentChange() {
       const vm = this;
-      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: vm.countryId })).then(res => {
+      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: vm.countryId })).then(res => {
         vm.CountryArr = res.data.data;
       });
-      this.areaId = '';
+      this.areaId = "";
     },
     addContinent() {
       if (this.countryId) {
         const vm = this;
         let flag = true;
         const ContinentName = this.findName(this.ContinentArr, this.countryId);
-        const CountryName = this.findName(this.CountryArr, this.areaId) || '';
+        const CountryName = this.findName(this.CountryArr, this.areaId) || "";
         if (!this.areaId) {
           this.areaId = 0;
         }
@@ -1181,7 +1226,7 @@ export default {
             areaName: CountryName.label
           });
         }
-        this.areaId = '';
+        this.areaId = "";
         // this.AddCompetitionRequest.competition.areaName = '';
       }
     },
@@ -1192,12 +1237,12 @@ export default {
       //   competitionId: this.uploadCompetitionId
       // };
       const formData = new FormData();
-      formData.append('file', null);
-      formData.append('competitionId', this.uploadCompetitionId);
+      formData.append("file", null);
+      formData.append("competitionId", this.uploadCompetitionId);
       this.$axios({
-        method: 'POST',
-        url: '/addCompetitionImg',
-        headers: { 'Content-Type': 'mutipart/form-data' },
+        method: "POST",
+        url: "/addCompetitionImg",
+        headers: { "Content-Type": "mutipart/form-data" },
         data: formData
       }).then(() => {});
       // this.$axios.post('/addCompetitionImg', this.$qs.stringify(data)).then(() => {});
@@ -1221,15 +1266,16 @@ export default {
       this.$axios.post(`/delcategorybyid?id=${id}`).then(res => {
         this.$message(res.data.msg);
         this.getCategoryList();
-        this.getList();
+        // this.getList();
       });
     },
     // eslint-disable-next-line consistent-return
     Save() {
+      console.log(this.$store.state.menuList);
       const vm = this;
       const id = vm.$route.query.id || vm.$route.query.currentId;
-      let url = '';
-      let p1 = '';
+      let href = "";
+      let p1 = "";
       if (this.A1 && !this.W1) {
         this.AddCompetitionRequest.competitionOption.machineType = 1;
       } else if (this.W1 && !this.A1) {
@@ -1258,68 +1304,76 @@ export default {
       // eslint-disable-next-line consistent-return
       PALL.then(list => {
         if (!vm.AddCompetitionRequest.competition.competitionName) {
-          this.$message(this.$t('all.tip552'));
+          this.$message(this.$t("all.tip552"));
           return false;
         }
         // 不等于1，第一个进来是调用add
-        if (String(vm.$route.query.id) !== '1' || vm.$route.query.isTemplate || vm.$route.query.showData) {
-          url = 'updatecompetition';
+        if (String(vm.$route.query.id) !== "1" || vm.$route.query.isTemplate || vm.$route.query.showData) {
+          href = "updatecompetition";
           vm.AddCompetitionRequest.competitionId = list[0] || id;
           // 上传图片接口需要id
           vm.uploadCompetitionId = vm.AddCompetitionRequest.competitionId;
         } else {
-          url = 'addcompetition';
+          href = "addcompetition";
         }
         vm.AddCompetitionRequest.competitionBasicOption.timeRangeBefore = vm.timeRangeBefore * 24 + vm.timeRangeBeforehours;
         vm.AddCompetitionRequest.competitionBasicOption.timeRangeAfter = vm.timeRangeAfter * 24 + vm.timeRangeAfterhours;
         vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
         const saveMethods = () => {
           // 保存 结果查询时间
-          sessionStorage.setItem('time', JSON.stringify({ begin: this.AddCompetitionRequest.competition.competitionStartPeriod, end: this.AddCompetitionRequest.competition.competitionEndPeriod }));
-          this.$axios.post(`/${url}`, vm.AddCompetitionRequest).then(res => {
+          sessionStorage.setItem(
+            "time",
+            JSON.stringify({
+              begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
+              end: this.AddCompetitionRequest.competition.competitionEndPeriod
+            })
+          );
+          this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
             debugger;
             if (res.data) {
-              const stage = 'competitionId';
-              const type = res.data.data;
+              const url = "competition";
+              const competitionId = res.data.data && res.data.data.competitionId;
               let item = {};
               vm.$message({
                 message: res.data.msg,
-                type: 'success',
+                type: "success",
                 duration: 2000
               });
-              if (type) {
-                vm.uploadCompetitionId = type;
-                sessionStorage.setItem('competitionId', type);
+              if (competitionId) {
+                vm.uploadCompetitionId = competitionId;
+                sessionStorage.setItem("competitionId", competitionId);
                 item = {
                   label: vm.AddCompetitionRequest.competition.competitionName,
-                  id: type,
-                  stage
+                  id: competitionId,
+                  url
                 };
               } else {
                 item = {
                   label: vm.AddCompetitionRequest.competition.competitionName,
-                  stage
+                  url
                 };
               }
               this.$refs.upload.submit();
-              changeMEenuList(window.treeList, id, item);
-              this.getList(id);
-              changeHash(window.location.hash.split('&')[0], 'competition', list[0] || id);
+              changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
+              debugger;
+              this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
+              // changeMEenuList(this.$store.state.menuList, id, item);
+              // this.getList(id);
             } else {
               vm.$message({
                 message: res.data.msg,
-                type: 'warning',
+                type: "warning",
                 duration: 2000
               });
             }
           });
         };
         // 判断比赛是否已经开打？
-        if (url === 'updatecompetition' && vm.AddCompetitionRequest.numFight) {
-          this.$confirm(this.$t('all.tip575'), {
-            confirmButtonText: this.$t('all.tip47'),
-            cancelButtonText: this.$t('all.tip30'),
-            type: 'warning'
+        if (href === "updatecompetition" && vm.AddCompetitionRequest.numFight) {
+          this.$confirm(this.$t("all.tip575"), {
+            confirmButtonText: this.$t("all.tip47"),
+            cancelButtonText: this.$t("all.tip30"),
+            type: "warning"
           })
             .then(() => {
               saveMethods();
@@ -1330,22 +1384,22 @@ export default {
         }
       });
     },
-    getList(id = window.treeList[0].id) {
-      this.$axios.post(`/allsubset?competitionId=${id}`).then(response => {
-        this.bus.$emit('change', response.data.data);
-      });
-    },
+    // getList(id = this.$store.state.menuList[0].id) {
+    //   this.$axios.post(`/allsubset?competitionId=${id}`).then(response => {
+    //     this.bus.$emit("change", response.data.data);
+    //   });
+    // },
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
       // 文件对象
-      formData.append('file', File);
+      formData.append("file", File);
       // 其他参数
-      formData.append('competitionId', this.uploadCompetitionId);
+      formData.append("competitionId", this.uploadCompetitionId);
       this.$axios({
-        method: 'POST',
-        url: '/addCompetitionImg',
-        headers: { 'Content-Type': 'mutipart/form-data' },
+        method: "POST",
+        url: "/addCompetitionImg",
+        headers: { "Content-Type": "mutipart/form-data" },
         data: formData
       }).then(() => {});
       // 此方法FormData参数无效
@@ -1375,21 +1429,21 @@ export default {
       });
     },
     OperAtorSearch() {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });
     },
     operatorCurrentChange(val) {
       this.searchOperator.pageNo = val;
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });
     },
     operatorSizeChange(val) {
       this.searchOperator.pageSize = val;
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.searchOperator)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.searchOperator)).then(res => {
         this.OperatorList = res.data.data.list;
         this.operatorTotal = res.data.data.total;
       });
@@ -1477,7 +1531,7 @@ export default {
         }
       }
       this.Shop.pageNum = val;
-      this.$axios.post('/getshop', this.$qs.stringify(this.Shop)).then(res => {
+      this.$axios.post("/getshop", this.$qs.stringify(this.Shop)).then(res => {
         this.CompetitionOptionShopList = res.data.data.list;
         this.showShopListTotal = res.data.data.total;
         toggleStates(this.CompetitionOptionShopList);
@@ -1485,7 +1539,7 @@ export default {
     },
     showShopListSizeChange(val) {
       this.Shop.pageSize = val;
-      this.$axios.post('/getshop', this.$qs.stringify(this.Shop)).then(res => {
+      this.$axios.post("/getshop", this.$qs.stringify(this.Shop)).then(res => {
         this.CompetitionOptionShopList = res.data.data.list;
         this.showShopListTotal = res.data.data.total;
       });

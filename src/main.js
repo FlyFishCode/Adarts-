@@ -19,9 +19,10 @@ import "nprogress/nprogress.css"; // 这个nprogress样式必须引入
 // eslint-disable-next-line import/extensions
 import App from "./App.vue";
 import router from "./router";
+import store from "./store";
 import "element-ui/lib/theme-chalk/index.css";
 import i18n from "./i18n/i18n";
-import './assets/fonts/iconfont.css';
+import "./assets/fonts/iconfont.css";
 import { getQuery } from "@/components/common/Utils";
 
 Vue.use(ElementUI);
@@ -93,5 +94,6 @@ Vue.filter("showDate", value => {
 new Vue({
     router,
     i18n,
+    store,
     render: h => h(App)
 }).$mount("#app");

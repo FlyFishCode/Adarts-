@@ -47,7 +47,7 @@
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
           {{ $t("all.tip8") }}
-          </el-col>
+        </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="LeagueMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
@@ -250,7 +250,7 @@
 // import findCity from '../../../components/common/Utils';
 // @ is an alias to /src
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
@@ -262,48 +262,48 @@ export default {
         }
       },
       total: 1,
-      city: '',
+      city: "",
       templateTotal: 1,
       ModularVisible: false,
       TemplateVisible: false,
       ContinentArr: [],
       CountryArr: [],
       competitionNameList: [],
-      CreateValue: '1',
+      CreateValue: "1",
       LeagueMgmtVO: {
-        areaId: '',
-        countryId: '',
+        areaId: "",
+        countryId: "",
         status: 0,
         type: 0,
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        competitionName: '',
-        operatorId: '',
-        creatorId: '',
-        userId: sessionStorage.getItem('userId'),
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        competitionName: "",
+        operatorId: "",
+        creatorId: "",
+        userId: sessionStorage.getItem("userId"),
         pageNum: 1,
         pageSize: 10
       },
       template: {
-        TemplateName: '',
+        TemplateName: "",
         TemplateType: 1,
-        TemplateRadio: ''
+        TemplateRadio: ""
       },
       dialog: {
-        DialogMoudleName: '1',
+        DialogMoudleName: "1",
         DialogMoudleRadio: 1,
-        DialogTemplateRadio: '1'
+        DialogTemplateRadio: "1"
       },
       moudleTopBoxData: [
         {
           radio: 1,
-          type: 'Local',
-          name: 'Local League'
+          type: "Local",
+          name: "Local League"
         },
         {
           radio: 2,
-          type: 'Online',
-          name: 'Online League'
+          type: "Online",
+          name: "Online League"
         }
       ],
       TemplateTopBoxData: [],
@@ -314,8 +314,8 @@ export default {
   },
   mounted() {
     const vm = this;
-    this.LeagueMgmtVO.userId = sessionStorage.getItem('userId');
-    this.$axios.post('/getcountry', vm.$qs.stringify({ creatorId: vm.LeagueMgmtVO.userId })).then(res => {
+    this.LeagueMgmtVO.userId = sessionStorage.getItem("userId");
+    this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.LeagueMgmtVO.userId })).then(res => {
       vm.ContinentArr = res.data.data;
     });
     this.search();
@@ -327,7 +327,7 @@ export default {
     search() {
       // eslint-disable-next-line no-unused-expressions
       this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
-      this.$axios.post('/getcompetitionList', this.LeagueMgmtVO).then(res => {
+      this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
@@ -335,17 +335,17 @@ export default {
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     getOperationdata() {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getCretetionData() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
@@ -354,7 +354,7 @@ export default {
       this.LeagueMgmtVO.pageSize = value;
       // eslint-disable-next-line no-unused-expressions
       this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
-      this.$axios.post('/getcompetitionList', this.LeagueMgmtVO).then(res => {
+      this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
@@ -366,7 +366,7 @@ export default {
       this.LeagueMgmtVO.pageNum = value;
       // eslint-disable-next-line no-unused-expressions
       this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
-      this.$axios.post('/getcompetitionList', this.LeagueMgmtVO).then(res => {
+      this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
@@ -375,21 +375,21 @@ export default {
     },
     dateChange(data) {
       if (this.LeagueMgmtVO.competitionEndPeriod && this.LeagueMgmtVO.competitionEndPeriod < data) {
-        this.LeagueMgmtVO.competitionEndPeriod = '';
+        this.LeagueMgmtVO.competitionEndPeriod = "";
       }
     },
     AreaOneChange(value) {
       const vm = this;
-      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: value })).then(res => {
         vm.CountryArr = res.data.data;
       });
-      this.LeagueMgmtVO.areaId = '';
+      this.LeagueMgmtVO.areaId = "";
     },
     download() {
-      console.log('Download');
+      console.log("Download");
     },
     create() {
-      if (this.CreateValue === '1') {
+      if (this.CreateValue === "1") {
         this.ModularVisible = true;
       } else {
         this.getTemplateTopBoxData();
@@ -397,23 +397,23 @@ export default {
       }
     },
     close(competitionId) {
-      this.$axios.post('/close', this.$qs.stringify({ competitionId })).then(() => {
+      this.$axios.post("/close", this.$qs.stringify({ competitionId })).then(() => {
         this.search();
       });
     },
     cancel(competitionId) {
-      this.$axios.post('/cancel', this.$qs.stringify({ competitionId })).then(() => {
+      this.$axios.post("/cancel", this.$qs.stringify({ competitionId })).then(() => {
         this.search();
       });
     },
     open(competitionId) {
-      this.$axios.post('/open', this.$qs.stringify({ competitionId })).then(res => {
+      this.$axios.post("/open", this.$qs.stringify({ competitionId })).then(res => {
         this.$message(res.data.msg);
         this.search();
       });
     },
     deleteLeague(id) {
-      this.$axios.post('/delcompetitionbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/delcompetitionbyid", this.$qs.stringify({ id })).then(res => {
         this.$message(res.data.msg);
         this.search();
       });
@@ -421,8 +421,16 @@ export default {
     ModularConfirm() {
       const vm = this;
       this.ModularVisible = false;
+      this.$store.commit("changeMenuList", [
+        {
+          id: "1",
+          label: "League",
+          url: "competition",
+          parentId: ""
+        }
+      ]);
       this.$router.push({
-        path: '/competition',
+        path: "/competition",
         query: {
           id: 1,
           fisrst: true,
@@ -433,8 +441,16 @@ export default {
     TemplateConfirm() {
       const vm = this;
       this.TemplateVisible = false;
+      this.$store.commit("changeMenuList", [
+        {
+          id: "1",
+          label: "League",
+          url: "competition",
+          parentId: ""
+        }
+      ]);
       this.$router.push({
-        name: '/competition',
+        name: "/competition",
         query: {
           id: `${vm.template.TemplateRadio}`,
           isTemplate: true
@@ -443,7 +459,7 @@ export default {
     },
     handleView(data) {
       this.$router.push({
-        name: 'resultMgmt',
+        name: "resultMgmt",
         query: {
           id: data.competitionId,
           name: data.competitionName,
@@ -462,7 +478,7 @@ export default {
         pageNum,
         pageSize
       };
-      this.$axios.post('/template/gettemplatelist', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/template/gettemplatelist", this.$qs.stringify(data)).then(res => {
         this.TemplateTopBoxData = res.data.data.list;
         this.templateTotal = res.data.data.total;
       });
@@ -478,7 +494,7 @@ export default {
     },
     push(id) {
       this.$router.push({
-        path: 'competition',
+        path: "competition",
         query: {
           id,
           showData: true
