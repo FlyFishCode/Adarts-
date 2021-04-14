@@ -114,7 +114,7 @@
           <el-table-column prop="application" :sortable="true" :label="$t('all.tip23')" min-width="10%"> </el-table-column>
           <el-table-column prop="approve" :sortable="true" :label="$t('all.tip24')" min-width="9%"></el-table-column>
         </el-table-column>
-        <el-table-column :sortable="true" :label="$t('all.tip7')" min-width="14%">
+        <el-table-column :sortable="true" :label="$t('all.tip7')" min-width="15%">
           <template slot-scope="scope">
             <div>{{ scope.row.competitionStartPeriod }}-{{ scope.row.competitionEndPeriod }}</div>
           </template>

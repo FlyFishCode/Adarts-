@@ -5,15 +5,15 @@
         <el-col :span="3" class="label-g">{{ $t("all.tip3") }}</el-col>
         <el-col :span="3" :title="detail.competitionName" class="overFlowStyle lineClass">{{ detail.competitionName }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip6") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.status === '1'?$t('all.tip26'):$t('all.tip27') }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.status === "1" ? $t("all.tip26") : $t("all.tip27") }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip4") }}</el-col>
         <el-col :span="9" class="overFlowStyle lineClass">{{ detail.area }}</el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">{{ $t("all.tip5") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.type === 1?$t('all.tip40'):$t('all.tip41') }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.type === 1 ? $t("all.tip40") : $t("all.tip41") }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip7") }}</el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.competitionStartPeriod.split(' ')[0] }}-{{ detail.competitionEndPeriod.split(' ')[0] }}</el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">{{ detail.competitionStartPeriod.split(" ")[0] }}-{{ detail.competitionEndPeriod.split(" ")[0] }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip310") }}</el-col>
         <el-col :span="3" class="overFlowStyle lineClass">{{ detail.entryCount }}</el-col>
       </el-row>
@@ -320,9 +320,9 @@
                       <div v-if="scope.row.gameMode === 6">{{ "Team2" }}</div>
                     </template>
                   </el-table-column>
-                  <el-table-column  prop="drawFirst" :label="$t('all.tip227')" min-width="6%">
+                  <el-table-column prop="drawFirst" :label="$t('all.tip227')" min-width="6%">
                     <template slot-scope="scope">
-                      <div>{{ scope.row.drawFirst === 1?$t("all.tip323"):$t("all.tip326") }}</div>
+                      <div>{{ scope.row.drawFirst === 1 ? $t("all.tip323") : $t("all.tip326") }}</div>
                     </template>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip111')" min-width="10%">
@@ -902,8 +902,8 @@
           <el-table-column property="teamName" :label="$t('all.tip244')" min-width="10%"></el-table-column>
           <el-table-column :label="$t('all.tip230')" min-width="10%">
             <template slot-scope="scope">
-              <div v-if="scope.row.afterModification === 1">{{ $t("all.tip309") }}</div>
-              <div v-if="scope.row.afterModification === 2">{{ $t("all.tip223") }}</div>
+              <div v-if="scope.row.fraction === 1">{{ $t("all.tip309") }}</div>
+              <div v-if="scope.row.fraction === 2">{{ $t("all.tip223") }}</div>
             </template>
           </el-table-column>
           <el-table-column property="original" :label="$t('all.tip231')" min-width="10%"></el-table-column>
@@ -930,79 +930,79 @@
 // @ is an alias to /src
 
 export default {
-  name: 'ResultInformation',
+  name: "ResultInformation",
   components: {},
   data() {
     return {
       stretch: true,
       showDetail: false,
       LeagueResultsDialog: false,
-      activeName: '1',
+      activeName: "1",
       diaLogTotal: 0,
-      defaultImg: require('@/assets/person.jpg'),
-      allScore: '',
-      matchId: '',
-      gameResultList: [{ id: 1, label: 'all.tip107' }, { id: 2, label: 'all.tip108' }, { id: 3, label: 'all.tip109' }],
+      defaultImg: require("@/assets/person.jpg"),
+      allScore: "",
+      matchId: "",
+      gameResultList: [{ id: 1, label: "all.tip107" }, { id: 2, label: "all.tip108" }, { id: 3, label: "all.tip109" }],
       gameScoreList: [],
       penaltyScoreList: [],
       ResultsHiotory: [],
-      homeResultId: '',
-      awayResultId: '',
-      gameResultTextarea: '',
+      homeResultId: "",
+      awayResultId: "",
+      gameResultTextarea: "",
       detail: {
-        competitionStartPeriod: '',
-        competitionEndPeriod: ''
+        competitionStartPeriod: "",
+        competitionEndPeriod: ""
       },
       rankingVO: {
-        competitionId: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
+        competitionId: "",
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
         pageNum: 1,
         pageSize: 10
       },
       PlayerAwardVO: {
-        competitionId: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
-        playerName: '',
-        teamName: '',
-        gender: '',
+        competitionId: "",
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
+        playerName: "",
+        teamName: "",
+        gender: "",
         pageNum: 1,
         pageSize: 10
       },
       TeamAwardVO: {
-        competitionId: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
-        teamName: '',
+        competitionId: "",
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
+        teamName: "",
         pageNum: 1,
         pageSize: 10
       },
       result: {
         state: false,
-        competitionId: '',
-        ategoryId: '',
-        divisionId: '',
-        stageId: '',
+        competitionId: "",
+        ategoryId: "",
+        divisionId: "",
+        stageId: "",
         pageNum: 1,
         pageSize: 10
       },
       PlayerVO: {
-        competitionId: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
-        playerName: '',
-        teamName: '',
-        minRating: '',
-        maxRating: '',
-        minPpd: '',
-        maxPpd: '',
-        minMpr: '',
-        maxMpr: '',
+        competitionId: "",
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
+        playerName: "",
+        teamName: "",
+        minRating: "",
+        maxRating: "",
+        minPpd: "",
+        maxPpd: "",
+        minMpr: "",
+        maxMpr: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -1013,10 +1013,10 @@ export default {
       stageList: [],
       rankingValue: {
         teamList: [],
-        rankingDecision: '',
-        winningPointWin: '',
-        winningPointDrawn: '',
-        winningPointLose: ''
+        rankingDecision: "",
+        winningPointWin: "",
+        winningPointDrawn: "",
+        winningPointLose: ""
       },
       total: 1,
       rankingtotal: 1,
@@ -1027,11 +1027,11 @@ export default {
       setList: [],
       legList: [],
       setDataList: [],
-      homeTeamName: '',
-      awayTeamName: '',
-      defaultSet: '',
-      defaultLeg: '',
-      isHomeTeam: '',
+      homeTeamName: "",
+      awayTeamName: "",
+      defaultSet: "",
+      defaultLeg: "",
+      isHomeTeam: "",
       homeTeam: [],
       awayTeam: [],
       tableData: [],
@@ -1045,9 +1045,9 @@ export default {
   },
   filters: {
     filterDate(data) {
-      let day = '';
-      const [first, last] = data.split(' ');
-      day = last.split('.')[0];
+      let day = "";
+      const [first, last] = data.split(" ");
+      day = last.split(".")[0];
       return `${first}-${day}`;
     }
   },
@@ -1077,9 +1077,9 @@ export default {
       this.$axios.post(`/fixedBarInfo?competitionId=${id}`).then(res => {
         if (!res.data.errorCode) {
           this.detail = res.data.data;
-          this.detail.area = '';
+          this.detail.area = "";
           vm.detail.countryList.forEach(i => {
-            let str = '';
+            let str = "";
             if (i.areaName) {
               str = `,${i.areaName}`;
             }
@@ -1091,7 +1091,7 @@ export default {
       });
     },
     getRankingList() {
-      this.$axios.post('/ranking', this.$qs.stringify(this.rankingVO)).then(res => {
+      this.$axios.post("/ranking", this.$qs.stringify(this.rankingVO)).then(res => {
         if (!res.data.errorCode) {
           this.rankingValue = res.data.data;
           this.rankingList = res.data.data.teamList;
@@ -1110,7 +1110,7 @@ export default {
     },
     getResultList() {
       this.result.state = this.result.state ? 1 : 0;
-      this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.result)).then(res => {
+      this.$axios.post("/getconfrontationresult", this.$qs.stringify(this.result)).then(res => {
         if (!res.data.errorCode) {
           this.resultList = res.data.data.list;
         } else {
@@ -1128,7 +1128,7 @@ export default {
       this.getResultList();
     },
     getTeamAwardList() {
-      this.$axios.post('/teamawardresult', this.$qs.stringify(this.TeamAwardVO)).then(res => {
+      this.$axios.post("/teamawardresult", this.$qs.stringify(this.TeamAwardVO)).then(res => {
         this.teamAwardList = res.data.data.list;
         this.teamAwardTotal = res.data.data.total;
       });
@@ -1142,7 +1142,7 @@ export default {
       this.getTeamAwardList();
     },
     getPlayerAwardList() {
-      this.$axios.post('/playerawardresult', this.$qs.stringify(this.PlayerAwardVO)).then(res => {
+      this.$axios.post("/playerawardresult", this.$qs.stringify(this.PlayerAwardVO)).then(res => {
         this.playerAwardList = res.data.data.list;
         this.playerAwardTotal = res.data.data.total;
       });
@@ -1156,7 +1156,7 @@ export default {
       this.getPlayerAwardList();
     },
     playerSearch() {
-      this.$axios.post('/playerresult', this.$qs.stringify(this.PlayerVO)).then(res => {
+      this.$axios.post("/playerresult", this.$qs.stringify(this.PlayerVO)).then(res => {
         if (!res.data.errorCode) {
           this.playerList = res.data.data.list;
         } else {
@@ -1192,28 +1192,28 @@ export default {
       const vm = this;
       list.forEach(i => {
         const Cobj = {
-          label: '',
-          id: ''
+          label: "",
+          id: ""
         };
-        if (i.url === 'category') {
+        if (i.url === "category") {
           Cobj.label = i.label;
           Cobj.id = i.id;
           vm.categoryList.push(Cobj);
           i.children.forEach(j => {
             const Dobj = {
-              label: '',
-              id: ''
+              label: "",
+              id: ""
             };
-            if (j.url === 'division') {
+            if (j.url === "division") {
               Dobj.label = j.label;
               Dobj.id = j.id;
               vm.divisionList.push(Dobj);
               j.children.forEach(k => {
                 const Sobj = {
-                  label: '',
-                  id: ''
+                  label: "",
+                  id: ""
                 };
-                if (k.url === 'stage') {
+                if (k.url === "stage") {
                   Sobj.label = k.label;
                   Sobj.id = k.id;
                   vm.stageList.push(Sobj);
@@ -1254,11 +1254,11 @@ export default {
           //   this.penaltyScoreList.push({ id: i + 1, label: i + 1 });
           // }
           // 联赛结果管理 添加数据
-          this.allResultMgmt.push({ teamName: this.homeTeamName, num: data.homeResult, value: '' });
-          this.allResultMgmt.push({ teamName: this.awayTeamName, num: data.visitingResult, value: '' });
+          this.allResultMgmt.push({ teamName: this.homeTeamName, num: data.homeResult, value: "" });
+          this.allResultMgmt.push({ teamName: this.awayTeamName, num: data.visitingResult, value: "" });
           // 联赛处罚管理 添加数据
-          this.penaltyMgmt.push({ teamName: this.homeTeamName, num: data.homePenaltyPoint, value: '' });
-          this.penaltyMgmt.push({ teamName: this.awayTeamName, num: data.visitingPenaltyPoint, value: '' });
+          this.penaltyMgmt.push({ teamName: this.homeTeamName, num: data.homePenaltyPoint, value: "" });
+          this.penaltyMgmt.push({ teamName: this.awayTeamName, num: data.visitingPenaltyPoint, value: "" });
         }
       });
       // 获取set/setData
@@ -1296,7 +1296,7 @@ export default {
           data.reason = this.allResultMgmt[i].value;
           data.result = this.allResultMgmt[i].num;
         }
-        this.$axios.post('/updateresult', this.$qs.stringify(data)).then(res => {
+        this.$axios.post("/updateresult", this.$qs.stringify(data)).then(res => {
           this.$message(res.data.msg);
         });
       }
@@ -1314,7 +1314,7 @@ export default {
           data.reason = this.penaltyMgmt[i].value;
           data.penaltyPoint = this.penaltyMgmt[i].num;
         }
-        this.$axios.post('/updatepenaltypoint', this.$qs.stringify(data)).then(res => {
+        this.$axios.post("/updatepenaltypoint", this.$qs.stringify(data)).then(res => {
           this.$message(res.data.msg);
         });
       }
@@ -1324,7 +1324,7 @@ export default {
         debugger;
         if (i.setResultId === value) {
           this.legList = i.legResultList;
-          this.defaultLeg = this.legList[0].legId;
+          this.defaultLeg = this.legList[0].legResultId;
           this.getLegData(this.defaultLeg, 1);
           this.getLegData(this.defaultLeg, 2);
           this.setDataList = i.legResultList;
@@ -1342,7 +1342,7 @@ export default {
         legResultId: id,
         isHomeTeam: type
       };
-      this.$axios.post('/legplayerdata', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/legplayerdata", this.$qs.stringify(data)).then(res => {
         if (type === 1) {
           this.homeTeam = res.data.data;
         } else {
@@ -1360,42 +1360,42 @@ export default {
     },
     showBox() {},
     tabClick(value) {
-      if (value.index === '2') {
+      if (value.index === "2") {
         this.getResultList();
       }
       this.showDetail = false;
     },
     requset(id) {
       console.log(id);
-      this.$message('id');
+      this.$message("id");
     },
     resultCategoryIdCG() {
-      this.result.divisionId = '';
-      this.result.stageId = '';
+      this.result.divisionId = "";
+      this.result.stageId = "";
     },
     resultDivisionIdCG() {
-      this.result.stageId = '';
+      this.result.stageId = "";
     },
     rankingCategoryChange() {
-      this.rankingVO.divisionId = '';
-      this.rankingVO.stageId = '';
+      this.rankingVO.divisionId = "";
+      this.rankingVO.stageId = "";
     },
     rankingDivisionChange() {
-      this.rankingVO.stageId = '';
+      this.rankingVO.stageId = "";
     },
     categoryChange() {
-      this.PlayerVO.divisionId = '';
-      this.PlayerVO.stageId = '';
+      this.PlayerVO.divisionId = "";
+      this.PlayerVO.stageId = "";
     },
     divisionChange() {
-      this.PlayerVO.stageId = '';
+      this.PlayerVO.stageId = "";
     },
     TeamAwardCategoryChange() {
-      this.TeamAwardVO.divisionId = '';
-      this.TeamAwardVO.stageId = '';
+      this.TeamAwardVO.divisionId = "";
+      this.TeamAwardVO.stageId = "";
     },
     TeamAwardDivisionChange() {
-      this.TeamAwardVO.stageId = '';
+      this.TeamAwardVO.stageId = "";
     }
   }
 };

@@ -1000,7 +1000,6 @@ export default {
     this.searchOperator.userId = userId;
     this.AddCompetitionRequest.competition.userId = userId;
     this.Shop.userId = userId;
-    debugger;
     if (this.$route.query.type === "1") {
       this.setFirstList = [
         {
