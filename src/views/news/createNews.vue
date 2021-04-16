@@ -90,26 +90,26 @@
   </div>
 </template>
 <script>
-import E from 'wangeditor';
+import E from "wangeditor";
 
 export default {
   data() {
     return {
       flag: false,
       countryList: [],
-      categoryList: [{ value: 1, label: 'all.tip603' }, { value: 2, label: 'all.tip604' }, { value: 3, label: 'all.tip605' }, { value: 4, label: 'all.tip606' }, { value: 5, label: 'all.tip1' }],
+      categoryList: [{ value: 1, label: "all.tip603" }, { value: 2, label: "all.tip604" }, { value: 3, label: "all.tip605" }, { value: 4, label: "all.tip606" }, { value: 5, label: "all.tip1" }],
       fileList: [],
       opeatorList: [],
       infoVO: {
-        id: '',
-        countryId: '',
+        id: "",
+        countryId: "",
         category: 1,
-        opeatorId: '',
-        registerDate: '',
-        title: '',
+        opeatorId: "",
+        registerDate: "",
+        title: "",
         display: 0,
-        thumbnail: '',
-        contents: ''
+        thumbnail: "",
+        contents: ""
       }
     };
   },
@@ -125,33 +125,33 @@ export default {
   },
   methods: {
     init(flag = false) {
-      const editor = new E('#editorElem');
+      const editor = new E("#editorElem");
       this.$nextTick(() => {
         editor.config.onchange = html => {
           this.infoVO.contents = html;
         };
         editor.config.height = 300;
         editor.config.menus = [
-          'head', // 标题
-          'bold', // 粗体
-          'fontSize', // 字号
-          'fontName', // 字体
-          'italic', // 斜体
-          'underline', // 下划线
-          'strikeThrough', // 删除线
-          'foreColor', // 文字颜色
-          'backColor', // 背景颜色
-          'link', // 插入链接
-          'list', // 列表
-          'justify', // 对齐方式
+          "head", // 标题
+          "bold", // 粗体
+          "fontSize", // 字号
+          "fontName", // 字体
+          "italic", // 斜体
+          "underline", // 下划线
+          "strikeThrough", // 删除线
+          "foreColor", // 文字颜色
+          "backColor", // 背景颜色
+          "link", // 插入链接
+          "list", // 列表
+          "justify", // 对齐方式
           // 'quote', // 引用
           // 'emoticon', // 表情
           // 'image', // 插入图片
           // 'table', // 表格
           // 'video', // 插入视频
           // 'code', // 插入代码
-          'undo', // 撤销
-          'redo' // 重复
+          "undo", // 撤销
+          "redo" // 重复
         ];
         editor.config.zIndex = 100;
         // 过滤掉复制文本中自带的样式,默认开启
@@ -163,8 +163,8 @@ export default {
         // };
         // editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 限制图片大小为2M
         // eslint-disable-next-line func-names
-        editor.config.linkImgCallback = function (url) {
-          const arr = url.split(',');
+        editor.config.linkImgCallback = function(url) {
+          const arr = url.split(",");
           const mime = arr[0].match(/:(.*?);/)[1];
           const encodeStr = atob(arr[1]);
           let n = encodeStr.length;
@@ -177,16 +177,16 @@ export default {
           // url 即插入图片的地址
         };
         // eslint-disable-next-line func-names
-        editor.config.linkCheck = function (text, link) {
+        editor.config.linkCheck = function(text, link) {
           console.log(text); // 插入的文字
           console.log(link); // 插入的链接
           return true; // 返回 true 表示校验成功
           // return '验证失败' // 返回字符串，即校验失败的提示信息
         };
         // 自定义配置颜色（字体颜色、背景色）
-        editor.config.colors = ['#000000', '#eeece0', '#1c487f', '#4d80bf', '#c24f4a', '#8baa4a', '#7b5ba1', '#46acc8', '#f9963b', '#ffffff'];
+        editor.config.colors = ["#000000", "#eeece0", "#1c487f", "#4d80bf", "#c24f4a", "#8baa4a", "#7b5ba1", "#46acc8", "#f9963b", "#ffffff"];
         // 自定义字体
-        editor.config.fontNames = ['宋体', '微软雅黑', 'Arial', 'Tahoma', 'Verdana'];
+        editor.config.fontNames = ["宋体", "微软雅黑", "Arial", "Tahoma", "Verdana"];
         // 隐藏“网络图片”tab
         editor.config.showLinkImg = false;
         // 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
@@ -200,8 +200,8 @@ export default {
     },
     save() {
       if (this.infoVO.thumbnail) {
-        this.$axios.post('/addleaguenews', this.$qs.stringify(this.infoVO)).then(res => {
-          if (res.data.msg === 'OK') {
+        this.$axios.post("/addleaguenews", this.$qs.stringify(this.infoVO)).then(res => {
+          if (res.data.msg === "OK") {
             this.$message(res.data.msg);
           }
         });
@@ -211,7 +211,7 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/searchOperation', this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem('userId') })).then(res => {
+        this.$axios.post("/searchOperation", this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem("userId") })).then(res => {
           this.opeatorList = res.data.data;
         });
       } else {
@@ -219,7 +219,7 @@ export default {
       }
     },
     getNewsInfo(id) {
-      this.$axios.post('/getleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/getleaguenewsbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.data) {
           this.infoVO = res.data.data;
           this.fileList.push({ url: res.data.data.thumbnail });
@@ -228,7 +228,7 @@ export default {
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("userId") })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
       });
@@ -236,11 +236,11 @@ export default {
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('image', File);
+      formData.append("image", File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
-          method: 'POST',
-          url: '/uploadPictures',
+          method: "POST",
+          url: "/uploadPictures",
           data: formData
         }).then(res => {
           if (res.data.data) {
@@ -252,8 +252,8 @@ export default {
       });
       P1.then(value => {
         this.infoVO.thumbnail = value;
-        this.$axios.post('/addleaguenews', this.$qs.stringify(this.infoVO)).then(res => {
-          if (res.data.msg === 'OK') {
+        this.$axios.post("/addleaguenews", this.infoVO).then(res => {
+          if (res.data.msg === "OK") {
             this.$message(res.data.msg);
           }
         });
@@ -261,7 +261,7 @@ export default {
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
-      this.infoVO.thumbnail = '';
+      this.infoVO.thumbnail = "";
     },
     handleChange(response, file) {
       this.fileList = file;

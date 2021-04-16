@@ -35,9 +35,8 @@
     </el-row>
     <div class="table">
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column type="index" :label="$t('all.tip257')" width="50">
-        </el-table-column>
-        <el-table-column prop="date" sortable :label="$t('all.tip258')" min-width="10%">
+        <el-table-column type="index" :label="$t('all.tip257')" width="50"> </el-table-column>
+        <el-table-column prop="date" :label="$t('all.tip258')" min-width="10%">
           <template slot-scope="scope">
             <div class="formImgBox">
               <img :src="scope.row.imgUrl" alt="" />
@@ -45,14 +44,12 @@
           </template>
         </el-table-column>
         <el-table-column prop="userName" sortable :label="$t('all.tip259')" min-width="9%"> </el-table-column>
-        <el-table-column sortable :label="$t('all.tip208')" min-width="6%">
+        <el-table-column :label="$t('all.tip208')" min-width="6%">
           <template slot-scope="scope">
-            <div>
-              {{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}
-            </div>
+            {{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}
           </template>
         </el-table-column>
-        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="8%"> </el-table-column>
+        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="12%"> </el-table-column>
         <el-table-column prop="homeShopName" sortable :label="$t('all.tip247')" min-width="8%"> </el-table-column>
         <el-table-column label="Adarts">
           <el-table-column prop="adartsRating" sortable :label="$t('all.tip154')" min-width="6%"> </el-table-column>
@@ -64,11 +61,28 @@
           <el-table-column prop="leaguePPd" sortable :label="$t('all.tip155')" min-width="5%"> </el-table-column>
           <el-table-column prop="leagueMpr" sortable :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
-        <el-table-column prop="status" sortable :label="$t('all.tip25')" min-width="8%">
+        <el-table-column label="User Define">
+          <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="6%">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'rating')"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="leagueRating" :label="$t('all.tip155')" min-width="6%">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'PPD')"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column prop="leagueRating" :label="$t('all.tip156')" min-width="6%">
+            <template slot-scope="scope">
+              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'MPR')"></el-input>
+            </template>
+          </el-table-column>
+        </el-table-column>
+        <el-table-column prop="status" :label="$t('all.tip25')" min-width="8%">
           <template slot-scope="scope">
-            <div v-if="scope.row.status === 1">{{ $t('all.tip242') }}</div>
-            <div v-if="scope.row.status === 2">{{ $t('all.tip27') }}</div>
-            <div v-if="scope.row.status === 3">{{ $t('all.tip253') }}</div>
+            <div v-if="scope.row.status === 1">{{ $t("all.tip242") }}</div>
+            <div v-if="scope.row.status === 2">{{ $t("all.tip27") }}</div>
+            <div v-if="scope.row.status === 3">{{ $t("all.tip253") }}</div>
           </template>
         </el-table-column>
         <el-table-column min-width="5%">
@@ -150,12 +164,21 @@
           </el-col>
         </el-row>
         <div class="page">
-          <el-pagination @size-change="topBoxSizeChange" @current-change="topBoxcurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="topBoxTotal"> </el-pagination>
+          <el-pagination
+            @size-change="topBoxSizeChange"
+            @current-change="topBoxcurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="topBoxTotal"
+          >
+          </el-pagination>
         </div>
       </el-dialog>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="tableTotal"> </el-pagination>
+      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="tableTotal">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -165,7 +188,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
@@ -174,26 +197,26 @@ export default {
       topBoxTotal: 1,
       tableTotal: 1,
       MemberVO: {
-        teamName: '',
-        homeShopName: '',
-        captainName: '',
-        entryMembers: ''
+        teamName: "",
+        homeShopName: "",
+        captainName: "",
+        entryMembers: ""
       },
       playerListVO: {
-        competitionId: '',
-        competitionTeamId: '',
+        competitionId: "",
+        competitionTeamId: "",
         pageNum: 1,
         pageSize: 10
       },
       TopBox: {
-        competitionId: '',
-        competitionTeamId: '',
-        teamId: '',
-        playerId: '',
-        playerName: '',
-        cardNumber: '',
-        gender: '',
-        homeShopName: '',
+        competitionId: "",
+        competitionTeamId: "",
+        teamId: "",
+        playerId: "",
+        playerName: "",
+        cardNumber: "",
+        gender: "",
+        homeShopName: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -216,18 +239,21 @@ export default {
   methods: {
     init() {
       const vm = this;
-      this.$axios.post('/getCompPlayerTeamList', this.$qs.stringify(this.playerListVO)).then(res => {
+      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableTotal = res.data.data.total;
         vm.tableData = res.data.data.list;
       });
     },
     topBoxSearch() {
       const vm = this;
-      this.$axios.post('/getCompNoPlayTeamList', this.TopBox).then(res => {
+      this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
         debugger;
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
       });
+    },
+    handleRatingBlur(id, type) {
+      console.log(id, type);
     },
     addMember() {
       this.topBoxSearch();
@@ -241,7 +267,7 @@ export default {
         competitionTeamId: this.MemberVO.competitionTeamId,
         playerIdList: [...this.multipleSelection.map(i => i.userId)]
       };
-      this.$axios.post('/compPlayerIntoTeam', data).then(() => {
+      this.$axios.post("/compPlayerIntoTeam", data).then(() => {
         this.init();
       });
       this.dialogTableVisible = false;
@@ -257,7 +283,7 @@ export default {
     topBoxSizeChange(val) {
       const vm = this;
       vm.TopBox.pageSize = val;
-      this.$axios.post('/getCompNoPlayTeamList', this.TopBox).then(res => {
+      this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
       });
@@ -265,7 +291,7 @@ export default {
     topBoxcurrentChange(val) {
       const vm = this;
       vm.TopBox.pageNum = val;
-      this.$axios.post('/getCompNoPlayTeamList', this.TopBox).then(res => {
+      this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
       });
@@ -273,14 +299,14 @@ export default {
     sizeChange(value) {
       const vm = this;
       this.playerListVO.pageSize = value;
-      this.$axios.post('/getCompPlayerTeamList', this.$qs.stringify(this.playerListVO)).then(res => {
+      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableData = res.data.data.list;
       });
     },
     currentChange(value) {
       const vm = this;
       this.playerListVO.pageNum = value;
-      this.$axios.post('/getCompPlayerTeamList', this.$qs.stringify(this.playerListVO)).then(res => {
+      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableData = res.data.data.list;
       });
     }

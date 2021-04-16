@@ -532,7 +532,7 @@
         <el-col class="label-g" :span="4">
           {{ $t("all.tip586") }}
         </el-col>
-        <el-col :span="20">
+        <el-col :span="4">
           <el-select v-model="AddCompetitionRequest.competitionBasicOption.giveUp" :placeholder="$t('placeholder.select')">
             <el-option v-for="item in giveUpList" :label="$t(item.label)" :key="item.value" :value="item.value"></el-option>
           </el-select>
@@ -872,6 +872,22 @@ export default {
         {
           value: 3,
           label: "all.tip590"
+        },
+        {
+          value: 4,
+          label: "all.tip623"
+        },
+        {
+          value: 5,
+          label: "all.tip624"
+        },
+        {
+          value: 6,
+          label: "all.tip625"
+        },
+        {
+          value: 7,
+          label: "all.tip626"
         }
       ],
       timeRangeBefore: 0,

@@ -174,15 +174,15 @@
 
 <script>
 // @ is an alias to /src
-import { saveQuery } from '@/components/common/Utils';
+import { saveQuery } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
     return {
-      userId: '',
+      userId: "",
       competitionOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.EntryMgmt.competitionStartPeriod);
@@ -213,7 +213,7 @@ export default {
         competitionEndPeriod: null,
         entryStartPeriod: null,
         entryEndPeriod: null,
-        userId: sessionStorage.getItem('userId'),
+        userId: sessionStorage.getItem("userId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -222,8 +222,8 @@ export default {
   },
   mounted() {
     const vm = this;
-    this.userId = sessionStorage.getItem('userId');
-    this.$axios.post('/getcountry', vm.$qs.stringify({ creatorId: vm.userId })).then(res => {
+    this.userId = sessionStorage.getItem("userId");
+    this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.userId })).then(res => {
       vm.ContinentArr = res.data.data;
     });
     this.search();
@@ -234,17 +234,17 @@ export default {
   methods: {
     getOperationdata() {
       // 获取操作者
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId: this.userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId: this.userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     getCretetionData() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: this.userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
@@ -260,7 +260,7 @@ export default {
     },
     change(value) {
       if (value) {
-        this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+        this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
           this.CountryArr = res.data.data;
         });
       } else {
@@ -278,33 +278,33 @@ export default {
     },
     search() {
       const vm = this;
-      this.$axios.post('/getCompetitionList', this.EntryMgmt).then(res => {
+      this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
       });
     },
     push(data) {
-      saveQuery('entryList', data);
+      saveQuery("entryList", data);
       this.$router.push({
-        path: 'entryList',
+        path: "entryList",
         query: {
           data: JSON.stringify(data)
         }
       });
     },
     mgmt(value) {
-      saveQuery('entryList', value);
+      saveQuery("entryList", value);
       this.$router.push({
-        name: 'entryList',
+        name: "entryList",
         query: {
           data: JSON.stringify(value)
         }
       });
     },
     assign(value) {
-      saveQuery('assign', value);
+      saveQuery("assign", value);
       this.$router.push({
-        name: 'assign',
+        name: "assign",
         query: {
           data: JSON.stringify(value)
         }
@@ -313,7 +313,7 @@ export default {
     sizeChange(value) {
       const vm = this;
       this.EntryMgmt.pageSize = value;
-      this.$axios.post('/getCompetitionList', this.EntryMgmt).then(res => {
+      this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
       });
@@ -321,7 +321,7 @@ export default {
     currentChange(value) {
       const vm = this;
       this.EntryMgmt.pageNum = value;
-      this.$axios.post('/getCompetitionList', this.EntryMgmt).then(res => {
+      this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
       });

@@ -638,7 +638,11 @@ const en = {
         tip607: "Team(ID)",
         tip608: "Banner",
 
-        tip622: 'Line-Up Deadline'
+        tip622: "Line-Up Deadline",
+        tip623: "Auto Handicap League Rating",
+        tip624: "Auto Handicap Adarts Rating",
+        tip625: "Manual & Auto Handicap League Rating",
+        tip626: "Manual & Auto Handicap Adarts Rating"
     },
     ...enLocale
 };
