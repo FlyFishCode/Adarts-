@@ -201,9 +201,7 @@ export default {
     save() {
       if (this.infoVO.thumbnail) {
         this.$axios.post("/addleaguenews", this.$qs.stringify(this.infoVO)).then(res => {
-          if (res.data.msg === "OK") {
-            this.$message(res.data.msg);
-          }
+          this.$message(res.data.msg);
         });
       } else {
         this.$refs.upload.submit();
@@ -253,9 +251,7 @@ export default {
       P1.then(value => {
         this.infoVO.thumbnail = value;
         this.$axios.post("/addleaguenews", this.infoVO).then(res => {
-          if (res.data.msg === "OK") {
-            this.$message(res.data.msg);
-          }
+          this.$message(res.data.msg);
         });
       });
     },

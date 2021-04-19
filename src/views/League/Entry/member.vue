@@ -85,9 +85,12 @@
             <div v-if="scope.row.status === 3">{{ $t("all.tip253") }}</div>
           </template>
         </el-table-column>
-        <el-table-column min-width="5%">
+        <el-table-column min-width="10%">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="Remove(scope.row.competitionPlayerId)">{{ $t("all.tip134") }}</el-button>
+            <div style="display:flex">
+              <el-button type="primary" size="mini" @click="save">{{ $t("all.tip136") }}</el-button>
+              <el-button type="danger" size="mini" @click="Remove(scope.row.competitionPlayerId)">{{ $t("all.tip134") }}</el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -234,7 +237,6 @@ export default {
     this.playerListVO.competitionId = this.MemberVO.competitionId;
     this.playerListVO.competitionTeamId = this.MemberVO.competitionTeamId;
     this.init();
-    this.topBoxSearch();
   },
   methods: {
     init() {
@@ -247,18 +249,23 @@ export default {
     topBoxSearch() {
       const vm = this;
       this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
-        debugger;
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
       });
     },
     handleRatingBlur(id, type) {
+      const obj = {};
+      this.$axios.post("/", obj).then(res => {
+        debugger;
+        console.log(res);
+      });
       console.log(id, type);
     },
     addMember() {
       this.topBoxSearch();
       this.dialogTableVisible = true;
     },
+    save() {},
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
