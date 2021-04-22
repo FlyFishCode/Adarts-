@@ -116,10 +116,12 @@
             </el-table-column>
             <el-table-column prop="teamName" :label="$t('all.tip316')" min-width="5%"> </el-table-column>
             <el-table-column prop="homeShop" :label="$t('all.tip455')" min-width="5%"> </el-table-column>
-            <el-table-column :label="$t('all.tip426')" min-width="6%">
+            <el-table-column :label="$t('all.tip426')" min-width="10%">
               <template slot-scope="scope">
-                <div>{{ `${scope.row.cardNumber}` }}</div>
-                <div>({{ scope.row.cardType === 5 ? $t("all.tip69") : $t("all.tip68") }})</div>
+                <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+                  {{ card.cardNumber }}
+                  <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+                </div>
               </template>
             </el-table-column>
             <el-table-column :label="$t('all.tip17')" min-width="4%">
@@ -472,64 +474,65 @@
 
 <script>
 // @ is an alias to /src
-import { downloadFile } from '@/components/common/Utils';
+import { downloadFile, staticObj } from "@/components/common/Utils";
 
 export default {
-  name: 'PlayerMgmt',
+  name: "PlayerMgmt",
   components: {},
   data() {
     return {
-      person: require('../../assets/person.jpg'),
-      userId: '',
+      staticObj,
+      person: require("../../assets/person.jpg"),
+      userId: "",
       playerDialog: false,
-      name: '',
-      activeName: 'first',
+      name: "",
+      activeName: "first",
       SearchPlayerPageTotal: 0,
-      ratingGrade: 'league',
+      ratingGrade: "league",
       shopList: [],
       continentArr: [],
       countryArr: [],
       operList: [],
       creteList: [],
       searchPlayer: {
-        userId: '',
-        userName: '',
-        cardNember: '',
+        userId: "",
+        userName: "",
+        cardNember: "",
         gender: null,
-        countryId: '',
-        areaId: '',
-        homeShop: '',
+        countryId: "",
+        areaId: "",
+        homeShop: "",
         cardType: 0,
         timeSlot: 0,
         pmr: 3,
-        min: '',
-        max: '',
+        min: "",
+        max: "",
         pageNum: 1,
         pageSize: 10
       },
       searchByCompetition: {
-        countryId: '',
-        areaId: '',
-        status: '',
-        type: '',
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        competitionName: '',
-        userId: '',
-        operId: '',
+        countryId: "",
+        areaId: "",
+        status: "",
+        type: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        competitionName: "",
+        userId: "",
+        operId: "",
         pageNum: 1,
         pageSize: 10
       },
       dialog: {
-        userId: '',
-        password: '',
-        nickName: '',
+        userId: "",
+        password: "",
+        nickName: "",
         gender: 1,
-        email: '',
-        phone: '',
-        homeShopId: '',
-        homeShopName: '',
-        regDate: ''
+        email: "",
+        phone: "",
+        homeShopId: "",
+        homeShopName: "",
+        regDate: ""
       },
       SearchPlayerTableData: [],
       SearchByCompetitionTableData: [],
@@ -537,7 +540,7 @@ export default {
     };
   },
   mounted() {
-    this.userId = sessionStorage.getItem('userId');
+    this.userId = sessionStorage.getItem("userId");
     this.name = this.$route.params.name;
     this.getCounry(this.userId);
     this.PlayerSearch();
@@ -551,75 +554,75 @@ export default {
     checkEmail() {
       const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!reg.test(this.dialog.email)) {
-        this.$message(`【${this.$t('all.tip428')}】${this.$t('all.tip572')}`);
-        this.dialog.email = '';
+        this.$message(`【${this.$t("all.tip428")}】${this.$t("all.tip572")}`);
+        this.dialog.email = "";
       }
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     checkPhone() {
       const reg = /^(?:(?:\+|00)86)?1[3-9]\d{9}$/;
       if (!reg.test(this.dialog.phone)) {
-        this.$message(`【${this.$t('all.tip429')}】${this.$t('all.tip572')}`);
-        this.dialog.phone = '';
+        this.$message(`【${this.$t("all.tip429")}】${this.$t("all.tip572")}`);
+        this.dialog.phone = "";
       }
     },
     getCounry(userId) {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
         this.continentArr = res.data.data;
       });
     },
     countryChange(value) {
-      this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.countryArr = res.data.data;
       });
-      this.searchPlayer.areaId = '';
+      this.searchPlayer.areaId = "";
     },
     otherCountryChange(value) {
-      this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.countryArr = res.data.data;
       });
-      this.searchByCompetition.areaId = '';
+      this.searchByCompetition.areaId = "";
     },
     getOperationdata(userId) {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
     SearchPlayerHandleSizeChange(value) {
       this.searchPlayer.pageSize = value;
-      this.$axios.post('/getPlayperList', this.searchPlayer).then(res => {
+      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
         this.SearchPlayerTableData = res.data.data.list;
       });
     },
     SearchPlayerHandleCurrentChange(value) {
       this.searchPlayer.pageNum = value;
-      this.$axios.post('/getPlayperList', this.searchPlayer).then(res => {
+      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
         this.SearchPlayerTableData = res.data.data.list;
       });
     },
     PlayerSearch() {
-      this.$axios.post('/getPlayperList', this.searchPlayer).then(res => {
+      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
         this.SearchPlayerPageTotal = res.data.data.total;
         this.SearchPlayerTableData = res.data.data.list;
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/getshop', this.$qs.stringify({ userId })).then(res => {
+      const userId = sessionStorage.getItem("userId");
+      this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });
     },
     PlayerDownload() {
-      this.$axios.post('/exportPlayperList', this.searchPlayer).then(res => {
+      this.$axios.post("/exportPlayperList", this.searchPlayer).then(res => {
         downloadFile(res);
       });
     },
@@ -633,21 +636,21 @@ export default {
     save() {
       //  vm.$qs.stringify(vm.PlayerMgmtVO.dialog)
       const vm = this;
-      this.$axios.post('/createPlayer', vm.dialog).then(res => {
+      this.$axios.post("/createPlayer", vm.dialog).then(res => {
         if (res.data.code === 1000) {
           this.PlayerSearch();
           this.playerDialog = false;
           this.dialog = {
-            userId: '',
-            password: '',
-            nickName: '',
+            userId: "",
+            password: "",
+            nickName: "",
             gender: 1,
-            cardType: '',
-            email: '',
-            phone: '',
-            homeShopId: '',
-            homeShopName: '',
-            regDate: ''
+            cardType: "",
+            email: "",
+            phone: "",
+            homeShopId: "",
+            homeShopName: "",
+            regDate: ""
           };
         } else {
           this.$message(res.data.msg);
@@ -655,7 +658,7 @@ export default {
       });
     },
     competitionSearch() {
-      this.$axios.post('/getPlayperCompList', this.searchByCompetition).then(res => {
+      this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
         this.SearchByCompetitionTableData = res.data.data.list;
       });
     },
@@ -665,7 +668,7 @@ export default {
     },
     push(id) {
       this.$router.push({
-        name: 'playerInformation',
+        name: "playerInformation",
         query: {
           id
         }

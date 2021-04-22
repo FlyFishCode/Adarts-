@@ -45,7 +45,7 @@
             </el-col>
             <el-col :span="5" id="divBoxWidth">
               <el-select v-model="MatchTableListVO.matchTable.status" filterable clearable :placeholder="$t('placeholder.select')">
-                <el-option :label="$t('all.tip516')" :value="1"></el-option>
+                <el-option :label="$t('all.tip532')" :value="1"></el-option>
                 <el-option :label="$t('all.tip515')" :value="2"></el-option>
               </el-select>
             </el-col>
@@ -168,23 +168,23 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
-      defaultActive: 'first',
+      defaultActive: "first",
       categoryList: [],
       divisionList: [],
       KnockoutTotal: 1,
       matchTabletotal: 1,
       MatchTableListVO: {
-        competitionname: '',
+        competitionname: "",
         matchTable: {
-          competitionId: '',
-          categoryId: '',
-          divisionId: '',
-          matchTableType: '',
-          status: '',
+          competitionId: "",
+          categoryId: "",
+          divisionId: "",
+          matchTableType: "",
+          status: "",
           pageNum: 1,
           pageSize: 10
         }
@@ -200,7 +200,7 @@ export default {
   },
   mounted() {
     if (this.$route.query.data) {
-      let data = '';
+      let data = "";
       try {
         data = JSON.parse(this.$route.query.data);
       } catch {
@@ -216,7 +216,7 @@ export default {
   },
   methods: {
     search() {
-      this.$axios.post('/matchTable/getStageList', this.MatchTableListVO.matchTable).then(res => {
+      this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
         this.matchTableData = res.data.data.list;
         this.matchTabletotal = res.data.data.total;
       });
@@ -227,12 +227,12 @@ export default {
           this.divisionList = res.data.data;
         });
       }
-      this.MatchTableListVO.matchTable.divisionId = '';
+      this.MatchTableListVO.matchTable.divisionId = "";
     },
     matchTableCreate(value) {
       const data = Object.assign(value, { matchTableName: this.MatchTableListVO.competitionname, isKnockout: 1 });
       this.$router.push({
-        name: 'matchTableStage',
+        name: "matchTableStage",
         query: {
           data: JSON.stringify(data)
         }
@@ -240,38 +240,38 @@ export default {
     },
     sizeChange(value) {
       this.MatchTableListVO.matchTable.pageSize = value;
-      this.$axios.post('/matchTable/getStageList', this.MatchTableListVO.matchTable).then(res => {
+      this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
         this.matchTableData = res.data.data.list;
       });
     },
     currentChange(value) {
       this.MatchTableListVO.matchTable.pageNum = value;
-      this.$axios.post('/matchTable/getStageList', this.MatchTableListVO.matchTable).then(res => {
+      this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
         this.matchTableData = res.data.data.list;
       });
     },
     knockoutSearch() {
-      this.$axios.post('/aaaaaaaa', this.Knockout).then(res => {
+      this.$axios.post("/aaaaaaaa", this.Knockout).then(res => {
         this.knockoutData = res.data.data.list;
         this.KnockoutTotal = res.data.data.total;
       });
     },
     KnockoutSizeChange(value) {
       this.Knockout.pageSize = value;
-      this.$axios.post('/matchTable/getStageList', this.Knockout).then(res => {
+      this.$axios.post("/matchTable/getStageList", this.Knockout).then(res => {
         this.matchTableData = res.data.data.list;
       });
     },
     KnockoutCurrentChange(value) {
       this.Knockout.pageNum = value;
-      this.$axios.post('/matchTable/getStageList', this.Knockout).then(res => {
+      this.$axios.post("/matchTable/getStageList", this.Knockout).then(res => {
         this.matchTableData = res.data.data.list;
       });
     },
     stageClick(value) {
       const data = Object.assign(value, { matchTableName: this.MatchTableListVO.competitionname });
       this.$router.push({
-        path: '/matchTableStage',
+        path: "/matchTableStage",
         query: {
           data: JSON.stringify(data)
         }
@@ -280,7 +280,7 @@ export default {
     nextStage(value) {
       const data = Object.assign(value, { matchTableName: this.MatchTableListVO.competitionname, isKnockout: 2 });
       this.$router.push({
-        path: '/knockout',
+        path: "/knockout",
         query: {
           data: JSON.stringify(data)
         }
@@ -288,23 +288,24 @@ export default {
     },
     push(msg) {
       this.$router.push({
-        path: '/matchTableStage'
+        path: "/matchTableStage"
       });
       console.log(msg);
     },
     handleClick() {},
     create() {
       this.$router.push({
-        path: '/knockout',
+        path: "/knockout",
         query: {
           data: JSON.stringify(this.$route.query.data)
         }
       });
     },
     selectChange(value) {
-      this.$$axios.post(`/getList?id=${value}`).then(res => {
-        console.log(res);
-      });
+      console.log(value);
+      // this.$axios.post(`/getList?id=${value}`).then(res => {
+      //   console.log(res);
+      // });
     }
   }
 };

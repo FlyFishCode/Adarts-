@@ -36,20 +36,29 @@
     <div class="table">
       <el-table :data="tableData" style="width: 100%">
         <el-table-column type="index" :label="$t('all.tip257')" width="50"> </el-table-column>
-        <el-table-column prop="date" :label="$t('all.tip258')" min-width="10%">
+        <el-table-column prop="date" :label="$t('all.tip258')" min-width="8%">
           <template slot-scope="scope">
             <div class="formImgBox">
               <img :src="scope.row.imgUrl" alt="" />
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="userName" sortable :label="$t('all.tip259')" min-width="9%"> </el-table-column>
+        <el-table-column prop="userName" sortable :label="$t('all.tip259')" min-width="7%"> </el-table-column>
         <el-table-column :label="$t('all.tip208')" min-width="6%">
           <template slot-scope="scope">
             {{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}
           </template>
         </el-table-column>
-        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="12%"> </el-table-column>
+        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="14%">
+          <template slot-scope="scope">
+            <div v-for="(card, index) in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+              <el-radio v-model="card.selectValue" :label="index" @change="handleRadioChange(scope.$index, index, card.selectValue)">
+                {{ card.cardNumber }}
+                <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+              </el-radio>
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column prop="homeShopName" sortable :label="$t('all.tip247')" min-width="8%"> </el-table-column>
         <el-table-column label="Adarts">
           <el-table-column prop="adartsRating" sortable :label="$t('all.tip154')" min-width="6%"> </el-table-column>
@@ -62,19 +71,19 @@
           <el-table-column prop="leagueMpr" sortable :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
         <el-table-column label="User Define">
-          <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="6%">
+          <el-table-column :label="$t('all.tip154')" min-width="6%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'rating')"></el-input>
+              <el-input v-model="scope.row.defineRating"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="leagueRating" :label="$t('all.tip155')" min-width="6%">
+          <el-table-column :label="$t('all.tip155')" min-width="6%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'PPD')"></el-input>
+              <el-input v-model="scope.row.definePpd"></el-input>
             </template>
           </el-table-column>
-          <el-table-column prop="leagueRating" :label="$t('all.tip156')" min-width="6%">
+          <el-table-column :label="$t('all.tip156')" min-width="6%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.status" @blur="handleRatingBlur(scope.row.userId, 'MPR')"></el-input>
+              <el-input v-model="scope.row.defineMpr"></el-input>
             </template>
           </el-table-column>
         </el-table-column>
@@ -88,7 +97,7 @@
         <el-table-column min-width="10%">
           <template slot-scope="scope">
             <div style="display:flex">
-              <el-button type="primary" size="mini" @click="save">{{ $t("all.tip136") }}</el-button>
+              <el-button type="primary" size="mini" @click="save(scope.row)">{{ $t("all.tip136") }}</el-button>
               <el-button type="danger" size="mini" @click="Remove(scope.row.competitionPlayerId)">{{ $t("all.tip134") }}</el-button>
             </div>
           </template>
@@ -146,9 +155,16 @@
                 <span>{{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}</span>
               </template>
             </el-table-column>
-            <el-table-column property="cardNumber" :label="$t('all.tip260')" min-width="6%"></el-table-column>
+            <el-table-column property="cardNumber" :label="$t('all.tip260')" min-width="10%">
+              <template slot-scope="scope">
+                <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+                  {{ card.cardNumber }}
+                  <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+                </div>
+              </template>
+            </el-table-column>
             <el-table-column property="homeShopName" :label="$t('all.tip455')" min-width="6%"></el-table-column>
-            <el-table-column property="name" :label="$t('all.tip316')" min-width="6%"></el-table-column>
+            <el-table-column property="teamName" :label="$t('all.tip316')" min-width="6%"></el-table-column>
             <el-table-column sortable label="Adarts">
               <el-table-column prop="adartsRating" sortable :label="$t('all.tip154')" min-width="6%"> </el-table-column>
               <el-table-column prop="adartsPPd" sortable :label="$t('all.tip155')" min-width="5%"> </el-table-column>
@@ -187,7 +203,7 @@
 </template>
 
 <script>
-// import { returnType } from '@/components/common/Utils';
+import { staticObj } from "@/components/common/Utils";
 // @ is an alias to /src
 
 export default {
@@ -195,10 +211,12 @@ export default {
   components: {},
   data() {
     return {
+      staticObj,
       dialogTableVisible: false,
       multipleSelection: [],
       topBoxTotal: 1,
       tableTotal: 1,
+      selectValue: 1,
       MemberVO: {
         teamName: "",
         homeShopName: "",
@@ -243,29 +261,52 @@ export default {
       const vm = this;
       this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableTotal = res.data.data.total;
+        res.data.data.list.forEach(i => {
+          i.cardList.forEach(j => {
+            Object.assign(j, { selectValue: 0 });
+          });
+        });
         vm.tableData = res.data.data.list;
       });
     },
     topBoxSearch() {
       const vm = this;
       this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
+        this.$message(res.data.msg);
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
       });
-    },
-    handleRatingBlur(id, type) {
-      const obj = {};
-      this.$axios.post("/", obj).then(res => {
-        debugger;
-        console.log(res);
-      });
-      console.log(id, type);
     },
     addMember() {
       this.topBoxSearch();
       this.dialogTableVisible = true;
     },
-    save() {},
+    save(row) {
+      const obj = {
+        competitionPlayerId: row.competitionPlayerId,
+        defineRating: row.defineRating,
+        definePpd: row.definePpd,
+        defineMpr: row.defineMpr,
+        userCardId: row.cardList[row.cardList[0].selectValue].cardId
+      };
+      this.$axios.post("/updateDefineRating", [obj]).then(res => {
+        this.$message(res.data.msg);
+      });
+    },
+    handleRadioChange(rowIndex, index, value) {
+      this.tableData[rowIndex].cardList.forEach((j, jndex) => {
+        if (jndex !== index) {
+          Object.assign(j, { selectValue: value });
+        } else {
+          this.tableData[rowIndex].adartsRating = j.adartsRating;
+          this.tableData[rowIndex].adartsPPd = j.adartsPPd;
+          this.tableData[rowIndex].adartsMpr = j.adartsMpr;
+          this.tableData[rowIndex].leagueRating = j.leagueRating;
+          this.tableData[rowIndex].leaguePPd = j.leaguePPd;
+          this.tableData[rowIndex].leagueMpr = j.leagueMpr;
+        }
+      });
+    },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
@@ -307,6 +348,11 @@ export default {
       const vm = this;
       this.playerListVO.pageSize = value;
       this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
+        res.data.data.list.forEach(i => {
+          i.cardList.forEach(j => {
+            Object.assign(j, { selectValue: 0 });
+          });
+        });
         vm.tableData = res.data.data.list;
       });
     },
@@ -314,6 +360,11 @@ export default {
       const vm = this;
       this.playerListVO.pageNum = value;
       this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
+        res.data.data.list.forEach(i => {
+          i.cardList.forEach(j => {
+            Object.assign(j, { selectValue: 0 });
+          });
+        });
         vm.tableData = res.data.data.list;
       });
     }

@@ -116,4 +116,8 @@ function changeHash(hash, type, id) {
     window.location.hash = newHash;
 }
 
-export { findCity, downloadFile, returnType, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash, changeMenus };
+const staticObj = {
+    leagueImg: require("@/assets/League.png"),
+    adartsImg: require("@/assets/Adarts.png")
+};
+export { findCity, downloadFile, returnType, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash, changeMenus, staticObj };

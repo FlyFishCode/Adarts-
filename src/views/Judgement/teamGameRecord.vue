@@ -197,33 +197,33 @@
       </el-row>
     </div>
     <el-row>
-        <el-col :span="12">
-          <div class="playerStyle">{{'张三'}}</div>
-          <div class="table">
-            <el-table :data="tableData" border style="width: 100%">
-              <el-table-column prop="date" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
-              <el-table-column prop="date" :label="$t('all.tip466')" min-width="7%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip473')" min-width="6%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip226')" min-width="8%"> </el-table-column>
-              <el-table-column prop="address" :label="$t('all.tip213')" min-width="5%"> </el-table-column>
-            </el-table>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="playerStyle">{{'李四'}}</div>
-          <div class="table">
-            <el-table :data="tableData" border style="width: 100%">
-              <el-table-column prop="date" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
-              <el-table-column prop="date" :label="$t('all.tip466')" min-width="7%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip473')" min-width="6%"> </el-table-column>
-              <el-table-column prop="name" :label="$t('all.tip226')" min-width="8%"> </el-table-column>
-              <el-table-column prop="address" :label="$t('all.tip213')" min-width="5%"> </el-table-column>
-            </el-table>
-          </div>
-        </el-col>
-      </el-row>
+      <el-col :span="12">
+        <div class="playerStyle">{{ "张三" }}</div>
+        <div class="table">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="date" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
+            <el-table-column prop="date" :label="$t('all.tip466')" min-width="7%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip473')" min-width="6%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip226')" min-width="8%"> </el-table-column>
+            <el-table-column prop="address" :label="$t('all.tip213')" min-width="5%"> </el-table-column>
+          </el-table>
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="playerStyle">{{ "李四" }}</div>
+        <div class="table">
+          <el-table :data="tableData" border style="width: 100%">
+            <el-table-column prop="date" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
+            <el-table-column prop="date" :label="$t('all.tip466')" min-width="7%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip473')" min-width="6%"> </el-table-column>
+            <el-table-column prop="name" :label="$t('all.tip226')" min-width="8%"> </el-table-column>
+            <el-table-column prop="address" :label="$t('all.tip213')" min-width="5%"> </el-table-column>
+          </el-table>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -231,7 +231,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
@@ -245,16 +245,16 @@ export default {
       dialogTableVisible: false,
       teamList: {},
       updata: {
-        playerResultId: '',
-        judgeUserId: '',
-        judge: '',
-        judgement: ''
+        playerResultId: "",
+        judgeUserId: "",
+        judge: "",
+        judgement: ""
       },
       gameRecordVO: {
-        confrontationId: '',
-        teamId: '',
-        setId: '',
-        legId: ''
+        confrontationId: "",
+        teamId: "",
+        setId: "",
+        legId: ""
       },
       setList: [],
       legList: [],
@@ -267,12 +267,12 @@ export default {
     this.gameRecordVO.teamId = this.$route.query.teamId;
     this.gameRecordVO.setId = this.$route.query.setId;
     this.gameRecordVO.legId = this.$route.query.legId;
-    this.updata.judgeUserId = sessionStorage.getItem('userId');
+    this.updata.judgeUserId = sessionStorage.getItem("userId");
     this.getData();
   },
   methods: {
     getData() {
-      this.$axios.post('/judgement/getlegGameRecord', this.$qs.stringify(this.gameRecordVO)).then(res => {
+      this.$axios.post("/judgement/getlegGameRecord", this.$qs.stringify(this.gameRecordVO)).then(res => {
         if (res.data.errCode) {
           this.$message(res.data.msg);
         } else {
@@ -280,32 +280,32 @@ export default {
           for (let i = 0; i < 4; i += 1) {
             const obj = {};
             switch (i) {
-            case 0:
-              obj.home = res.data.data.teamList[0].teamName;
-              obj.value = 'all.tip215';
-              obj.away = res.data.data.teamList[1].teamName;
-              this.teamData.push(obj);
-              break;
-            case 1:
-              obj.home = res.data.data.teamList[0].ppd || res.data.data.teamList[0].mpr;
-              obj.value = 'all.tip228';
-              obj.away = res.data.data.teamList[1].ppd || res.data.data.teamList[1].mpr;
-              this.teamData.push(obj);
-              break;
-            case 2:
-              obj.home = res.data.data.teamList[0].cdateInt;
-              obj.value = 'all.tip321';
-              obj.away = res.data.data.teamList[1].cdateInt;
-              this.teamData.push(obj);
-              break;
-            default:
-              obj.photo = true;
-              obj.homeName = res.data.data.teamList[0].playerResultId;
-              obj.value = 'all.tip371';
-              obj.photo = true;
-              obj.awayName = res.data.data.teamList[1].playerResultId;
-              this.teamData.push(obj);
-              break;
+              case 0:
+                obj.home = res.data.data.teamList[0].teamName;
+                obj.value = "all.tip215";
+                obj.away = res.data.data.teamList[1].teamName;
+                this.teamData.push(obj);
+                break;
+              case 1:
+                obj.home = res.data.data.teamList[0].ppd || res.data.data.teamList[0].mpr;
+                obj.value = "all.tip228";
+                obj.away = res.data.data.teamList[1].ppd || res.data.data.teamList[1].mpr;
+                this.teamData.push(obj);
+                break;
+              case 2:
+                obj.home = res.data.data.teamList[0].cdateInt;
+                obj.value = "all.tip321";
+                obj.away = res.data.data.teamList[1].cdateInt;
+                this.teamData.push(obj);
+                break;
+              default:
+                obj.photo = true;
+                obj.homeName = res.data.data.teamList[0].playerResultId;
+                obj.value = "all.tip371";
+                obj.photo = true;
+                obj.awayName = res.data.data.teamList[1].playerResultId;
+                this.teamData.push(obj);
+                break;
             }
           }
         }
@@ -313,11 +313,11 @@ export default {
     },
     dateChange(data) {
       if (this.gameRecordVO.EndTime && this.gameRecordVO.EndTime < data) {
-        this.gameRecordVO.EndTime = '';
+        this.gameRecordVO.EndTime = "";
       }
     },
     save() {
-      this.$axios.post('/judgement/updateJudge', this.$qs.stringify(this.updata)).then(res => {
+      this.$axios.post("/judgement/updateJudge", this.$qs.stringify(this.updata)).then(res => {
         if (res.data.code === 1000) {
           this.$message(res.data.msg);
         }
@@ -347,7 +347,7 @@ export default {
   margin: 0 auto;
   width: 80px;
 }
-.playerStyle{
+.playerStyle {
   text-align: center;
   margin: 10px 0;
 }

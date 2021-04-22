@@ -141,4 +141,13 @@ body {
   height: 600px;
   overflow-y: auto;
 }
+.leagueImg {
+  width: 18px;
+  height: 18px;
+}
+.leagueImgBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>
