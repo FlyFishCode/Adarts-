@@ -71,19 +71,19 @@
           <el-table-column prop="leagueMpr" sortable :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
         <el-table-column label="User Define">
-          <el-table-column :label="$t('all.tip154')" min-width="6%">
+          <el-table-column :label="$t('all.tip154')" min-width="8%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.defineRating"></el-input>
+              <el-input v-model="scope.row.defineRating" @change="handleChange('Rating', scope.$index, scope.row.defineRating)" clearable></el-input>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('all.tip155')" min-width="6%">
+          <el-table-column :label="$t('all.tip155')" min-width="8%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.definePpd"></el-input>
+              <el-input v-model="scope.row.definePpd" @change="handleChange('PPD', scope.$index, scope.row.definePpd)" clearable></el-input>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('all.tip156')" min-width="6%">
+          <el-table-column :label="$t('all.tip156')" min-width="8%">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.defineMpr"></el-input>
+              <el-input v-model="scope.row.defineMpr" @change="handleChange('MPR', scope.$index, scope.row.defineMpr)" clearable></el-input>
             </template>
           </el-table-column>
         </el-table-column>
@@ -262,8 +262,44 @@ export default {
       this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableTotal = res.data.data.total;
         res.data.data.list.forEach(i => {
-          i.cardList.forEach(j => {
-            Object.assign(j, { selectValue: 0 });
+          i.cardList.forEach((j, index) => {
+            if (j.isEntryCard) {
+              Object.assign(j, { selectValue: index });
+            } else {
+              Object.assign(j, { selectValue: "" });
+            }
+          });
+        });
+        vm.tableData = res.data.data.list;
+      });
+    },
+    sizeChange(value) {
+      const vm = this;
+      this.playerListVO.pageSize = value;
+      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
+        res.data.data.list.forEach(i => {
+          i.cardList.forEach((j, index) => {
+            if (j.isEntryCard) {
+              Object.assign(j, { selectValue: index });
+            } else {
+              Object.assign(j, { selectValue: "" });
+            }
+          });
+        });
+        vm.tableData = res.data.data.list;
+      });
+    },
+    currentChange(value) {
+      const vm = this;
+      this.playerListVO.pageNum = value;
+      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
+        res.data.data.list.forEach(i => {
+          i.cardList.forEach((j, index) => {
+            if (j.isEntryCard) {
+              Object.assign(j, { selectValue: index });
+            } else {
+              Object.assign(j, { selectValue: "" });
+            }
           });
         });
         vm.tableData = res.data.data.list;
@@ -292,6 +328,125 @@ export default {
       this.$axios.post("/updateDefineRating", [obj]).then(res => {
         this.$message(res.data.msg);
       });
+    },
+    handleChange(type, rowIndex, value) {
+      const RatingList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+      const PPDList = [
+        "0",
+        "10.65",
+        "11.90",
+        "13.15",
+        "14.40",
+        "15.65",
+        "16.90",
+        "18.15",
+        "19.45",
+        "20.75",
+        "22.05",
+        "23.35",
+        "24.65",
+        "25.95",
+        "27.30",
+        "28.65",
+        "30.00",
+        "31.35",
+        "32.70",
+        "34.05",
+        "35.40",
+        "36.80",
+        "38.20",
+        "39.60",
+        "41.00",
+        "42.40",
+        "43.80",
+        "45.20",
+        "46.60",
+        "48.00"
+      ];
+      const MPRList = [
+        "0",
+        "1.10",
+        "1.20",
+        "1.31",
+        "1.46",
+        "1.61",
+        "1.76",
+        "1.91",
+        "2.06",
+        "2.21",
+        "2.36",
+        "2.51",
+        "2.66",
+        "2.81",
+        "2.96",
+        "3.11",
+        "3.26",
+        "3.41",
+        "3.56",
+        "3.71",
+        "3.86",
+        "4.07",
+        "4.28",
+        "4.49",
+        "4.70",
+        "4.96",
+        "5.22",
+        "5.48",
+        "5.74",
+        "6.00"
+      ];
+      const getLevel = (num, list, RList) => {
+        let level = 0;
+        let averageNum = 0;
+        const exg = /^\d+(?:\.\d{0,2})?/;
+        if (!num) {
+          return 0;
+        }
+        if (num >= 30) {
+          return list[list.length - 1];
+        }
+        if (RList) {
+          for (let index = 0; index < list.length; index += 1) {
+            if (Number(num) >= Number(list[index]) && index !== list.length - 1) {
+              averageNum = 0.01;
+              level = RList[index] + averageNum * ((num / list[index + 1]).toString().match(exg)[0] * 100);
+            } else {
+              level = 30;
+            }
+          }
+        } else if (num.includes(".")) {
+          const [firstNum, lastNum] = num.split(".");
+          averageNum = ((list[firstNum] - list[firstNum - 1]).toFixed(2) / 100).toFixed(4);
+          level = Number(list[firstNum - 1]) + averageNum * lastNum;
+        } else {
+          level = list[num - 1];
+        }
+        return level.toString().match(exg)[0];
+      };
+      const defaultObj = this.tableData[rowIndex];
+      switch (type) {
+        case "Rating":
+          if (value >= 30) {
+            defaultObj.defineRating = 30;
+          }
+          defaultObj.definePpd = getLevel(value, PPDList);
+          defaultObj.defineMpr = getLevel(value, MPRList);
+          break;
+        case "PPD":
+          if (value >= 48) {
+            defaultObj.definePpd = 48;
+          }
+          defaultObj.defineRating = getLevel(value, PPDList, RatingList);
+          defaultObj.defineMpr = 0;
+          break;
+        default:
+          if (value >= 6) {
+            defaultObj.defineMpr = 6;
+          }
+          defaultObj.defineRating = getLevel(value, MPRList, RatingList);
+          defaultObj.definePpd = 0;
+          break;
+      }
     },
     handleRadioChange(rowIndex, index, value) {
       this.tableData[rowIndex].cardList.forEach((j, jndex) => {
@@ -342,30 +497,6 @@ export default {
       this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
         vm.topBoxTotal = res.data.data.total;
         vm.topBoxTableData = res.data.data.list;
-      });
-    },
-    sizeChange(value) {
-      const vm = this;
-      this.playerListVO.pageSize = value;
-      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
-        res.data.data.list.forEach(i => {
-          i.cardList.forEach(j => {
-            Object.assign(j, { selectValue: 0 });
-          });
-        });
-        vm.tableData = res.data.data.list;
-      });
-    },
-    currentChange(value) {
-      const vm = this;
-      this.playerListVO.pageNum = value;
-      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
-        res.data.data.list.forEach(i => {
-          i.cardList.forEach(j => {
-            Object.assign(j, { selectValue: 0 });
-          });
-        });
-        vm.tableData = res.data.data.list;
       });
     }
   }

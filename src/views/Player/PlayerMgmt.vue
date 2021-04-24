@@ -114,9 +114,9 @@
                 <div class="tableLink" @click="push(scope.row.id)">{{ scope.row.nickName }}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="teamName" :label="$t('all.tip316')" min-width="5%"> </el-table-column>
+            <el-table-column prop="teamName" :label="$t('all.tip316')" min-width="6%"> </el-table-column>
             <el-table-column prop="homeShop" :label="$t('all.tip455')" min-width="5%"> </el-table-column>
-            <el-table-column :label="$t('all.tip426')" min-width="10%">
+            <el-table-column :label="$t('all.tip426')" min-width="8%">
               <template slot-scope="scope">
                 <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
                   {{ card.cardNumber }}

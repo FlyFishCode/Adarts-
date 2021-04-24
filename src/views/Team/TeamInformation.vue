@@ -346,7 +346,14 @@
               <el-table-column prop="account" :sortable="true" :label="$t('all.tip456')" min-width="3%"></el-table-column>
               <el-table-column prop="userName" :sortable="true" :label="$t('all.tip412')" min-width="5%"></el-table-column>
               <el-table-column prop="homeShopName" :sortable="true" :label="$t('all.tip455')" min-width="5%"></el-table-column>
-              <el-table-column prop="cardNumber" :sortable="true" :label="$t('all.tip260')" min-width="5%"></el-table-column>
+              <el-table-column :sortable="true" :label="$t('all.tip260')" min-width="5%">
+                <template slot-scope="scope">
+                  <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+                    {{ card.cardNumber }}
+                    <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+                  </div>
+                </template>
+              </el-table-column>
               <el-table-column :sortable="true" label="Adarts" min-width="3%">
                 <el-table-column prop="adartsRating" :sortable="true" :label="$t('all.tip154')" min-width="3%"></el-table-column>
                 <el-table-column prop="adartsPPd" :sortable="true" :label="$t('all.tip155')" min-width="3%"></el-table-column>
@@ -437,7 +444,14 @@
               </el-table-column>
               <el-table-column property="account" :label="$t('all.tip456')" min-width="6%"></el-table-column>
               <el-table-column property="userName" :label="$t('all.tip412')" min-width="10%"></el-table-column>
-              <el-table-column property="cardNumber" :label="$t('all.tip426')" min-width="6%"></el-table-column>
+              <el-table-column :label="$t('all.tip426')" min-width="6%">
+                <template slot-scope="scope">
+                  <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+                    {{ card.cardNumber }}
+                    <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+                  </div>
+                </template>
+              </el-table-column>
               <el-table-column :sortable="true" label="Adarts">
                 <el-table-column prop="adartsRating" :sortable="true" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
                 <el-table-column prop="adartsPPd" :sortable="true" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
@@ -469,7 +483,7 @@
         </el-dialog>
       </div>
     </div>
-    <el-dialog :title="$t('all.tip263')" :visible.sync="addMemberTopBox" top="30px">
+    <el-dialog :title="$t('all.tip263')" :visible.sync="addMemberTopBox" top="30px" width="70%">
       <el-row class="center-Row">
         <el-col class="label-g" :span="4">
           {{ $t("all.tip456") }}
@@ -520,7 +534,14 @@
             </template>
           </el-table-column>
           <el-table-column property="userName" :label="$t('all.tip412')" min-width="10%"></el-table-column>
-          <el-table-column property="cardNumber" :label="$t('all.tip426')" min-width="14%"></el-table-column>
+          <el-table-column :label="$t('all.tip426')" min-width="14%">
+            <template slot-scope="scope">
+              <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
+                {{ card.cardNumber }}
+                <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column label="Adarts">
             <el-table-column property="adartsRating" :label="$t('all.tip154')" min-width="10%"></el-table-column>
             <el-table-column property="adartsPPd" :label="$t('all.tip155')" min-width="10%"></el-table-column>
@@ -553,13 +574,14 @@
   </div>
 </template>
 <script>
-import { returnType } from '@/components/common/Utils';
+import { returnType, staticObj } from "@/components/common/Utils";
 
 export default {
   data() {
     return {
-      id: '',
-      personImg: require('../../assets/person.jpg'),
+      id: "",
+      staticObj,
+      personImg: require("../../assets/person.jpg"),
       fileList: [],
       shopList: [],
       captainList: [],
@@ -571,18 +593,18 @@ export default {
         type: 0,
         year: 2020
       },
-      captain: '',
+      captain: "",
       quarterList: [],
       monthList: [],
       changeCaptain: false,
       dialogVisible: false,
       addMemberTopBox: false,
       addMemberVO: {
-        playerId: '',
-        teamId: '',
-        homeShopName: '',
-        cardNumber: '',
-        gender: '',
+        playerId: "",
+        teamId: "",
+        homeShopName: "",
+        cardNumber: "",
+        gender: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -590,52 +612,52 @@ export default {
         leagueType: 0,
         matchStatus: 0,
         year: 2020,
-        competitionId: '',
-        teamId: '',
+        competitionId: "",
+        teamId: "",
         pageNum: 1,
         pageSize: 10
       },
       playerVO: {
-        teamId: '',
+        teamId: "",
         pageNum: 1,
         pageSize: 10
       },
       addMemberList: [],
       addMemberSelectionList: [],
-      dialogImageUrl: '',
-      defaultName: 'first',
+      dialogImageUrl: "",
+      defaultName: "first",
       entryHistoryTotal: 1,
       entryHistoryType: 0,
       entryHistoryList: [],
       playerList: [],
       entryHistoryVO: {
-        id: '',
-        competitorType: 'team',
+        id: "",
+        competitorType: "team",
         leagueType: 0,
         pageNum: 1,
         pageSize: 10
       },
-      currentType: '',
+      currentType: "",
       teamRatingList: [],
       TeamInformationVO: {
-        id: '',
-        regDate: '',
-        teamName: '',
-        creatorName: '',
-        captainId: '',
-        players: '',
-        shopId: '',
-        League: '',
-        location: ''
+        id: "",
+        regDate: "",
+        teamName: "",
+        creatorName: "",
+        captainId: "",
+        players: "",
+        shopId: "",
+        League: "",
+        location: ""
       },
       editTeamInfo: {},
       captainDialogData: {
-        id: '',
-        name: '',
-        cardNo: '',
-        gender: '',
+        id: "",
+        name: "",
+        cardNo: "",
+        gender: "",
         captain: 1,
-        teamId: '',
+        teamId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -643,7 +665,7 @@ export default {
       scheduleResultList: [],
       scheduleResultListTotal: 1,
       captainListTotal: 1,
-      radioId: ''
+      radioId: ""
     };
   },
   mounted() {
@@ -655,15 +677,15 @@ export default {
     this.scheduleResultVO.teamId = this.id;
     this.addMemberVO.teamId = this.id;
     this.init();
-    this.getTeamRatingList('team', this.id);
-    this.getRating('team', undefined, undefined, this.id, undefined);
+    this.getTeamRatingList("team", this.id);
+    this.getRating("team", undefined, undefined, this.id, undefined);
     this.getTeamInfomation(this.id);
     this.getCompetitionList(this.id);
   },
   methods: {
     init() {
-      const upLoad = document.getElementsByClassName('el-upload')[0];
-      upLoad.style.visibility = 'hidden';
+      const upLoad = document.getElementsByClassName("el-upload")[0];
+      upLoad.style.visibility = "hidden";
       if (new Date().getFullYear() !== this.yearList[0].id) {
         this.yearList.push({
           id: new Date().getFullYear(),
@@ -691,11 +713,11 @@ export default {
     getTeamInfomation(id) {
       const vm = this;
       this.$axios.get(`/getteambyid?id=${id}`).then(res => {
-        let imgUrl = '';
+        let imgUrl = "";
         if (res.data.data.imgUrl) {
           imgUrl = `${res.data.data.localhostImg}${res.data.data.imgUrl}`;
         } else {
-          imgUrl = require('../../assets/team.jpg');
+          imgUrl = require("../../assets/team.jpg");
         }
         vm.fileList.push({ url: imgUrl });
         vm.TeamInformationVO = res.data.data;
@@ -712,7 +734,7 @@ export default {
         competitorType: type,
         id
       };
-      this.$axios.post('/getRecord', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/getRecord", this.$qs.stringify(data)).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
@@ -727,46 +749,46 @@ export default {
         year,
         id
       };
-      this.$axios.post('/getRecordByDate', data).then(res => {
+      this.$axios.post("/getRecordByDate", data).then(res => {
         this.quarterList = [];
         this.monthList = [];
-        let name = '';
-        let headName = '';
-        let value = '';
+        let name = "";
+        let headName = "";
+        let value = "";
         const list = res.data.data.quarterTotalList.concat(res.data.data.quarterAccumulatedList);
         const monthArr = res.data.data.monthTotalList.concat(res.data.data.monthAccumulatedList);
         // 数据处理
         for (let index = 0; index < 6; index += 1) {
           switch (index) {
-          case 0:
-            if (currentType === '1') {
-              name = 'Monthly total';
-            }
-            name = name || 'Quarterly Total';
-            headName = 'Rating';
-            value = 'rating';
-            break;
-          case 1:
-            headName = 'PPD';
-            value = 'ppd';
-            break;
-          case 2:
-            headName = 'MPR';
-            value = 'mpr';
-            break;
-          case 3:
-            name = 'Accumulated Total';
-            headName = 'Rating';
-            value = 'rating';
-            break;
-          case 4:
-            headName = 'PPD';
-            value = 'ppd';
-            break;
-          default:
-            headName = 'MPR';
-            value = 'mpr';
-            break;
+            case 0:
+              if (currentType === "1") {
+                name = "Monthly total";
+              }
+              name = name || "Quarterly Total";
+              headName = "Rating";
+              value = "rating";
+              break;
+            case 1:
+              headName = "PPD";
+              value = "ppd";
+              break;
+            case 2:
+              headName = "MPR";
+              value = "mpr";
+              break;
+            case 3:
+              name = "Accumulated Total";
+              headName = "Rating";
+              value = "rating";
+              break;
+            case 4:
+              headName = "PPD";
+              value = "ppd";
+              break;
+            default:
+              headName = "MPR";
+              value = "mpr";
+              break;
           }
           const quarterlyObj = {
             name,
@@ -798,7 +820,7 @@ export default {
       });
     },
     getEntryHistoryList() {
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
@@ -808,110 +830,110 @@ export default {
       });
     },
     getScheduleResultList() {
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
         this.scheduleResultTotal = res.data.data.total;
       });
     },
     entryHistoryCurrentChange(value) {
       this.entryHistoryVO.pageNum = value;
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         this.entryHistoryList = res.data.data.list;
         this.entryHistoryTotal = res.data.data.total;
       });
     },
     entryHistorySizeChange(value) {
       this.entryHistoryVO.pageSize = value;
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         this.entryHistoryList = res.data.data.list;
         this.entryHistoryTotal = res.data.data.total;
       });
     },
     typeChange(value) {
-      this.getRating('team', value, this.rating.year, this.id, this.currentType);
+      this.getRating("team", value, this.rating.year, this.id, this.currentType);
     },
     yearChange(value) {
-      this.getRating('team', this.rating.type, value, this.id, this.currentType);
+      this.getRating("team", this.rating.type, value, this.id, this.currentType);
     },
     tabClick(tab) {
       this.currentType = tab.index;
-      this.getRating('team', this.rating.type, this.rating.year, this.id, tab.index);
+      this.getRating("team", this.rating.type, this.rating.year, this.id, tab.index);
     },
     entryHistoryTypeChange(value) {
       this.entryHistoryVO.leagueType = value;
       this.getEntryHistoryList();
     },
     addMemberSearch() {
-      this.$axios.post('/getNoPlayTeamList', this.addMemberVO).then(res => {
+      this.$axios.post("/getNoPlayTeamList", this.addMemberVO).then(res => {
         this.addMemberList = res.data.data.list;
         this.addMemberListTotal = res.data.data.total;
       });
     },
     addMemberListCurrentChange(val) {
       this.addMemberVO.pageNum = val;
-      this.$axios.post('/getNoPlayTeamList', this.addMemberVO).then(res => {
+      this.$axios.post("/getNoPlayTeamList", this.addMemberVO).then(res => {
         this.addMemberList = res.data.data.list;
       });
     },
     addMemberListSizeChange(val) {
       this.addMemberVO.pageSize = val;
-      this.$axios.post('/getNoPlayTeamList', this.addMemberVO).then(res => {
+      this.$axios.post("/getNoPlayTeamList", this.addMemberVO).then(res => {
         this.addMemberList = res.data.data.list;
       });
     },
     scheduleResultListCurrentChange(val) {
       this.scheduleResultVO.pageNum = val;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
       });
     },
     scheduleResultListSizeChange(val) {
       this.scheduleResultVO.pageSize = val;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
       });
     },
     getPlayerList() {
-      this.$axios.post('/getPlayerTeamList', this.playerVO).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
         this.playerList = res.data.data.list;
         this.playerListTotal = res.data.data.total;
       });
     },
     playerListCurrentChange(val) {
       this.playerVO.pageNum = val;
-      this.$axios.post('/getPlayerTeamList', this.playerVO).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
         this.playerList = res.data.data.list;
       });
     },
     playerListSizeChange(val) {
       this.playerVO.pageSize = val;
-      this.$axios.post('/getPlayerTeamList', this.playerVO).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
         this.playerList = res.data.data.list;
         this.playerListTotal = res.data.data.total;
       });
     },
     leagueTypeChange(value) {
       this.scheduleResultVO.leagueType = value;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
         this.scheduleResultTotal = res.data.data.total;
       });
     },
     scheduleResultYearChange(value) {
       this.scheduleResultVO.year = value;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
       });
     },
     competitionIdChange(value) {
       this.scheduleResultVO.competitionId = value;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
       });
     },
     matchStatusChange(value) {
       this.scheduleResultVO.matchStatus = value;
-      this.$axios.post('/getTeamSchedule', this.scheduleResultVO).then(res => {
+      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
       });
     },
@@ -928,8 +950,8 @@ export default {
       this.addMemberSelectionList = val;
     },
     addAddMember() {
-      const data = returnType(this.addMemberSelectionList, 'id');
-      this.$axios.post('/playerIntoTeam', { playerIds: data, teamId: this.playerVO.teamId }).then(res => {
+      const data = returnType(this.addMemberSelectionList, "id");
+      this.$axios.post("/playerIntoTeam", { playerIds: data, teamId: this.playerVO.teamId }).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
         this.$refs.dialogTableRef.clearSelection();
@@ -937,20 +959,20 @@ export default {
       this.addMemberTopBox = false;
     },
     captainSearch() {
-      this.$axios.post('/getPlayerTeamList', this.captainDialogData).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.captainDialogData).then(res => {
         this.captainList = res.data.data.list;
         this.captainListTotal = res.data.data.total;
       });
     },
     captainListSizeChange(value) {
       this.captainDialogData.pageSize = value;
-      this.$axios.post('/getPlayerTeamList', this.captainDialogData).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.captainDialogData).then(res => {
         this.captainList = res.data.data.list;
       });
     },
     captainListCurrentChange(value) {
       this.captainDialogData.pageNum = value;
-      this.$axios.post('/getPlayerTeamList', this.captainDialogData).then(res => {
+      this.$axios.post("/getPlayerTeamList", this.captainDialogData).then(res => {
         this.captainList = res.data.data.list;
       });
     },
@@ -960,7 +982,7 @@ export default {
         playerId: id,
         teamId: this.$route.query.id
       };
-      this.$axios.post('/viceCaptain', this.$qs.stringify(obj)).then(res => {
+      this.$axios.post("/viceCaptain", this.$qs.stringify(obj)).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
       });
@@ -971,7 +993,7 @@ export default {
         playerId: id,
         teamId: this.$route.query.id
       };
-      this.$axios.post('/viceCaptain', this.$qs.stringify(obj)).then(res => {
+      this.$axios.post("/viceCaptain", this.$qs.stringify(obj)).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
       });
@@ -982,7 +1004,7 @@ export default {
         this.getPlayerList();
       });
     },
-    getShopList(value = '') {
+    getShopList(value = "") {
       this.$axios.post(`/getshopByName?shopName=${value}`).then(res => {
         this.shopList = res.data.data;
       });
@@ -998,7 +1020,7 @@ export default {
         this.TeamInformationVO.captainId = this.captain;
         this.changeCaptain = false;
       } else {
-        this.$message(this.$t('all.tip550'));
+        this.$message(this.$t("all.tip550"));
       }
     },
     fileChange(file, fileList) {
@@ -1012,28 +1034,28 @@ export default {
       const File = data.file;
       const formData = new FormData();
       // 文件对象
-      formData.append('file', File);
+      formData.append("file", File);
       // 其他参数
-      formData.append('teamId', this.id);
+      formData.append("teamId", this.id);
       this.handleRemove();
       this.$axios({
-        method: 'POST',
-        url: '/addTeamImg',
+        method: "POST",
+        url: "/addTeamImg",
         data: formData
       }).then(res => {
         if (res.data.errorCode) {
           vm.$message(res.data.msg);
-          vm.$route.push('/');
+          vm.$route.push("/");
         } else {
           vm.$message(res.data.msg);
         }
       });
     },
     topBoxSizeChange() {
-      console.log('a');
+      console.log("a");
     },
     topBoxcurrentChange() {
-      console.log('a');
+      console.log("a");
     },
     handleClick() {},
     arraySpanMethod({ rowIndex, columnIndex }) {
@@ -1049,11 +1071,11 @@ export default {
           colspan: 0
         };
       }
-      return '';
+      return "";
     },
     save() {
       this.editTeamInfo.id = this.TeamInformationVO.id;
-      this.editTeamInfo.captainId = Number(this.TeamInformationVO.captainId.split('/')[0]);
+      this.editTeamInfo.captainId = Number(this.TeamInformationVO.captainId.split("/")[0]);
       this.editTeamInfo.creatorId = this.TeamInformationVO.creatorId;
       this.editTeamInfo.shopId = this.TeamInformationVO.shopId;
       this.editTeamInfo.teamName = this.TeamInformationVO.teamName;
@@ -1062,7 +1084,7 @@ export default {
       } else {
         this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
       }
-      this.$axios.post('/editorTeamInfo', this.editTeamInfo).then(res => {
+      this.$axios.post("/editorTeamInfo", this.editTeamInfo).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
       });
@@ -1072,7 +1094,7 @@ export default {
         file: null,
         teamId: this.id
       };
-      this.$axios.post('/addTeamImg', this.$qs.stringify(data)).then(() => {});
+      this.$axios.post("/addTeamImg", this.$qs.stringify(data)).then(() => {});
     },
     handlePreview(file) {
       this.dialogImageUrl = file.url;

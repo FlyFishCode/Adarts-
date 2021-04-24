@@ -18,7 +18,7 @@
             <div slot="tip" class="el-upload__tip">{{ `2：${$t("all.tip3872")}` }}</div>
             <div slot="tip" class="el-upload__tip">{{ `3：${$t("all.tip3873")}` }}</div>
           </div>
-          <el-upload :http-request="uploadImg"  list-type="picture-card" action=" " :on-preview="handlePreview" :on-change="fileChange" :on-remove="handleRemove" :file-list="fileList">
+          <el-upload :http-request="uploadImg" list-type="picture-card" action=" " :on-preview="handlePreview" :on-change="fileChange" :on-remove="handleRemove" :file-list="fileList">
             <div>
               <el-button id="upload" size="small" type="primary" style="display:none"></el-button>
             </div>
@@ -174,18 +174,18 @@
         </el-col>
         <div class="table">
           <el-table :data="playerRatingList" border style="width: 100%">
-            <el-table-column :sortable=true :label="$t('all.tip5')">
+            <el-table-column :sortable="true" :label="$t('all.tip5')">
               <template slot-scope="scope">
                 <div>{{ scope.row.leagueType === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="rating" :sortable=true :label="$t('all.tip154')"></el-table-column>
-            <el-table-column prop="ppd" :sortable=true :label="$t('all.tip155')"></el-table-column>
-            <el-table-column prop="game01Count" :sortable=true :label="$t('all.tip395')"></el-table-column>
-            <el-table-column prop="mpr" :sortable=true :label="$t('all.tip156')"></el-table-column>
-            <el-table-column prop="gameCricketCount" :sortable=true :label="$t('all.tip396')"></el-table-column>
-            <el-table-column prop="gameCountUpCount" :sortable=true :label="$t('all.tip495')"></el-table-column>
-            <el-table-column prop="attendLeagueCount" :sortable=true :label="$t('all.tip397')"></el-table-column>
+            <el-table-column prop="rating" :sortable="true" :label="$t('all.tip154')"></el-table-column>
+            <el-table-column prop="ppd" :sortable="true" :label="$t('all.tip155')"></el-table-column>
+            <el-table-column prop="game01Count" :sortable="true" :label="$t('all.tip395')"></el-table-column>
+            <el-table-column prop="mpr" :sortable="true" :label="$t('all.tip156')"></el-table-column>
+            <el-table-column prop="gameCricketCount" :sortable="true" :label="$t('all.tip396')"></el-table-column>
+            <el-table-column prop="gameCountUpCount" :sortable="true" :label="$t('all.tip495')"></el-table-column>
+            <el-table-column prop="attendLeagueCount" :sortable="true" :label="$t('all.tip397')"></el-table-column>
           </el-table>
         </div>
       </el-row>
@@ -267,12 +267,12 @@
                 <el-table-column prop="leagueName" :label="$t('all.tip1')" min-width="6%"> </el-table-column>
                 <el-table-column :label="$t('all.tip403')" min-width="10%">
                   <template slot-scope="scope">
-                    <div>{{ scope.row.leagueStartTime.split(' ')[0] }}</div>
+                    <div>{{ scope.row.leagueStartTime.split(" ")[0] }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip404')" min-width="10%">
                   <template slot-scope="scope">
-                    <div>{{ scope.row.leagueEndTime.split(' ')[0] }}</div>
+                    <div>{{ scope.row.leagueEndTime.split(" ")[0] }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip25')" min-width="4%">
@@ -307,7 +307,8 @@
             </div>
           </el-row>
           <div class="page">
-            <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+            <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+            </el-pagination>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -318,10 +319,10 @@
 export default {
   data() {
     return {
-      id: '',
-      currentType: '',
+      id: "",
+      currentType: "",
       dialogVisible: false,
-      dialogImageUrl: '',
+      dialogImageUrl: "",
       fileList: [],
       shopList: [],
       playerRatingList: [],
@@ -334,28 +335,28 @@ export default {
         year: 2020
       },
       entryHistoryVO: {
-        id: '',
-        competitorType: 'player',
+        id: "",
+        competitorType: "player",
         leagueType: 0,
         pageNum: 1,
         pageSize: 10
       },
-      defaultName: 'first',
+      defaultName: "first",
       PlayerInformationVO: {
-        id: '',
-        regDate: '',
-        nickName: '',
-        gender: '1',
-        phone: '',
-        homeShopName: '',
-        email: '',
-        cardNumber: '',
-        teamName: '',
-        birthday: '',
-        countryId: '',
-        areaId: '',
-        language: '',
-        valid: ''
+        id: "",
+        regDate: "",
+        nickName: "",
+        gender: "1",
+        phone: "",
+        homeShopName: "",
+        email: "",
+        cardNumber: "",
+        teamName: "",
+        birthday: "",
+        countryId: "",
+        areaId: "",
+        language: "",
+        valid: ""
       },
       quarterList: [],
       monthList: [],
@@ -367,16 +368,17 @@ export default {
     console.log(process.env.VUE_APP_IMGURL);
     this.id = this.$route.query.id;
     this.entryHistoryVO.id = this.id;
-    const upLoad = document.getElementsByClassName('el-upload')[0];
-    upLoad.style.visibility = 'hidden';
-    if (new Date().getFullYear() !== this.yearList[0].id) {
+    const upLoad = document.getElementsByClassName("el-upload")[0];
+    const currentYear = new Date().getFullYear();
+    upLoad.style.visibility = "hidden";
+    if (currentYear !== this.yearList[0].id) {
       this.yearList.push({
-        id: new Date().getFullYear,
-        year: new Date().getFullYear
+        id: currentYear,
+        year: currentYear
       });
     }
-    this.getPlayerRatingList('player', this.id);
-    this.getRating('player', undefined, undefined, this.id, undefined);
+    this.getPlayerRatingList("player", this.id);
+    this.getRating("player", undefined, undefined, this.id, undefined);
     this.getEntryHistoryList();
     this.getShopList();
     this.getPlayerInfomation(this.id);
@@ -396,11 +398,11 @@ export default {
     // },
     getPlayerInfomation(id) {
       this.$axios.get(`/getPlayperInfo?id=${id}`).then(res => {
-        let imgUrl = '';
+        let imgUrl = "";
         if (res.data.portrait) {
           imgUrl = res.data.portrait;
         } else {
-          imgUrl = require('../../assets/person.jpg');
+          imgUrl = require("../../assets/person.jpg");
         }
         this.fileList.push({ url: imgUrl });
         this.PlayerInformationVO = res.data;
@@ -413,46 +415,46 @@ export default {
         year,
         id
       };
-      this.$axios.post('/getRecordByDate', data).then(res => {
+      this.$axios.post("/getRecordByDate", data).then(res => {
         this.quarterList = [];
         this.monthList = [];
-        let name = '';
-        let headName = '';
-        let value = '';
+        let name = "";
+        let headName = "";
+        let value = "";
         const list = res.data.data.quarterTotalList.concat(res.data.data.quarterAccumulatedList);
         const monthArr = res.data.data.monthTotalList.concat(res.data.data.monthAccumulatedList);
         // 数据处理
         for (let index = 0; index < 6; index += 1) {
           switch (index) {
-          case 0:
-            if (currentType === '1') {
-              name = 'Monthly total';
-            }
-            name = name || 'Quarterly Total';
-            headName = 'Rating';
-            value = 'rating';
-            break;
-          case 1:
-            headName = 'PPD';
-            value = 'ppd';
-            break;
-          case 2:
-            headName = 'MPR';
-            value = 'mpr';
-            break;
-          case 3:
-            name = 'Accumulated Total';
-            headName = 'Rating';
-            value = 'rating';
-            break;
-          case 4:
-            headName = 'PPD';
-            value = 'ppd';
-            break;
-          default:
-            headName = 'MPR';
-            value = 'mpr';
-            break;
+            case 0:
+              if (currentType === "1") {
+                name = "Monthly total";
+              }
+              name = name || "Quarterly Total";
+              headName = "Rating";
+              value = "rating";
+              break;
+            case 1:
+              headName = "PPD";
+              value = "ppd";
+              break;
+            case 2:
+              headName = "MPR";
+              value = "mpr";
+              break;
+            case 3:
+              name = "Accumulated Total";
+              headName = "Rating";
+              value = "rating";
+              break;
+            case 4:
+              headName = "PPD";
+              value = "ppd";
+              break;
+            default:
+              headName = "MPR";
+              value = "mpr";
+              break;
           }
           const quarterlyObj = {
             name,
@@ -484,7 +486,7 @@ export default {
       });
     },
     getEntryHistoryList() {
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
@@ -499,34 +501,34 @@ export default {
     },
     currentChange(value) {
       this.entryHistoryVO.pageNum = value;
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         this.entryHistoryList = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     sizeChange(value) {
       this.entryHistoryVO.pageSize = value;
-      this.$axios.post('/getEntryHistory', this.entryHistoryVO).then(res => {
+      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
         this.entryHistoryList = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     typeChange(value) {
-      this.getRating('player', value, this.rating.year, this.id, this.currentType);
+      this.getRating("player", value, this.rating.year, this.id, this.currentType);
     },
     yearChange(value) {
-      this.getRating('player', this.rating.type, value, this.id, this.currentType);
+      this.getRating("player", this.rating.type, value, this.id, this.currentType);
     },
     tabClick(tab) {
       this.currentType = tab.index;
-      this.getRating('player', this.rating.type, this.rating.year, this.id, tab.index);
+      this.getRating("player", this.rating.type, this.rating.year, this.id, tab.index);
     },
     getPlayerRatingList(type, id) {
       const data = {
         competitorType: type,
         id
       };
-      this.$axios.post('/getRecord', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/getRecord", this.$qs.stringify(data)).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
@@ -535,8 +537,8 @@ export default {
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/getshop', this.$qs.stringify({ userId })).then(res => {
+      const userId = sessionStorage.getItem("userId");
+      this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });
     },
@@ -545,17 +547,17 @@ export default {
       const File = data.file;
       const formData = new FormData();
       // 文件对象
-      formData.append('file', File);
+      formData.append("file", File);
       // 其他参数
-      formData.append('memberId', this.id);
+      formData.append("memberId", this.id);
       this.$axios({
-        method: 'POST',
-        url: '/addMemberImg',
+        method: "POST",
+        url: "/addMemberImg",
         data: formData
-      }).then((res) => {
+      }).then(res => {
         if (res.data.errorCode) {
           vm.$message(res.data.msg);
-          vm.$route.push('/');
+          vm.$route.push("/");
         } else {
           vm.$message(res.data.msg);
         }
@@ -577,11 +579,11 @@ export default {
           colspan: 0
         };
       }
-      return '';
+      return "";
     },
     save() {
       const vm = this;
-      this.$axios.post('/editorPlayerInfo', vm.PlayerInformationVO).then(res => {
+      this.$axios.post("/editorPlayerInfo", vm.PlayerInformationVO).then(res => {
         console.log(res);
       });
     },
@@ -604,8 +606,7 @@ export default {
         file: null,
         memberId: this.id
       };
-      this.$axios.post('/addMemberImg', this.$qs.stringify(data)).then(() => {
-      });
+      this.$axios.post("/addMemberImg", this.$qs.stringify(data)).then(() => {});
     },
     handlePreview(file) {
       this.dialogImageUrl = file.url;
