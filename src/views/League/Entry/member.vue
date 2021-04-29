@@ -459,7 +459,7 @@ export default {
               // }
             }
           }
-          return level;
+          return Number(level);
         };
         switch (type) {
           case "Rating":
@@ -470,7 +470,7 @@ export default {
           case "PPD":
             defaultObj.definePpd = getLevel("PPD", value, PPDList, PPDList);
             if (value && defaultObj.defineMpr) {
-              defaultObj.defineRating = ((Number(value) + Number(defaultObj.defineMpr)) / 2).toFixed(2);
+              defaultObj.defineRating = ((getLevel("PPD", value, PPDList, RatingList) + getLevel("MPR", defaultObj.defineMpr, MPRList, RatingList)) / 2).toFixed(2);
             }
             if ((value && !defaultObj.defineMpr) || (!value && defaultObj.defineMpr)) {
               defaultObj.defineRating = getLevel("PPD", value, PPDList, RatingList);
@@ -479,7 +479,7 @@ export default {
           default:
             defaultObj.defineMpr = getLevel("MPR", value, MPRList, MPRList);
             if (defaultObj.definePpd && value) {
-              defaultObj.defineRating = ((Number(defaultObj.definePpd) + Number(value)) / 2).toFixed(2);
+              defaultObj.defineRating = ((getLevel("PPD", defaultObj.definePpd, PPDList, RatingList) + getLevel("MPR", value, MPRList, RatingList)) / 2).toFixed(2);
             }
             if ((!value && defaultObj.definePpd) || (value && !defaultObj.definePpd)) {
               defaultObj.defineRating = getLevel("MPR", value, MPRList, RatingList);
