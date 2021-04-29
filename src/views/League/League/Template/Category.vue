@@ -470,11 +470,6 @@ export default {
         saveMethods();
       }
     },
-    // getList() {
-    //   this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-    //     this.bus.$emit("change", response.data.data);
-    //   });
-    // },
     Delete(id) {
       this.$axios.post(`/deldivisionbyid?id=${id}`).then(res => {
         this.$message(res.data.msg);

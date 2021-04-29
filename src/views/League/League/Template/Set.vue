@@ -590,13 +590,6 @@ export default {
           });
           vm.setData(vm.$route.query.id, false, 1);
           // 添加leg之后更新原始数据
-          // this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(response => {
-          //   if(response.data.data){
-          //     this.$store.commit("changeMenuList", response.data.data);
-          //   }
-          //   this.treeDataList = res.data.data;
-          //   vm.returnFatherNode(vm.getNode(res.data.data[0], data));
-          // });
           this.bus.$emit("setNode", this.$route.query.id);
         });
       };
@@ -615,11 +608,6 @@ export default {
         saveMethods();
       }
     },
-    // getList() {
-    //   this.$axios.post(`/allsubset?competitionId=${this.$store.state.menuList[0].id}`).then(response => {
-    //     this.bus.$emit('change', response.data.data);
-    //   });
-    // },
     maxRatingChange(value) {
       if (!value) {
         this.set.ratingMaximum = 0;

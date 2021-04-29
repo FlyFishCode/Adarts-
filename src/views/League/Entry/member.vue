@@ -330,122 +330,162 @@ export default {
       });
     },
     handleChange(type, rowIndex, value) {
-      const RatingList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-      const PPDList = [
-        "0",
-        "10.65",
-        "11.90",
-        "13.15",
-        "14.40",
-        "15.65",
-        "16.90",
-        "18.15",
-        "19.45",
-        "20.75",
-        "22.05",
-        "23.35",
-        "24.65",
-        "25.95",
-        "27.30",
-        "28.65",
-        "30.00",
-        "31.35",
-        "32.70",
-        "34.05",
-        "35.40",
-        "36.80",
-        "38.20",
-        "39.60",
-        "41.00",
-        "42.40",
-        "43.80",
-        "45.20",
-        "46.60",
-        "48.00"
-      ];
-      const MPRList = [
-        "0",
-        "1.10",
-        "1.20",
-        "1.31",
-        "1.46",
-        "1.61",
-        "1.76",
-        "1.91",
-        "2.06",
-        "2.21",
-        "2.36",
-        "2.51",
-        "2.66",
-        "2.81",
-        "2.96",
-        "3.11",
-        "3.26",
-        "3.41",
-        "3.56",
-        "3.71",
-        "3.86",
-        "4.07",
-        "4.28",
-        "4.49",
-        "4.70",
-        "4.96",
-        "5.22",
-        "5.48",
-        "5.74",
-        "6.00"
-      ];
-      const getLevel = (num, list, RList) => {
-        let level = 0;
-        let averageNum = 0;
-        const exg = /^\d+(?:\.\d{0,2})?/;
-        if (!num) {
-          return 0;
-        }
-        if (num >= 30) {
-          return list[list.length - 1];
-        }
-        if (RList) {
-          for (let index = 0; index < list.length; index += 1) {
-            if (Number(num) >= Number(list[index]) && index !== list.length - 1) {
-              averageNum = 0.01;
-              level = RList[index] + averageNum * ((num / list[index + 1]).toString().match(exg)[0] * 100);
-            } else {
-              level = 30;
+      if (value) {
+        const defaultObj = this.tableData[rowIndex];
+        const RatingList = [
+          "1.00",
+          "2.00",
+          "3.00",
+          "4.00",
+          "5.00",
+          "6.00",
+          "7.00",
+          "8.00",
+          "9.00",
+          "10.00",
+          "11.00",
+          "12.00",
+          "13.00",
+          "14.00",
+          "15.00",
+          "16.00",
+          "17.00",
+          "18.00",
+          "19.00",
+          "20.00",
+          "21.00",
+          "22.00",
+          "23.00",
+          "24.00",
+          "25.00",
+          "26.00",
+          "27.00",
+          "28.00",
+          "29.00",
+          "30.00"
+        ];
+        const PPDList = [
+          "0",
+          "10.65",
+          "11.90",
+          "13.15",
+          "14.40",
+          "15.65",
+          "16.90",
+          "18.15",
+          "19.45",
+          "20.75",
+          "22.05",
+          "23.35",
+          "24.65",
+          "25.95",
+          "27.30",
+          "28.65",
+          "30.00",
+          "31.35",
+          "32.70",
+          "34.05",
+          "35.40",
+          "36.80",
+          "38.20",
+          "39.60",
+          "41.00",
+          "42.40",
+          "43.80",
+          "45.20",
+          "46.60",
+          "48.00"
+        ];
+        const MPRList = [
+          "0",
+          "1.10",
+          "1.20",
+          "1.31",
+          "1.46",
+          "1.61",
+          "1.76",
+          "1.91",
+          "2.06",
+          "2.21",
+          "2.36",
+          "2.51",
+          "2.66",
+          "2.81",
+          "2.96",
+          "3.11",
+          "3.26",
+          "3.41",
+          "3.56",
+          "3.71",
+          "3.86",
+          "4.07",
+          "4.28",
+          "4.49",
+          "4.70",
+          "4.96",
+          "5.22",
+          "5.48",
+          "5.74",
+          "6.00"
+        ];
+        const getLevel = (typeStr, num, typeList, list) => {
+          let flag = false;
+          let level = 0;
+          if (typeStr === "Rating") {
+            if (num >= 30) {
+              flag = true;
             }
           }
-        } else if (num.includes(".")) {
-          const [firstNum, lastNum] = num.split(".");
-          averageNum = ((list[firstNum] - list[firstNum - 1]).toFixed(2) / 100).toFixed(4);
-          level = Number(list[firstNum - 1]) + averageNum * lastNum;
-        } else {
-          level = list[num - 1];
+          if (typeStr === "PPD") {
+            if (num >= 48) {
+              flag = true;
+            }
+          }
+          if (typeStr === "MPR") {
+            if (num >= 6) {
+              flag = true;
+            }
+          }
+          if (flag) {
+            return list[list.length - 1];
+          }
+          for (let index = 0; index < typeList.length; index += 1) {
+            if (Number(num) >= Number(typeList[index]) && index !== typeList.length - 1) {
+              const temp = Number((num - typeList[index]) / (typeList[index + 1] - typeList[index])).toFixed(4);
+              // if (index) {
+              level = (Number(list[index]) + temp * (list[index + 1] - list[index]).toFixed(4)).toFixed(2);
+              // } else {
+              // level = list[index];
+              // }
+            }
+          }
+          return level;
+        };
+        switch (type) {
+          case "Rating":
+            defaultObj.defineRating = getLevel("Rating", value, RatingList, RatingList);
+            defaultObj.definePpd = getLevel("Rating", value, RatingList, PPDList);
+            defaultObj.defineMpr = getLevel("Rating", value, RatingList, MPRList);
+            break;
+          case "PPD":
+            defaultObj.definePpd = getLevel("PPD", value, PPDList, PPDList);
+            if (value && defaultObj.defineMpr) {
+              defaultObj.defineRating = ((Number(value) + Number(defaultObj.defineMpr)) / 2).toFixed(2);
+            }
+            if ((value && !defaultObj.defineMpr) || (!value && defaultObj.defineMpr)) {
+              defaultObj.defineRating = getLevel("PPD", value, PPDList, RatingList);
+            }
+            break;
+          default:
+            defaultObj.defineMpr = getLevel("MPR", value, MPRList, MPRList);
+            if (defaultObj.definePpd && value) {
+              defaultObj.defineRating = ((Number(defaultObj.definePpd) + Number(value)) / 2).toFixed(2);
+            }
+            if ((!value && defaultObj.definePpd) || (value && !defaultObj.definePpd)) {
+              defaultObj.defineRating = getLevel("MPR", value, MPRList, RatingList);
+            }
+            break;
         }
-        return level.toString().match(exg)[0];
-      };
-      const defaultObj = this.tableData[rowIndex];
-      switch (type) {
-        case "Rating":
-          if (value >= 30) {
-            defaultObj.defineRating = 30;
-          }
-          defaultObj.definePpd = getLevel(value, PPDList);
-          defaultObj.defineMpr = getLevel(value, MPRList);
-          break;
-        case "PPD":
-          if (value >= 48) {
-            defaultObj.definePpd = 48;
-          }
-          defaultObj.defineRating = getLevel(value, PPDList, RatingList);
-          defaultObj.defineMpr = 0;
-          break;
-        default:
-          if (value >= 6) {
-            defaultObj.defineMpr = 6;
-          }
-          defaultObj.defineRating = getLevel(value, MPRList, RatingList);
-          defaultObj.definePpd = 0;
-          break;
       }
     },
     handleRadioChange(rowIndex, index, value) {

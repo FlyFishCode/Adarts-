@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <el-tabs v-model="defaultActive" type="card" @tab-click="handleClick">
-      <el-tab-pane :label="$t('all.tip270')" name="first">
+      <!-- <el-tab-pane :label="$t('all.tip270')" name="first">
         <el-row class="search">
           <el-row class="center-Row">
             <el-col class="label-g" :span="3">
@@ -159,7 +159,7 @@
           >
           </el-pagination>
         </div>
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
   </div>
 </template>

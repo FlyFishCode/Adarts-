@@ -62,15 +62,6 @@ export default {
   data() {
     return {
       id: 5,
-      // treeDataList: [
-      //   {
-      //     id: "1",
-      //     label: "League",
-      //     url: "competition",
-      //     stage: "competitionId",
-      //     parentId: ""
-      //   }
-      // ],
       dialogTableVisible: false,
       template: {
         name: "",
@@ -158,23 +149,13 @@ export default {
       ]
     };
   },
-  // watch: {
-  //   treeDataList: {
-  //     handler(newVal) {
-  //       if (newVal) {
-  //         this.treeDataList = this.treeDataList;
-  //       }
-  //     },
-  //     deep: true
-  //   }
-  // },
   mounted() {
-    // const vm = this;
-    // this.treeDataList = this.treeDataList;
     if ((this.$route.query.showData && this.$route.query.id) || this.$route.query.isTemplate) {
-      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
-        this.treeDataList = res.data.data;
-        // this.changeLegName(this.treeDataList);
+      const id = sessionStorage.getItem("competitionId") || "";
+      this.$axios.post(`/allsubset?competitionId=${id}`).then(res => {
+        if (res.data.data) {
+          this.treeDataList = res.data.data;
+        }
       });
     }
     this.bus.$on("setNode", data => {

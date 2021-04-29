@@ -777,11 +777,6 @@ export default {
         saveMethods();
       }
     },
-    // getList() {
-    //   this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-    //     this.bus.$emit('change', response.data.data);
-    //   });
-    // },
     gameTypeChange(value) {
       switch (value) {
         case 1:

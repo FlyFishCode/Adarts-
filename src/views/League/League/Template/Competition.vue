@@ -846,7 +846,20 @@ export default {
       showShopListTotal: 0,
       operatorSelectionList: [],
       removeList: [],
-      setFirstList: [],
+      setFirstList: [
+        {
+          value: 1,
+          label: "all.tip111"
+        },
+        {
+          value: 2,
+          label: "all.tip112"
+        },
+        {
+          value: 3,
+          label: "all.tip113"
+        }
+      ],
       operatorTotal: 1,
       searchOperator: {
         userId: "",
@@ -1010,61 +1023,7 @@ export default {
     next();
   },
   mounted() {
-    this.uploadCompetitionId = this.$route.query.id || this.$route.query.currentId;
-    sessionStorage.setItem("competitionId", this.uploadCompetitionId);
-    const userId = sessionStorage.getItem("userId");
-    this.searchOperator.userId = userId;
-    this.AddCompetitionRequest.competition.userId = userId;
-    this.Shop.userId = userId;
-    if (this.$route.query.type === "1") {
-      this.setFirstList = [
-        {
-          value: 1,
-          label: "all.tip111"
-        },
-        {
-          value: 2,
-          label: "all.tip112"
-        },
-        {
-          value: 3,
-          label: "all.tip113"
-        }
-      ];
-    } else {
-      this.setFirstList = [
-        {
-          value: 1,
-          label: "all.tip111"
-        },
-        {
-          value: 2,
-          label: "all.tip112"
-        },
-        {
-          value: 3,
-          label: "all.tip113"
-        },
-        {
-          value: 4,
-          label: "all.tip517"
-        },
-        {
-          value: 5,
-          label: "all.tip518"
-        }
-      ];
-    }
-    this.AddCompetitionRequest.competition.type = this.$route.query.type;
-    // 获取保存的阶段数据
-    if (this.$route.query.id && !this.$route.query.fisrst) {
-      // 有数据就拿保存的数据
-      this.setData(this.$route.query.id);
-      this.getCategoryList();
-    } else {
-      this.OperAtorSearch();
-    }
-    this.getOperationdata();
+    this.init();
   },
   computed: {
     // 换算成为分钟
@@ -1073,6 +1032,31 @@ export default {
     }
   },
   methods: {
+    init() {
+      const query = this.$route.query;
+      if (query.id || query.currentId) {
+        this.uploadCompetitionId = query.id || query.currentId;
+        sessionStorage.setItem("competitionId", this.uploadCompetitionId);
+      }
+      const userId = sessionStorage.getItem("userId");
+      this.searchOperator.userId = userId;
+      this.AddCompetitionRequest.competition.userId = userId;
+      this.Shop.userId = userId;
+      if (query.type !== "1") {
+        this.setFirstList.push({ value: 4, label: "all.tip517" });
+        this.setFirstList.push({ value: 5, label: "all.tip518" });
+      }
+      this.AddCompetitionRequest.competition.type = query.type;
+      // 获取保存的阶段数据
+      if (query.id && !query.fisrst) {
+        // 有数据就拿保存的数据
+        this.setData(query.id);
+        this.getCategoryList();
+      } else {
+        this.OperAtorSearch();
+      }
+      this.getOperationdata();
+    },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
       if (!isJPG) {
@@ -1247,10 +1231,6 @@ export default {
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
-      // const data = {
-      //   file: null,
-      //   competitionId: this.uploadCompetitionId
-      // };
       const formData = new FormData();
       formData.append("file", null);
       formData.append("competitionId", this.uploadCompetitionId);
@@ -1399,11 +1379,6 @@ export default {
         }
       });
     },
-    // getList(id = this.$store.state.menuList[0].id) {
-    //   this.$axios.post(`/allsubset?competitionId=${id}`).then(response => {
-    //     this.bus.$emit("change", response.data.data);
-    //   });
-    // },
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();

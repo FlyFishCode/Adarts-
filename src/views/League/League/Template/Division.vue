@@ -369,11 +369,6 @@ export default {
       });
       this.copyBox = false;
     },
-    // getList() {
-    //   this.$axios.post(`/allsubset?competitionId=${window.treeList[0].id}`).then(response => {
-    //     this.bus.$emit("change", response.data.data);
-    //   });
-    // },
     Delete(id) {
       this.$axios.post(`/delestage?id=${id}`).then(res => {
         this.$message(res.data.msg);
