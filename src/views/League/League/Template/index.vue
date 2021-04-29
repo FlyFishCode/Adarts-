@@ -1,16 +1,10 @@
 <template>
   <div>
+    <el-row style="margin:5px 0px">
+      <el-button size="mini" type="primary" @click="save">{{ $t("all.tip137") }}</el-button>
+    </el-row>
     <el-row class="tac">
-      <el-col :span="menuSpan" class="menuBox">
-        <el-row>
-          <el-col>
-            <el-button size="mini" type="primary" @click="save">{{ $t("all.tip137") }}</el-button>
-          </el-col>
-        </el-row>
-        <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-          <el-radio-button :label="false" icon="el-icon-edit" ref="show"><i class="el-icon-s-unfold"></i></el-radio-button>
-          <el-radio-button :label="true" icon="el-icon-edit" ref="false"><i class="el-icon-s-fold"></i></el-radio-button>
-        </el-radio-group> -->
+      <el-col :span="5" class="menuBox">
         <div class="treeList">
           <el-tree :data="treeDataList" ref="tree" node-key="id" current-node-key="1" default-expand-all :expand-on-click-node="false" highlight-current @node-click="entryDetail">
             <div class="custom-tree-node" slot-scope="{ node, data }" :data="data.id">
@@ -23,33 +17,33 @@
           </el-tree>
         </div>
       </el-col>
-      <el-dialog :title="$t('all.tip137')" :visible.sync="dialogTableVisible">
-        <el-row class="input-Row">
-          <el-col class="label-g" :span="5">
-            {{ $t("all.tip48") }}
-          </el-col>
-          <el-col :span="19">
-            <el-input v-model="template.name" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
-          </el-col>
-        </el-row>
-        <el-row class="input-Row">
-          <el-col class="label-g" :span="5">
-            {{ $t("all.tip138") }}
-          </el-col>
-          <el-col :span="19">
-            <el-input v-model="template.description" type="textarea" :autosize="{ minRows: 6, maxRows: 6 }" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
-          </el-col>
-        </el-row>
-        <el-row class="button-Row">
-          <el-col :span="1">
-            <el-button type="primary" size="mini" @click="SaveTemplate">{{ $t("all.tip136") }}</el-button>
-          </el-col>
-        </el-row>
-      </el-dialog>
-      <el-col :span="cententSpan">
+      <el-col :span="19">
         <router-view></router-view>
       </el-col>
     </el-row>
+    <el-dialog :title="$t('all.tip137')" :visible.sync="dialogTableVisible">
+      <el-row class="input-Row">
+        <el-col class="label-g" :span="5">
+          {{ $t("all.tip48") }}
+        </el-col>
+        <el-col :span="19">
+          <el-input v-model="template.name" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
+        </el-col>
+      </el-row>
+      <el-row class="input-Row">
+        <el-col class="label-g" :span="5">
+          {{ $t("all.tip138") }}
+        </el-col>
+        <el-col :span="19">
+          <el-input v-model="template.description" type="textarea" :autosize="{ minRows: 6, maxRows: 6 }" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
+        </el-col>
+      </el-row>
+      <el-row class="button-Row">
+        <el-col :span="1">
+          <el-button type="primary" size="mini" @click="SaveTemplate">{{ $t("all.tip136") }}</el-button>
+        </el-col>
+      </el-row>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -67,10 +61,7 @@ export default {
         name: "",
         description: ""
       },
-      // isCollapse: false,
       competitionId: "",
-      menuSpan: 5,
-      cententSpan: 19,
       currentNodeId: 0,
       menuList: [],
       legName: [

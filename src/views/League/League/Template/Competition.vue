@@ -1110,7 +1110,6 @@ export default {
                 });
               });
             }
-            console.log(vm.operatorSelectionList);
           });
           // 设置店铺地址
           vm.Shop.pageSize = 100;

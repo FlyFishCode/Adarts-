@@ -94,7 +94,6 @@ function handle(value) {
 function changeCurrentObj(id, name, list, data) {
     // 当前阶段id，当前阶段名称，数据，遍历数据
     list.forEach(i => {
-        debugger;
         if ((Number(i.id) === Number(id) && i.url === name) || (Number(i.id) === Number(id) && i.url === "set")) {
             i.current = data;
         } else if (i.children) {
