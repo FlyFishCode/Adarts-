@@ -349,14 +349,14 @@
                     </el-table-column>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip309')" min-width="7%">
-                    <el-table-column label="1" min-width="7%">
+                    <el-table-column :label="$t('all.tip107')" min-width="7%">
                       <template slot-scope="scope">
                         <el-select v-model="scope.row.homeIsWin" :placeholder="$t('placeholder.select')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
                         </el-select>
                       </template>
                     </el-table-column>
-                    <el-table-column label="0" min-width="7%">
+                    <el-table-column :label="$t('all.tip109')" min-width="7%">
                       <template slot-scope="scope">
                         <el-select v-model="scope.row.visitingIsWin" :placeholder="$t('placeholder.select')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
@@ -710,11 +710,11 @@
                 <el-table-column prop="legLose" :label="$t('all.tip109')" min-width="7%"></el-table-column>
                 <el-table-column prop="legRatio" :label="$t('all.tip533')" min-width="7%"></el-table-column>
               </el-table-column>
-              <el-table-column :label="$t('all.tip341')" min-width="10%">
+              <!-- <el-table-column :label="$t('all.tip341')" min-width="10%">
                 <template slot-scope="scope">
                   <el-button size="mini" type="primary" @click="requset(scope.row.playerId)">{{ $t("all.tip342") }}</el-button>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
             </el-table>
           </div>
         </el-row>
@@ -725,7 +725,7 @@
             :current-page="1"
             :page-sizes="[10, 20, 50, 100]"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="PlayerTotal"
+            :total="playerTotal"
           ></el-pagination>
         </div>
       </el-tab-pane>
@@ -950,6 +950,11 @@ export default {
       awayResultId: "",
       gameResultTextarea: "",
       detail: {
+        status: "",
+        area: "",
+        type: "",
+        entryCount: "",
+        competitionName: "",
         competitionStartPeriod: "",
         competitionEndPeriod: ""
       },
@@ -1020,7 +1025,7 @@ export default {
       },
       total: 1,
       rankingtotal: 1,
-      PlayerTotal: 1,
+      playerTotal: 1,
       teamAwardTotal: 1,
       playerAwardTotal: 1,
       resultList: [],
@@ -1073,26 +1078,26 @@ export default {
       this.showDetails(id);
     },
     showDetails(id) {
-      const vm = this;
       this.$axios.post(`/fixedBarInfo?competitionId=${id}`).then(res => {
         if (!res.data.errorCode) {
           this.detail = res.data.data;
           this.detail.area = "";
-          vm.detail.countryList.forEach(i => {
+          this.detail.countryList.forEach(i => {
             let str = "";
             if (i.areaName) {
               str = `,${i.areaName}`;
             }
-            vm.detail.area += `${i.countryName}${str};`;
+            this.detail.area += `${i.countryName}${str};`;
           });
         } else {
           this.$message(res.data.msg);
         }
+        console.log(this.detail);
       });
     },
     getRankingList() {
       this.$axios.post("/ranking", this.$qs.stringify(this.rankingVO)).then(res => {
-        if (!res.data.errorCode) {
+        if (res.data.data) {
           this.rankingValue = res.data.data;
           this.rankingList = res.data.data.teamList;
         } else {
@@ -1159,6 +1164,7 @@ export default {
       this.$axios.post("/playerresult", this.$qs.stringify(this.PlayerVO)).then(res => {
         if (!res.data.errorCode) {
           this.playerList = res.data.data.list;
+          this.playerTotal = res.data.data.total;
         } else {
           this.$message(res.data.msg);
         }
@@ -1354,6 +1360,7 @@ export default {
       this.$axios.post(`/getmodifyrecord?confrontationInfoId=${this.matchId}`).then(res => {
         if (res.data.data) {
           this.ResultsHiotory = res.data.data;
+          // this.diaLogTotal = res.data.data;
         }
         this.LeagueResultsDialog = true;
       });

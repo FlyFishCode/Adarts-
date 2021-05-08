@@ -49,7 +49,7 @@
             {{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}
           </template>
         </el-table-column>
-        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="14%">
+        <el-table-column prop="cardNumber" sortable :label="$t('all.tip260')" min-width="15%">
           <template slot-scope="scope">
             <div v-for="(card, index) in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
               <el-radio v-model="card.selectValue" :label="index" @change="handleRadioChange(scope.$index, index, card.selectValue)">

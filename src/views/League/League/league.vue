@@ -21,30 +21,6 @@
             <el-option :value="2" :label="$t('all.tip27')"></el-option>
           </el-select>
         </el-col>
-      </el-row>
-      <el-row class="center-Row">
-        <el-col class="label-g" :span="3">{{ $t("all.tip5") }}</el-col>
-        <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="LeagueMgmtVO.type" clearable :placeholder="$t('placeholder.select')">
-            <el-option :value="0" :label="$t('all.tip0')"></el-option>
-            <el-option :value="1" :label="$t('all.tip42')"></el-option>
-            <el-option :value="2" :label="$t('all.tip43')"></el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">{{ $t("all.tip7") }}</el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="LeagueMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"></el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="LeagueMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
-            </el-date-picker>
-          </el-col>
-        </el-col>
-      </el-row>
-
-      <el-row class="center-Row">
         <el-col class="label-g" :span="3">
           {{ $t("all.tip8") }}
         </el-col>
@@ -53,19 +29,42 @@
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
           </el-select>
         </el-col>
+      </el-row>
+      <el-row class="center-Row">
+        <el-col class="label-g" :span="3">{{ $t("all.tip7") }}</el-col>
+        <el-col :span="6">
+          <el-col :span="12">
+            <el-date-picker v-model="LeagueMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"></el-date-picker>
+          </el-col>
+          <el-col :span="12">
+            <el-date-picker v-model="LeagueMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
+            </el-date-picker>
+          </el-col>
+        </el-col>
+        <el-col class="label-g" :span="3">{{ $t("all.tip5") }}</el-col>
+        <el-col :span="3" id="divBoxWidth">
+          <el-select v-model="LeagueMgmtVO.type" clearable :placeholder="$t('placeholder.select')">
+            <el-option :value="0" :label="$t('all.tip0')"></el-option>
+            <el-option :value="1" :label="$t('all.tip42')"></el-option>
+            <el-option :value="2" :label="$t('all.tip43')"></el-option>
+          </el-select>
+        </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip382") }}</el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-select v-model="LeagueMgmtVO.creatorId" clearable :placeholder="$t('placeholder.select')">
             <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="2">{{ $t("all.tip9") }}</el-col>
-        <el-col :span="4">
+      </el-row>
+
+      <el-row class="center-Row">
+        <el-col class="label-g" :span="3">{{ $t("all.tip9") }}</el-col>
+        <el-col :span="3">
           <el-select v-model="LeagueMgmtVO.operatorId" clearable :placeholder="$t('placeholder.select')">
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
-        <el-col :span="2" class="btnClass">
+        <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
           <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
         </el-col>
@@ -439,23 +438,26 @@ export default {
       });
     },
     TemplateConfirm() {
-      const vm = this;
-      this.TemplateVisible = false;
-      this.$store.commit("changeMenuList", [
-        {
-          id: "1",
-          label: "League",
-          url: "competition",
-          parentId: ""
-        }
-      ]);
-      this.$router.push({
-        name: "/competition",
-        query: {
-          id: `${vm.template.TemplateRadio}`,
-          isTemplate: true
-        }
-      });
+      if (this.template.TemplateRadio) {
+        this.TemplateVisible = false;
+        this.$store.commit("changeMenuList", [
+          {
+            id: "1",
+            label: "League",
+            url: "competition",
+            parentId: ""
+          }
+        ]);
+        this.$router.push({
+          name: "/competition",
+          query: {
+            id: `${this.template.TemplateRadio}`,
+            isTemplate: true
+          }
+        });
+      } else {
+        this.$message(this.$t("all.tip627"));
+      }
     },
     handleView(data) {
       this.$router.push({

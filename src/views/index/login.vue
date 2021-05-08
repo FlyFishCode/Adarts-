@@ -24,17 +24,17 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
       user: {
-        account: '',
-        password: ''
+        account: "",
+        password: ""
       },
       showTips: false,
       clear: true,
-      tipsText: '',
+      tipsText: "",
       flag: true
     };
   },
@@ -50,22 +50,22 @@ export default {
     login() {
       const vm = this;
       if (!this.user.account) {
-        this.check(this.$t('message.tips2'));
+        this.check(this.$t("message.tips2"));
         return;
       }
       if (!this.user.password) {
-        this.check(this.$t('message.tips3'));
+        this.check(this.$t("message.tips3"));
         return;
       }
-      this.$axios.post('/login/login', vm.user).then((res) => {
+      this.$axios.post("/login/login", vm.user).then(res => {
         if (res.data.errorCode) {
           vm.check(res.data.msg);
         } else {
-          sessionStorage.setItem('token', res.data.data.token);
-          sessionStorage.setItem('userId', res.data.data.id);
-          sessionStorage.setItem('userType', res.data.data.userType);
+          sessionStorage.setItem("token", res.data.data.token);
+          sessionStorage.setItem("userId", res.data.data.id);
+          sessionStorage.setItem("userType", res.data.data.userType);
           vm.$router.push({
-            path: '/index'
+            path: "/league"
           });
         }
       });
@@ -79,7 +79,7 @@ export default {
       const oldClass = this.$refs.button.$el.className;
       this.showTips = true;
       this.tipsText = msg;
-      this.$refs.button.$el.className += ' shakeButton';
+      this.$refs.button.$el.className += " shakeButton";
       setTimeout(() => {
         vm.showTips = false;
         vm.flag = true;
@@ -132,7 +132,7 @@ export default {
   margin-top: 15px;
   height: 50px;
 }
-.shakeButton{
+.shakeButton {
   animation: shake 0.1s linear infinite;
 }
 .tips {

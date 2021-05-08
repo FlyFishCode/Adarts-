@@ -26,9 +26,30 @@
             <el-option :value="3" :label="$t('all.tip28')"></el-option>
           </el-select>
         </el-col>
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip8") }}
+        </el-col>
+        <el-col :span="3">
+          <el-select v-model="MatchTableMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
+            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
+          </el-select>
+        </el-col>
       </el-row>
 
       <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip7") }}
+        </el-col>
+        <el-col :span="6">
+          <el-col :span="12">
+            <el-date-picker v-model="MatchTableMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange">
+            </el-date-picker>
+          </el-col>
+          <el-col :span="12">
+            <el-date-picker v-model="MatchTableMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
+            </el-date-picker>
+          </el-col>
+        </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip5") }}
         </el-col>
@@ -40,36 +61,16 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip7") }}
-        </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="MatchTableMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="MatchTableMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions"> </el-date-picker>
-          </el-col>
-        </el-col>
-      </el-row>
-      <el-row class="center-Row">
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip8") }}
-        </el-col>
-        <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="MatchTableMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
-            <el-option v-for="(item,index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">
           {{ $t("all.tip9") }}
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-select v-model="MatchTableMgmtVO.operId" filterable clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="2">
+      </el-row>
+      <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
@@ -116,7 +117,7 @@
         </el-table-column>
         <el-table-column :label="$t('all.tip7')" min-width="10%">
           <template slot-scope="scope">
-            {{ scope.row.competitionStartPeriod | showDate}}/{{ scope.row.competitionEndPeriod  | showDate}}
+            {{ scope.row.competitionStartPeriod | showDate }}/{{ scope.row.competitionEndPeriod | showDate }}
           </template>
         </el-table-column>
         <el-table-column :label="$t('all.tip9')" min-width="8%">
@@ -149,17 +150,18 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { saveQuery } from '@/components/common/Utils';
+import { saveQuery } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
@@ -174,16 +176,16 @@ export default {
       CountryArr: [],
       total: 1,
       MatchTableMgmtVO: {
-        areaId: '',
-        countryId: '',
+        areaId: "",
+        countryId: "",
         status: 0,
         type: 0,
         competitionStartPeriod: null,
         competitionEndPeriod: null,
-        competitionName: '',
-        userId: sessionStorage.getItem('userId'),
-        operId: '',
-        createId: '',
+        competitionName: "",
+        userId: sessionStorage.getItem("userId"),
+        operId: "",
+        createId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -194,7 +196,7 @@ export default {
     };
   },
   mounted() {
-    const creatorId = sessionStorage.getItem('userId');
+    const creatorId = sessionStorage.getItem("userId");
     this.search();
     this.getCounarr(creatorId);
     this.getOperationdata(creatorId);
@@ -203,59 +205,59 @@ export default {
   },
   methods: {
     getCounarr(creatorId) {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
         this.ContinentArr = res.data.data;
       });
     },
     getOperationdata(userId) {
       // 获取操作者
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
     dateChange(data) {
       if (this.MatchTableMgmtVO.competitionEndPeriod && this.MatchTableMgmtVO.competitionEndPeriod < data) {
-        this.MatchTableMgmtVO.competitionEndPeriod = '';
+        this.MatchTableMgmtVO.competitionEndPeriod = "";
       }
     },
     search() {
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.MatchTableMgmtVO).then(res => {
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.MatchTableMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     change(value) {
-      this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.CountryArr = res.data.data;
       });
-      this.MatchTableMgmtVO.areaId = '';
+      this.MatchTableMgmtVO.areaId = "";
     },
     push(data) {
-      saveQuery('matchTableList', data);
+      saveQuery("matchTableList", data);
       this.$router.push({
-        name: 'matchTableList',
+        name: "matchTableList",
         query: { data: JSON.stringify(data) }
       });
     },
     sizeChange(value) {
       this.MatchTableMgmtVO.pageSize = value;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.MatchTableMgmtVO).then(res => {
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.MatchTableMgmtVO).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     currentChange(value) {
       this.MatchTableMgmtVO.pageNum = value;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.MatchTableMgmtVO).then(res => {
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.MatchTableMgmtVO).then(res => {
         this.tableData = res.data.data.list;
       });
     }

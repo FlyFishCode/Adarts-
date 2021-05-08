@@ -26,9 +26,30 @@
             <el-option :value="3" :label="$t('all.tip28')"></el-option>
           </el-select>
         </el-col>
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip8") }}
+        </el-col>
+        <el-col :span="3">
+          <el-select v-model="ResultMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
+            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
+          </el-select>
+        </el-col>
       </el-row>
 
       <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip7") }}
+        </el-col>
+        <el-col :span="6">
+          <el-col :span="12">
+            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange" clearable>
+            </el-date-picker>
+          </el-col>
+          <el-col :span="12">
+            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions" clearable>
+            </el-date-picker>
+          </el-col>
+        </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip5") }}
         </el-col>
@@ -40,38 +61,16 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip7") }}
-        </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange" clearable>
-            </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
-          </el-col>
-        </el-col>
-      </el-row>
-      <el-row class="center-Row">
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip8") }}
-        </el-col>
-        <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="ResultMgmtVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
-            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">
           {{ $t("all.tip9") }}
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-select v-model="ResultMgmtVO.operatorId" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="2">
+      </el-row>
+      <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
@@ -143,7 +142,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
@@ -159,16 +158,16 @@ export default {
       operList: [],
       creteList: [],
       ResultMgmtVO: {
-        areaId: '',
-        countryId: '',
+        areaId: "",
+        countryId: "",
         status: 0,
         type: 0,
-        creatorId: '',
-        competitionName: '',
-        operatorId: '',
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        userId: sessionStorage.getItem('userId'),
+        creatorId: "",
+        competitionName: "",
+        operatorId: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        userId: sessionStorage.getItem("userId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -183,12 +182,12 @@ export default {
   },
   methods: {
     init() {
-      const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
+      const userId = sessionStorage.getItem("userId");
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
         this.ContinentArr = res.data.data;
       });
       this.getOperationdata(userId);
@@ -196,68 +195,68 @@ export default {
       this.getAllCompetitionName();
     },
     getOperationdata(userId) {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
     change(value) {
       const vm = this;
-      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: value })).then(res => {
         vm.CountryArr = res.data.data;
       });
       this.ResultMgmtVO.areaId = null;
     },
     dateChange(data) {
       if (this.ResultMgmtVO.competitionEndPeriod && this.ResultMgmtVO.competitionEndPeriod < data) {
-        this.ResultMgmtVO.competitionEndPeriod = '';
+        this.ResultMgmtVO.competitionEndPeriod = "";
       }
     },
     sizeChange(value) {
       const vm = this;
       this.ResultMgmtVO.pageSize = value;
       // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === '0' ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
+      this.ResultMgmtVO.status === "0" ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = '0') : this.ResultMgmtVO.status;
+        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = "0") : this.ResultMgmtVO.status;
       });
     },
     currentChange(value) {
       const vm = this;
       this.ResultMgmtVO.pageNum = value;
       // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === '0' ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
+      this.ResultMgmtVO.status === "0" ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
         // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = '0') : this.ResultMgmtVO.status;
+        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = "0") : this.ResultMgmtVO.status;
       });
     },
     search() {
-      this.$axios.post('/matchTable/getMatchTableCompetitionList', this.ResultMgmtVO).then(res => {
+      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     push(data) {
       this.$router.push({
-        name: 'resultInformation',
+        name: "resultInformation",
         query: {
           id: String(data.id),
-          name: '1'
+          name: "1"
         }
       });
     }

@@ -22,6 +22,12 @@
             <el-col :span="3">
               <el-input v-model="Competition.captain" clearable :placeholder="$t('placeholder.input')"></el-input>
             </el-col>
+            <el-col class="label-g" :span="2">
+              {{ $t("all.tip455") }}
+            </el-col>
+            <el-col :span="3">
+              <el-input v-model="Competition.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            </el-col>
           </el-row>
           <el-row class="center-Row">
             <el-col class="label-g" :span="3">
@@ -36,12 +42,6 @@
               <el-select v-model="Competition.areaId" clearable :placeholder="$t('placeholder.select')">
                 <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
-            </el-col>
-            <el-col class="label-g" :span="2">
-              {{ $t("all.tip455") }}
-            </el-col>
-            <el-col :span="3">
-              <el-input v-model="Competition.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
             </el-col>
           </el-row>
           <el-row>
@@ -71,9 +71,9 @@
               <el-input v-model.number="Competition.min" clearable :placeholder="$t('placeholder.input')"></el-input> _
               <el-input v-model.number="Competition.max" clearable :placeholder="$t('placeholder.input')"></el-input>
             </el-col>
-            <el-col :span="5" class="lineClass">
+            <el-col :span="2" class="lineClass">
               <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
-              <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button>
+              <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
             </el-col>
           </el-row>
         </el-row>
@@ -169,8 +169,27 @@
                 <el-option :value="3" :label="$t('all.tip28')"></el-option>
               </el-select>
             </el-col>
+            <el-col class="label-g" :span="3">
+              {{ $t("all.tip8") }}
+            </el-col>
+            <el-col :span="3" class="lineClass">
+              <el-select v-model="TeamMgmt.name" clearable filterable :placeholder="$t('placeholder.select')">
+                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
+              </el-select>
+            </el-col>
           </el-row>
           <el-row>
+            <el-col class="label-g" :span="3">
+              {{ $t("all.tip7") }}
+            </el-col>
+            <el-col :span="6">
+              <el-col :span="12">
+                <el-date-picker v-model="TeamMgmt.competitionStartPeriod" type="datetime" default-time="00:00:00" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+              </el-col>
+              <el-col :span="12">
+                <el-date-picker v-model="TeamMgmt.competitionEndPeriod" type="datetime" default-time="23:59:59" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+              </el-col>
+            </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip5") }}
             </el-col>
@@ -181,26 +200,6 @@
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip7") }}
-            </el-col>
-            <el-col :span="3">
-              <el-date-picker v-model="TeamMgmt.competitionStartPeriod" type="datetime" default-time="00:00:00" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
-            </el-col>
-            <el-col :span="0.5" class="lineClass">-</el-col>
-            <el-col :span="3">
-              <el-date-picker v-model="TeamMgmt.competitionEndPeriod" type="datetime" default-time="23:59:59" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
-            </el-col>
-          </el-row>
-          <el-row class="center-Row">
-            <el-col class="label-g" :span="3">
-              {{ $t("all.tip8") }}
-            </el-col>
-            <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.name" clearable filterable :placeholder="$t('placeholder.select')">
-                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
-              </el-select>
-            </el-col>
-            <el-col class="label-g" :span="3">
               {{ $t("all.tip382") }}
             </el-col>
             <el-col :span="3" class="lineClass">
@@ -208,6 +207,8 @@
                 <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
               </el-select>
             </el-col>
+          </el-row>
+          <el-row class="center-Row">
             <el-col class="label-g" :span="3">
               {{ $t("all.tip9") }}
             </el-col>
@@ -216,7 +217,7 @@
                 <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
               </el-select>
             </el-col>
-            <el-col :span="5" class="lineClass">
+            <el-col :span="2" class="lineClass">
               <el-button size="mini" type="primary" @click="leagueSearch">{{ $t("all.tip10") }}</el-button>
               <!-- <el-button size="mini" type="primary" @click="download">{{ $t("all.tip11") }}</el-button> -->
             </el-col>
@@ -328,30 +329,30 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
-      team: require('../../assets/team.jpg'),
+      team: require("../../assets/team.jpg"),
       dialogVisible: false,
       SearchTeamPageTotal: 0,
       TeamPageTotal: 1,
       SearchTeamTableData: [],
-      name: '',
-      activeName: 'first',
-      StartTime: '',
-      EndTime: '',
-      WomenNums: '',
+      name: "",
+      activeName: "first",
+      StartTime: "",
+      EndTime: "",
+      WomenNums: "",
       TeamMgmt: {
-        areaId: '',
-        countryId: '',
-        status: '',
-        type: '',
+        areaId: "",
+        countryId: "",
+        status: "",
+        type: "",
         competitionStartPeriod: null,
         competitionEndPeriod: null,
-        name: '',
-        creatorId: '',
-        operatorId: '',
+        name: "",
+        creatorId: "",
+        operatorId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -363,25 +364,25 @@ export default {
       ContinentArr: [],
       CountryArr: [],
       Dialog: {
-        teamName: '',
-        captainId: '',
-        shopId: '',
+        teamName: "",
+        captainId: "",
+        shopId: "",
         regDate: new Date(),
-        createId: ''
+        createId: ""
       },
       ratingType: 1,
       Competition: {
-        teamId: '',
-        teamName: '',
-        captain: '',
-        areaId: '',
-        countryId: '',
-        homeShopName: '',
+        teamId: "",
+        teamName: "",
+        captain: "",
+        areaId: "",
+        countryId: "",
+        homeShopName: "",
         timeSlot: 0,
         pmr: 3,
-        min: '',
-        max: '',
-        userId: sessionStorage.getItem('userId'),
+        min: "",
+        max: "",
+        userId: sessionStorage.getItem("userId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -389,7 +390,7 @@ export default {
     };
   },
   mounted() {
-    const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem("userId");
     this.Dialog.createId = userId;
     this.name = this.$route.params.name;
     this.search();
@@ -403,7 +404,7 @@ export default {
   methods: {
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
+        this.$axios.post("/accountplayerlist", this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {
@@ -411,63 +412,63 @@ export default {
       }
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
     getOperationdata(userId) {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getAreaList(userId) {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
         this.ContinentArr = res.data.data;
       });
     },
     areaChange(value) {
-      this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.CountryArr = res.data.data;
       });
-      this.Competition.areaId = '';
+      this.Competition.areaId = "";
     },
     areaIdChange(value) {
-      this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.CountryArr = res.data.data;
       });
-      this.TeamMgmt.areaId = '';
+      this.TeamMgmt.areaId = "";
     },
     getShopList() {
-      const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/getshop', this.$qs.stringify({ userId })).then(res => {
+      const userId = sessionStorage.getItem("userId");
+      this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });
     },
     search() {
-      this.$axios.post('/getTeamList', this.Competition).then(res => {
+      this.$axios.post("/getTeamList", this.Competition).then(res => {
         this.SearchTeamPageTotal = res.data.data.total;
         this.SearchTeamTableData = res.data.data.list;
       });
     },
     SearchTeamSizeChange(val) {
       this.Competition.pageSize = val;
-      this.$axios.post('/getTeamList', this.Competition).then(res => {
+      this.$axios.post("/getTeamList", this.Competition).then(res => {
         this.SearchTeamTableData = res.data.data.list;
       });
     },
     SearchTeamCurrentChange(val) {
       this.Competition.pageNum = val;
-      this.$axios.post('/getTeamList', this.Competition).then(res => {
+      this.$axios.post("/getTeamList", this.Competition).then(res => {
         this.SearchTeamTableData = res.data.data.list;
       });
     },
     leagueSearch() {
-      this.$axios.post('/getTeamListComp', this.TeamMgmt).then(res => {
+      this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
@@ -478,25 +479,25 @@ export default {
     },
     TeamSizeChange(val) {
       this.TeamMgmt.pageSize = val;
-      this.$axios.post('/getTeamListComp', this.TeamMgmt).then(res => {
+      this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     TeamCurrentChange(val) {
       this.TeamMgmt.pageNum = val;
-      this.$axios.post('/getTeamListComp', this.TeamMgmt).then(res => {
+      this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     save() {
       const vm = this;
       vm.Dialog.regDate = new Date(vm.Dialog.regDate);
-      this.$axios.post('/addTeam', vm.Dialog).then(res => {
+      this.$axios.post("/addTeam", vm.Dialog).then(res => {
         this.$message(res.data.msg);
-        this.Dialog.teamName = '';
-        this.Dialog.captainId = '';
-        this.Dialog.shopId = '';
-        this.Dialog.regDate = '';
+        this.Dialog.teamName = "";
+        this.Dialog.captainId = "";
+        this.Dialog.shopId = "";
+        this.Dialog.regDate = "";
         this.search();
       });
       this.dialogVisible = false;
@@ -507,12 +508,12 @@ export default {
     },
     mgmt() {
       this.$router.push({
-        name: 'entryList'
+        name: "entryList"
       });
     },
     detali(id) {
       this.$router.push({
-        path: 'teamInformation',
+        path: "teamInformation",
         query: {
           id
         }

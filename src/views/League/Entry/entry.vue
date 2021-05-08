@@ -26,9 +26,35 @@
             <el-option :value="3" :label="$t('all.tip28')"></el-option>
           </el-select>
         </el-col>
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip382") }}
+        </el-col>
+        <el-col :span="4">
+          <el-select v-model="EntryMgmt.creator" clearable :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
+          </el-select>
+        </el-col>
       </el-row>
 
       <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip7") }}
+        </el-col>
+        <el-col :span="6">
+          <el-col :span="12">
+            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionChange">
+            </el-date-picker>
+          </el-col>
+          <el-col :span="12">
+            <el-date-picker
+              v-model="EntryMgmt.competitionEndPeriod"
+              type="datetime"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="competitionOptions"
+            ></el-date-picker>
+          </el-col>
+        </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip5") }}
         </el-col>
@@ -40,26 +66,26 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip7") }}
+          {{ $t("all.tip9") }}
         </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionChange">
-            </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker
-              v-model="EntryMgmt.competitionEndPeriod"
-              type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="23:59:59"
-              :picker-options="competitionOptions"
-            ></el-date-picker>
-          </el-col>
+        <el-col :span="4">
+          <el-select v-model="EntryMgmt.operator" clearable :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
+          </el-select>
         </el-col>
       </el-row>
       <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip56") }}
+        </el-col>
+        <el-col :span="6">
+          <el-col :span="12">
+            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
+          </el-col>
+          <el-col :span="12">
+            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
+          </el-col>
+        </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip8") }}
         </el-col>
@@ -68,38 +94,7 @@
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip56") }}
-        </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
-          </el-col>
-        </el-col>
-      </el-row>
-
-      <el-row class="center-Row">
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip382") }}
-        </el-col>
-        <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="EntryMgmt.creator" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
-          </el-select>
-        </el-col>
-        <el-col class="label-g" :span="3">
-          {{ $t("all.tip9") }}
-        </el-col>
-        <el-col :span="4">
-          <el-select v-model="EntryMgmt.operator" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="4" class="lineClass">
+        <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
         </el-col>
       </el-row>
