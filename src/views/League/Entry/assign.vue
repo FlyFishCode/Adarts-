@@ -285,7 +285,15 @@
           </el-table>
         </div>
         <div class="page">
-          <el-pagination @size-change="assignDialogSizeChange" @current-change="assignDialogCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="assignDialogTotal"> </el-pagination>
+          <el-pagination
+            @size-change="assignDialogSizeChange"
+            @current-change="assignDialogCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="assignDialogTotal"
+          >
+          </el-pagination>
         </div>
         <el-row style="display:flex;justify-content:center">
           <el-col :span="2">
@@ -299,10 +307,10 @@
 
 <script>
 // @ is an alias to /src
-import { returnType } from '@/components/common/Utils';
+import { returnType } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
@@ -315,51 +323,51 @@ export default {
       divisionList: [],
       stageList: [],
       detial: {
-        categoryCount: '',
-        divisionCount: '',
-        stageCount: ''
+        categoryCount: "",
+        divisionCount: "",
+        stageCount: ""
       },
       AssignVO: {
         Detial: {
-          competitionName: '',
-          status: '',
-          area: '',
-          type: '',
-          competitionStartPeriod: '',
-          competitionEndPeriod: '',
-          entryStartPeriod: '',
-          entryEndPeriod: ''
+          competitionName: "",
+          status: "",
+          area: "",
+          type: "",
+          competitionStartPeriod: "",
+          competitionEndPeriod: "",
+          entryStartPeriod: "",
+          entryEndPeriod: ""
         },
         AssignDialog: {
-          teamId: '',
-          teamName: '',
-          homeShopName: '',
-          rating1: '',
-          rating2: '',
-          ppd1: '',
-          ppd2: '',
-          mpr1: '',
-          mpr2: ''
+          teamId: "",
+          teamName: "",
+          homeShopName: "",
+          rating1: "",
+          rating2: "",
+          ppd1: "",
+          ppd2: "",
+          mpr1: "",
+          mpr2: ""
         },
         StageAssignDialog: {
-          competitionId: '',
+          competitionId: "",
           categoryId: null,
           divisionId: null,
           stageId: null,
-          homeShopName: '',
-          mpr1: '',
-          mpr2: '',
-          ppd1: '',
-          ppd2: '',
-          rating1: '',
-          rating2: '',
-          teamId: '',
-          teamName: ''
+          homeShopName: "",
+          mpr1: "",
+          mpr2: "",
+          ppd1: "",
+          ppd2: "",
+          rating1: "",
+          rating2: "",
+          teamId: "",
+          teamName: ""
         }
       },
-      categoryId: '',
-      divisionId: '',
-      stageId: '',
+      categoryId: "",
+      divisionId: "",
+      stageId: "",
       StageAssignTableData: [],
       AssignDiologData: [],
       AssignDialogTableData: [],
@@ -375,9 +383,9 @@ export default {
       this.AssignVO.Detial = this.$route.query.data;
     }
     this.AssignVO.StageAssignDialog.competitionId = this.AssignVO.Detial.id;
-    vm.AssignVO.Detial.area = '';
+    vm.AssignVO.Detial.area = "";
     this.AssignVO.Detial.countryList.forEach(i => {
-      let str = '';
+      let str = "";
       if (i.areaName) {
         str = `,${i.areaName}`;
       }
@@ -432,7 +440,7 @@ export default {
     },
     divClick(value, type, index, Findex, mineIndex) {
       this.$router.push({
-        name: 'assignedTeams',
+        name: "assignedTeams",
         query: {
           data: JSON.stringify(value),
           type,
@@ -447,33 +455,33 @@ export default {
       this.AssignDialogTableData = [];
       const list = [];
       const Listdata = {
-        categoryName: '',
-        categoryId: '',
-        divisionName: '',
-        divisionId: '',
-        stageName: '',
-        stageId: ''
+        categoryName: "",
+        categoryId: "",
+        divisionName: "",
+        divisionId: "",
+        stageName: "",
+        stageId: ""
       };
-      debugger;
+
       switch (type) {
-      case '1':
-        Listdata.categoryName = data.categoryName;
-        Listdata.categoryId = data.categoryId;
-        break;
-      case '2':
-        Listdata.categoryName = data.categoryName;
-        Listdata.categoryId = data.categoryId;
-        Listdata.divisionName = data.competitionDivisionList[Findex].divisionName;
-        Listdata.divisionId = data.competitionDivisionList[Findex].divisionId;
-        break;
-      default:
-        Listdata.categoryName = data.categoryName;
-        Listdata.categoryId = data.categoryId;
-        Listdata.divisionName = data.competitionDivisionList[Findex].divisionName;
-        Listdata.divisionId = data.competitionDivisionList[Findex].divisionId;
-        Listdata.stageName = data.competitionDivisionList[Findex].competitionStageList[MindIndex].stageName;
-        Listdata.stageId = data.competitionDivisionList[Findex].competitionStageList[MindIndex].stageId;
-        break;
+        case "1":
+          Listdata.categoryName = data.categoryName;
+          Listdata.categoryId = data.categoryId;
+          break;
+        case "2":
+          Listdata.categoryName = data.categoryName;
+          Listdata.categoryId = data.categoryId;
+          Listdata.divisionName = data.competitionDivisionList[Findex].divisionName;
+          Listdata.divisionId = data.competitionDivisionList[Findex].divisionId;
+          break;
+        default:
+          Listdata.categoryName = data.categoryName;
+          Listdata.categoryId = data.categoryId;
+          Listdata.divisionName = data.competitionDivisionList[Findex].divisionName;
+          Listdata.divisionId = data.competitionDivisionList[Findex].divisionId;
+          Listdata.stageName = data.competitionDivisionList[Findex].competitionStageList[MindIndex].stageName;
+          Listdata.stageId = data.competitionDivisionList[Findex].competitionStageList[MindIndex].stageId;
+          break;
       }
       list.push(Listdata);
       this.AssignDiologData = list;
@@ -482,19 +490,19 @@ export default {
     AssignDiologSearch() {
       const data = this.AssignDiologData[0];
       let flag = true;
-      let url = '';
+      let url = "";
       if (data.stageName && flag) {
-        url = 'getStageTeamList';
+        url = "getStageTeamList";
         flag = false;
         this.AssignVO.AssignDialog.divisionId = data.divisionId;
       }
       if (data.divisionId && flag) {
-        url = 'getDivisionTeamList';
+        url = "getDivisionTeamList";
         flag = false;
         this.AssignVO.AssignDialog.categoryId = data.categoryId;
       }
       if (data.categoryId && flag) {
-        url = 'getCategoryTeamList';
+        url = "getCategoryTeamList";
         this.AssignVO.AssignDialog.competitionId = this.AssignVO.Detial.id;
       }
       this.$axios.post(`/${url}`, this.AssignVO.AssignDialog).then(res => {
@@ -505,7 +513,7 @@ export default {
     },
     DialogSearch() {
       const vm = this;
-      this.$axios.post('/getShortcutTeamList', vm.AssignVO.StageAssignDialog).then(res => {
+      this.$axios.post("/getShortcutTeamList", vm.AssignVO.StageAssignDialog).then(res => {
         if (!res.data.errorCode) {
           vm.StageAssignTableData = res.data.data;
         } else {
@@ -519,10 +527,9 @@ export default {
         categoryId: this.AssignVO.StageAssignDialog.categoryId,
         divisionId: this.AssignVO.StageAssignDialog.divisionId,
         stageId: this.AssignVO.StageAssignDialog.stageId,
-        mainId: returnType(this.StageAssignTableSelectionList, 'teamId')
+        mainId: returnType(this.StageAssignTableSelectionList, "teamId")
       };
-      this.$axios.post('/shortcutTeam', data).then(res => {
-        debugger;
+      this.$axios.post("/shortcutTeam", data).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
           return;
@@ -542,25 +549,25 @@ export default {
     Assign() {
       const data = this.AssignDiologData[0];
       let flag = true;
-      let url = '';
+      let url = "";
       const params = {
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
-        mainId: returnType(this.AssignSelectionArr, 'mainId')
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
+        mainId: returnType(this.AssignSelectionArr, "mainId")
       };
       if (data.stageId && flag) {
-        url = 'teamIntoStage';
+        url = "teamIntoStage";
         flag = false;
         params.stageId = data.stageId;
       }
       if (data.divisionId && flag) {
-        url = 'teamIntoDivision';
+        url = "teamIntoDivision";
         flag = false;
         params.divisionId = data.divisionId;
       }
       if (data.categoryId && flag) {
-        url = 'teamIntoCategory';
+        url = "teamIntoCategory";
         params.categoryId = data.categoryId;
       }
       this.$axios.post(`/${url}`, params).then(res => {
@@ -586,8 +593,8 @@ export default {
     setHeight(value) {
       return {
         height: `${30 * value}px`,
-        display: 'flex',
-        alignItems: 'center'
+        display: "flex",
+        alignItems: "center"
       };
     }
     // arraySpanMethod({ rowIndex, columnIndex }) {
@@ -632,7 +639,7 @@ export default {
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;
 }
-.table>>>.el-table__body-wrapper td{
+.table >>> .el-table__body-wrapper td {
   height: 100%;
 }
 .tableLink {
@@ -643,24 +650,24 @@ export default {
 .tableLink:hover {
   font-weight: bold;
 }
-.assignDialogTable{
+.assignDialogTable {
   height: 500px;
   overflow-y: auto;
 }
-.el-table::before{
+.el-table::before {
   height: 0;
 }
-.table>>>.el-table__body td{
-  padding: 0!important;
+.table >>> .el-table__body td {
+  padding: 0 !important;
   border: 1px solid #666;
 }
-.el-table{
+.el-table {
   border: none;
 }
-.el-table--border::after{
+.el-table--border::after {
   width: 0px;
 }
-.table>>>.el-table__body .cell{
-  padding: 0!important;
+.table >>> .el-table__body .cell {
+  padding: 0 !important;
 }
 </style>

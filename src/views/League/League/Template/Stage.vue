@@ -536,26 +536,22 @@ export default {
   },
   watch: {
     idDisabled(newValue) {
-      debugger;
       if (newValue) {
         this.setUpStageData(this.$route.query.parentId);
+      } else if (this.oldValue.gameIn) {
+        this.stageGameOption = this.oldValue;
       } else {
-        debugger;
-        if (this.oldValue.gameIn) {
-          this.stageGameOption = this.oldValue;
-        } else {
-          this.stageGameOption = {
-            gameIn: 1,
-            gameOut: 1,
-            freezeOption: 1,
-            bull: 1,
-            outTips: 1,
-            inCriteria: 2,
-            outCriteria: 2,
-            overkill: 1,
-            scoreGap: 200
-          };
-        }
+        this.stageGameOption = {
+          gameIn: 1,
+          gameOut: 1,
+          freezeOption: 1,
+          bull: 1,
+          outTips: 1,
+          inCriteria: 2,
+          outCriteria: 2,
+          overkill: 1,
+          scoreGap: 200
+        };
       }
     }
   },
@@ -620,7 +616,6 @@ export default {
     setUpStageData(id) {
       const vm = this;
       this.$axios.post(`/getdivisionbyid?id=${id}`).then(res => {
-        debugger;
         if (res.data.data) {
           vm.stageGameOption = res.data.data;
         }
@@ -744,7 +739,6 @@ export default {
               };
             }
             vm.isCurrentSave = type;
-            debugger;
             this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
             // changeMenus(this.$store.state.menuList, id, item, vm);
             // 修改stage之后把此stage下的set删除;

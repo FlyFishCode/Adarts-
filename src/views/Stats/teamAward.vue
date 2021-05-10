@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="teamVO.competitionName" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="(item,index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
+            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="1">
@@ -37,7 +37,6 @@
           <!-- <el-button type="primary" size="mini" @click="search">{{ $t("all.tip11") }}</el-button> -->
         </el-col>
       </el-row>
-
     </el-row>
     <div class="table">
       <el-table :data="tableData" border style="width: 100%">
@@ -65,7 +64,8 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination  @current-change="currentChange" @size-change="sizeChange" :current-page='1' :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination @current-change="currentChange" @size-change="sizeChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
@@ -88,7 +88,7 @@ export default {
       total: 1,
       teamVO: {
         competitionType: 0,
-        competitionName: '',
+        competitionName: "",
         startPeriod: null,
         endPeriod: null,
         pageNum: 1,
@@ -101,7 +101,7 @@ export default {
     };
   },
   mounted() {
-    const creatorId = sessionStorage.getItem('userId');
+    const creatorId = sessionStorage.getItem("userId");
     this.getcountry(creatorId);
     this.search();
     this.getAllCompetitionName();
@@ -109,39 +109,38 @@ export default {
   methods: {
     dateChange(data) {
       if (this.teamVO.endPeriod && this.teamVO.endPeriod < data) {
-        this.teamVO.endPeriod = '';
+        this.teamVO.endPeriod = "";
       }
     },
     search() {
-      this.$axios.post('/teamaward', this.teamVO).then((res) => {
+      this.$axios.post("/teamaward", this.teamVO).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {
-          debugger;
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
         }
       });
     },
     getcountry(creatorId) {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId })).then((res) => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
         this.ContinentArr = res.data.data;
       });
     },
     sizeChange(value) {
       this.teamVO.pageSize = value;
-      this.$axios.post('/teamaward', this.teamVO).then((res) => {
+      this.$axios.post("/teamaward", this.teamVO).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     currentChange(value) {
       this.teamVO.pageNum = value;
-      this.$axios.post('/teamaward', this.teamVO).then((res) => {
+      this.$axios.post("/teamaward", this.teamVO).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     }

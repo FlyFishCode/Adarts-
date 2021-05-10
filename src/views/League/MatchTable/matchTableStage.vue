@@ -755,7 +755,7 @@ export default {
   mounted() {
     if (this.$route.query.data) {
       const data = JSON.parse(this.$route.query.data);
-      debugger;
+
       this.Stage.formList.competition = data.matchTableName;
       this.Stage.formList.category = data.categoryName;
       this.Stage.formList.division = data.divisionName;

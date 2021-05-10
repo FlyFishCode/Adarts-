@@ -12,9 +12,9 @@
           {{ $t("all.tip536") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          <div v-if="teamList.status === 1">{{ this.$t('all.tip26') }}</div>
-          <div v-if="teamList.status === 2">{{ this.$t('all.tip27') }}</div>
-          <div v-if="teamList.status === 3">{{ this.$t('all.tip28') }}</div>
+          <div v-if="teamList.status === 1">{{ this.$t("all.tip26") }}</div>
+          <div v-if="teamList.status === 2">{{ this.$t("all.tip27") }}</div>
+          <div v-if="teamList.status === 3">{{ this.$t("all.tip28") }}</div>
         </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip535") }}
@@ -28,14 +28,12 @@
           {{ $t("all.tip537") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          {{ teamList.leagueType === 1?$t('all.tip42'):$t('all.tip43') }}
+          {{ teamList.leagueType === 1 ? $t("all.tip42") : $t("all.tip43") }}
         </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip538") }}
         </el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">
-          {{ teamList.competitionStartPeriod | showDate }}~{{ teamList.competitionEndPeriod | showDate }}
-        </el-col>
+        <el-col :span="3" class="overFlowStyle lineClass"> {{ teamList.competitionStartPeriod | showDate }}~{{ teamList.competitionEndPeriod | showDate }} </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip310") }}
         </el-col>
@@ -107,44 +105,45 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { saveQuery } from '@/components/common/Utils';
+import { saveQuery } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
       teamList: {
-        competitionName: '',
-        status: '',
-        area: '',
-        leagueType: '',
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        number: '',
-        rankingType: ''
+        competitionName: "",
+        status: "",
+        area: "",
+        leagueType: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        number: "",
+        rankingType: ""
       },
       rankingList: [
-        { id: 0, label: 'all.tip0' },
-        { id: 1, label: 'all.tip559' },
-        { id: 2, label: 'all.tip560' },
-        { id: 3, label: 'all.tip561' },
-        { id: 4, label: 'all.tip562' },
-        { id: 5, label: 'all.tip563' }
+        { id: 0, label: "all.tip0" },
+        { id: 1, label: "all.tip559" },
+        { id: 2, label: "all.tip560" },
+        { id: 3, label: "all.tip561" },
+        { id: 4, label: "all.tip562" },
+        { id: 5, label: "all.tip563" }
       ],
       teamListVO: {
-        competitionId: '',
-        ranking: '',
-        categoryId: '',
-        divisionId: '',
-        stageId: '',
+        competitionId: "",
+        ranking: "",
+        categoryId: "",
+        divisionId: "",
+        stageId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -156,7 +155,7 @@ export default {
     };
   },
   mounted() {
-    let data = '';
+    let data = "";
     try {
       data = JSON.parse(this.$route.query.data);
     } catch {
@@ -170,10 +169,10 @@ export default {
     init(data) {
       this.teamList = data;
       this.teamListVO.competitionId = data.id;
-      this.teamList.area = '';
-      debugger;
+      this.teamList.area = "";
+
       data.countryList.forEach(i => {
-        let str = '';
+        let str = "";
         if (i.areaName) {
           str = `,${i.areaName}`;
         }
@@ -181,7 +180,7 @@ export default {
       });
     },
     search() {
-      this.$axios.post('/judgement/teamList', this.$qs.stringify(this.teamListVO)).then(res => {
+      this.$axios.post("/judgement/teamList", this.$qs.stringify(this.teamListVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
@@ -201,28 +200,28 @@ export default {
       const vm = this;
       list.forEach(i => {
         const Cobj = {
-          label: '',
-          id: ''
+          label: "",
+          id: ""
         };
-        if (i.url === 'category') {
+        if (i.url === "category") {
           Cobj.label = i.label;
           Cobj.id = i.id;
           vm.categoryList.push(Cobj);
           i.children.forEach(j => {
             const Dobj = {
-              label: '',
-              id: ''
+              label: "",
+              id: ""
             };
-            if (j.url === 'division') {
+            if (j.url === "division") {
               Dobj.label = j.label;
               Dobj.id = j.id;
               vm.divisionList.push(Dobj);
               j.children.forEach(k => {
                 const Sobj = {
-                  label: '',
-                  id: ''
+                  label: "",
+                  id: ""
                 };
-                if (k.url === 'stage') {
+                if (k.url === "stage") {
                   Sobj.label = k.label;
                   Sobj.id = k.id;
                   vm.stageList.push(Sobj);
@@ -237,18 +236,18 @@ export default {
       });
     },
     push(data) {
-      saveQuery('teamList', data);
+      saveQuery("teamList", data);
       this.$router.push({
-        name: 'teamMatch',
+        name: "teamMatch",
         query: { data: JSON.stringify(data) }
       });
     },
     categoryChange() {
-      this.teamListVO.divisionId = '';
-      this.teamListVO.stageId = '';
+      this.teamListVO.divisionId = "";
+      this.teamListVO.stageId = "";
     },
     divisionChange() {
-      this.teamListVO.stageId = '';
+      this.teamListVO.stageId = "";
     }
   }
 };

@@ -189,7 +189,6 @@ export default {
       }
     },
     append(data) {
-      debugger;
       let label = "";
       let url = "";
       let newChild = {
@@ -473,7 +472,6 @@ export default {
           if (i.children.length) {
             i.children.forEach(j => {
               // "category"
-              debugger;
               // eslint-disable-next-line no-param-reassign
               j.current.divisionList = [];
               // eslint-disable-next-line no-unused-expressions
@@ -481,7 +479,6 @@ export default {
               if (j.children.length) {
                 j.children.forEach(k => {
                   // "division"
-                  debugger;
                   // eslint-disable-next-line no-param-reassign
                   k.current.stageList = [];
                   // eslint-disable-next-line no-unused-expressions
@@ -489,7 +486,6 @@ export default {
                   if (k.children.length) {
                     k.children.forEach(n => {
                       // stage
-                      debugger;
                       // eslint-disable-next-line no-param-reassign
                       n.current.setList = [];
                       // eslint-disable-next-line no-unused-expressions
@@ -497,7 +493,6 @@ export default {
                       if (n.children.length) {
                         n.children.forEach(m => {
                           // set
-                          debugger;
                           // eslint-disable-next-line no-unused-expressions
                           m.current && n.current.setList.push(m.current);
                         });

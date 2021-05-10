@@ -1323,7 +1323,6 @@ export default {
             })
           );
           this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
-            debugger;
             if (res.data) {
               const url = "competition";
               const competitionId = res.data.data && res.data.data.competitionId;
@@ -1349,7 +1348,6 @@ export default {
               }
               this.$refs.upload.submit();
               changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
-              debugger;
               this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
               // changeMEenuList(this.$store.state.menuList, id, item);
               // this.getList(id);
@@ -1393,7 +1391,7 @@ export default {
       }).then(() => {});
       // 此方法FormData参数无效
       // this.$axios.post('/addCompetitionImg', vm.$qs.stringify(formData)).then(res => {
-      //   debugger;
+      //
       //   console.log(res);
       // });
     },
@@ -1495,7 +1493,6 @@ export default {
       const vm = this;
       this.ShopDialog = true;
       this.$nextTick(() => {
-        debugger;
         if (!this.$refs.ShopListRef.selection.length) {
           this.CompetitionOptionShopList.forEach((i, index) => {
             vm.showShopList.forEach(j => {
@@ -1542,7 +1539,6 @@ export default {
           arr.push(i);
         }
       });
-      debugger;
       this.showShopList = arr;
       if (arr.length > 0) {
         this.AddCompetitionRequest.shopIdList = [...new Set(arr.map(i => i.shopId))];

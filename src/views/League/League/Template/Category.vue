@@ -152,7 +152,6 @@ export default {
   watch: {
     // eslint-disable-next-line func-names
     "AddCategoryRequest.ratingLimit": function(newValue) {
-      debugger;
       if (newValue === 1) {
         this.ratingDisabled = false;
         this.ppdDisabled = true;
@@ -168,7 +167,6 @@ export default {
     },
     // eslint-disable-next-line func-names
     "AddCategoryRequest.mprLimit": function(newValue) {
-      debugger;
       if (newValue === 1) {
         this.mprDisabled = false;
         this.ratingDisabled = true;
@@ -184,7 +182,6 @@ export default {
     },
     // eslint-disable-next-line func-names
     "AddCategoryRequest.ppdLimit": function(newValue) {
-      debugger;
       if (newValue === 1) {
         this.ppdDisabled = false;
         this.mprDisabled = true;
@@ -200,7 +197,6 @@ export default {
     },
     // eslint-disable-next-line func-names
     "AddCategoryRequest.unlimited": function(newValue) {
-      debugger;
       if (newValue === 1) {
         this.ratingDisabled = true;
         this.ppdDisabled = true;
@@ -423,7 +419,7 @@ export default {
             vm.$message({
               message: res.data.msg
             });
-            debugger;
+
             if (res.data.data) {
               for (const value of Object.values(res.data.data)) {
                 type = `${value}`;

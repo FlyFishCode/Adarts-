@@ -1340,7 +1340,6 @@ export default {
     },
     setChange(value) {
       this.setList.forEach(i => {
-        debugger;
         if (i.setResultId === value) {
           this.legList = i.legResultList;
           this.defaultLeg = this.legList[0].legResultId;
