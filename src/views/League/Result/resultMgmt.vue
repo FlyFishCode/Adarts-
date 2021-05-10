@@ -135,12 +135,12 @@
             <div v-if="scope.row.state === 3">{{ $t("all.tip333") }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="date" :label="$t('all.tip336')" min-width="12%">
+        <!-- <el-table-column prop="date" :label="$t('all.tip336')" min-width="12%">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="down(scope.row)">{{ $t("form.DownloadButton") }}</el-button>
             <el-button size="mini" type="primary" @click="upload(scope.row)">{{ $t("all.tip338") }}</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column :label="$t('all.tip339')" min-width="10%">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="result(scope.row)">{{ $t("form.showButton") }}</el-button>
@@ -272,7 +272,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'detail',
+  name: "detail",
   components: {},
   data() {
     return {
@@ -283,30 +283,30 @@ export default {
       teamList: [],
       total: 1,
       detail: {
-        name: '',
-        status: '',
-        area: '',
-        type: '',
-        date: ''
+        name: "",
+        status: "",
+        area: "",
+        type: "",
+        date: ""
       },
       resultMgmtVO: {
         serchList: {
-          competitionId: '',
-          categoryId: '',
-          divisionId: '',
-          stageId: '',
-          teamId: '',
-          teamName: '',
-          state: '',
+          competitionId: "",
+          categoryId: "",
+          divisionId: "",
+          stageId: "",
+          teamId: "",
+          teamName: "",
+          state: "",
           isResult: false,
           isMatch: false,
           pageNum: 1,
           pageSize: 10
         },
         topBox: {
-          MatchDate: '1',
-          Submitted: '1',
-          Saved: '1'
+          MatchDate: "1",
+          Submitted: "1",
+          Saved: "1"
         }
       },
       lineUpTopBoxDetialData: [],
@@ -315,8 +315,8 @@ export default {
       awayTeamPlayers: [],
       tableData: [],
       matchTeam: {
-        homeTeam: '',
-        awayTeam: ''
+        homeTeam: "",
+        awayTeam: ""
       }
     };
   },
@@ -327,21 +327,21 @@ export default {
     init(data) {
       this.detail.name = data.name;
       this.detail.date = data.date;
-      if (data.type === '1') {
-        this.detail.type = 'all.tip40';
+      if (data.type === "1") {
+        this.detail.type = "all.tip40";
       } else {
-        this.detail.type = 'all.tip41';
+        this.detail.type = "all.tip41";
       }
-      if (data.status === '1') {
-        this.detail.status = 'all.tip26';
-      } else if (data.status === '2') {
-        this.detail.status = 'all.tip27';
+      if (data.status === "1") {
+        this.detail.status = "all.tip26";
+      } else if (data.status === "2") {
+        this.detail.status = "all.tip27";
       } else {
-        this.detail.status = 'all.tip28';
+        this.detail.status = "all.tip28";
       }
       if (data.Area.length > 0) {
         JSON.parse(data.Area).forEach(i => {
-          let str = '';
+          let str = "";
           if (i.areaName) {
             str = `,${i.areaName}`;
           }
@@ -354,62 +354,62 @@ export default {
       this.getSelectList(data.id);
     },
     returnType(id) {
-      let type = '';
+      let type = "";
       switch (id) {
-      case 1:
-        type = 'all.tip499';
-        break;
-      case 2:
-        type = 'all.tip500';
-        break;
-      case 3:
-        type = 'all.tip501';
-        break;
-      case 4:
-        type = 'all.tip502';
-        break;
-      case 5:
-        type = 'all.tip505';
-        break;
-      case 6:
-        type = 'all.tip506';
-        break;
-      case 7:
-        type = 'all.tip507';
-        break;
-      case 8:
-        type = 'all.tip508';
-        break;
-      case 9:
-        type = 'all.tip509';
-        break;
-      case 10:
-        type = 'all.tip177';
-        break;
-      case 11:
-        type = 'all.tip554';
-        break;
-      case 12:
-        type = 'all.tip555';
-        break;
-      case 13:
-        type = 'all.tip556';
-        break;
-      case 14:
-        type = 'all.tip557';
-        break;
-      case 20:
-        type = 'all.tip511';
-        break;
-      case 21:
-        type = 'all.tip510';
-        break;
-      case 22:
-        type = 'all.tip558';
-        break;
-      default:
-        type = 'CricketCount-up';
-        break;
+        case 1:
+          type = "all.tip499";
+          break;
+        case 2:
+          type = "all.tip500";
+          break;
+        case 3:
+          type = "all.tip501";
+          break;
+        case 4:
+          type = "all.tip502";
+          break;
+        case 5:
+          type = "all.tip505";
+          break;
+        case 6:
+          type = "all.tip506";
+          break;
+        case 7:
+          type = "all.tip507";
+          break;
+        case 8:
+          type = "all.tip508";
+          break;
+        case 9:
+          type = "all.tip509";
+          break;
+        case 10:
+          type = "all.tip177";
+          break;
+        case 11:
+          type = "all.tip554";
+          break;
+        case 12:
+          type = "all.tip555";
+          break;
+        case 13:
+          type = "all.tip556";
+          break;
+        case 14:
+          type = "all.tip557";
+          break;
+        case 20:
+          type = "all.tip511";
+          break;
+        case 21:
+          type = "all.tip510";
+          break;
+        case 22:
+          type = "all.tip558";
+          break;
+        default:
+          type = "CricketCount-up";
+          break;
       }
       return type;
     },
@@ -423,7 +423,7 @@ export default {
       });
     },
     search() {
-      this.$axios.post('/getconfrontationresult', this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
+      this.$axios.post("/getconfrontationresult", this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
         if (!res.data.errorCode) {
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
@@ -448,14 +448,14 @@ export default {
       for (let i = 0; i < this.lineUpTopBoxTableList.length; i += 1) {
         for (let j = 0; j < this.lineUpTopBoxTableList[i].legGameList.length; j += 1) {
           const obj = {
-            confrontationInfoId: '',
-            legId: '',
-            setId: '',
-            status: '',
+            confrontationInfoId: "",
+            legId: "",
+            setId: "",
+            status: "",
             playerList: []
           };
           for (let k = 0; k < this.lineUpTopBoxTableList[i].legGameList[j].playerList.length; k += 1) {
-            let playerId = '';
+            let playerId = "";
             if (type === 1) {
               playerId = this.lineUpTopBoxTableList[i].legGameList[j].playerList[k].homePlayerId;
             } else {
@@ -475,22 +475,22 @@ export default {
           data.push(obj);
         }
       }
-      this.$axios.post('/matchTable/playerIntoLeg', data).then(res => {
+      this.$axios.post("/matchTable/playerIntoLeg", data).then(res => {
         this.$message(res.data.msg);
         this.lineUpTopBoxVisible = false;
       });
     },
     categoryChange() {
-      this.resultMgmtVO.serchList.divisionId = '';
-      this.resultMgmtVO.serchList.stageId = '';
+      this.resultMgmtVO.serchList.divisionId = "";
+      this.resultMgmtVO.serchList.stageId = "";
     },
     divisionChange() {
-      this.resultMgmtVO.serchList.stageId = '';
+      this.resultMgmtVO.serchList.stageId = "";
     },
     setStyle(value) {
       return {
         height: `${48 * value}px`,
-        textAlign: 'center',
+        textAlign: "center",
         lineHeight: `${48 * value}px`
       };
     },
@@ -507,14 +507,14 @@ export default {
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
-      let obj = 'homePlayerId';
+      let obj = "homePlayerId";
       let RepeatIndex = -1;
       let fg = -1;
       let GenderNum = 0;
       const LegObj = {};
       const vm = this;
       if (type === 2) {
-        obj = 'visitingPlayerId';
+        obj = "visitingPlayerId";
       }
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList.forEach(i => {
         i.playerList.forEach(e => {
@@ -545,8 +545,8 @@ export default {
         });
       });
       if (RepeatIndex !== -1) {
-        vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
-        vm.$message(vm.$t('all.tip584'));
+        vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
+        vm.$message(vm.$t("all.tip584"));
         return;
       }
       // 性别要求校验
@@ -581,11 +581,11 @@ export default {
             }
           });
           if (GenderNum < Num) {
-            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
             if (fg === 1) {
-              vm.$message(vm.$t('all.tip583') + Num);
+              vm.$message(vm.$t("all.tip583") + Num);
             } else if (fg === 0) {
-              vm.$message(vm.$t('all.tip579') + Num);
+              vm.$message(vm.$t("all.tip579") + Num);
             }
             return;
           }
@@ -623,8 +623,8 @@ export default {
           });
           for (const [key, value] of Object.entries(LegObj)) {
             if (key && value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
-              this.$message(this.$t('all.tip581') + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+              this.$message(this.$t("all.tip581") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               return;
             }
           }
@@ -636,8 +636,8 @@ export default {
             if (AllSetObj[i][obj]) {
               currentList = AllSetObj.filter(j => AllSetObj[i][obj] === j[obj] && AllSetObj[i].mode === j.mode && AllSetObj[i].setId !== j.setId);
               if (currentList.length > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum - 1) {
-                this.$message(this.$t('all.tip582') + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
-                vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+                this.$message(this.$t("all.tip582") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
+                vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
                 break;
               }
             }
@@ -661,8 +661,8 @@ export default {
         for (let i = 0; i < currentPlayerList.length; i += 1) {
           const repeatId = prePlayerList.find(j => j === currentPlayerList[i]);
           if (repeatId) {
-            this.$message(this.$t('all.tip580'));
-            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+            this.$message(this.$t("all.tip580"));
+            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
             break;
           }
         }
@@ -676,8 +676,8 @@ export default {
           for (let i = 0; i < currentPlayerList.length; i += 1) {
             const repeatId = NextPlayerList.find(j => j === currentPlayerList[i]);
             if (repeatId) {
-              this.$message(this.$t('all.tip110'));
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+              this.$message(this.$t("all.tip110"));
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               break;
             }
           }
@@ -699,24 +699,24 @@ export default {
             res.data.data.forEach(i => {
               let MaxPlayer = 0;
               switch (i.mode) {
-              case 1:
-                MaxPlayer = 1;
-                break;
-              case 2:
-                MaxPlayer = 2;
-                break;
-              case 3:
-                MaxPlayer = 3;
-                break;
-              case 4:
-                MaxPlayer = 4;
-                break;
-              case 5:
-                MaxPlayer = 2;
-                break;
-              default:
-                MaxPlayer = 4;
-                break;
+                case 1:
+                  MaxPlayer = 1;
+                  break;
+                case 2:
+                  MaxPlayer = 2;
+                  break;
+                case 3:
+                  MaxPlayer = 3;
+                  break;
+                case 4:
+                  MaxPlayer = 4;
+                  break;
+                case 5:
+                  MaxPlayer = 2;
+                  break;
+                default:
+                  MaxPlayer = 4;
+                  break;
               }
               Object.assign(i, { MaxPlayer });
               i.legGameList.forEach(j => {
@@ -724,16 +724,16 @@ export default {
                   if (j.playerList.length < MaxPlayer) {
                     for (let item = j.playerList.length; item < MaxPlayer; item += 1) {
                       j.playerList.push({
-                        homePlayerId: '',
-                        visitingPlayerId: ''
+                        homePlayerId: "",
+                        visitingPlayerId: ""
                       });
                     }
                   }
                 } else {
                   for (let jndex = 0; jndex < MaxPlayer; jndex += 1) {
                     j.playerList.push({
-                      homePlayerId: '',
-                      visitingPlayerId: ''
+                      homePlayerId: "",
+                      visitingPlayerId: ""
                     });
                   }
                 }
@@ -785,28 +785,28 @@ export default {
       const vm = this;
       list.forEach(i => {
         const Cobj = {
-          label: '',
-          id: ''
+          label: "",
+          id: ""
         };
-        if (i.url === 'category') {
+        if (i.url === "category") {
           Cobj.label = i.label;
           Cobj.id = i.id;
           vm.categoryList.push(Cobj);
           i.children.forEach(j => {
             const Dobj = {
-              label: '',
-              id: ''
+              label: "",
+              id: ""
             };
-            if (j.url === 'division') {
+            if (j.url === "division") {
               Dobj.label = j.label;
               Dobj.id = j.id;
               vm.divisionList.push(Dobj);
               j.children.forEach(k => {
                 const Sobj = {
-                  label: '',
-                  id: ''
+                  label: "",
+                  id: ""
                 };
-                if (k.url === 'stage') {
+                if (k.url === "stage") {
                   Sobj.label = k.label;
                   Sobj.id = k.id;
                   vm.stageList.push(Sobj);
@@ -824,10 +824,10 @@ export default {
     upload() {},
     result(data) {
       this.$router.push({
-        name: 'resultInformation',
+        name: "resultInformation",
         query: {
           id: String(data.competitionId),
-          name: '2'
+          name: "2"
         }
       });
     }

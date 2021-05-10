@@ -61,7 +61,7 @@
         <el-row>
           <div class="table">
             <el-table :data="rankingList" style="width: 100%">
-              <el-table-column type="index" :label="$t('all.tip214')" width="80"></el-table-column>
+              <el-table-column prop="row" :label="$t('all.tip214')" width="80"></el-table-column>
               <el-table-column prop="teamName" :label="$t('all.tip534')" min-width="7%"></el-table-column>
               <el-table-column prop="rating" :label="$t('all.tip154')" min-width="7%"></el-table-column>
               <el-table-column prop="ppd" :label="$t('all.tip155')" min-width="6%"></el-table-column>
@@ -154,7 +154,7 @@
                   <div class="tableLink" @click="info(scope.row.id, 1)">{{ scope.row.homeTeamName }}</div>
                 </template>
               </el-table-column>
-              <el-table-column prop="homeResult" :label="$t('all.tip325')" min-width="10%">
+              <el-table-column prop="homeResult" :label="$t('all.tip309')" min-width="10%">
                 <template slot-scope="scope">
                   <div class="result">
                     <div style="width:60%">
@@ -181,7 +181,7 @@
               </el-table-column>
             </el-table-column>
             <el-table-column :label="$t('all.tip326')">
-              <el-table-column prop="awayResult" :label="$t('all.tip325')" min-width="10%">
+              <el-table-column prop="awayResult" :label="$t('all.tip309')" min-width="10%">
                 <template slot-scope="scope">
                   <div class="result">
                     <div>{{ scope.row.visitingResult }}</div>
@@ -290,8 +290,8 @@
             </div>
             <el-row class="allBox">
               <el-col :span="6">
-                <el-col :span="2">{{ "Set" }}</el-col>
-                <el-col :span="10">
+                <el-col :span="4">{{ "Set" }}</el-col>
+                <el-col :span="8">
                   <el-select v-model="defaultSet" :placeholder="$t('placeholder.select')" @change="setChange">
                     <el-option v-for="item in setList" :key="item.setResultId" :label="item.setName" :value="item.setResultId"></el-option>
                   </el-select>
@@ -325,7 +325,7 @@
                       <div>{{ scope.row.drawFirst === 1 ? $t("all.tip323") : $t("all.tip326") }}</div>
                     </template>
                   </el-table-column>
-                  <el-table-column :label="$t('all.tip111')" min-width="10%">
+                  <el-table-column :label="$t('all.tip323')" min-width="10%">
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
                         <div v-for="(item, index) in scope.row.homePlayerList" :key="index">
@@ -349,14 +349,14 @@
                     </el-table-column>
                   </el-table-column>
                   <el-table-column :label="$t('all.tip309')" min-width="7%">
-                    <el-table-column :label="$t('all.tip107')" min-width="7%">
+                    <el-table-column :label="$t('all.tip111')" min-width="7%">
                       <template slot-scope="scope">
                         <el-select v-model="scope.row.homeIsWin" :placeholder="$t('placeholder.select')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
                         </el-select>
                       </template>
                     </el-table-column>
-                    <el-table-column :label="$t('all.tip109')" min-width="7%">
+                    <el-table-column :label="$t('all.tip325')" min-width="7%">
                       <template slot-scope="scope">
                         <el-select v-model="scope.row.visitingIsWin" :placeholder="$t('placeholder.select')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
@@ -674,7 +674,7 @@
           </el-form>
           <div class="table">
             <el-table :data="playerList" style="width: 100%">
-              <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
+              <el-table-column prop="row" :label="$t('all.tip257')" width="50"></el-table-column>
               <el-table-column :label="$t('all.tip80')" min-width="7%">
                 <template slot-scope="scope">
                   <div class="formImgBox">
@@ -781,8 +781,8 @@
           </el-form>
         </el-row>
         <div class="table">
-          <el-table :data="playerAwardList" border style="width: 100%">
-            <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
+          <el-table :data="playerAwardList" border>
+            <el-table-column prop="row" :label="$t('all.tip257')" width="50"></el-table-column>
             <el-table-column :label="$t('all.tip340')" min-width="10%">
               <template slot-scope="scope">
                 <div>{{ `${scope.row.playerName}` }}</div>
@@ -856,7 +856,7 @@
         </el-row>
         <div class="table">
           <el-table :data="teamAwardList" border style="width: 100%">
-            <el-table-column type="index" :label="$t('all.tip214')" width="80"></el-table-column>
+            <el-table-column prop="row" :label="$t('all.tip214')" width="80"></el-table-column>
             <el-table-column :label="$t('all.tip361')" min-width="10%">
               <template slot-scope="scope">
                 <div>{{ scope.row.teamName }}</div>
@@ -1099,7 +1099,8 @@ export default {
       this.$axios.post("/ranking", this.$qs.stringify(this.rankingVO)).then(res => {
         if (res.data.data) {
           this.rankingValue = res.data.data;
-          this.rankingList = res.data.data.teamList;
+          this.rankingList = res.data.data.teamList.list;
+          this.rankingtotal = res.data.data.teamList.total;
         } else {
           this.$message(res.data.msg);
         }
@@ -1148,10 +1149,22 @@ export default {
     },
     getPlayerAwardList() {
       this.$axios.post("/playerawardresult", this.$qs.stringify(this.PlayerAwardVO)).then(res => {
-        this.playerAwardList = res.data.data.list;
-        this.playerAwardTotal = res.data.data.total;
+        if (res.data.data.list) {
+          this.playerAwardList = res.data.data.list;
+          this.playerAwardTotal = res.data.data.total;
+        }
       });
     },
+    // sortChange({ order }) {
+    //   // 升序
+    //   if (order === "ascending") {
+    //     console.log(1);
+    //   }
+    //   // 降序
+    //   if (order === "descending") {
+    //     console.log(2);
+    //   }
+    // },
     playerAwardSizeChange(value) {
       this.PlayerAwardVO.pageSize = value;
       this.getPlayerAwardList();
@@ -1429,6 +1442,7 @@ export default {
 }
 .title {
   background: #eeeeee;
+  line-height: 28px;
 }
 .ButtonBox {
   display: flex;

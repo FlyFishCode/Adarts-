@@ -286,26 +286,15 @@
                       <div>{{ showData(index, scope.$index + 1, itemIndex).visitingTeamName }}</div>
                       <div>{{ showData(index, scope.$index + 1, itemIndex).week }}</div>
                       <div>
-                        <el-button
-                          v-if="showData(index, scope.$index + 1, itemIndex).state === 1"
-                          size="mini"
-                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
-                          >{{ $t("all.tip334") }}</el-button
-                        >
-                        <el-button
-                          v-if="showData(index, scope.$index + 1, itemIndex).state === 2"
-                          size="mini"
-                          type="primary"
-                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
-                          >{{ $t("all.tip288") }}</el-button
-                        >
-                        <el-button
-                          v-if="showData(index, scope.$index + 1, itemIndex).state === 3"
-                          size="mini"
-                          type="danger"
-                          @click="showTopBox(showData(index, scope.$index + 1, itemIndex))"
-                          >{{ $t("all.tip333") }}</el-button
-                        >
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 1" size="mini" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip334")
+                        }}</el-button>
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 2" size="mini" type="primary" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip288")
+                        }}</el-button>
+                        <el-button v-if="showData(index, scope.$index + 1, itemIndex).state === 3" size="mini" type="danger" @click="showTopBox(showData(index, scope.$index + 1, itemIndex))">{{
+                          $t("all.tip333")
+                        }}</el-button>
                       </div>
                     </template>
                   </template>
@@ -670,14 +659,14 @@ export default {
       lineUpTopBoxVisible: false,
       hasData: false,
       isTimeTable: true,
-      matchTableId: '',
+      matchTableId: "",
       LeagueMgmtVO: {},
       lineUpTopBoxDetialData: {},
       lineUpTopBoxTableList: [],
-      matchTableTime: '',
+      matchTableTime: "",
       homeAttend: false,
       awayAttend: false,
-      timeDate: '',
+      timeDate: "",
       MatchingTableList: [],
       MatchingTableData: [],
       cycleType: 1,
@@ -686,13 +675,13 @@ export default {
       dayType: 1,
       Stage: {
         formList: {
-          competition: '',
-          category: '',
-          division: '',
-          stage: ''
+          competition: "",
+          category: "",
+          division: "",
+          stage: ""
         },
         MatchTableOption: {
-          stageId: '',
+          stageId: "",
           matchTable: 1,
           round: 1,
           cycle: 1,
@@ -703,14 +692,14 @@ export default {
           isWed: true,
           isThu: true,
           isFri: true,
-          isSat: '',
-          isSun: '',
+          isSat: "",
+          isSun: "",
           hour: 1,
           minute: 0,
           intervalTime: 60
         }
       },
-      activeName: '',
+      activeName: "",
       HourArr: [],
       MinuteArr: [],
       tableHeader: [{ index: 0 }],
@@ -766,6 +755,7 @@ export default {
   mounted() {
     if (this.$route.query.data) {
       const data = JSON.parse(this.$route.query.data);
+      debugger;
       this.Stage.formList.competition = data.matchTableName;
       this.Stage.formList.category = data.categoryName;
       this.Stage.formList.division = data.divisionName;
@@ -830,16 +820,16 @@ export default {
       if (id === 1) {
         this.homeAttend = !this.homeAttend;
         if (this.homeAttend) {
-          this.$message(this.$t('all.tip591'));
+          this.$message(this.$t("all.tip591"));
         } else {
-          this.$message(this.$t('all.tip592'));
+          this.$message(this.$t("all.tip592"));
         }
       } else {
         this.awayAttend = !this.awayAttend;
         if (this.awayAttend) {
-          this.$message(this.$t('all.tip591'));
+          this.$message(this.$t("all.tip591"));
         } else {
-          this.$message(this.$t('all.tip592'));
+          this.$message(this.$t("all.tip592"));
         }
       }
       const data = {
@@ -847,13 +837,13 @@ export default {
         homeAttend: Number(this.homeAttend),
         visitingAttend: Number(this.awayAttend)
       };
-      this.$axios.post('/updateAttend', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/updateAttend", this.$qs.stringify(data)).then(res => {
         console.log(res);
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem('userId');
-      this.$axios.post('/getshop', this.$qs.stringify({ userId })).then(res => {
+      const userId = sessionStorage.getItem("userId");
+      this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.ShopList = res.data.data.list;
       });
     },
@@ -876,65 +866,65 @@ export default {
       }
     },
     returnType(id) {
-      let type = '';
+      let type = "";
       switch (id) {
-      case 0:
-        type = 'all.tip521';
-        break;
-      case 1:
-        type = 'all.tip499';
-        break;
-      case 2:
-        type = 'all.tip500';
-        break;
-      case 3:
-        type = 'all.tip501';
-        break;
-      case 4:
-        type = 'all.tip502';
-        break;
-      case 5:
-        type = 'all.tip505';
-        break;
-      case 6:
-        type = 'all.tip506';
-        break;
-      case 7:
-        type = 'all.tip507';
-        break;
-      case 8:
-        type = 'all.tip508';
-        break;
-      case 9:
-        type = 'all.tip509';
-        break;
-      case 10:
-        type = 'all.tip177';
-        break;
-      case 11:
-        type = 'all.tip554';
-        break;
-      case 12:
-        type = 'all.tip555';
-        break;
-      case 13:
-        type = 'all.tip556';
-        break;
-      case 14:
-        type = 'all.tip557';
-        break;
-      case 20:
-        type = 'all.tip511';
-        break;
-      case 21:
-        type = 'all.tip510';
-        break;
-      case 22:
-        type = 'all.tip558';
-        break;
-      default:
-        type = 'CricketCount-up';
-        break;
+        case 0:
+          type = "all.tip521";
+          break;
+        case 1:
+          type = "all.tip499";
+          break;
+        case 2:
+          type = "all.tip500";
+          break;
+        case 3:
+          type = "all.tip501";
+          break;
+        case 4:
+          type = "all.tip502";
+          break;
+        case 5:
+          type = "all.tip505";
+          break;
+        case 6:
+          type = "all.tip506";
+          break;
+        case 7:
+          type = "all.tip507";
+          break;
+        case 8:
+          type = "all.tip508";
+          break;
+        case 9:
+          type = "all.tip509";
+          break;
+        case 10:
+          type = "all.tip177";
+          break;
+        case 11:
+          type = "all.tip554";
+          break;
+        case 12:
+          type = "all.tip555";
+          break;
+        case 13:
+          type = "all.tip556";
+          break;
+        case 14:
+          type = "all.tip557";
+          break;
+        case 20:
+          type = "all.tip511";
+          break;
+        case 21:
+          type = "all.tip510";
+          break;
+        case 22:
+          type = "all.tip558";
+          break;
+        default:
+          type = "CricketCount-up";
+          break;
       }
       return type;
     },
@@ -956,7 +946,7 @@ export default {
         data = 1;
       }
       this.Stage.MatchTableOption.cycle = this.cycle * data;
-      this.$axios.post('/generateagainst', vm.Stage.MatchTableOption).then(res => {
+      this.$axios.post("/generateagainst", vm.Stage.MatchTableOption).then(res => {
         this.$message({
           message: res.data.msg
         });
@@ -1013,12 +1003,12 @@ export default {
         return obj;
       }
       return {
-        confrontationDate: '',
-        homeTeamName: '',
-        visitingTeamName: '',
-        state: '',
-        week: '',
-        id: ''
+        confrontationDate: "",
+        homeTeamName: "",
+        visitingTeamName: "",
+        state: "",
+        week: "",
+        id: ""
       };
     },
     getMatchTableData(id) {
@@ -1080,7 +1070,7 @@ export default {
     setStyle(value) {
       return {
         height: `${48 * value}px`,
-        textAlign: 'center',
+        textAlign: "center",
         lineHeight: `${48 * value}px`
       };
     },
@@ -1097,14 +1087,14 @@ export default {
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
-      let obj = 'homePlayerId';
+      let obj = "homePlayerId";
       let RepeatIndex = -1;
       let fg = -1;
       let GenderNum = 0;
       const LegObj = {};
       const vm = this;
       if (type === 2) {
-        obj = 'visitingPlayerId';
+        obj = "visitingPlayerId";
       }
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList.forEach(i => {
         i.playerList.forEach(e => {
@@ -1135,8 +1125,8 @@ export default {
         });
       });
       if (RepeatIndex !== -1) {
-        vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
-        vm.$message(vm.$t('all.tip584'));
+        vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
+        vm.$message(vm.$t("all.tip584"));
         return;
       }
       // 性别要求校验
@@ -1171,11 +1161,11 @@ export default {
             }
           });
           if (GenderNum < Num) {
-            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+            vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
             if (fg === 1) {
-              vm.$message(vm.$t('all.tip583') + Num);
+              vm.$message(vm.$t("all.tip583") + Num);
             } else if (fg === 0) {
-              vm.$message(vm.$t('all.tip579') + Num);
+              vm.$message(vm.$t("all.tip579") + Num);
             }
             return;
           }
@@ -1212,9 +1202,9 @@ export default {
             }
           });
           for (const [key, value] of Object.entries(LegObj)) {
-            if (key && key !== 'null' && value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
-              this.$message(this.$t('all.tip581') + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+            if (key && key !== "null" && value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
+              this.$message(this.$t("all.tip581") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               return;
             }
           }
@@ -1226,8 +1216,8 @@ export default {
             if (AllSetObj[i][obj]) {
               currentList = AllSetObj.filter(j => AllSetObj[i][obj] === j[obj] && AllSetObj[i].mode === j.mode && AllSetObj[i].setId !== j.setId);
               if (currentList.length > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum - 1) {
-                this.$message(this.$t('all.tip582') + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
-                vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+                this.$message(this.$t("all.tip582") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
+                vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
                 break;
               }
             }
@@ -1259,14 +1249,14 @@ export default {
           for (let i = 0; i < currentPlayerList.length; i += 1) {
             const preId = prePlayerList.find(j => j === currentPlayerList[i]);
             if (preId) {
-              this.$message(this.$t('all.tip580'));
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+              this.$message(this.$t("all.tip580"));
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               break;
             }
             const NextId = NextPlayerList.find(j => j === currentPlayerList[i]);
             if (NextId) {
-              this.$message(this.$t('all.tip110'));
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+              this.$message(this.$t("all.tip110"));
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               break;
             }
           }
@@ -1276,8 +1266,8 @@ export default {
           for (let i = 0; i < currentPlayerList.length; i += 1) {
             const NextId = NextPlayerList.find(j => j === currentPlayerList[i]);
             if (NextId) {
-              this.$message(this.$t('all.tip110'));
-              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = '';
+              this.$message(this.$t("all.tip110"));
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
               break;
             }
           }
@@ -1300,24 +1290,24 @@ export default {
             res.data.data.forEach(i => {
               let MaxPlayer = 0;
               switch (i.mode) {
-              case 1:
-                MaxPlayer = 1;
-                break;
-              case 2:
-                MaxPlayer = 2;
-                break;
-              case 3:
-                MaxPlayer = 3;
-                break;
-              case 4:
-                MaxPlayer = 4;
-                break;
-              case 5:
-                MaxPlayer = 2;
-                break;
-              default:
-                MaxPlayer = 4;
-                break;
+                case 1:
+                  MaxPlayer = 1;
+                  break;
+                case 2:
+                  MaxPlayer = 2;
+                  break;
+                case 3:
+                  MaxPlayer = 3;
+                  break;
+                case 4:
+                  MaxPlayer = 4;
+                  break;
+                case 5:
+                  MaxPlayer = 2;
+                  break;
+                default:
+                  MaxPlayer = 4;
+                  break;
               }
               Object.assign(i, { MaxPlayer });
               i.legGameList.forEach(j => {
@@ -1325,16 +1315,16 @@ export default {
                   if (j.playerList.length < MaxPlayer) {
                     for (let item = j.playerList.length; item < MaxPlayer; item += 1) {
                       j.playerList.push({
-                        homePlayerId: '',
-                        visitingPlayerId: ''
+                        homePlayerId: "",
+                        visitingPlayerId: ""
                       });
                     }
                   }
                 } else {
                   for (let jndex = 0; jndex < MaxPlayer; jndex += 1) {
                     j.playerList.push({
-                      homePlayerId: '',
-                      visitingPlayerId: ''
+                      homePlayerId: "",
+                      visitingPlayerId: ""
                     });
                   }
                 }
@@ -1397,14 +1387,14 @@ export default {
       for (let i = 0; i < this.lineUpTopBoxTableList.length; i += 1) {
         for (let j = 0; j < this.lineUpTopBoxTableList[i].legGameList.length; j += 1) {
           const obj = {
-            confrontationInfoId: '',
-            legId: '',
-            setId: '',
-            status: '',
+            confrontationInfoId: "",
+            legId: "",
+            setId: "",
+            status: "",
             playerList: []
           };
           for (let k = 0; k < this.lineUpTopBoxTableList[i].legGameList[j].playerList.length; k += 1) {
-            let playerId = '';
+            let playerId = "";
             if (type === 1) {
               playerId = this.lineUpTopBoxTableList[i].legGameList[j].playerList[k].homePlayerId;
             } else {
@@ -1424,17 +1414,17 @@ export default {
           data.push(obj);
         }
       }
-      this.$axios.post('/matchTable/playerIntoLeg', data).then(res => {
+      this.$axios.post("/matchTable/playerIntoLeg", data).then(res => {
         this.$message(res.data.msg);
         this.getTimeTableData(this.matchTableId);
       });
     },
     result(id) {
       this.$router.push({
-        name: 'resultInformation',
+        name: "resultInformation",
         query: {
           id,
-          name: '2'
+          name: "2"
         }
       });
     },
@@ -1452,11 +1442,11 @@ export default {
     },
     save() {
       const data = {
-        confInfoId: '',
-        homeAttend: '',
-        visitingAttend: '',
-        homePlayShopId: '',
-        visitingPlayShopId: '',
+        confInfoId: "",
+        homeAttend: "",
+        visitingAttend: "",
+        homePlayShopId: "",
+        visitingPlayShopId: "",
         confrontationDate: new Date(this.matchTableTime)
       };
       this.MatchingTableList.forEach(i => {
@@ -1476,7 +1466,7 @@ export default {
           data.visitingPlayShopId = i.awayPlayShopId;
         }
       });
-      this.$axios.post('/matchTable/updateFightInfo', data).then(res => {
+      this.$axios.post("/matchTable/updateFightInfo", data).then(res => {
         this.$message(res.data.msg);
         this.getMatchTableData(this.matchTableId);
         this.getTimeTableData(this.matchTableId);
@@ -1485,61 +1475,61 @@ export default {
     },
     getHomeAndVisitingBeginINFo(id, type) {
       const vm = this;
-      let SRT = '';
+      let SRT = "";
       this.$axios.get(`/matchTable/getHomeAndVisitingFightINfo?confInfoId=${id}`).then(res => {
         if (res.data.data) {
           if (type) {
-            SRT = 'MatchingTableList';
+            SRT = "MatchingTableList";
             vm[SRT] = [];
           } else {
-            SRT = 'MatchingTableData';
+            SRT = "MatchingTableData";
             vm[SRT] = [];
           }
           for (let j = 0; j < 7; j += 1) {
             const obj = {};
             switch (j) {
-            case 0:
-              obj.id = id;
-              obj.photo = true;
-              obj.type = res.data.data[0].type;
-              obj.title = ['Set Point', 'Winning Point', 'Penalty Point'];
-              obj.homelist = [res.data.data[0].setPoint, res.data.data[0].winningPoint, res.data.data[0].penaltyPoint];
-              obj.awaylist = [res.data.data[1].setPoint, res.data.data[1].winningPoint, res.data.data[1].penaltyPoint];
-              obj.teamName = res.data.data[0].teamName;
-              obj.awayName = res.data.data[1].teamName;
-              vm.matchTableTime = res.data.data[0].gameDate;
-              break;
-            case 1:
-              obj.label = 'all.tip246';
-              obj.homeCaptainName = res.data.data[0].captainName;
-              obj.awayCaptainName = res.data.data[1].captainName;
-              break;
-            case 2:
-              obj.label = 'all.tip296';
-              obj.button = '1';
-              obj.id = res.data.data[0].id;
-              break;
-            case 3:
-              obj.label = 'all.tip215';
-              obj.select = '1';
-              obj.homePlayShopId = res.data.data[0].playShopId;
-              obj.awayPlayShopId = res.data.data[1].playShopId;
-              break;
-            case 4:
-              obj.label = 'all.tip295';
-              obj.homeMachine = res.data.data[0].machine;
-              obj.awayMachine = res.data.data[1].machine;
-              break;
-            case 5:
-              obj.label = 'all.tip298';
-              obj.homeForceAttend = res.data.data[0].useForceAttend;
-              obj.awayForceAttend = res.data.data[1].useForceAttend;
-              break;
-            default:
-              obj.label = 'all.tip297';
-              obj.homePlayerChange = `${res.data.data[0].playerChange}/${res.data.data[0].forceAttendNumber}`;
-              obj.awayPlayerChange = `${res.data.data[1].playerChange}/${res.data.data[1].forceAttendNumber}`;
-              break;
+              case 0:
+                obj.id = id;
+                obj.photo = true;
+                obj.type = res.data.data[0].type;
+                obj.title = ["Set Point", "Winning Point", "Penalty Point"];
+                obj.homelist = [res.data.data[0].setPoint, res.data.data[0].winningPoint, res.data.data[0].penaltyPoint];
+                obj.awaylist = [res.data.data[1].setPoint, res.data.data[1].winningPoint, res.data.data[1].penaltyPoint];
+                obj.teamName = res.data.data[0].teamName;
+                obj.awayName = res.data.data[1].teamName;
+                vm.matchTableTime = res.data.data[0].gameDate;
+                break;
+              case 1:
+                obj.label = "all.tip246";
+                obj.homeCaptainName = res.data.data[0].captainName;
+                obj.awayCaptainName = res.data.data[1].captainName;
+                break;
+              case 2:
+                obj.label = "all.tip296";
+                obj.button = "1";
+                obj.id = res.data.data[0].id;
+                break;
+              case 3:
+                obj.label = "all.tip215";
+                obj.select = "1";
+                obj.homePlayShopId = res.data.data[0].playShopId;
+                obj.awayPlayShopId = res.data.data[1].playShopId;
+                break;
+              case 4:
+                obj.label = "all.tip295";
+                obj.homeMachine = res.data.data[0].machine;
+                obj.awayMachine = res.data.data[1].machine;
+                break;
+              case 5:
+                obj.label = "all.tip298";
+                obj.homeForceAttend = res.data.data[0].useForceAttend;
+                obj.awayForceAttend = res.data.data[1].useForceAttend;
+                break;
+              default:
+                obj.label = "all.tip297";
+                obj.homePlayerChange = `${res.data.data[0].playerChange}/${res.data.data[0].forceAttendNumber}`;
+                obj.awayPlayerChange = `${res.data.data[1].playerChange}/${res.data.data[1].forceAttendNumber}`;
+                break;
             }
             if (Object.keys(obj).length > 0) {
               vm[SRT].push(obj);
