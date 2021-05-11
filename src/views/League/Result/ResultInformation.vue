@@ -299,10 +299,10 @@
               </el-col>
               <el-col :span="2">{{ $t("all.tip225") }}</el-col>
               <el-col :span="15">
-                <el-input v-model="gameResultTextarea" clearable></el-input>
+                <el-input v-model="setReason" clearable></el-input>
               </el-col>
               <el-col :span="1">
-                <el-button type="primary" size="mini" @click="showBox">{{ $t("all.tip136") }}</el-button>
+                <el-button type="primary" size="mini" @click="handleClickSet">{{ $t("all.tip136") }}</el-button>
               </el-col>
             </el-row>
             <el-row style="border:1px solid #eee;">
@@ -329,8 +329,8 @@
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
                         <div v-for="(item, index) in scope.row.homePlayerList" :key="index">
-                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')">
-                            <el-option v-for="item in scope.row.homePlayerList" :key="item.playerId" :label="item.playerName" :value="item.playerId"></el-option>
+                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')" disabled>
+                            <el-option v-for="item in scope.row.homePlayerList" :key="item.playerResultId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
                       </template>
@@ -380,8 +380,8 @@
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
                         <div v-for="(item, index) in scope.row.visitingPlayerList" :key="index">
-                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')">
-                            <el-option v-for="item in scope.row.visitingPlayerList" :key="item.playerId" :label="item.playerName" :value="item.playerId"></el-option>
+                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')" disabled>
+                            <el-option v-for="item in scope.row.visitingPlayerList" :key="item.playerResultId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
                       </template>
@@ -403,15 +403,15 @@
                 <el-col :span="6" :title="homeTeamName" class="overFlowStyle">{{ $t("all.tip323") + "：" }}{{ homeTeamName }}</el-col>
                 <el-col :span="2">{{ $t("all.tip225") }}</el-col>
                 <el-col :span="15">
-                  <el-input v-model="gameResultTextarea" clearable></el-input>
+                  <el-input v-model="homeReason" clearable></el-input>
                 </el-col>
                 <el-col :span="1">
-                  <el-button type="primary" size="mini" @click="showBox">{{ $t("all.tip136") }}</el-button>
+                  <el-button type="primary" size="mini" @click="hancleClickLeg(1)">{{ $t("all.tip136") }}</el-button>
                 </el-col>
               </el-row>
               <div class="table">
                 <el-table :data="homeTeam" border style="width: 100%">
-                  <el-table-column prop="id" :label="$t('all.tip257')" min-width="2%"></el-table-column>
+                  <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
                   <el-table-column :label="$t('all.tip340')" min-width="4%">
                     <template slot-scope="scope">
                       <div>{{ `${scope.row.playerName}` }}</div>
@@ -508,15 +508,15 @@
               <el-col :span="6" :title="awayTeamName" class="overFlowStyle">{{ $t("all.tip326") + "：" }}{{ awayTeamName }}</el-col>
               <el-col :span="2">{{ $t("all.tip225") }}</el-col>
               <el-col :span="15">
-                <el-input v-model="gameResultTextarea" clearable></el-input>
+                <el-input v-model="awayReason" clearable></el-input>
               </el-col>
               <el-col :span="1">
-                <el-button type="primary" size="mini" @click="showBox">{{ $t("all.tip136") }}</el-button>
+                <el-button type="primary" size="mini" @click="hancleClickLeg(0)">{{ $t("all.tip136") }}</el-button>
               </el-col>
             </el-row>
             <div class="table">
               <el-table :data="awayTeam" border style="width: 100%">
-                <el-table-column prop="id" :label="$t('all.tip257')" min-width="2%"></el-table-column>
+                <el-table-column type="index" :label="$t('all.tip257')" width="50"></el-table-column>
                 <el-table-column :label="$t('all.tip340')" min-width="4%">
                   <template slot-scope="scope">
                     <div>{{ `${scope.row.playerName}` }}</div>
@@ -948,7 +948,9 @@ export default {
       ResultsHiotory: [],
       homeResultId: "",
       awayResultId: "",
-      gameResultTextarea: "",
+      setReason: "",
+      homeReason: "",
+      awayReason: "",
       detail: {
         status: "",
         area: "",
@@ -1155,16 +1157,6 @@ export default {
         }
       });
     },
-    // sortChange({ order }) {
-    //   // 升序
-    //   if (order === "ascending") {
-    //     console.log(1);
-    //   }
-    //   // 降序
-    //   if (order === "descending") {
-    //     console.log(2);
-    //   }
-    // },
     playerAwardSizeChange(value) {
       this.PlayerAwardVO.pageSize = value;
       this.getPlayerAwardList();
@@ -1348,7 +1340,6 @@ export default {
           this.setDataList = i.legResultList;
         }
       });
-      console.log(this.setDataList);
     },
     legChange(value) {
       this.getLegData(value, 1);
@@ -1377,7 +1368,76 @@ export default {
         this.LeagueResultsDialog = true;
       });
     },
-    showBox() {},
+    handleClickSet() {
+      const obj = {
+        reason: this.setReason,
+        legResultList: []
+      };
+      this.setDataList.forEach(i => {
+        const tempObj = {
+          homeIsWin: i.homeIsWin,
+          homeScore: i.homeScore,
+          legResultId: i.legResultId,
+          visitingIsWin: i.visitingIsWin,
+          visitingScore: i.visitingScore,
+          playerResultList: []
+        };
+        i.homePlayerList.forEach(j => {
+          tempObj.playerResultList.push({
+            playerId: j.playerId,
+            playerResultId: j.playerResultId,
+            ppdMpr: j.ppdMpr
+          });
+        });
+        i.visitingPlayerList.forEach(j => {
+          tempObj.playerResultList.push({
+            playerId: j.playerId,
+            playerResultId: j.playerResultId,
+            ppdMpr: j.ppdMpr
+          });
+        });
+        obj.legResultList.push(tempObj);
+      });
+      this.$axios.post("/updateSetResult", obj).then(res => {
+        this.$message(res.data.msg);
+      });
+    },
+    hancleClickLeg(type) {
+      const obj = {
+        reason: "",
+        playerResultList: []
+      };
+      let str = "";
+      if (type) {
+        str = "homeTeam";
+        obj.reason = this.homeReason;
+      } else {
+        str = "awayTeam";
+        obj.reason = this.awayReason;
+      }
+      obj.playerResultList = this[str].map(i => ({
+        doubleBull: i.doubleBull,
+        eightMarks: i.eightMarks,
+        fiveMarks: i.fiveMarks,
+        hatTrick: i.hatTrick,
+        highTon: i.highTon,
+        highTonOut: i.highTonOut,
+        lowTon: i.lowTon,
+        lowTonOut: i.lowTonOut,
+        nineMarks: i.nineMarks,
+        playerResultId: i.playerResultId,
+        sevenMarks: i.sevenMarks,
+        sideBull: i.sideBull,
+        sixMarks: i.sixMarks,
+        threeInABed: i.threeInABed,
+        threeInTheBlack: i.threeInTheBlack,
+        ton80: i.ton80,
+        whiteHorse: i.whiteHorse
+      }));
+      this.$axios.post("/updateLegResult", obj).then(res => {
+        this.$message(res.data.msg);
+      });
+    },
     tabClick(value) {
       if (value.index === "2") {
         this.getResultList();
