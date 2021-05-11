@@ -249,7 +249,7 @@
                 <el-table-column prop="teamName" :label="$t('all.tip324')" min-width="5%"></el-table-column>
                 <el-table-column :label="$t('all.tip309')" min-width="5%">
                   <template slot-scope="scope">
-                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')" @change="homeChange">
+                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')">
                       <el-option v-for="item in gameScoreList" :key="item.index" :label="item.label" :value="item.id"></el-option>
                     </el-select>
                   </template>
@@ -276,7 +276,7 @@
                 <el-table-column prop="teamName" :label="$t('all.tip324')" min-width="5%"></el-table-column>
                 <el-table-column :label="$t('all.tip223')" min-width="5%">
                   <template slot-scope="scope">
-                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')" @change="awayChange">
+                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')">
                       <el-option v-for="item in penaltyScoreList" :key="item.index" :label="item.label" :value="item.id"></el-option>
                     </el-select>
                   </template>
@@ -1190,12 +1190,6 @@ export default {
         this.findObj(res.data.data);
       });
     },
-    homeChange(value) {
-      console.log(value, this.allResultMgmt);
-    },
-    awayChange() {
-      console.log(this.penaltyMgmt);
-    },
     change(value) {
       console.log(value);
     },
@@ -1313,7 +1307,6 @@ export default {
       }
     },
     penaltyScore() {
-      console.log(this.penaltyMgmt);
       for (let i = 0; i < 2; i += 1) {
         const data = {};
         if (i === 0) {
@@ -1443,10 +1436,6 @@ export default {
         this.getResultList();
       }
       this.showDetail = false;
-    },
-    requset(id) {
-      console.log(id);
-      this.$message("id");
     },
     resultCategoryIdCG() {
       this.result.divisionId = "";

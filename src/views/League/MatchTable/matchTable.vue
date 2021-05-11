@@ -108,7 +108,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('all.tip18')" min-width="10%">
+        <el-table-column :label="$t('all.tip442')" min-width="10%">
           <template slot-scope="scope">
             <div v-for="item in scope.row.countryList" :key="item.index">
               {{ item.areaName }}
