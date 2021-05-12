@@ -452,11 +452,7 @@ export default {
           for (let index = 0; index < typeList.length; index += 1) {
             if (Number(num) >= Number(typeList[index]) && index !== typeList.length - 1) {
               const temp = Number((num - typeList[index]) / (typeList[index + 1] - typeList[index])).toFixed(4);
-              // if (index) {
               level = (Number(list[index]) + temp * (list[index + 1] - list[index]).toFixed(4)).toFixed(2);
-              // } else {
-              // level = list[index];
-              // }
             }
           }
           return Number(level);

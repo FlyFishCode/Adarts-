@@ -12,9 +12,9 @@
           {{ $t("all.tip536") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          <div v-if="match.status === 1">{{ this.$t('all.tip26') }}</div>
-          <div v-if="match.status === 2">{{ this.$t('all.tip27') }}</div>
-          <div v-if="match.status === 3">{{ this.$t('all.tip28') }}</div>
+          <div v-if="match.status === 1">{{ this.$t("all.tip26") }}</div>
+          <div v-if="match.status === 2">{{ this.$t("all.tip27") }}</div>
+          <div v-if="match.status === 3">{{ this.$t("all.tip28") }}</div>
         </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip4") }}
@@ -34,8 +34,14 @@
           {{ $t("all.tip538") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass"> {{ match.start }}-{{ match.end }} </el-col>
+        <el-col :span="3" class="label-g">
+          {{ $t("all.tip244") }}
+        </el-col>
+        <el-col :span="3" class="overFlowStyle lineClass">
+          {{ match.teamName }}
+        </el-col>
       </el-row>
-      <el-row class="center-Row">
+      <!-- <el-row class="center-Row">
         <el-col :span="3" class="label-g">
           {{ $t("all.tip244") }}
         </el-col>
@@ -60,7 +66,7 @@
         <el-col :span="3" class="overFlowStyle lineClass">
           {{ match.stage }}
         </el-col>
-      </el-row>
+      </el-row> -->
     </div>
 
     <div class="search">
@@ -89,7 +95,7 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="matchVO.game" :placeholder="$t('placeholder.select')">
-             <el-option v-for="item in gameNameList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
+            <el-option v-for="item in gameNameList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">
@@ -112,7 +118,8 @@
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="matchVO.end" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions"> </el-date-picker>
+            <el-date-picker v-model="matchVO.end" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
+            </el-date-picker>
           </el-col>
         </el-col>
         <el-col :span="2" class="lineClass">
@@ -168,7 +175,8 @@
         </el-table-column>
       </el-table>
       <div class="page">
-        <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+        <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        </el-pagination>
       </div>
     </div>
 
@@ -189,35 +197,36 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     const vm = this;
     return {
+      dialogTableVisible: false,
       total: 1,
       modeList: [
-        { id: 1, label: 'all.tip200' },
-        { id: 2, label: 'all.tip201' },
-        { id: 3, label: 'all.tip202' },
-        { id: 4, label: 'all.tip203' },
-        { id: 5, label: 'all.tip204' },
-        { id: 6, label: 'all.tip205' }
+        { id: 1, label: "all.tip200" },
+        { id: 2, label: "all.tip201" },
+        { id: 3, label: "all.tip202" },
+        { id: 4, label: "all.tip203" },
+        { id: 5, label: "all.tip204" },
+        { id: 6, label: "all.tip205" }
       ],
       gameNameList: [
-        { value: 1, label: 'all.tip499' },
-        { value: 2, label: 'all.tip500' },
-        { value: 3, label: 'all.tip501' },
-        { value: 4, label: 'all.tip502' },
-        { value: 5, label: 'all.tip503' },
-        { value: 6, label: 'all.tip504' },
-        { value: 7, label: 'all.tip505' },
-        { value: 8, label: 'all.tip506' },
-        { value: 9, label: 'all.tip507' },
-        { value: 10, label: 'all.tip508' },
-        { value: 11, label: 'all.tip509' },
-        { value: 12, label: 'all.tip510' },
-        { value: 13, label: 'all.tip511' },
-        { value: 14, label: 'all.tip512' }
+        { value: 1, label: "all.tip499" },
+        { value: 2, label: "all.tip500" },
+        { value: 3, label: "all.tip501" },
+        { value: 4, label: "all.tip502" },
+        { value: 5, label: "all.tip503" },
+        { value: 6, label: "all.tip504" },
+        { value: 7, label: "all.tip505" },
+        { value: 8, label: "all.tip506" },
+        { value: 9, label: "all.tip507" },
+        { value: 10, label: "all.tip508" },
+        { value: 11, label: "all.tip509" },
+        { value: 12, label: "all.tip510" },
+        { value: 13, label: "all.tip511" },
+        { value: 14, label: "all.tip512" }
       ],
       pickerOptions: {
         disabledDate(time) {
@@ -225,28 +234,27 @@ export default {
           return time.getTime() < date1;
         }
       },
-      dialogTableVisible: false,
       match: {
-        competition: '',
-        status: '',
-        area: '',
-        leagueType: '',
-        start: '',
-        end: '',
-        teamName: '',
-        category: '',
-        division: '',
-        stage: ''
+        competition: "",
+        status: "",
+        area: "",
+        leagueType: "",
+        start: "",
+        end: "",
+        teamName: "",
+        category: "",
+        division: "",
+        stage: ""
       },
       matchVO: {
-        competitionId: '',
-        teamId: '',
-        judge: '',
-        gameMode: '',
-        game: '',
-        vsTeam: '',
-        start: '',
-        end: '',
+        competitionId: "",
+        teamId: "",
+        judge: "",
+        gameMode: "",
+        game: "",
+        vsTeam: "",
+        start: "",
+        end: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -255,14 +263,14 @@ export default {
     };
   },
   mounted() {
-    let data = '';
+    let data = "";
     try {
       data = JSON.parse(this.$route.query.data);
     } catch {
       data = this.$route.query.data;
     }
     this.init(data);
-    this.getMatchList();
+    this.search();
   },
   methods: {
     init(data) {
@@ -275,8 +283,8 @@ export default {
       this.matchVO.teamId = data.teamId;
       this.match.area = data.Area;
     },
-    getMatchList() {
-      this.$axios.post('/judgement/getMatch', this.$qs.stringify(this.matchVO)).then(res => {
+    search() {
+      this.$axios.post("/judgement/getMatch", this.$qs.stringify(this.matchVO)).then(res => {
         if (res.data.errCode) {
           this.$message(res.data.msg);
         } else {
@@ -287,14 +295,13 @@ export default {
     },
     dateChange(data) {
       if (this.matchVO.EndTime && this.matchVO.EndTime < data) {
-        this.matchVO.EndTime = '';
+        this.matchVO.EndTime = "";
       }
     },
-    search() {},
     currentChange(val) {
       this.matchVO.pageNum = val;
-      this.$axios.post('/judgement/getMatch', this.$qs.stringify(this.matchVO)).then(res => {
-        if (res.data.errCode) {
+      this.$axios.post("/judgement/getMatch", this.$qs.stringify(this.matchVO)).then(res => {
+        if (res.data.data) {
           this.$message(res.data.msg);
         } else {
           this.tableData = res.data.data.list;
@@ -304,7 +311,7 @@ export default {
     },
     sizeChange(val) {
       this.matchVO.pageSize = val;
-      this.$axios.post('/judgement/getMatch', this.$qs.stringify(this.matchVO)).then(res => {
+      this.$axios.post("/judgement/getMatch", this.$qs.stringify(this.matchVO)).then(res => {
         if (res.data.errCode) {
           this.$message(res.data.msg);
         } else {
@@ -315,7 +322,7 @@ export default {
     },
     view(data) {
       this.$router.push({
-        name: 'teamGameRecord',
+        name: "teamGameRecord",
         query: {
           confrontationId: data.confrontationId,
           teamId: this.$route.query.teamId,

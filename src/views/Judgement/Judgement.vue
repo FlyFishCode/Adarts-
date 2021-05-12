@@ -155,7 +155,7 @@
 import { saveQuery } from "@/components/common/Utils";
 
 export default {
-  name: "home",
+  name: "Judgement",
   components: {},
   data() {
     const vm = this;
@@ -203,8 +203,10 @@ export default {
   methods: {
     search() {
       this.$axios.post("/matchTable/getMatchTableCompetitionList", this.judgementVO).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
+        if (res.data.data) {
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        }
       });
     },
     currentChange(value) {

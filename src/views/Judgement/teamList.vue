@@ -44,7 +44,7 @@
           {{ $t("all.tip364") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          {{ teamList.rankingType }}
+          {{ getRatingType(teamList.rankingType) }}
         </el-col>
       </el-row>
     </div>
@@ -170,7 +170,6 @@ export default {
       this.teamList = data;
       this.teamListVO.competitionId = data.id;
       this.teamList.area = "";
-
       data.countryList.forEach(i => {
         let str = "";
         if (i.areaName) {
@@ -181,15 +180,41 @@ export default {
     },
     search() {
       this.$axios.post("/judgement/teamList", this.$qs.stringify(this.teamListVO)).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
+        if (res.data.data) {
+          res.data.data.list.forEach(i => {
+            // eslint-disable-next-line no-param-reassign
+            i.competitionId = this.teamListVO.competitionId;
+          });
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        }
       });
     },
     sizeChange(value) {
-      console.log(value);
+      this.teamListVO.pageSize = value;
+      this.search();
     },
     currentChange(value) {
-      console.log(value);
+      this.teamListVO.pageNum = value;
+      this.search();
+    },
+    getRatingType(type) {
+      let str = "";
+      switch (type) {
+        case 1:
+          str = "按比赛排";
+          break;
+        case 2:
+          str = "按段位排";
+          break;
+        case 3:
+          str = "分组Division";
+          break;
+        default:
+          str = "阶段stage";
+          break;
+      }
+      return str;
     },
     getSelectList(id) {
       this.$axios.post(`/allsubset?competitionId=${id}`).then(res => {
