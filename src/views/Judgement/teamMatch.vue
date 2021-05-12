@@ -76,10 +76,8 @@
         </el-col>
         <el-col :span="2">
           <el-select v-model="matchVO.judge" :placeholder="$t('placeholder.select')">
-            <el-option value="1" :label="$t('all.tip0')"></el-option>
-            <el-option value="2" :label="$t('all.tip27')"></el-option>
-            <el-option value="3" :label="$t('all.tip26')"></el-option>
-            <el-option value="3" :label="$t('all.tip28')"></el-option>
+            <el-option value="1" :label="$t('all.tip376')"></el-option>
+            <el-option value="2" :label="$t('all.tip551')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">

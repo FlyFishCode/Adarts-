@@ -94,7 +94,7 @@
         <el-table-column type="index" :label="$t('all.tip214')" width="100"> </el-table-column>
         <el-table-column :label="$t('all.tip244')" min-width="7%">
           <template slot-scope="scope">
-            <div class="tableLink" @click="push(scope.row)">{{ scope.row.teamName }}</div>
+            <div class="tableLink" @click="entryPage(scope.row)">{{ scope.row.teamName }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="homeShop" :label="$t('all.tip455')" min-width="7%"> </el-table-column>
@@ -130,14 +130,6 @@ export default {
         number: "",
         rankingType: ""
       },
-      rankingList: [
-        { id: 0, label: "all.tip0" },
-        { id: 1, label: "all.tip559" },
-        { id: 2, label: "all.tip560" },
-        { id: 3, label: "all.tip561" },
-        { id: 4, label: "all.tip562" },
-        { id: 5, label: "all.tip563" }
-      ],
       teamListVO: {
         competitionId: "",
         ranking: "",
@@ -147,6 +139,15 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
+      rankingList: [
+        { id: 0, label: "all.tip0" },
+        { id: 1, label: "all.tip559" },
+        { id: 2, label: "all.tip560" },
+        { id: 3, label: "all.tip561" },
+        { id: 4, label: "all.tip562" },
+        { id: 5, label: "all.tip563" }
+      ],
+      queryData: {},
       total: 1,
       categoryList: [],
       divisionList: [],
@@ -181,12 +182,20 @@ export default {
     search() {
       this.$axios.post("/judgement/teamList", this.$qs.stringify(this.teamListVO)).then(res => {
         if (res.data.data) {
-          res.data.data.list.forEach(i => {
+          res.data.data.teamList.list.forEach(i => {
             // eslint-disable-next-line no-param-reassign
             i.competitionId = this.teamListVO.competitionId;
           });
-          this.tableData = res.data.data.list;
-          this.total = res.data.data.total;
+          this.queryData.type = res.data.data.type;
+          this.queryData.status = res.data.data.status;
+          this.queryData.entryCount = res.data.data.entryCount;
+          this.queryData.countryList = res.data.data.countryList;
+          this.queryData.competitionId = res.data.data.competitionId;
+          this.queryData.competitionName = res.data.data.competitionName;
+          this.queryData.competitionStartPeriod = res.data.data.competitionStartPeriod;
+          this.queryData.competitionEndPeriod = res.data.data.competitionEndPeriod;
+          this.tableData = res.data.data.teamList.list;
+          this.total = res.data.data.teamList.total;
         }
       });
     },
@@ -260,11 +269,11 @@ export default {
         }
       });
     },
-    push(data) {
+    entryPage(data) {
       saveQuery("teamList", data);
       this.$router.push({
         name: "teamMatch",
-        query: { data: JSON.stringify(data) }
+        query: { data: JSON.stringify(this.queryData) }
       });
     },
     categoryChange() {

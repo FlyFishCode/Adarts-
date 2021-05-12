@@ -88,7 +88,7 @@
 
     <div class="table">
       <el-table :data="tableData" style="width: 100%" :default-sort="{ prop: 'competitionId', order: 'descending' }">
-        <el-table-column :sortable="true" :label="$t('all.tip5')" min-width="13%">
+        <el-table-column :sortable="true" :label="$t('all.tip5')" min-width="10%">
           <template slot-scope="scope">
             <div>{{ scope.row.type === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
           </template>
@@ -113,13 +113,13 @@
           <el-table-column prop="application" :sortable="true" :label="$t('all.tip23')" min-width="10%"> </el-table-column>
           <el-table-column prop="approve" :sortable="true" :label="$t('all.tip24')" min-width="9%"></el-table-column>
         </el-table-column>
-        <el-table-column :sortable="true" :label="$t('all.tip7')" min-width="15%">
+        <el-table-column :sortable="true" :label="$t('all.tip7')" min-width="14%">
           <template slot-scope="scope">
             <div>{{ scope.row.competitionStartPeriod }}-{{ scope.row.competitionEndPeriod }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="userName" :sortable="true" :label="$t('all.tip382')" min-width="8%"></el-table-column>
-        <el-table-column :sortable="true" :label="$t('all.tip9')" min-width="8%">
+        <el-table-column :sortable="true" :label="$t('all.tip9')" min-width="10%">
           <template slot-scope="scope">
             <div v-for="item in scope.row.operatorList" :key="item.index">{{ item }}</div>
           </template>
@@ -131,7 +131,7 @@
             <div v-if="scope.row.status === 3">{{ $t("all.tip28") }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="date" :label="$t('all.tip2')" min-width="25%">
+        <el-table-column prop="date" :label="$t('all.tip2')" min-width="20%">
           <template slot-scope="scope">
             <div v-if="scope.row.status === 1">
               <el-button size="mini" @click="close(scope.row.competitionId)">{{ $t("form.Closebutton") }}</el-button>
