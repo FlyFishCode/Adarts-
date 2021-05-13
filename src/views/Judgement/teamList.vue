@@ -116,7 +116,7 @@
 import { saveQuery } from "@/components/common/Utils";
 
 export default {
-  name: "home",
+  name: "teamList",
   components: {},
   data() {
     return {

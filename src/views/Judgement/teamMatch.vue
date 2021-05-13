@@ -149,11 +149,11 @@
             <div class="tableLink" @click="show(scope.row)">{{ $t("all.tip551") }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="address" :label="$t('all.tip33')" min-width="5%">
+        <!-- <el-table-column prop="address" :label="$t('all.tip33')" min-width="5%">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="view(scope.row)">{{ $t("all.tip33") }}</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
       <div class="page">
         <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total">

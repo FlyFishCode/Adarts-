@@ -112,11 +112,20 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"> </el-date-picker>
+            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange">
+            </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions"> </el-date-picker>
+            <el-date-picker
+              v-model="ResultMgmtVO.competitionEndPeriod"
+              type="datetime"
+              format="yyyy-MM-dd"
+              :placeholder="$t('placeholder.datePicker')"
+              default-time="23:59:59"
+              :picker-options="pickerOptions"
+            >
+            </el-date-picker>
           </el-col>
         </el-col>
         <el-col :span="2" class="lineClass">
@@ -163,7 +172,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "playerMatch",
   components: {},
   data() {
     const vm = this;
@@ -177,26 +186,26 @@ export default {
       dialogTableVisible: false,
       teamList: {},
       ResultMgmtVO: {
-        AreaOne: '',
-        AreaTwo: '',
-        AreaThree: '',
-        StatusValue: '',
-        TypeValue: '',
-        PeriodValue: '',
-        Name: '',
-        Operator: '',
-        StartTime: '',
-        EndTime: '',
-        EntryStartTime: '',
-        EntryEndTime: ''
+        AreaOne: "",
+        AreaTwo: "",
+        AreaThree: "",
+        StatusValue: "",
+        TypeValue: "",
+        PeriodValue: "",
+        Name: "",
+        Operator: "",
+        StartTime: "",
+        EndTime: "",
+        EntryStartTime: "",
+        EntryEndTime: ""
       },
       tableData: [
         {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          date: "2016-05-03",
+          name: "王小虎",
+          province: "上海",
+          city: "普陀区",
+          address: "上海市普陀区金沙江路 1518 弄",
           zip: 200333
         }
       ],
@@ -206,13 +215,13 @@ export default {
   methods: {
     dateChange(data) {
       if (this.ResultMgmtVO.EndTime && this.ResultMgmtVO.EndTime < data) {
-        this.ResultMgmtVO.EndTime = '';
+        this.ResultMgmtVO.EndTime = "";
       }
     },
     search() {},
     view(data) {
       this.$router.push({
-        name: 'playerGameRecord',
+        name: "playerGameRecord",
         query: {
           id: data
         }

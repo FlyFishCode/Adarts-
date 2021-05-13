@@ -31,9 +31,7 @@
         <el-col :span="3" class="label-g">
           {{ $t("all.tip538") }}
         </el-col>
-        <el-col :span="3" class="overFlowStyle lineClass">
-          {{ teamList.start }}-{{ teamList.end }}
-        </el-col>
+        <el-col :span="3" class="overFlowStyle lineClass"> {{ teamList.start }}-{{ teamList.end }} </el-col>
         <el-col :span="3" class="label-g">
           {{ $t("all.tip310") }}
         </el-col>
@@ -123,32 +121,32 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "playerList",
   components: {},
   data() {
     return {
       teamList: {},
       ResultMgmtVO: {
-        AreaOne: '',
-        AreaTwo: '',
-        AreaThree: '',
-        StatusValue: '',
-        TypeValue: '',
-        PeriodValue: '',
-        Name: '',
-        Operator: '',
-        StartTime: '',
-        EndTime: '',
-        EntryStartTime: '',
-        EntryEndTime: ''
+        AreaOne: "",
+        AreaTwo: "",
+        AreaThree: "",
+        StatusValue: "",
+        TypeValue: "",
+        PeriodValue: "",
+        Name: "",
+        Operator: "",
+        StartTime: "",
+        EndTime: "",
+        EntryStartTime: "",
+        EntryEndTime: ""
       },
       tableData: [
         {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          date: "2016-05-03",
+          name: "王小虎",
+          province: "上海",
+          city: "普陀区",
+          address: "上海市普陀区金沙江路 1518 弄",
           zip: 200333
         }
       ]
@@ -158,7 +156,7 @@ export default {
     search() {},
     push(msg) {
       this.$router.push({
-        name: 'playerMatch',
+        name: "playerMatch",
         query: {
           name: msg.row.city
         }

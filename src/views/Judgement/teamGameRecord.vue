@@ -231,7 +231,7 @@
 // @ is an alias to /src
 
 export default {
-  name: "home",
+  name: "teamGameRecord",
   components: {},
   data() {
     const vm = this;
