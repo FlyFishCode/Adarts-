@@ -164,12 +164,12 @@ export default {
     }
     this.init(data);
     this.search();
-    this.getSelectList(data.id);
+    this.getSelectList(data.id || data.competitionId);
   },
   methods: {
     init(data) {
       this.teamList = data;
-      this.teamListVO.competitionId = data.id;
+      this.teamListVO.competitionId = data.id || data.competitionId;
       this.teamList.area = "";
       data.countryList.forEach(i => {
         let str = "";
@@ -270,10 +270,10 @@ export default {
       });
     },
     entryPage(data) {
-      saveQuery("teamList", data);
+      saveQuery("teamList", Object.assign(this.queryData, data));
       this.$router.push({
         name: "teamMatch",
-        query: { data: JSON.stringify(this.queryData) }
+        query: { data: JSON.stringify(Object.assign(this.queryData, data)) }
       });
     },
     categoryChange() {
