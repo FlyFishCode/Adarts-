@@ -432,13 +432,14 @@ export default {
         path: "/competition",
         query: {
           id: 1,
-          fisrst: true,
+          first: true,
           type: `${vm.dialog.DialogMoudleRadio}`
         }
       });
     },
     TemplateConfirm() {
       if (this.template.TemplateRadio) {
+        let id = "";
         this.TemplateVisible = false;
         this.$store.commit("changeMenuList", [
           {
@@ -448,11 +449,16 @@ export default {
             parentId: ""
           }
         ]);
-        this.$router.push({
-          name: "/competition",
-          query: {
-            id: `${this.template.TemplateRadio}`,
-            isTemplate: true
+        this.$axios.post(`/template/foundCompByTemp?competitionId=${this.template.TemplateRadio}`).then(res => {
+          if (res.data.data) {
+            id = res.data.data;
+            this.$router.push({
+              name: "/competition",
+              query: {
+                id,
+                showData: true
+              }
+            });
           }
         });
       } else {

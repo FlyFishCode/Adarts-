@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row style="margin:5px 0px">
-      <el-button size="mini" type="primary" @click="save">{{ $t("all.tip137") }}</el-button>
+      <el-button v-if="isTemplate" size="mini" type="primary" @click="save">{{ $t("all.tip137") }}</el-button>
     </el-row>
     <el-row class="tac">
       <el-col :span="5" class="menuBox">
@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       id: 5,
+      isTemplate: true,
       dialogTableVisible: false,
       template: {
         name: "",
@@ -148,6 +149,9 @@ export default {
           this.treeDataList = res.data.data;
         }
       });
+    }
+    if (this.$route.query.isTemplate) {
+      this.isTemplate = false;
     }
     this.bus.$on("setNode", data => {
       this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {

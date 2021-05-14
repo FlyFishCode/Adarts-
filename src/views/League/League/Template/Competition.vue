@@ -6,7 +6,7 @@
           <el-button size="mini" type="info" @click="Delete">{{ $t("all.tip130") }}</el-button>
         </el-col> -->
         <el-col :span="2">
-          <el-button size="mini" type="primary" @click="Save">{{ $t("all.tip136") }}</el-button>
+          <el-button size="mini" type="primary" @click="saveCompetition">{{ $t("all.tip136") }}</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -1033,6 +1033,7 @@ export default {
   },
   methods: {
     init() {
+      debugger;
       const query = this.$route.query;
       if (query.id || query.currentId) {
         this.uploadCompetitionId = query.id || query.currentId;
@@ -1048,7 +1049,7 @@ export default {
       }
       this.AddCompetitionRequest.competition.type = query.type;
       // 获取保存的阶段数据
-      if (query.id && !query.fisrst) {
+      if (query.id && !query.first) {
         // 有数据就拿保存的数据
         this.setData(query.id);
         this.getCategoryList();
@@ -1264,12 +1265,11 @@ export default {
       });
     },
     // eslint-disable-next-line consistent-return
-    Save() {
-      console.log(this.$store.state.menuList);
+    saveCompetition() {
+      // console.log(this.$store.state.menuList);
       const vm = this;
       const id = vm.$route.query.id || vm.$route.query.currentId;
       let href = "";
-      let p1 = "";
       if (this.A1 && !this.W1) {
         this.AddCompetitionRequest.competitionOption.machineType = 1;
       } else if (this.W1 && !this.A1) {
@@ -1279,102 +1279,88 @@ export default {
       }
       this.AddCompetitionRequest.countryList = [];
       this.CountryShowArr.forEach(i => {
-        const obj = {
+        this.AddCompetitionRequest.countryList.push({
           countryId: i.countryId,
           areaId: i.areaId || 0
-        };
-        this.AddCompetitionRequest.countryList.push(obj);
-      });
-      // 如果是模板页面进来
-      if (vm.$route.query.isTemplate) {
-        // window.location.href = window.location.href.split('&')[0];
-        p1 = new Promise(resolve => {
-          vm.$axios.post(`/template/foundCompByTemp?competitionId=${id}`).then(res => {
-            resolve(res.data.data);
-          });
         });
-      }
-      const PALL = Promise.all([p1]);
-      // eslint-disable-next-line consistent-return
-      PALL.then(list => {
-        if (!vm.AddCompetitionRequest.competition.competitionName) {
-          this.$message(this.$t("all.tip552"));
-          return false;
-        }
-        // 不等于1，第一个进来是调用add
-        if (String(vm.$route.query.id) !== "1" || vm.$route.query.isTemplate || vm.$route.query.showData) {
-          href = "updatecompetition";
-          vm.AddCompetitionRequest.competitionId = list[0] || id;
-          // 上传图片接口需要id
-          vm.uploadCompetitionId = vm.AddCompetitionRequest.competitionId;
-        } else {
-          href = "addcompetition";
-        }
-        vm.AddCompetitionRequest.competitionBasicOption.timeRangeBefore = vm.timeRangeBefore * 24 + vm.timeRangeBeforehours;
-        vm.AddCompetitionRequest.competitionBasicOption.timeRangeAfter = vm.timeRangeAfter * 24 + vm.timeRangeAfterhours;
-        vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
-        const saveMethods = () => {
-          // 保存 结果查询时间
-          sessionStorage.setItem(
-            "time",
-            JSON.stringify({
-              begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
-              end: this.AddCompetitionRequest.competition.competitionEndPeriod
-            })
-          );
-          this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
-            if (res.data) {
-              const url = "competition";
-              const competitionId = res.data.data && res.data.data.competitionId;
-              let item = {};
-              vm.$message({
-                message: res.data.msg,
-                type: "success",
-                duration: 2000
-              });
-              if (competitionId) {
-                vm.uploadCompetitionId = competitionId;
-                sessionStorage.setItem("competitionId", competitionId);
-                item = {
-                  label: vm.AddCompetitionRequest.competition.competitionName,
-                  id: competitionId,
-                  url
-                };
-              } else {
-                item = {
-                  label: vm.AddCompetitionRequest.competition.competitionName,
-                  url
-                };
-              }
-              this.$refs.upload.submit();
-              changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
-              this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
-              // changeMEenuList(this.$store.state.menuList, id, item);
-              // this.getList(id);
-            } else {
-              vm.$message({
-                message: res.data.msg,
-                type: "warning",
-                duration: 2000
-              });
-            }
-          });
-        };
-        // 判断比赛是否已经开打？
-        if (href === "updatecompetition" && vm.AddCompetitionRequest.numFight) {
-          this.$confirm(this.$t("all.tip575"), {
-            confirmButtonText: this.$t("all.tip47"),
-            cancelButtonText: this.$t("all.tip30"),
-            type: "warning"
-          })
-            .then(() => {
-              saveMethods();
-            })
-            .catch(() => false);
-        } else {
-          saveMethods();
-        }
       });
+      if (!vm.AddCompetitionRequest.competition.competitionName) {
+        this.$message(this.$t("all.tip552"));
+        return false;
+      }
+      // 不等于1，第一个进来是调用add
+      if (String(vm.$route.query.id) !== "1" || vm.$route.query.isTemplate || vm.$route.query.showData) {
+        href = "updatecompetition";
+        vm.AddCompetitionRequest.competitionId = id;
+        // 上传图片接口需要id
+        vm.uploadCompetitionId = id;
+      } else {
+        href = "addcompetition";
+      }
+      vm.AddCompetitionRequest.competitionBasicOption.timeRangeBefore = vm.timeRangeBefore * 24 + vm.timeRangeBeforehours;
+      vm.AddCompetitionRequest.competitionBasicOption.timeRangeAfter = vm.timeRangeAfter * 24 + vm.timeRangeAfterhours;
+      vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
+      const saveMethods = () => {
+        // 保存 结果查询时间
+        sessionStorage.setItem(
+          "time",
+          JSON.stringify({
+            begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
+            end: this.AddCompetitionRequest.competition.competitionEndPeriod
+          })
+        );
+        this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
+          if (res.data) {
+            const url = "competition";
+            const competitionId = res.data.data && res.data.data.competitionId;
+            let item = {};
+            vm.$message({
+              message: res.data.msg,
+              type: "success",
+              duration: 2000
+            });
+            if (competitionId) {
+              vm.uploadCompetitionId = competitionId;
+              sessionStorage.setItem("competitionId", competitionId);
+              item = {
+                label: vm.AddCompetitionRequest.competition.competitionName,
+                id: competitionId,
+                url
+              };
+            } else {
+              item = {
+                label: vm.AddCompetitionRequest.competition.competitionName,
+                url
+              };
+            }
+            this.$refs.upload.submit();
+            changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
+            this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
+            // changeMEenuList(this.$store.state.menuList, id, item);
+            // this.getList(id);
+          } else {
+            vm.$message({
+              message: res.data.msg,
+              type: "warning",
+              duration: 2000
+            });
+          }
+        });
+      };
+      // 判断比赛是否已经开打？
+      if (href === "updatecompetition" && vm.AddCompetitionRequest.numFight) {
+        this.$confirm(this.$t("all.tip575"), {
+          confirmButtonText: this.$t("all.tip47"),
+          cancelButtonText: this.$t("all.tip30"),
+          type: "warning"
+        })
+          .then(() => {
+            saveMethods();
+          })
+          .catch(() => false);
+      } else {
+        saveMethods();
+      }
     },
     uploadImg(data) {
       const File = data.file;
