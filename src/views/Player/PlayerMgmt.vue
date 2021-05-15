@@ -37,10 +37,12 @@
             <el-col class="label-g" :span="3">
               {{ $t("all.tip442") }}
             </el-col>
-            <el-col :span="7">
+            <el-col :span="3">
               <el-select v-model="searchPlayer.countryId" clearable :placeholder="$t('placeholder.select')" @change="countryChange">
                 <el-option v-for="item in continentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
+            </el-col>
+            <el-col :span="3">
               <el-select v-model="searchPlayer.areaId" clearable :placeholder="$t('placeholder.select')">
                 <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
@@ -68,7 +70,26 @@
             <el-col class="label-g" :span="3">
               {{ $t("all.tip154") }}
             </el-col>
-            <el-col :span="10">
+            <el-col :span="3">
+              <el-select v-model="ratingGrade" :placeholder="$t('placeholder.select')">
+                <el-option :label="$t('all.tip468')" value="league"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="3">
+              <el-select v-model="searchPlayer.timeSlot" :placeholder="$t('placeholder.select')">
+                <el-option :label="$t('all.tip378')" :value="0"></el-option>
+                <el-option :label="$t('all.tip379')" :value="1"></el-option>
+                <el-option :label="$t('all.tip380')" :value="2"></el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="3">
+              <el-select v-model="searchPlayer.pmr" :placeholder="$t('placeholder.select')">
+                <el-option :label="$t('all.tip155')" :value="1"></el-option>
+                <el-option :label="$t('all.tip156')" :value="2"></el-option>
+                <el-option :label="$t('all.tip154')" :value="3"></el-option>
+              </el-select>
+            </el-col>
+            <!-- <el-col :span="10">
               <el-select v-model="ratingGrade" :placeholder="$t('placeholder.select')">
                 <el-option :label="$t('all.tip468')" value="league"></el-option>
               </el-select>
@@ -82,14 +103,14 @@
                 <el-option :label="$t('all.tip156')" :value="2"></el-option>
                 <el-option :label="$t('all.tip154')" :value="3"></el-option>
               </el-select>
-            </el-col>
+            </el-col> -->
             <el-col :span="4" class="lineInputClass">
               <el-input v-model.number="searchPlayer.min" clearable :placeholder="$t('placeholder.input')"></el-input> _
               <el-input v-model.number="searchPlayer.max" clearable :placeholder="$t('placeholder.input')"></el-input>
             </el-col>
-            <el-col :span="3" class="buttonBox">
+            <el-col :span="2" class="buttonBox">
               <el-button type="primary" size="mini" @click="PlayerSearch">{{ $t("form.SearchButton") }}</el-button>
-              <el-button type="primary" size="mini" @click="PlayerDownload">{{ $t("form.DownloadButton") }}</el-button>
+              <!-- <el-button type="primary" size="mini" @click="PlayerDownload">{{ $t("form.DownloadButton") }}</el-button> -->
             </el-col>
           </el-row>
         </el-row>
@@ -360,7 +381,7 @@
                 <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
               </el-select>
             </el-col>
-            <el-col :span="3" class="buttonBox">
+            <el-col :span="2" class="buttonBox">
               <el-button size="mini" type="primary" @click="competitionSearch">{{ $t("all.tip10") }}</el-button>
               <!-- <el-button size="mini" type="primary" @click="CompetitionDownload">{{ $t("all.tip11") }}</el-button> -->
             </el-col>

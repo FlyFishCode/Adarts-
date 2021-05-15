@@ -77,7 +77,7 @@
       </el-col>
       <el-col :span="2" class="buttonBox">
         <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
-        <el-button type="primary" size="mini" @click="upload">{{ $t("all.tip338") }}</el-button>
+        <!-- <el-button type="primary" size="mini" @click="upload">{{ $t("all.tip338") }}</el-button> -->
         <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
       </el-col>
     </el-row>
@@ -238,10 +238,10 @@
 
 <script>
 // @ is an alias to /src
-import { downloadFile, returnType, handle } from '@/components/common/Utils';
+import { downloadFile, returnType, handle } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
@@ -251,31 +251,31 @@ export default {
       tableSelection: [],
       topBoxTableDataTotal: 1,
       detial: {
-        status: '',
-        competitionName: '',
-        type: '',
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        entryStartPeriod: '',
-        entryEndPeriod: '',
-        area: ''
+        status: "",
+        competitionName: "",
+        type: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        entryStartPeriod: "",
+        entryEndPeriod: "",
+        area: ""
       },
       EntryList: {
-        competitionId: '',
-        teamName: '',
-        teamId: '',
-        captainName: '',
-        homeShopName: '',
-        status: ' ',
+        competitionId: "",
+        teamName: "",
+        teamId: "",
+        captainName: "",
+        homeShopName: "",
+        status: " ",
         pageNum: 1,
         pageSize: 10
       },
       topBoxData: {
-        competitionId: '',
-        teamName: '',
-        teamId: '',
-        captainName: '',
-        homeShopName: '',
+        competitionId: "",
+        teamName: "",
+        teamId: "",
+        captainName: "",
+        homeShopName: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -300,19 +300,19 @@ export default {
       this.detial.entryStartPeriod = data.entryStartPeriod;
       this.detial.entryEndPeriod = data.entryEndPeriod;
       if (data.type === 1) {
-        this.detial.type = 'all.tip40';
+        this.detial.type = "all.tip40";
       } else {
-        this.detial.type = 'all.tip41';
+        this.detial.type = "all.tip41";
       }
-      if (data.status === '1') {
-        this.detial.status = 'all.tip26';
-      } else if (data.status === '2') {
-        this.detial.status = 'all.tip27';
+      if (data.status === "1") {
+        this.detial.status = "all.tip26";
+      } else if (data.status === "2") {
+        this.detial.status = "all.tip27";
       } else {
-        this.detial.status = 'all.tip28';
+        this.detial.status = "all.tip28";
       }
       data.countryList.forEach(i => {
-        let str = '';
+        let str = "";
         if (i.areaName) {
           str = `,${i.areaName}`;
         }
@@ -323,26 +323,26 @@ export default {
       return row.status === 1;
     },
     search() {
-      this.$axios.post('/getCompetitionTeamList', this.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", this.EntryList).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     upload() {
-      console.log('upload');
+      console.log("upload");
     },
     download() {
       const vm = this;
-      this.$axios.post('/download', vm.EntryList).then(res => {
+      this.$axios.post("/download", vm.EntryList).then(res => {
         downloadFile(res);
       });
     },
     create() {
-      console.log('Create');
+      console.log("Create");
     },
     push(value) {
       this.$router.push({
-        name: 'member',
+        name: "member",
         query: {
           data: JSON.stringify(value)
         }
@@ -350,37 +350,37 @@ export default {
     },
     topBoxTableDataCurrentChange(value) {
       this.topBoxData.pageNum = value;
-      this.$axios.post('/getNoEntryTeamList', this.topBoxData).then(res => {
+      this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
         this.topBoxTableData = res.data.data.list;
       });
     },
     topBoxTableDataSizeChange(value) {
       this.topBoxData.pageSize = value;
-      this.$axios.post('/getNoEntryTeamList', this.topBoxData).then(res => {
+      this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
         this.topBoxTableData = res.data.data.list;
       });
     },
     sizeChange(value) {
       const vm = this;
       vm.EntryList.pageSize = value;
-      this.$axios.post('/getCompetitionTeamList', vm.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", vm.EntryList).then(res => {
         vm.tableData = res.data.data.list;
         vm.total = res.data.data.total;
       });
     },
     currentChange(value) {
       this.EntryList.pageNum = value;
-      this.$axios.post('/getCompetitionTeamList', this.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", this.EntryList).then(res => {
         this.tableData = res.data.data.list;
       });
     },
     agree() {
-      const ids = returnType(this.tableSelection, 'competitionTeamId');
+      const ids = returnType(this.tableSelection, "competitionTeamId");
       if (!ids) {
-        this.$message(this.$t('all.tip571'));
+        this.$message(this.$t("all.tip571"));
         return;
       }
-      this.$axios.post('/approve', { ids, status: 2 }).then(res => {
+      this.$axios.post("/approve", { ids, status: 2 }).then(res => {
         if (res.data) {
           this.$message(res.data.msg);
           this.search();
@@ -388,12 +388,12 @@ export default {
       });
     },
     reject() {
-      const ids = returnType(this.tableSelection, 'competitionTeamId');
+      const ids = returnType(this.tableSelection, "competitionTeamId");
       if (!ids) {
-        this.$message(this.$t('all.tip571'));
+        this.$message(this.$t("all.tip571"));
         return;
       }
-      this.$axios.post('/approve', { ids, status: 3 }).then(res => {
+      this.$axios.post("/approve", { ids, status: 3 }).then(res => {
         if (res.data) {
           this.$message(res.data.msg);
           this.search();
@@ -401,7 +401,7 @@ export default {
       });
     },
     cancel(id) {
-      this.$axios.post('/approve', { ids: id, status: 1 }).then(res => {
+      this.$axios.post("/approve", { ids: id, status: 1 }).then(res => {
         if (res.data) {
           this.$message(res.data.msg);
           this.search();
@@ -410,8 +410,8 @@ export default {
     },
     add() {
       // const vm = this;
-      const teamIDS = returnType(this.multipleSelection, 'teamId');
-      this.$axios.post('/teamIntoCompetition', { teamIds: teamIDS, competitionId: this.EntryList.competitionId }).then(res => {
+      const teamIDS = returnType(this.multipleSelection, "teamId");
+      this.$axios.post("/teamIntoCompetition", { teamIds: teamIDS, competitionId: this.EntryList.competitionId }).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         }
@@ -420,7 +420,7 @@ export default {
       this.dialogTableVisible = false;
     },
     TopboxSearch() {
-      this.$axios.post('/getNoEntryTeamList', this.topBoxData).then(res => {
+      this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
         this.topBoxTableData = res.data.data.list;
         this.topBoxTableDataTotal = res.data.data.total;
       });

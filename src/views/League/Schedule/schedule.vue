@@ -20,7 +20,7 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="scheduleVO.leagueName" clearable filterable :placeholder="$t('placeholder.select')">
-            <el-option v-for="(item,index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
+            <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -84,15 +84,17 @@
         </el-col>
       </el-col>
     </el-row>
-    <el-calendar  v-model="value" class="dataBox">
+    <el-calendar v-model="value" class="dataBox">
       <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
       <template slot="dateCell" slot-scope="{ data }" :data="matchArr">
         <p :class="data.isSelected ? 'is-selected' : '' + 'dataStyle'">{{ data.day }}{{ data.isSelected ? "✔️" : "" }}</p>
-        <div class="detailBox" @scroll="scrollDiv($event,data.day)">
+        <div class="detailBox" @scroll="scrollDiv($event, data.day)">
           <div class="dataStyle">
             <div v-for="item in matchArr" :key="item.index">
               <div v-if="item.confrontationDate && item.confrontationDate.split(' ')[0] === data.day">
-                <div :title="`${item.stageName}/${item.homeTeamName},${item.visitTeamName}`" :class="item.state === 1 ? 'ready' : 'finished'" @click="showDetails(item)">{{ `${item.stageName}/${item.homeTeamName},${item.visitTeamName}` }}</div>
+                <div :title="`${item.stageName}/${item.homeTeamName},${item.visitTeamName}`" :class="item.state === 1 ? 'ready' : 'finished'" @click="showDetails(item)">
+                  {{ `${item.stageName}/${item.homeTeamName},${item.visitTeamName}` }}
+                </div>
               </div>
             </div>
           </div>
@@ -106,26 +108,26 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
-      time: '',
+      time: "",
       value: new Date(),
       creteList: [],
       operList: [],
-      day: '',
+      day: "",
       lastTime: null,
       timer: null,
       scheduleVO: {
-        countryId: '',
-        areaId: '',
-        leagueName: '',
-        status: '',
-        leagueType: '',
-        agentUserId: '',
-        operUserId: '',
-        userId: sessionStorage.getItem('userId'),
+        countryId: "",
+        areaId: "",
+        leagueName: "",
+        status: "",
+        leagueType: "",
+        agentUserId: "",
+        operUserId: "",
+        userId: sessionStorage.getItem("userId"),
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1
       },
@@ -137,7 +139,7 @@ export default {
     };
   },
   mounted() {
-    const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem("userId");
     this.getOperationdata(userId);
     this.getCretetionData(userId);
     this.search();
@@ -146,24 +148,24 @@ export default {
   },
   methods: {
     getCounarr(userId) {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
         this.ContinentArr = res.data.data;
       });
     },
     change(value) {
       const vm = this;
-      this.$axios.post('/getareabycountryid', vm.$qs.stringify({ countryId: value })).then(res => {
+      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: value })).then(res => {
         vm.CountryArr = res.data.data;
       });
       this.scheduleVO.areaId = null;
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem('userId')}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
     timeChange(value) {
-      const [year, month] = value.split('-');
+      const [year, month] = value.split("-");
       this.scheduleVO.year = year;
       this.scheduleVO.month = month;
       this.value = new Date(value);
@@ -171,42 +173,42 @@ export default {
     },
     showDetails(data) {
       this.$router.push({
-        path: '/matchTableStage',
+        path: "/matchTableStage",
         query: {
           data: JSON.stringify(data)
         }
       });
     },
     search() {
-      this.$axios.post('/getSchedule', this.scheduleVO).then(res => {
+      this.$axios.post("/getSchedule", this.scheduleVO).then(res => {
         if (res.data.data) {
           this.matchArr = res.data.data;
         }
       });
     },
     getOperationdata(userId) {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     getCretetionData(userId) {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
     mgmt() {
       this.$router.push({
-        name: 'entryList'
+        name: "entryList"
       });
     },
     assign() {
       this.$router.push({
-        name: 'assign'
+        name: "assign"
       });
     },
     push(msg) {
       this.$router.push({
-        name: 'resultInformation',
+        name: "resultInformation",
         params: {
           name: msg.row.city
         }
@@ -253,7 +255,7 @@ export default {
               data = Object.assign(vm.scheduleVO, data);
               // 记录上一次函数触发的时间
               vm.lastTime = nowTime;
-              vm.$axios.post('/getScheduleDay', data).then(res => {
+              vm.$axios.post("/getScheduleDay", data).then(res => {
                 if (res.data.data.list.length) {
                   vm.matchArr.push(...res.data.data.list);
                 }
@@ -325,7 +327,7 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-.detailBox{
+.detailBox {
   height: 150px;
   overflow-y: auto;
   position: relative;

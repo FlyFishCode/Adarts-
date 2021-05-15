@@ -167,11 +167,13 @@ export default {
     },
     search() {
       this.$axios.post("/getLeagueNewsList", this.infoVO).then(res => {
-        res.data.data.list.forEach(i => {
-          // eslint-disable-next-line no-param-reassign
-          i.display = Boolean(i.display);
-        });
-        this.tableData = res.data.data.list;
+        if (res.data.data) {
+          res.data.data.list.forEach(i => {
+            // eslint-disable-next-line no-param-reassign
+            i.display = Boolean(i.display);
+          });
+          this.tableData = res.data.data.list;
+        }
       });
     },
     deleteNews(id) {

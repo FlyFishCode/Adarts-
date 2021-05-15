@@ -35,20 +35,20 @@
               {{ $t("all.tip456") }}
             </el-col>
             <el-col :span="5" class="lineClass">
-              <el-input v-model="PlayerInformationVO.id" disabled></el-input>
+              <el-input v-model="playerInformationVO.id" disabled></el-input>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip389") }}
             </el-col>
             <el-col :span="5" class="lineClass">
-              <el-input v-model="PlayerInformationVO.regDate" disabled></el-input>
+              <el-input v-model="playerInformationVO.regDate" disabled></el-input>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip441") }}
             </el-col>
             <el-col :span="5" class="lineClass">
-              <el-input v-model="PlayerInformationVO.birthday" disabled></el-input>
-              <!-- <el-date-picker v-model="PlayerInformationVO.birthday" type="date" format="yyyy-MM-dd"> </el-date-picker> -->
+              <!-- <el-input v-model="playerInformationVO.birthday" disabled></el-input> -->
+              <el-date-picker v-model="playerInformationVO.birthday" type="date" format="yyyy-MM-dd" :disabled="disable"> </el-date-picker>
             </el-col>
           </el-row>
           <el-row class="center-Row">
@@ -57,23 +57,23 @@
                 {{ $t("all.tip259") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.nickName" disabled></el-input>
+                <el-input v-model="playerInformationVO.nickName" disabled></el-input>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip208") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-radio v-model="PlayerInformationVO.gender" :label="0" disabled>{{ $t("all.tip209") }}</el-radio>
-                <el-radio v-model="PlayerInformationVO.gender" :label="1" disabled>{{ $t("all.tip210") }}</el-radio>
+                <el-radio v-model="playerInformationVO.gender" :label="0" disabled>{{ $t("all.tip209") }}</el-radio>
+                <el-radio v-model="playerInformationVO.gender" :label="1" disabled>{{ $t("all.tip210") }}</el-radio>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip17") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.countryId" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.countryId" :placeholder="$t('placeholder.select')" @change="countryChange">
-                  <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
-                </el-select> -->
+                <!-- <el-input v-model="playerInformationVO.countryId" disabled></el-input> -->
+                <el-select v-model="playerInformationVO.countryId" :placeholder="$t('placeholder.select')" @change="countryChange" :disabled="disable">
+                  <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
+                </el-select>
               </el-col>
             </el-col>
           </el-row>
@@ -83,22 +83,22 @@
                 {{ $t("all.tip425") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.nickName" disabled></el-input>
+                <el-input v-model="playerInformationVO.nickName" disabled></el-input>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip429") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.phone" disabled></el-input>
+                <el-input v-model="playerInformationVO.phone" disabled></el-input>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip442") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.areaId" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.areaId" :placeholder="$t('placeholder.select')">
+                <!-- <el-input v-model="playerInformationVO.areaId" disabled></el-input> -->
+                <el-select v-model="playerInformationVO.areaId" :placeholder="$t('placeholder.select')" disabled>
                   <el-option v-for="item in continentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
-                </el-select> -->
+                </el-select>
               </el-col>
             </el-col>
           </el-row>
@@ -108,23 +108,23 @@
                 {{ $t("all.tip455") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.homeShopName" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.homeShopName" :placeholder="$t('placeholder.select')">
+                <!-- <el-input v-model="playerInformationVO.homeShopName" disabled></el-input> -->
+                <el-select v-model="playerInformationVO.homeShopName" :placeholder="$t('placeholder.select')" :disabled="disable">
                   <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"></el-option>
-                </el-select> -->
+                </el-select>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip428") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.email" disabled></el-input>
+                <el-input v-model="playerInformationVO.email" disabled></el-input>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip460") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.language" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.language" >
+                <el-input v-model="playerInformationVO.language" :disabled="disable"></el-input>
+                <!-- <el-select v-model="playerInformationVO.language" :disabled="disable">
                   <el-option label="EEF" value="1"></el-option>
                   <el-option label="GDFSG" value="2"></el-option>
                   <el-option label="Gteam" value="3"></el-option>
@@ -138,14 +138,14 @@
                 {{ $t("all.tip463") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.cardNumber" disabled></el-input>
+                <el-input v-model="playerInformationVO.cardNumber" disabled></el-input>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip316") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.teamName" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.teamName" :placeholder="$t('placeholder.select')">
+                <el-input v-model="playerInformationVO.teamName" :disabled="disable"></el-input>
+                <!-- <el-select v-model="playerInformationVO.teamName" :placeholder="$t('placeholder.select')" :disabled="disable">
                   <el-option label="EEF" value="1"></el-option>
                   <el-option label="GDFSG" value="2"></el-option>
                   <el-option label="Gteam" value="3"></el-option>
@@ -156,11 +156,11 @@
                 {{ $t("all.tip443") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-input v-model="PlayerInformationVO.valid" disabled></el-input>
-                <!-- <el-select v-model="PlayerInformationVO.valid" :placeholder="$t('placeholder.select')">
-                  <el-option :label="$t('all.tip475')" :value="1"></el-option>
+                <!-- <el-input v-model="playerInformationVO.valid" disabled></el-input> -->
+                <el-select v-model="playerInformationVO.valid" :placeholder="$t('placeholder.select')" :disabled="disable">
                   <el-option :label="$t('all.tip545')" :value="0"></el-option>
-                </el-select> -->
+                  <el-option :label="$t('all.tip475')" :value="1"></el-option>
+                </el-select>
               </el-col>
             </el-col>
           </el-row>
@@ -322,6 +322,7 @@ export default {
       id: "",
       currentType: "",
       dialogVisible: false,
+      disable: false,
       dialogImageUrl: "",
       fileList: [],
       shopList: [],
@@ -342,7 +343,7 @@ export default {
         pageSize: 10
       },
       defaultName: "first",
-      PlayerInformationVO: {
+      playerInformationVO: {
         id: "",
         regDate: "",
         nickName: "",
@@ -367,35 +368,43 @@ export default {
   mounted() {
     console.log(process.env.VUE_APP_IMGURL);
     this.id = this.$route.query.id;
-    this.entryHistoryVO.id = this.id;
-    const upLoad = document.getElementsByClassName("el-upload")[0];
-    const currentYear = new Date().getFullYear();
-    upLoad.style.visibility = "hidden";
-    if (currentYear !== this.yearList[0].id) {
-      this.yearList.push({
-        id: currentYear,
-        year: currentYear
-      });
-    }
-    this.getPlayerRatingList("player", this.id);
-    this.getRating("player", undefined, undefined, this.id, undefined);
-    this.getEntryHistoryList();
-    this.getShopList();
-    this.getPlayerInfomation(this.id);
-    // this.getCountry(userId);
+    this.init(this.id);
   },
   methods: {
-    // getCountry(userId) {
-    //   this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: userId })).then(res => {
-    //     this.countryArr = res.data.data;
-    //   });
-    // },
-    // countryChange(id) {
-    //   this.$axios.post('/getareabycountryid', this.$qs.stringify({ countryId: id })).then(res => {
-    //     this.continentArr = res.data.data;
-    //   });
-    //   this.PlayerInformationVO.areaId = '';
-    // },
+    init(id) {
+      this.entryHistoryVO.id = id;
+      this.disable = true;
+      this.getPlayerRatingList("player", id);
+      this.getRating("player", undefined, undefined, id, undefined);
+      this.getEntryHistoryList();
+      this.getShopList();
+      this.getPlayerInfomation(id);
+      this.getCountry(id);
+      this.countryChange();
+      this.initYear();
+    },
+    initYear() {
+      const upLoad = document.getElementsByClassName("el-upload")[0];
+      const currentYear = new Date().getFullYear();
+      upLoad.style.visibility = "hidden";
+      if (currentYear !== this.yearList[0].id) {
+        this.yearList.push({
+          id: currentYear,
+          year: currentYear
+        });
+      }
+    },
+    getCountry(userId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
+        this.countryArr = res.data.data;
+      });
+    },
+    countryChange() {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: this.playerInformationVO.countryId })).then(res => {
+        this.continentArr = res.data.data;
+      });
+      this.playerInformationVO.areaId = "";
+    },
     getPlayerInfomation(id) {
       this.$axios.get(`/getPlayperInfo?id=${id}`).then(res => {
         let imgUrl = "";
@@ -405,7 +414,7 @@ export default {
           imgUrl = require("../../assets/person.jpg");
         }
         this.fileList.push({ url: imgUrl });
-        this.PlayerInformationVO = res.data;
+        this.playerInformationVO = res.data;
       });
     },
     getRating(type, state = 0, year = 2020, id, currentType = 0) {
@@ -582,8 +591,7 @@ export default {
       return "";
     },
     save() {
-      const vm = this;
-      this.$axios.post("/editorPlayerInfo", vm.PlayerInformationVO).then(res => {
+      this.$axios.post("/editorPlayerInfo", this.playerInformationVO).then(res => {
         console.log(res);
       });
     },

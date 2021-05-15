@@ -38,7 +38,7 @@
           <el-table-column prop="leaguePPd" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
           <el-table-column prop="leagueMpr" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
-        <el-table-column prop="seedNumber" :label="$t('all.tip594')" min-width="5%">
+        <el-table-column v-if="this.type === '3'" prop="seedNumber" :label="$t('all.tip594')" min-width="5%">
           <template slot-scope="scope">
             <el-input v-model.number="scope.row.seedNumber" @blur="changeSeedNo(scope.row)" clearable></el-input>
           </template>
@@ -51,7 +51,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="1"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="1"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -60,23 +69,23 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
       multipleSelection: [],
       AddMemberVO: {
-        categoryName: '',
-        divisionName: '',
-        stageName: ''
+        categoryName: "",
+        divisionName: "",
+        stageName: ""
       },
       tableData: [],
-      data: '',
-      type: '',
-      Findex: '',
-      index: '',
-      mineIndex: '',
-      showSeedNo: this.$route.query.type === '3'
+      data: "",
+      type: "",
+      Findex: "",
+      index: "",
+      mineIndex: "",
+      showSeedNo: this.$route.query.type === "3"
     };
   },
   mounted() {
@@ -91,31 +100,31 @@ export default {
   },
   methods: {
     search(data, type, Findex, index, mineIndex) {
-      let id = '';
-      let param = '';
-      let url = '';
+      let id = "";
+      let param = "";
+      let url = "";
       switch (type) {
-      case '1':
-        this.AddMemberVO.categoryName = data.categoryName;
-        id = data.categoryId;
-        param = 'categoryId';
-        url = 'getTeamIntoCategoryList';
-        break;
-      case '2':
-        this.AddMemberVO.categoryName = data.categoryName;
-        this.AddMemberVO.divisionName = data.competitionDivisionList[mineIndex].divisionName;
-        id = data.competitionDivisionList[mineIndex].divisionId;
-        param = 'divisionId';
-        url = 'getTeamIntoDivisionList';
-        break;
-      default:
-        this.AddMemberVO.categoryName = data.categoryName;
-        this.AddMemberVO.divisionName = data.competitionDivisionList[Findex].divisionName;
-        this.AddMemberVO.stageName = data.competitionDivisionList[Findex].competitionStageList[mineIndex].stageName;
-        id = data.competitionDivisionList[Findex].competitionStageList[mineIndex].stageId;
-        param = 'stageId';
-        url = 'getTeamIntoStageList';
-        break;
+        case "1":
+          this.AddMemberVO.categoryName = data.categoryName;
+          id = data.categoryId;
+          param = "categoryId";
+          url = "getTeamIntoCategoryList";
+          break;
+        case "2":
+          this.AddMemberVO.categoryName = data.categoryName;
+          this.AddMemberVO.divisionName = data.competitionDivisionList[mineIndex].divisionName;
+          id = data.competitionDivisionList[mineIndex].divisionId;
+          param = "divisionId";
+          url = "getTeamIntoDivisionList";
+          break;
+        default:
+          this.AddMemberVO.categoryName = data.categoryName;
+          this.AddMemberVO.divisionName = data.competitionDivisionList[Findex].divisionName;
+          this.AddMemberVO.stageName = data.competitionDivisionList[Findex].competitionStageList[mineIndex].stageName;
+          id = data.competitionDivisionList[Findex].competitionStageList[mineIndex].stageId;
+          param = "stageId";
+          url = "getTeamIntoStageList";
+          break;
       }
       this.$axios.get(`/${url}?${param}=${id}`).then(res => {
         this.tableData = res.data.data;
@@ -126,7 +135,7 @@ export default {
         competitionTeamId: row.mainId,
         seedNumber: row.seedNumber
       };
-      this.$axios.post('/updateSeedNumber', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/updateSeedNumber", this.$qs.stringify(data)).then(res => {
         this.$message(res.data.msg);
       });
     },
@@ -140,17 +149,17 @@ export default {
       this.dialogTableVisible = false;
     },
     Delete(id) {
-      let url = '';
+      let url = "";
       switch (this.$route.query.type) {
-      case '1':
-        url = 'teamRemoveCategory';
-        break;
-      case '2':
-        url = 'teamRemoveDivision';
-        break;
-      default:
-        url = 'teamRemoveStage';
-        break;
+        case "1":
+          url = "teamRemoveCategory";
+          break;
+        case "2":
+          url = "teamRemoveDivision";
+          break;
+        default:
+          url = "teamRemoveStage";
+          break;
       }
       this.$axios.get(`/${url}?mainId=${id}`).then(res => {
         this.$message(res.data.msg);

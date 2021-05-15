@@ -17,10 +17,10 @@
       <el-col :span="20" class="textClass">{{ Stage.formList.stage }}</el-col>
     </el-row>
     <div>
-      <el-row>
-        <el-col :span="23" class="title-g">{{ $t("all.tip276") }}</el-col>
-        <el-col v-if="hasData" :span="1" class="buttonBox">
-          <el-button size="mini" @click="deleteMatchtable">{{ $t("all.tip130") }}</el-button>
+      <el-row class="rowTitle">
+        <el-col :span="23">{{ $t("all.tip276") }}</el-col>
+        <el-col v-if="hasData" :span="1">
+          <el-button size="small" type="danger" @click="deleteMatchtable">{{ $t("all.tip130") }}</el-button>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -117,7 +117,7 @@
         <el-col :span="2">
           <el-input v-model.number="Stage.MatchTableOption.intervalTime" clearable :disabled="hasData" :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
-        <el-col :span="4" v-if="!hasData" class="lineClass">
+        <el-col :span="2" v-if="!hasData" class="lineClass">
           <el-button size="mini" @click="create" type="primary">{{ $t("all.tip516") }}</el-button>
         </el-col>
       </el-row>
@@ -636,6 +636,16 @@
         </el-row>
       </el-dialog>
     </div>
+    <!-- 错误提示弹框 -->
+    <div>
+      <el-dialog title="提示" :visible.sync="errorDialogVisible" width="30%" center>
+        <span>{{ $t("all.tip628") }}</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="small" @click="errorDialogVisible = false">{{ $t("all.tip30") }}</el-button>
+          <el-button size="small" type="primary" @click="handleErrorOk">{{ $t("all.tip47") }}</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -657,16 +667,18 @@ export default {
       MatchingTableTopBox: false,
       MatchingTable: false,
       lineUpTopBoxVisible: false,
+      errorDialogVisible: false,
       hasData: false,
       isTimeTable: true,
+      homeAttend: false,
+      awayAttend: false,
       matchTableId: "",
       LeagueMgmtVO: {},
       lineUpTopBoxDetialData: {},
       lineUpTopBoxTableList: [],
       matchTableTime: "",
-      homeAttend: false,
-      awayAttend: false,
       timeDate: "",
+      errorMsg: "",
       MatchingTableList: [],
       MatchingTableData: [],
       cycleType: 1,
@@ -755,7 +767,6 @@ export default {
   mounted() {
     if (this.$route.query.data) {
       const data = JSON.parse(this.$route.query.data);
-
       this.Stage.formList.competition = data.matchTableName;
       this.Stage.formList.category = data.categoryName;
       this.Stage.formList.division = data.divisionName;
@@ -931,13 +942,7 @@ export default {
     create() {
       const vm = this;
       let data = 0;
-      this.Stage.MatchTableOption.isMon = this.returnNum(this.Stage.MatchTableOption.isMon);
-      this.Stage.MatchTableOption.isTue = this.returnNum(this.Stage.MatchTableOption.isTue);
-      this.Stage.MatchTableOption.isWed = this.returnNum(this.Stage.MatchTableOption.isWed);
-      this.Stage.MatchTableOption.isThu = this.returnNum(this.Stage.MatchTableOption.isThu);
-      this.Stage.MatchTableOption.isFri = this.returnNum(this.Stage.MatchTableOption.isFri);
-      this.Stage.MatchTableOption.isSat = this.returnNum(this.Stage.MatchTableOption.isSat);
-      this.Stage.MatchTableOption.isSun = this.returnNum(this.Stage.MatchTableOption.isSun);
+      this.changeType("toNumber");
       if (this.cycleType === 1) {
         data = 7;
       } else if (this.cycleType === 2) {
@@ -947,33 +952,28 @@ export default {
       }
       this.Stage.MatchTableOption.cycle = this.cycle * data;
       this.$axios.post("/generateagainst", vm.Stage.MatchTableOption).then(res => {
-        this.$message({
-          message: res.data.msg
-        });
         if (res.data.data) {
           vm.matchTableId = res.data.data;
           vm.getTimeTableData(res.data.data);
           vm.getMatchTableOption(res.data.data);
           vm.getMatchTableData(res.data.data);
           vm.hasData = true;
+          this.$message({
+            message: res.data.msg
+          });
+        } else {
+          this.errorMsg = res.data.msg;
+          this.errorDialogVisible = true;
         }
-        if (vm.dayType === 1) {
-          vm.Stage.MatchTableOption.isMon = true;
-          vm.Stage.MatchTableOption.isTue = true;
-          vm.Stage.MatchTableOption.isWed = true;
-          vm.Stage.MatchTableOption.isThu = true;
-          vm.Stage.MatchTableOption.isFri = true;
-          vm.Stage.MatchTableOption.isSat = false;
-          vm.Stage.MatchTableOption.isSun = false;
-        }
-        if (vm.dayType === 2) {
-          this.Stage.MatchTableOption.isMon = false;
-          this.Stage.MatchTableOption.isTue = false;
-          this.Stage.MatchTableOption.isWed = false;
-          this.Stage.MatchTableOption.isThu = false;
-          this.Stage.MatchTableOption.isFri = false;
-          this.Stage.MatchTableOption.isSat = true;
-          this.Stage.MatchTableOption.isSun = true;
+        this.changeType("toBoolen");
+      });
+    },
+    handleErrorOk() {
+      this.errorDialogVisible = false;
+      this.$router.push({
+        path: "/assignedTeams",
+        query: {
+          stageId: ""
         }
       });
     },
@@ -1033,11 +1033,24 @@ export default {
         }
       });
     },
-    returnNum(value) {
-      if (value) {
-        return 1;
+    changeType(value) {
+      if (value === "toNumber") {
+        this.Stage.MatchTableOption.isMon = Number(this.Stage.MatchTableOption.isMon);
+        this.Stage.MatchTableOption.isTue = Number(this.Stage.MatchTableOption.isTue);
+        this.Stage.MatchTableOption.isWed = Number(this.Stage.MatchTableOption.isWed);
+        this.Stage.MatchTableOption.isThu = Number(this.Stage.MatchTableOption.isThu);
+        this.Stage.MatchTableOption.isFri = Number(this.Stage.MatchTableOption.isFri);
+        this.Stage.MatchTableOption.isSat = Number(this.Stage.MatchTableOption.isSat);
+        this.Stage.MatchTableOption.isSun = Number(this.Stage.MatchTableOption.isSun);
+      } else {
+        this.Stage.MatchTableOption.isMon = Boolean(this.Stage.MatchTableOption.isMon);
+        this.Stage.MatchTableOption.isTue = Boolean(this.Stage.MatchTableOption.isTue);
+        this.Stage.MatchTableOption.isWed = Boolean(this.Stage.MatchTableOption.isWed);
+        this.Stage.MatchTableOption.isThu = Boolean(this.Stage.MatchTableOption.isThu);
+        this.Stage.MatchTableOption.isFri = Boolean(this.Stage.MatchTableOption.isFri);
+        this.Stage.MatchTableOption.isSat = Boolean(this.Stage.MatchTableOption.isSat);
+        this.Stage.MatchTableOption.isSun = Boolean(this.Stage.MatchTableOption.isSun);
       }
-      return 0;
     },
     TemplatelViewClick() {
       this.TemplatelView = true;
@@ -1087,12 +1100,12 @@ export default {
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
+      const LegObj = {};
+      const vm = this;
       let obj = "homePlayerId";
       let RepeatIndex = -1;
       let fg = -1;
       let GenderNum = 0;
-      const LegObj = {};
-      const vm = this;
       if (type === 2) {
         obj = "visitingPlayerId";
       }
@@ -1576,6 +1589,11 @@ export default {
   justify-content: space-around;
   height: 28px;
   line-height: 20px;
+}
+.rowTitle {
+  height: 34px;
+  line-height: 30px;
+  background: #eee;
 }
 .tableselectBox {
   margin: 5px 0;
