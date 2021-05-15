@@ -225,13 +225,13 @@ export default {
       this.search();
     },
     getOoperatorList() {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("userId") })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.operatorList = res.data.data;
         this.infoVO.operatorId = res.data.data[0].creatorId;
       });
     },
     getCountryList() {
-      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("userId") })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
       });

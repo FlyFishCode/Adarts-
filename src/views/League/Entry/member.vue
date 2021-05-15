@@ -43,7 +43,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="userName" sortable :label="$t('all.tip259')" min-width="7%"> </el-table-column>
+        <el-table-column prop="userName" :label="$t('all.tip259')" min-width="7%"> </el-table-column>
         <el-table-column :label="$t('all.tip208')" min-width="6%">
           <template slot-scope="scope">
             {{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}

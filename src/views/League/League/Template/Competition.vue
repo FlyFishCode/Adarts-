@@ -815,7 +815,7 @@ export default {
   data() {
     const vm = this;
     return {
-      userType: sessionStorage.getItem("userType"),
+      userType: sessionStorage.getItem("LeagueUserType"),
       competitionEndPeriodPickerOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.AddCompetitionRequest.competition.competitionStartPeriod);
@@ -1039,7 +1039,7 @@ export default {
         this.uploadCompetitionId = query.id || query.currentId;
         sessionStorage.setItem("competitionId", this.uploadCompetitionId);
       }
-      const userId = sessionStorage.getItem("userId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.searchOperator.userId = userId;
       this.AddCompetitionRequest.competition.userId = userId;
       this.Shop.userId = userId;
@@ -1133,7 +1133,7 @@ export default {
     getOperationdata() {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
         this.agentList = res.data.data;
-        this.Shop.agentId = Number(sessionStorage.getItem("userId"));
+        this.Shop.agentId = Number(sessionStorage.getItem("LeagueUserId"));
         this.shopSearch();
       });
     },

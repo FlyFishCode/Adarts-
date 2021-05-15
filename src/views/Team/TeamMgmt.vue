@@ -382,7 +382,7 @@ export default {
         pmr: 3,
         min: "",
         max: "",
-        userId: sessionStorage.getItem("userId"),
+        userId: sessionStorage.getItem("LeagueUserId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -390,7 +390,7 @@ export default {
     };
   },
   mounted() {
-    const userId = sessionStorage.getItem("userId");
+    const userId = sessionStorage.getItem("LeagueUserId");
     this.Dialog.createId = userId;
     this.name = this.$route.params.name;
     this.search();
@@ -412,7 +412,7 @@ export default {
       }
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
@@ -444,7 +444,7 @@ export default {
       this.TeamMgmt.areaId = "";
     },
     getShopList() {
-      const userId = sessionStorage.getItem("userId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });

@@ -267,7 +267,7 @@ export default {
     init(data) {
       this.matchVO.competitionId = data.competitionId;
       this.matchVO.teamId = data.teamId;
-      this.matchVO.userId = sessionStorage.getItem("userId");
+      this.matchVO.userId = sessionStorage.getItem("LeagueUserId");
       this.match.competitionName = data.competitionName;
       this.match.status = data.status;
       this.match.start = data.competitionStartPeriod.split(" ")[0];

@@ -231,7 +231,7 @@
           <el-input v-model.number="howMany" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button size="mini" type="primary" @click="Create">{{ $t("all.tip16") }}</el-button>
+          <el-button size="mini" type="primary" @click="create">{{ $t("all.tip16") }}</el-button>
         </el-col>
       </el-row>
       <div class="table">
@@ -651,7 +651,7 @@ export default {
       }
       this.legList.splice(index, 1);
       // this.getList();
-      // this.bus.$emit("setNode", this.$route.query.id);
+      this.bus.$emit("setNode", this.$route.query.id);
     },
     CopyFrom() {
       this.copyBox = true;
@@ -695,7 +695,7 @@ export default {
         console.log(err);
       });
     },
-    Create() {
+    create() {
       this.set.stageId = this.$route.query.parentId;
       if (!this.set.stageId) {
         return;

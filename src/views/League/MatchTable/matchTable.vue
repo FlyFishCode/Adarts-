@@ -183,7 +183,7 @@ export default {
         competitionStartPeriod: null,
         competitionEndPeriod: null,
         competitionName: "",
-        userId: sessionStorage.getItem("userId"),
+        userId: sessionStorage.getItem("LeagueUserId"),
         operId: "",
         createId: "",
         pageNum: 1,
@@ -196,7 +196,7 @@ export default {
     };
   },
   mounted() {
-    const creatorId = sessionStorage.getItem("userId");
+    const creatorId = sessionStorage.getItem("LeagueUserId");
     this.search();
     this.getCounarr(creatorId);
     this.getOperationdata(creatorId);
@@ -216,7 +216,7 @@ export default {
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("userId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },

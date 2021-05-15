@@ -36,7 +36,7 @@ Vue.prototype.$axios = http;
 http.interceptors.request.use(
     config => {
         NProgress.start();
-        const token = sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("LeagueToken");
         if (!config.headers.token) {
             // eslint-disable-next-line no-param-reassign
             config.headers.token = token;

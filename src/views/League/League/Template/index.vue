@@ -452,7 +452,7 @@ export default {
         data = {
           competition: { id: this.$route.query.id },
           isHaveComp: 1,
-          userId: sessionStorage.getItem("userId"),
+          userId: sessionStorage.getItem("LeagueUserId"),
           name: this.template.name,
           description: this.template.description
         };
@@ -460,7 +460,7 @@ export default {
         const { competition, competitionBasicOption, competitionOption, countryList, operatorList, shopIdList } = this.treeDataList[0].current;
         const categoryList = [];
         data = {
-          userId: sessionStorage.getItem("userId"),
+          userId: sessionStorage.getItem("LeagueUserId"),
           name: this.template.name,
           description: this.template.description,
           isHaveComp: 2,

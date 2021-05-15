@@ -853,7 +853,7 @@ export default {
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem("userId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.ShopList = res.data.data.list;
       });
@@ -961,7 +961,8 @@ export default {
           this.$message({
             message: res.data.msg
           });
-        } else {
+        }
+        if (res.data.code === 1061) {
           this.errorMsg = res.data.msg;
           this.errorDialogVisible = true;
         }
@@ -1042,7 +1043,8 @@ export default {
         this.Stage.MatchTableOption.isFri = Number(this.Stage.MatchTableOption.isFri);
         this.Stage.MatchTableOption.isSat = Number(this.Stage.MatchTableOption.isSat);
         this.Stage.MatchTableOption.isSun = Number(this.Stage.MatchTableOption.isSun);
-      } else {
+      }
+      if (value === "toBoolen") {
         this.Stage.MatchTableOption.isMon = Boolean(this.Stage.MatchTableOption.isMon);
         this.Stage.MatchTableOption.isTue = Boolean(this.Stage.MatchTableOption.isTue);
         this.Stage.MatchTableOption.isWed = Boolean(this.Stage.MatchTableOption.isWed);

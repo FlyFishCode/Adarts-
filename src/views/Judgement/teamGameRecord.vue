@@ -267,7 +267,7 @@ export default {
     this.gameRecordVO.teamId = this.$route.query.teamId;
     this.gameRecordVO.setId = this.$route.query.setId;
     this.gameRecordVO.legId = this.$route.query.legId;
-    this.updata.judgeUserId = sessionStorage.getItem("userId");
+    this.updata.judgeUserId = sessionStorage.getItem("LeagueUserId");
     this.getData();
   },
   methods: {
