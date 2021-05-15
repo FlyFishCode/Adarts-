@@ -146,7 +146,7 @@
             <div v-if="scope.row.judge === 2">
               <div class="tableLink" @click="show">{{ $t("all.tip551") }}</div>
             </div> -->
-            <div class="tableLink" @click="show(scope.row)">{{ $t("all.tip551") }}</div>
+            <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip551") }}</div>
           </template>
         </el-table-column>
         <!-- <el-table-column prop="address" :label="$t('all.tip33')" min-width="5%">
@@ -170,7 +170,11 @@
         </el-table-column>
         <el-table-column prop="value" :label="$t('all.tip541')" min-width="10%"></el-table-column>
         <el-table-column prop="team" :label="$t('all.tip244')" min-width="10%"></el-table-column>
-        <el-table-column prop="judge" :label="$t('all.tip368')" min-width="10%"></el-table-column>
+        <el-table-column prop="judge" :label="$t('all.tip368')" min-width="10%">
+          <template slot-scope="scope">
+            <div>{{ scope.row.judge === 1 ? $t("all.tip376") : $t("all.tip551") }}</div>
+          </template>
+        </el-table-column>
         <el-table-column prop="judgement" :label="$t('all.tip225')" min-width="10%"></el-table-column>
         <el-table-column prop="editor" :label="$t('all.tip233')" min-width="10%"></el-table-column>
       </el-table>
@@ -326,15 +330,15 @@ export default {
         }
       });
     },
-    show(data) {
+    showResult(data) {
       this.$axios.post(`/judgement/getJudge?playerResultId=${data.playerResultId}`).then(res => {
         const obj = {
           date: data.date,
           value: `${data.setId}/${data.legId}`,
           team: data.vsTeam,
           judge: res.data.data.judge,
-          reson: res.data.data.judgement,
-          editor: res.data.data.editor
+          reson: res.data.data.judgement || "-",
+          editor: res.data.data.editor || "-"
         };
         this.dialogData = [obj];
       });

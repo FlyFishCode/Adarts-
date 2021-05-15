@@ -152,7 +152,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column min-width="19%">
+        <el-table-column min-width="10%">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="mgmt(scope.row)">{{ $t("all.tip241") }}</el-button>
             <el-button size="mini" type="primary" @click="assign(scope.row)">{{ $t("all.tip264") }}</el-button>

@@ -313,8 +313,25 @@
                 <el-option :value="3" :label="$t('all.tip28')"></el-option>
               </el-select>
             </el-col>
+            <el-col class="label-g" :span="3">
+              {{ $t("all.tip8") }}
+            </el-col>
+            <el-col :span="3" class="lineClass">
+              <el-select v-model="searchByCompetition.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
+                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
+              </el-select>
+            </el-col>
           </el-row>
           <el-row>
+            <el-col class="label-g" :span="3">
+              {{ $t("all.tip7") }}
+            </el-col>
+            <el-col :span="3">
+              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="datetime" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+            </el-col>
+            <el-col :span="3">
+              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+            </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip5") }}
             </el-col>
@@ -326,28 +343,6 @@
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip7") }}
-            </el-col>
-            <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="datetime" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
-            </el-col>
-            <el-col :span="0.5" class="lineClass">
-              -
-            </el-col>
-            <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
-            </el-col>
-          </el-row>
-          <el-row class="center-Row">
-            <el-col class="label-g" :span="3">
-              {{ $t("all.tip8") }}
-            </el-col>
-            <el-col :span="3" class="lineClass">
-              <el-select v-model="searchByCompetition.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
-                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
-              </el-select>
-            </el-col>
-            <el-col class="label-g" :span="3">
               {{ $t("all.tip382") }}
             </el-col>
             <el-col :span="3" class="lineClass">
@@ -355,6 +350,8 @@
                 <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
               </el-select>
             </el-col>
+          </el-row>
+          <el-row class="center-Row">
             <el-col class="label-g" :span="3">
               {{ $t("all.tip9") }}
             </el-col>

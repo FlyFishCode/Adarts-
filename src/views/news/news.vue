@@ -19,6 +19,17 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
+          {{ $t("all.tip436") }}
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.registerStartDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.registerEndDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
@@ -26,28 +37,13 @@
             <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
           </el-select>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip436") }}
-        </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.registerStartDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.registerEndDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-            </el-date-picker>
-          </el-col>
-        </el-col>
-        <el-col class="label-g" :span="2">
           {{ $t("all.tip597") }}
         </el-col>
         <el-col :span="3">
           <el-input v-model="infoVO.title"></el-input>
         </el-col>
-        <el-col class="label-g" :span="2">
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
@@ -95,7 +91,7 @@
         <el-table-column prop="display" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
-              <el-checkbox v-model="scope.row.display" @change='checkboxChange(scope.row)'></el-checkbox>
+              <el-checkbox v-model="scope.row.display" @change="checkboxChange(scope.row)"></el-checkbox>
             </div>
           </template>
         </el-table-column>
@@ -135,15 +131,15 @@ export default {
       tableData: [],
       countryList: [],
       operatorList: [],
-      categoryList: [{ value: 1, label: 'all.tip603' }, { value: 2, label: 'all.tip604' }, { value: 3, label: 'all.tip605' }, { value: 4, label: 'all.tip606' }, { value: 5, label: 'all.tip1' }],
+      categoryList: [{ value: 1, label: "all.tip603" }, { value: 2, label: "all.tip604" }, { value: 3, label: "all.tip605" }, { value: 4, label: "all.tip606" }, { value: 5, label: "all.tip1" }],
       infoVO: {
-        countryId: '',
+        countryId: "",
         category: 1,
-        operatorId: '',
-        registerStartDate: '',
-        registerEndDate: '',
-        opeatorIdName: '',
-        title: '',
+        operatorId: "",
+        registerStartDate: "",
+        registerEndDate: "",
+        opeatorIdName: "",
+        title: "",
         display: 1,
         pageNum: 1,
         pageSize: 10
@@ -159,18 +155,18 @@ export default {
   },
   methods: {
     create() {
-      this.$router.push('/createNews');
+      this.$router.push("/createNews");
     },
     entryPage(id) {
       this.$router.push({
-        path: '/createNews',
+        path: "/createNews",
         query: {
           newsId: id
         }
       });
     },
     search() {
-      this.$axios.post('/getLeagueNewsList', this.infoVO).then(res => {
+      this.$axios.post("/getLeagueNewsList", this.infoVO).then(res => {
         res.data.data.list.forEach(i => {
           // eslint-disable-next-line no-param-reassign
           i.display = Boolean(i.display);
@@ -179,7 +175,7 @@ export default {
       });
     },
     deleteNews(id) {
-      this.$axios.post('/delleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/delleaguenewsbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.msg) {
           this.$message(res.data.msg);
           this.search();
@@ -187,35 +183,35 @@ export default {
       });
     },
     getCategoryType(type) {
-      let str = '';
+      let str = "";
       switch (type) {
-      case 1:
-        str = 'all.tip603';
-        break;
-      case 2:
-        str = 'all.tip604';
-        break;
-      case 3:
-        str = 'all.tip605';
-        break;
-      case 4:
-        str = 'all.tip606';
-        break;
-      default:
-        str = 'all.tip1';
-        break;
+        case 1:
+          str = "all.tip603";
+          break;
+        case 2:
+          str = "all.tip604";
+          break;
+        case 3:
+          str = "all.tip605";
+          break;
+        case 4:
+          str = "all.tip606";
+          break;
+        default:
+          str = "all.tip1";
+          break;
       }
       return str;
     },
     checkboxChange(item) {
-      this.$axios.post('/updatedisplay', this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
+      this.$axios.post("/updatedisplay", this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
         this.$message(res.data.msg);
       });
     },
     save() {},
     dateChange(data) {
       if (this.infoVO.registerEndDate && this.infoVO.registerEndDate < data) {
-        this.infoVO.registerEndDate = '';
+        this.infoVO.registerEndDate = "";
       }
     },
     sizeChange(value) {
@@ -227,20 +223,20 @@ export default {
       this.search();
     },
     getOoperatorList() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("userId") })).then(res => {
         this.operatorList = res.data.data;
         this.infoVO.operatorId = res.data.data[0].creatorId;
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("userId") })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
       });
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
+        this.$axios.post("/accountplayerlist", this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {

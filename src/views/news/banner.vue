@@ -19,6 +19,17 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
+          {{ $t("all.tip436") }}
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip609") }}
         </el-col>
         <el-col :span="3">
@@ -27,27 +38,13 @@
             <el-option :value="2" :label="$t('all.tip611')"></el-option>
           </el-select>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip436") }}
-        </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
-          </el-col>
-        </el-col>
-        <el-col class="label-g" :span="2">
           {{ $t("all.tip597") }}
         </el-col>
         <el-col :span="3">
           <el-input v-model="infoVO.name" clearable></el-input>
         </el-col>
-        <el-col class="label-g" :span="2">
+        <el-col class="label-g" :span="3">
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
@@ -141,13 +138,13 @@ export default {
       countryList: [],
       operatorList: [],
       infoVO: {
-        countryId: '',
-        userId: sessionStorage.getItem('userId'),
-        operationId: '',
+        countryId: "",
+        userId: sessionStorage.getItem("userId"),
+        operationId: "",
         useType: null,
-        startDate: '',
-        endDate: '',
-        name: '',
+        startDate: "",
+        endDate: "",
+        name: "",
         status: null,
         pageNum: 1,
         pageSize: 10
@@ -165,18 +162,18 @@ export default {
       this.getOoperatorList();
     },
     create() {
-      this.$router.push('/createBanner');
+      this.$router.push("/createBanner");
     },
     entryPage(id) {
       this.$router.push({
-        path: '/createBanner',
+        path: "/createBanner",
         query: {
           bannerId: id
         }
       });
     },
     search() {
-      this.$axios.post('/getBannerList', this.infoVO).then(res => {
+      this.$axios.post("/getBannerList", this.infoVO).then(res => {
         res.data.data.list.forEach(i => {
           // eslint-disable-next-line no-param-reassign
           i.status = Boolean(i.status);
@@ -186,7 +183,7 @@ export default {
       });
     },
     deleteNews(id) {
-      this.$axios.post('/delbannerbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/delbannerbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.msg) {
           this.$message(res.data.msg);
           this.search();
@@ -195,13 +192,13 @@ export default {
     },
     checkboxChange(item) {
       const obj = Object.assign({}, item, { status: Number(item.status) });
-      this.$axios.post('/operationbanner', obj).then(res => {
+      this.$axios.post("/operationbanner", obj).then(res => {
         this.$message(res.data.msg);
       });
     },
     dateChange(data) {
       if (this.infoVO.endDate && this.infoVO.endDate < data) {
-        this.infoVO.endDate = '';
+        this.infoVO.endDate = "";
       }
     },
     sizeChange(value) {
@@ -213,12 +210,12 @@ export default {
       this.search();
     },
     getOoperatorList() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("userId") })).then(res => {
         this.operatorList = res.data.data;
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("userId") })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
         this.search();
@@ -226,7 +223,7 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
+        this.$axios.post("/accountplayerlist", this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {
