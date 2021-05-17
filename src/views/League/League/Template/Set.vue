@@ -253,7 +253,7 @@
           </el-table-column>
           <el-table-column prop="date" min-width="6%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" @click="deleteLeg(scope.$index, scope.row.legId)">{{ $t("all.tip130") }}</el-button>
+              <el-button size="mini" type="danger" @click="handleLegDelete(scope.$index, scope.row.legId)">{{ $t("all.tip130") }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -282,13 +282,18 @@
         <el-button size="mini" @click="Add" type="primary">{{ $t("all.tip132") }}</el-button>
       </div>
     </el-dialog>
+    <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
   </div>
 </template>
 <script>
 import { deleteStage, changeCurrentObj } from "@/components/common/Utils";
+import DeleteDialog from "@/components/deleteDialog";
 
 export default {
   name: "Set",
+  components: {
+    DeleteDialog
+  },
   data() {
     return {
       id: "",
@@ -322,7 +327,10 @@ export default {
       stageGameIdList: [{ value: 0, label: this.$t("all.tip521") }],
       choicesList: [{ id: 2, label: "all.tip513" }, { id: 3, label: "all.tip514" }],
       copyRadio: 0,
+      deleteLegId: 0,
+      deleteLegIndex: 0,
       copyBox: false,
+      deleteVisible: false,
       copyBoxData: [],
       choicesData: [],
       maxPlayer: 1,
@@ -643,16 +651,36 @@ export default {
           break;
       }
     },
-    deleteLeg(index, id) {
-      if (id) {
-        this.$axios.post(`/deleteLeg?legId=${id}`).then(res => {
-          console.log(res.data.msg);
+    handleCancel() {
+      this.deleteVisible = false;
+    },
+    handleLegDelete(index, id) {
+      this.deleteVisible = true;
+      this.deleteLegIndex = index;
+      this.deleteLegId = id;
+    },
+    handleOk(type) {
+      if (type) {
+        this.$axios.post(`/deleteLeg?legId=${this.deleteLegId}`).then(res => {
+          if (res.data.code === 1000) {
+            this.legList.splice(this.deleteLegIndex, 1);
+            this.bus.$emit("setNode", this.$route.query.id);
+          }
+          this.$message(res.data.msg);
+          this.deleteVisible = false;
         });
       }
-      this.legList.splice(index, 1);
-      // this.getList();
-      this.bus.$emit("setNode", this.$route.query.id);
     },
+    // deleteLeg(index, id) {
+    //   if (id) {
+    //     this.$axios.post(`/deleteLeg?legId=${id}`).then(res => {
+    //       console.log(res.data.msg);
+    //     });
+    //   }
+    //   this.legList.splice(index, 1);
+    //   // this.getList();
+    //   this.bus.$emit("setNode", this.$route.query.id);
+    // },
     CopyFrom() {
       this.copyBox = true;
     },

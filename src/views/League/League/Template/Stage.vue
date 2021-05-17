@@ -153,7 +153,7 @@
             <el-table-column prop="choice" :label="$t('all.tip192')" min-width="9%"> </el-table-column>
             <el-table-column min-width="6%">
               <template slot-scope="scope">
-                <el-button size="mini" type="primary" @click="Delete(scope.$index, scope.row.stageGameId)">{{ $t("all.tip130") }}</el-button>
+                <el-button size="mini" type="danger" @click="Delete(scope.$index, scope.row.stageGameId)">{{ $t("all.tip130") }}</el-button>
               </template>
             </el-table-column>
           </el-table>

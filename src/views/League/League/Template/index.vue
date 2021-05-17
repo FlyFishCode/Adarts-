@@ -143,8 +143,7 @@ export default {
   },
   mounted() {
     if ((this.$route.query.showData && this.$route.query.id) || this.$route.query.isTemplate) {
-      const id = sessionStorage.getItem("competitionId") || "";
-      this.$axios.post(`/allsubset?competitionId=${id}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
         if (res.data.data) {
           this.treeDataList = res.data.data;
         }

@@ -640,7 +640,7 @@
           <el-table-column prop="division" :label="$t('all.tip52')" min-width="9%"> </el-table-column>
           <el-table-column min-width="6%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" @click="categoryDelete(scope.row.id)">{{ $t("all.tip130") }}</el-button>
+              <el-button size="mini" type="danger" @click="handleCategoryDelete(scope.row.id)">{{ $t("all.tip130") }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -765,7 +765,7 @@
         </el-table>
       </div>
       <div slot="footer" class="DialogButton">
-        <el-button size="mini" @click="Remove" type="primary">{{ $t("all.tip134") }}</el-button>
+        <el-button size="mini" @click="Remove" type="danger">{{ $t("all.tip134") }}</el-button>
       </div>
     </el-dialog>
     <!-- CompetitionAreaDialog -->
@@ -804,14 +804,20 @@
         <el-button size="mini" @click="CountrySave" type="primary">{{ $t("all.tip136") }}</el-button>
       </div>
     </el-dialog>
+    <div>
+      <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
+    </div>
   </div>
 </template>
 <script>
 import { changeMenus, changeCurrentObj, changeHash } from "@/components/common/Utils";
+import DeleteDialog from "@/components/deleteDialog";
 
 export default {
   name: "Competition",
-  components: {},
+  components: {
+    DeleteDialog
+  },
   data() {
     const vm = this;
     return {
@@ -920,6 +926,8 @@ export default {
       ShopDialog: false,
       ShopList: false,
       disabled: false,
+      deleteVisible: false,
+      deleteCategoryId: 0,
       fileList: [],
       CompetitionOptionShopList: [],
       A1: true,
@@ -1033,7 +1041,6 @@ export default {
   },
   methods: {
     init() {
-      debugger;
       const query = this.$route.query;
       if (query.id || query.currentId) {
         this.uploadCompetitionId = query.id || query.currentId;
@@ -1257,12 +1264,31 @@ export default {
     showDetails() {
       this.ShopList = true;
     },
-    categoryDelete(id) {
-      this.$axios.post(`/delcategorybyid?id=${id}`).then(res => {
-        this.$message(res.data.msg);
-        this.getCategoryList();
-        // this.getList();
+    handleCancel() {
+      this.deleteVisible = false;
+    },
+    handleOk(type) {
+      if (type) {
+        this.$axios.post(`/delcategorybyid?id=${this.deleteCategoryId}`).then(res => {
+          if (res.data.code === 1000) {
+            this.getCategoryList();
+            this.getMenuList();
+          }
+          this.$message(res.data.msg);
+          this.deleteVisible = false;
+        });
+      }
+    },
+    getMenuList() {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
+        if (res.data.data) {
+          this.$store.state.menuList = res.data.data;
+        }
       });
+    },
+    handleCategoryDelete(id) {
+      this.deleteVisible = true;
+      this.deleteCategoryId = id;
     },
     // eslint-disable-next-line consistent-return
     saveCompetition() {

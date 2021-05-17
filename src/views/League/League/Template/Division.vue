@@ -160,7 +160,7 @@
           <el-table-column prop="setNumber" :label="$t('all.tip53')" min-width="9%"> </el-table-column>
           <el-table-column min-width="6%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" @click="Delete(scope.row.stageId)">{{ $t("all.tip130") }}</el-button>
+              <el-button size="mini" type="danger" @click="handleStageDelete(scope.row.stageId)">{{ $t("all.tip130") }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -198,21 +198,28 @@
         <el-button size="mini" @click="Add" type="primary">{{ $t("all.tip132") }}</el-button>
       </div>
     </el-dialog>
+    <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
   </div>
 </template>
 <script>
 import { changeMenus, changeCurrentObj, changeHash } from "@/components/common/Utils";
+import DeleteDialog from "@/components/deleteDialog";
 
 export default {
   name: "Division",
+  components: {
+    DeleteDialog
+  },
   data() {
     return {
       id: "",
       list: [],
       showLimit: true,
+      deleteVisible: false,
       copyBox: false,
       copyName: "",
       copyRadio: 1,
+      deleteStageId: 0,
       copyBoxInput: "",
       isCurrentSave: "",
       division: {
@@ -369,11 +376,30 @@ export default {
       });
       this.copyBox = false;
     },
-    Delete(id) {
-      this.$axios.post(`/delestage?id=${id}`).then(res => {
-        this.$message(res.data.msg);
-        this.getStageList();
-        // this.getList();
+    handleCancel() {
+      this.deleteVisible = false;
+    },
+    handleStageDelete(id) {
+      this.deleteVisible = true;
+      this.deleteStageId = id;
+    },
+    handleOk(type) {
+      if (type) {
+        this.$axios.post(`/delestage?id=${this.deleteStageId}`).then(res => {
+          if (res.data.code === 1000) {
+            this.getStageList();
+            this.getMenuList();
+          }
+          this.$message(res.data.msg);
+          this.deleteVisible = false;
+        });
+      }
+    },
+    getMenuList() {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
+        if (res.data.data) {
+          this.$store.state.menuList = res.data.data;
+        }
       });
     }
   }
