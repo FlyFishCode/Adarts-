@@ -1400,7 +1400,11 @@ export default {
         url: "/addCompetitionImg",
         headers: { "Content-Type": "mutipart/form-data" },
         data: formData
-      }).then(() => {});
+      }).then(res => {
+        if (res.data.code !== 1000) {
+          this.$message(res.data.msg);
+        }
+      });
       // 此方法FormData参数无效
       // this.$axios.post('/addCompetitionImg', vm.$qs.stringify(formData)).then(res => {
       //

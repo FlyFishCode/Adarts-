@@ -444,6 +444,7 @@ export default {
           } else {
             Object.assign(vm.setGameList, res.data.data.setGameOption);
           }
+          debugger;
           vm.legList = res.data.data.legList;
           if (res.data.data.ratingMaximum) {
             vm.maxRating = 1;
@@ -696,17 +697,19 @@ export default {
       this.deleteLegIndex = index;
       this.deleteLegId = id;
     },
-    handleOk(type) {
-      if (type) {
+    handleOk() {
+      if (this.deleteLegId) {
         this.$axios.post(`/deleteLeg?legId=${this.deleteLegId}`).then(res => {
           if (res.data.code === 1000) {
             this.legList.splice(this.deleteLegIndex, 1);
             this.bus.$emit("setNode", this.$route.query.id);
           }
           this.$message(res.data.msg);
-          this.deleteVisible = false;
         });
+      } else {
+        this.legList.splice(this.deleteLegIndex, 1);
       }
+      this.deleteVisible = false;
     },
     // deleteLeg(index, id) {
     //   if (id) {
@@ -733,33 +736,6 @@ export default {
         // this.getList();
       });
       this.copyBox = false;
-    },
-    getLegGameList() {
-      const vm = this;
-      const pro = new Promise((resolve, reject) => {
-        this.$axios.post("/getgamelist", vm.$qs.stringify({ stageId: this.set.stageId })).then(res => {
-          if (res.data.data) {
-            resolve(res.data.data);
-          }
-          reject(res);
-        });
-      });
-      pro.then(res => {
-        res.forEach(i => {
-          debugger;
-          vm.allGameList.forEach(j => {
-            if (i.gameName === j.value) {
-              const flag = vm.stageGameIdList.every(k => i.id !== k.value);
-              if (flag) {
-                vm.stageGameIdList.push({ value: i.id, label: j.label });
-              }
-            }
-          });
-        });
-      });
-      pro.catch(err => {
-        console.log(err);
-      });
     },
     create() {
       this.set.stageId = this.$route.query.parentId;
@@ -789,6 +765,36 @@ export default {
         });
       }
       this.getLegGameList();
+    },
+    getLegGameList() {
+      const vm = this;
+      const obj = {
+        stageId: this.set.stageId,
+        mode: this.set.mode
+      };
+      const pro = new Promise((resolve, reject) => {
+        this.$axios.post("/getgamelist", vm.$qs.stringify(obj)).then(res => {
+          if (res.data.data) {
+            resolve(res.data.data);
+          }
+          reject(res);
+        });
+      });
+      pro.then(res => {
+        res.forEach(i => {
+          vm.allGameList.forEach(j => {
+            if (i.gameName === j.value) {
+              const flag = vm.stageGameIdList.every(k => i.id !== k.value);
+              if (flag) {
+                vm.stageGameIdList.push({ value: i.id, label: j.label });
+              }
+            }
+          });
+        });
+      });
+      pro.catch(err => {
+        console.log(err);
+      });
     }
   }
 };
