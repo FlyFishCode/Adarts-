@@ -3,13 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vue-cli-service serve --mode development --open",
+        "dev": "vue-cli-service serve --mode development --open",
         "build": "vue-cli-service build --mode production",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^4.0.0",
         "axios": "^0.19.0",
+        "blueimp-md5": "^2.18.0",
         "core-js": "^3.3.2",
         "echarts": "^4.8.0",
         "element-ui": "^2.13.1",
@@ -20,6 +21,7 @@
         "vue": "^2.6.10",
         "vue-i18n": "^8.15.1",
         "vue-router": "^3.1.3",
+        "vuex": "^3.6.2",
         "wangeditor": "^4.5.4"
     },
     "devDependencies": {
@@ -37,110 +39,6 @@
     "postcss": {
         "plugins": {
             "autoprefixer": {}
-        }
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "@vue/airbnb"
-        ],
-        "rules": {
-            "global-require": 0,
-            "arrow-parens": "off",
-            "globals": {
-                "common": true
-            },
-            "generators": "always",
-            "no-restricted-syntax": 0,
-            "func-names": [
-                "error",
-                "always"
-            ],
-            "prefer-destructuring": [
-                "error",
-                {
-                    "object": false,
-                    "array": false
-                }
-            ],
-            "semi": [
-                2,
-                "always"
-            ],
-            "no-tabs": "off",
-            "no-console": "off",
-            "no-debugger": "off",
-            "vue/no-unused-components": [
-                "error",
-                {
-                    "ignoreWhenBindingPresent": true
-                }
-            ],
-            "vue/no-parsing-error": [
-                2,
-                {
-                    "x-invalid-end-tag": false
-                }
-            ],
-            "linebreak-style": [
-                0,
-                "error",
-                "windows"
-            ],
-            "quotes": [
-                1,
-                "single"
-            ],
-            "comma-dangle": [
-                "error",
-                "never"
-            ],
-            "semi-style": [
-                "error",
-                "last"
-            ],
-            "extends": "eslint:recommended",
-            "max-len": [
-                "error",
-                {
-                    "code": 500
-                }
-            ],
-            "indent": [
-                1,
-                2
-            ],
-            "func-call-spacing": "off",
-            "treatUndefinedAsUnspecified": 0,
-            "import/no-extraneous-dependencies": [
-                2,
-                {
-                    "devDependencies": true
-                }
-            ],
-            "import/extensions": [
-                "error",
-                "always",
-                {
-                    "js": "never",
-                    "vue": "never"
-                }
-            ],
-            "import/no-unresolved": [
-                2,
-                {
-                    "ignore": [
-                        "antd-mobile"
-                    ]
-                }
-            ]
-        },
-        "parserOptions": {
-            "parser": "babel-eslint"
         }
     },
     "browserslist": [
