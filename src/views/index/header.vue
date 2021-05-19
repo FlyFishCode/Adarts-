@@ -9,12 +9,12 @@
       </el-col> -->
       <el-col :span="3">
         <!-- <el-form-item :label="$t('message.language')"> -->
-          <span class="languageClass">{{$t('all.tip460')}}</span>
-          <el-select v-model="language" :placeholder="$t('placeholder.select')" size="mini" @change="selectLanguage" class="selectClass">
-            <el-option value="jtzh" label="简体中文"></el-option>
-            <el-option value="ftzh" label="繁體中文"></el-option>
-            <el-option value="en" label="English"></el-option>
-          </el-select>
+        <span class="languageClass">{{ $t("all.tip460") }}</span>
+        <el-select v-model="language" :placeholder="$t('placeholder.select')" size="mini" @change="selectLanguage" class="selectClass">
+          <el-option value="jtzh" label="简体中文"></el-option>
+          <el-option value="ftzh" label="繁體中文"></el-option>
+          <el-option value="en" label="English"></el-option>
+        </el-select>
         <!-- </el-form-item> -->
       </el-col>
       <el-col :span="2">
@@ -30,41 +30,40 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
-  components: {
-  },
+  name: "home",
+  components: {},
   data() {
     return {
-      language: ''
+      language: ""
     };
   },
   mounted() {
-    if (this.$i18n.locale === 'jtzh') {
-      this.language = 'jtzh';
-      this.$i18n.locale = 'jtzh';
+    if (this.$i18n.locale === "jtzh") {
+      this.language = "jtzh";
+      this.$i18n.locale = "jtzh";
     } else {
-      this.language = 'en';
-      this.$i18n.locale = 'en';
+      this.language = "en";
+      this.$i18n.locale = "en";
     }
   },
   methods: {
     selectLanguage(value) {
       this.$i18n.locale = value;
-      sessionStorage.setItem('lang', value);
-      this.bus.$emit('change', window.treeList);
+      sessionStorage.setItem("lang", value);
+      this.bus.$emit("change", window.treeList);
     },
     loginOut() {
       const vm = this;
-      this.$confirm(this.$t('all.tip593'), {
-        confirmButtonText: this.$t('all.tip47'),
-        cancelButtonText: this.$t('all.tip30'),
-        type: 'warning'
+      this.$confirm(this.$t("all.tip593"), {
+        confirmButtonText: this.$t("all.tip47"),
+        cancelButtonText: this.$t("all.tip30"),
+        type: "warning"
       })
         .then(() => {
-          sessionStorage.removeItem('token');
-          sessionStorage.removeItem('userId');
-          sessionStorage.removeItem('userType');
-          vm.$router.push({ path: '/' });
+          sessionStorage.removeItem("LeagueToken");
+          sessionStorage.removeItem("LeagueUserId");
+          sessionStorage.removeItem("LeagueUserType");
+          vm.$router.push({ path: "/" });
         })
         .catch(() => {
           // this.$message({
@@ -101,16 +100,16 @@ export default {
 .loginOut:hover {
   cursor: pointer;
 }
-.languageClass{
+.languageClass {
   position: relative;
   top: 2px;
   width: 45%;
   display: inline-block;
 }
-.selectClass{
+.selectClass {
   width: 50%;
 }
-.loginOut:hover{
+.loginOut:hover {
   opacity: 0.5;
 }
 </style>

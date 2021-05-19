@@ -62,7 +62,7 @@
         <el-table-column prop="display" :label="$t('all.tip600')" min-width="5%">
           <template slot-scope="scope">
             <div class="tableClass">
-              <el-checkbox v-model="scope.row.display" @change='checkboxChange(scope.row)'></el-checkbox>
+              <el-checkbox v-model="scope.row.display" @change="checkboxChange(scope.row)"></el-checkbox>
             </div>
           </template>
         </el-table-column>
@@ -103,12 +103,12 @@ export default {
       countryList: [],
       operatorList: [],
       infoVO: {
-        countryId: '',
-        userId: '',
+        countryId: "",
+        userId: "",
         useType: 1,
-        startDate: '',
-        endDate: '',
-        name: '',
+        startDate: "",
+        endDate: "",
+        name: "",
         display: null,
         pageNum: 1,
         pageSize: 10
@@ -127,18 +127,18 @@ export default {
       this.getOoperatorList();
     },
     create() {
-      this.$router.push('/createIcon');
+      this.$router.push("/createIcon");
     },
     entryPage(id) {
       this.$router.push({
-        path: '/createIcon',
+        path: "/createIcon",
         query: {
           iconId: id
         }
       });
     },
     search() {
-      this.$axios.post('/getBannerList', this.infoVO).then(res => {
+      this.$axios.post("/getBannerList", this.infoVO).then(res => {
         res.data.data.forEach(i => {
           // eslint-disable-next-line no-param-reassign
           i.display = Boolean(i.display);
@@ -147,7 +147,7 @@ export default {
       });
     },
     deleteNews(id) {
-      this.$axios.post('/delleaguenewsbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/delleaguenewsbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.msg) {
           this.$message(res.data.msg);
           this.search();
@@ -155,32 +155,32 @@ export default {
       });
     },
     checkboxChange(item) {
-      this.$axios.post('/updatedisplay', this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
+      this.$axios.post("/updatedisplay", this.$qs.stringify({ id: item.id, display: Number(item.display) })).then(res => {
         this.$message(res.data.msg);
       });
     },
     dateChange(data) {
       if (this.infoVO.endDate && this.infoVO.endDate < data) {
-        this.infoVO.endDate = '';
+        this.infoVO.endDate = "";
       }
     },
     sizeChange() {},
     currentChange() {},
     getOoperatorList() {
-      this.$axios.post('/operation/getcreatorlist', this.$qs.stringify({ userId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.operatorList = res.data.data;
         this.infoVO.operatorId = res.data.data[0].creatorId;
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
       });
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/accountplayerlist', this.$qs.stringify({ account: value })).then(res => {
+        this.$axios.post("/accountplayerlist", this.$qs.stringify({ account: value })).then(res => {
           this.playerList = res.data.data;
         });
       } else {

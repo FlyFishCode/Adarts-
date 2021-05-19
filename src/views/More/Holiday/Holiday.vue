@@ -32,7 +32,7 @@
         <el-table-column prop="holidayName" :label="$t('all.tip434')" min-width="10%"> </el-table-column>
         <el-table-column :label="$t('all.tip436')" min-width="10%">
           <template slot-scope="scope">
-            {{ scope.row.holidayStartTime.split(' ')[0] }}-{{ scope.row.holidayEndTime.split(' ')[0] }}
+            {{ scope.row.holidayStartTime.split(" ")[0] }}-{{ scope.row.holidayEndTime.split(" ")[0] }}
           </template>
         </el-table-column>
         <el-table-column prop="holidayDescribe" :label="$t('all.tip49')" min-width="20%"> </el-table-column>
@@ -45,7 +45,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
 
     <el-dialog :title="$t('all.tip437')" :visible.sync="holidayDialog">
@@ -76,7 +85,8 @@
         </el-col>
         <el-col :span="2" class="lineClass">-</el-col>
         <el-col :span="9">
-          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
+          </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -84,11 +94,20 @@
           {{ $t("all.tip49") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="holidayDialogVO.holidayDescribe" :placeholder="$t('all.tip65')" type="textarea" maxlength="300" show-word-limit :autosize="{ minRows: 4, maxRows: 4 }" autocomplete="off" clearable></el-input>
+          <el-input
+            v-model="holidayDialogVO.holidayDescribe"
+            :placeholder="$t('all.tip65')"
+            type="textarea"
+            maxlength="300"
+            show-word-limit
+            :autosize="{ minRows: 4, maxRows: 4 }"
+            autocomplete="off"
+            clearable
+          ></el-input>
         </el-col>
       </el-row>
       <div slot="footer" class="dialogButton">
-        <el-button type="primary" size="mini" @click="save">{{ $t('all.tip136') }}</el-button>
+        <el-button type="primary" size="mini" @click="save">{{ $t("all.tip136") }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -98,7 +117,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Holiday',
+  name: "Holiday",
   components: {},
   data() {
     const vm = this;
@@ -110,9 +129,9 @@ export default {
         }
       },
       holidayVO: {
-        userId: '',
+        userId: "",
         ownerUserId: -1,
-        countryId: '',
+        countryId: "",
         pageNo: 1,
         pageSize: 10
       },
@@ -120,28 +139,28 @@ export default {
       ContinentArr: [],
       holidayDialog: false,
       holidayDialogVO: {
-        userId: sessionStorage.getItem('userId'),
-        countryId: '',
-        holidayName: '',
-        holidayStartTime: '',
-        holidayEndTime: '',
-        holidayDescribe: ''
+        userId: sessionStorage.getItem("LeagueUserId"),
+        countryId: "",
+        holidayName: "",
+        holidayStartTime: "",
+        holidayEndTime: "",
+        holidayDescribe: ""
       },
       tableData: [],
       flag: 1,
-      id: ''
+      id: ""
     };
   },
   mounted() {
-    this.holidayVO.userId = sessionStorage.getItem('userId');
-    this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: this.holidayVO.userId })).then(res => {
+    this.holidayVO.userId = sessionStorage.getItem("LeagueUserId");
+    this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.holidayVO.userId })).then(res => {
       this.ContinentArr = res.data.data;
     });
     this.search();
   },
   methods: {
     returnCountry(id) {
-      let label = '';
+      let label = "";
       this.ContinentArr.forEach(i => {
         if (i.id === id) {
           label = i.label;
@@ -151,30 +170,30 @@ export default {
     },
     search() {
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
+      this.$axios.post("/holiday/getholiday", this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
-        this.holidayVO.countryId = '';
+        this.holidayVO.countryId = "";
       });
     },
     create() {
       this.flag = 1;
-      this.holidayDialogVO.countryId = '';
-      this.holidayDialogVO.holidayName = '';
-      this.holidayDialogVO.holidayStartTime = '';
-      this.holidayDialogVO.holidayEndTime = '';
-      this.holidayDialogVO.holidayDescribe = '';
+      this.holidayDialogVO.countryId = "";
+      this.holidayDialogVO.holidayName = "";
+      this.holidayDialogVO.holidayStartTime = "";
+      this.holidayDialogVO.holidayEndTime = "";
+      this.holidayDialogVO.holidayDescribe = "";
       this.holidayDialog = true;
     },
     save() {
-      let url = '';
+      let url = "";
       if (this.flag === 1) {
-        url = 'holiday/addholiday';
+        url = "holiday/addholiday";
         delete this.holidayDialogVO.id;
       } else {
-        url = 'holiday/modifyholiday';
+        url = "holiday/modifyholiday";
         this.holidayDialogVO.id = this.id;
-        this.holidayDialogVO.userId = sessionStorage.getItem('userId');
+        this.holidayDialogVO.userId = sessionStorage.getItem("LeagueUserId");
       }
       this.$axios.post(`/${url}`, this.holidayDialogVO).then(res => {
         this.$message(res.data.msg);
@@ -198,10 +217,10 @@ export default {
     },
     deleteHoliday(id) {
       const data = {
-        userId: sessionStorage.getItem('userId'),
+        userId: sessionStorage.getItem("LeagueUserId"),
         id
       };
-      this.$axios.post('/holiday/delholidaybyid', this.$qs.stringify(data)).then(res => {
+      this.$axios.post("/holiday/delholidaybyid", this.$qs.stringify(data)).then(res => {
         this.$message(res.data.msg);
         this.search();
       });
@@ -209,7 +228,7 @@ export default {
     currentChange(value) {
       this.holidayVO.pageNo = value;
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
+      this.$axios.post("/holiday/getholiday", this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
       });
@@ -217,14 +236,14 @@ export default {
     sizeChange(value) {
       this.holidayVO.pageSize = value;
       this.holidayVO.countryId = this.holidayVO.countryId || -1;
-      this.$axios.post('/holiday/getholiday', this.holidayVO).then(res => {
+      this.$axios.post("/holiday/getholiday", this.holidayVO).then(res => {
         this.total = res.data.data.total;
         this.tableData = res.data.data.list;
       });
     },
     change(value) {
       if (value) {
-        this.holidayDialogVO.holidayEndTime = '';
+        this.holidayDialogVO.holidayEndTime = "";
       }
     }
   }

@@ -71,17 +71,17 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
       operList: [],
       total: 1,
       templateVO: {
-        userId: '',
+        userId: "",
         leagueType: 1,
-        name: '',
-        operator: '',
+        name: "",
+        operator: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -89,18 +89,18 @@ export default {
     };
   },
   mounted() {
-    this.templateVO.userId = sessionStorage.getItem('userId');
+    this.templateVO.userId = sessionStorage.getItem("LeagueUserId");
     this.search();
     this.getOperationdata(this.templateVO.userId);
   },
   methods: {
     getOperationdata(userId) {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
     search() {
-      this.$axios.post('/template/gettemplatelist', this.$qs.stringify(this.templateVO)).then(res => {
+      this.$axios.post("/template/gettemplatelist", this.$qs.stringify(this.templateVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
@@ -121,7 +121,7 @@ export default {
     },
     push(id) {
       this.$router.push({
-        path: 'competition',
+        path: "competition",
         query: {
           id,
           isTemplate: true

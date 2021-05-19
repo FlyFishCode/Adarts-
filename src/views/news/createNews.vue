@@ -75,7 +75,7 @@
           class="uploadBg"
           action=" "
           ref="upload"
-          :auto-upload="false"
+          :auto-upload="true"
           list-type="picture-card"
           :on-change="handleChange"
           :on-remove="handleRemove"
@@ -205,6 +205,7 @@ export default {
         });
       } else {
         this.$refs.upload.submit();
+        this.$message("请上传图片！");
       }
     },
     remoteMethod(value) {
@@ -241,18 +242,21 @@ export default {
           url: "/uploadPictures",
           data: formData
         }).then(res => {
-          if (res.data.data) {
+          if (res.data.code === 1000) {
             resolve(res.data.data);
           } else {
-            reject(res.data.data);
+            reject(res.data.msg);
           }
         });
       });
       P1.then(value => {
         this.infoVO.thumbnail = value;
         this.$axios.post("/addleaguenews", this.infoVO).then(res => {
-          this.$message(res.data.msg);
+          console.log(res);
+          // this.$message(res.data.msg);
         });
+      }).catch(err => {
+        this.$message(err);
       });
     },
     handleRemove(file, fileList) {

@@ -14,7 +14,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="operatorVO.operName" clearable :placeholder="$t('placeholder.input')" ></el-input>
+          <el-input v-model="operatorVO.operName" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
@@ -52,7 +52,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
     <!-- 修改 -->
     <el-dialog :title="$t('all.tip462')" :visible.sync="changeDiolog">
@@ -74,7 +83,7 @@
         <el-col class="label-g" :span="4">
           {{ $t("all.tip63") }}
         </el-col>
-        <el-col :span="20"  id="divBoxWidth">
+        <el-col :span="20" id="divBoxWidth">
           <el-input v-model="changeVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
       </el-row>
@@ -82,7 +91,7 @@
         <el-col class="label-g" :span="4">
           {{ $t("all.tip457") }}
         </el-col>
-        <el-col :span="20"  id="divBoxWidth">
+        <el-col :span="20" id="divBoxWidth">
           <el-select v-model="changeVo.agentId" :placeholder="$t('placeholder.select')">
             <el-option v-for="item in creatorList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
@@ -120,7 +129,7 @@
         <el-col class="label-g" :span="4">
           {{ $t("all.tip63") }}
         </el-col>
-        <el-col :span="20"  id="divBoxWidth">
+        <el-col :span="20" id="divBoxWidth">
           <el-input v-model="creatorVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
       </el-row>
@@ -128,7 +137,7 @@
         <el-col class="label-g" :span="4">
           {{ $t("all.tip457") }}
         </el-col>
-        <el-col :span="20"  id="divBoxWidth">
+        <el-col :span="20" id="divBoxWidth">
           <el-select v-model="creatorVo.agentId" :placeholder="$t('placeholder.select')">
             <el-option v-for="item in creatorList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
@@ -153,7 +162,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Holiday',
+  name: "Holiday",
   components: {},
   data() {
     return {
@@ -162,40 +171,40 @@ export default {
       CreatDialog: false,
       changeDiolog: false,
       operatorVO: {
-        userId: '',
-        operId: '',
-        operName: '',
-        agentId: '',
+        userId: "",
+        operId: "",
+        operName: "",
+        agentId: "",
         pageNo: 1,
         pageSize: 10
       },
       creatorVo: {
-        operAccount: '',
-        operPassword: '',
-        agentId: '',
-        operName: '',
-        description: ''
+        operAccount: "",
+        operPassword: "",
+        agentId: "",
+        operName: "",
+        description: ""
       },
       changeVo: {
-        operAccount: '',
-        operPassword: '',
-        agentId: '',
-        operName: '',
-        description: ''
+        operAccount: "",
+        operPassword: "",
+        agentId: "",
+        operName: "",
+        description: ""
       },
       creatorList: [],
       tableData: []
     };
   },
   mounted() {
-    this.operatorVO.userId = sessionStorage.getItem('userId');
+    this.operatorVO.userId = sessionStorage.getItem("LeagueUserId");
     this.search();
     this.getCreatorList();
   },
   filters: {
     capitalize(value) {
-      if (!value) return '';
-      const [year, time] = value.split('T');
+      if (!value) return "";
+      const [year, time] = value.split("T");
       return `${year} ${time.slice(0, 5)}`;
     }
   },
@@ -207,7 +216,7 @@ export default {
       });
     },
     getCreatorList() {
-      const userId = sessionStorage.getItem('userId');
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post(`/operation/getcreatorlist?userId=${userId}`).then(res => {
         this.creatorList = res.data.data;
         this.agentList = res.data.data;
@@ -215,7 +224,7 @@ export default {
     },
     push(data) {
       this.$router.push({
-        path: '/competition',
+        path: "/competition",
         query: data
       });
     },
@@ -234,47 +243,47 @@ export default {
       this.changeDiolog = true;
     },
     changeCreator() {
-      this.$axios.post('/operation/updateoperationbyid', this.$qs.stringify(this.changeVo)).then(res => {
+      this.$axios.post("/operation/updateoperationbyid", this.$qs.stringify(this.changeVo)).then(res => {
         this.$message(res.data.msg);
-        this.changeVo.operAccount = '';
-        this.changeVo.operPassword = '';
-        this.changeVo.agentId = '';
-        this.changeVo.operName = '';
-        this.changeVo.description = '';
+        this.changeVo.operAccount = "";
+        this.changeVo.operPassword = "";
+        this.changeVo.agentId = "";
+        this.changeVo.operName = "";
+        this.changeVo.description = "";
         this.search();
       });
       this.changeDiolog = false;
     },
     save() {
-      this.creatorVo.createId = sessionStorage.getItem('userId');
-      this.$axios.post('/operation/addoperation', this.creatorVo).then(res => {
+      this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
+      this.$axios.post("/operation/addoperation", this.creatorVo).then(res => {
         this.$message(res.data.msg);
-        this.creatorVo.operAccount = '';
-        this.creatorVo.operPassword = '';
-        this.creatorVo.agentId = '';
-        this.creatorVo.operName = '';
-        this.creatorVo.description = '';
+        this.creatorVo.operAccount = "";
+        this.creatorVo.operPassword = "";
+        this.creatorVo.agentId = "";
+        this.creatorVo.operName = "";
+        this.creatorVo.description = "";
         this.search();
       });
       this.CreatDialog = false;
     },
     delete() {},
     search() {
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     currentChange(val) {
       this.operatorVO.pageNo = val;
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });
     },
     sizeChange(val) {
       this.operatorVO.pageSize = val;
-      this.$axios.post('/operation/getoperationlist', this.$qs.stringify(this.operatorVO)).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;
         this.total = res.data.data.total;
       });

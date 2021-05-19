@@ -98,23 +98,23 @@ export default {
         }
       },
       flag: false,
-      typeOrder: '',
+      typeOrder: "",
       countryList: [],
       playerList: [],
       fileList: [],
       infoVO: {
-        id: '',
-        countryId: '',
-        userId: '',
+        id: "",
+        countryId: "",
+        userId: "",
         useType: 1,
-        startDate: '',
-        endDate: '',
-        link: '',
-        name: '',
+        startDate: "",
+        endDate: "",
+        link: "",
+        name: "",
         target: 1,
         status: 1,
-        mainOrderNo: '',
-        viceOrderNo: ''
+        mainOrderNo: "",
+        viceOrderNo: ""
       }
     };
   },
@@ -137,7 +137,7 @@ export default {
         this.infoVO.viceOrderNo = this.typeOrder;
       }
       if (this.flag) {
-        this.$axios.post('/operationbanner', this.infoVO).then(res => {
+        this.$axios.post("/operationbanner", this.infoVO).then(res => {
           if (res.data.msg) {
             this.$message(res.data.msg);
           }
@@ -148,7 +148,7 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/searchOperation', this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem('userId') })).then(res => {
+        this.$axios.post("/searchOperation", this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
           this.playerList = res.data.data;
         });
       } else {
@@ -157,11 +157,11 @@ export default {
     },
     dateChange(data) {
       if (this.infoVO.endDate && this.infoVO.endDate < data) {
-        this.infoVO.endDate = '';
+        this.infoVO.endDate = "";
       }
     },
     getBannerInfo(id) {
-      this.$axios.post('/getbannerbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/getbannerbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.data) {
           this.infoVO = res.data.data;
           this.remoteMethod(res.data.data.userName);
@@ -178,18 +178,18 @@ export default {
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.countryList = res.data.data;
       });
     },
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('image', File);
+      formData.append("image", File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
-          method: 'POST',
-          url: '/uploadPictures',
+          method: "POST",
+          url: "/uploadPictures",
           data: formData
         }).then(res => {
           if (res.data.data) {
@@ -201,7 +201,7 @@ export default {
       });
       P1.then(value => {
         this.infoVO.image = value;
-        this.$axios.post('/operationbanner', this.infoVO).then(res => {
+        this.$axios.post("/operationbanner", this.infoVO).then(res => {
           if (res.data.msg) {
             this.$message(res.data.msg);
           }
@@ -210,7 +210,7 @@ export default {
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
-      this.infoVO.image = '';
+      this.infoVO.image = "";
     }
   }
 };

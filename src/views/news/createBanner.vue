@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="search">
-      <el-row class="center-Row">
+      <el-row>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip17") }}
         </el-col>
@@ -32,14 +32,11 @@
         <el-col class="label-g" :span="3">
           {{ $t("all.tip612") }}
         </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.startDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="2" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
-          </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.startDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip597") }}
@@ -99,7 +96,7 @@
           action=" "
           ref="upload"
           :limit="1"
-          :auto-upload="false"
+          :auto-upload="true"
           list-type="picture-card"
           :on-remove="handleRemove"
           :file-list="fileList"
@@ -123,24 +120,24 @@ export default {
         }
       },
       flag: false,
-      typeOrder: '',
+      typeOrder: "",
       countryList: [],
       playerList: [],
       fileList: [],
       infoVO: {
-        id: '',
-        countryId: '',
-        userId: '',
+        id: "",
+        countryId: "",
+        userId: "",
         useType: 1,
-        startDate: '',
-        endDate: '',
-        link: '',
-        image: '',
-        name: '',
+        startDate: "",
+        endDate: "",
+        link: "",
+        image: "",
+        name: "",
         target: 1,
         status: 1,
-        mainOrderNo: '',
-        viceOrderNo: ''
+        mainOrderNo: "",
+        viceOrderNo: ""
       }
     };
   },
@@ -163,18 +160,19 @@ export default {
         this.infoVO.viceOrderNo = this.typeOrder;
       }
       if (this.infoVO.image) {
-        this.$axios.post('/operationbanner', this.infoVO).then(res => {
+        this.$axios.post("/operationbanner", this.infoVO).then(res => {
           if (res.data.msg) {
             this.$message(res.data.msg);
           }
         });
       } else {
         this.$refs.upload.submit();
+        this.$message("请上传图片！");
       }
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post('/searchOperation', this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem('userId') })).then(res => {
+        this.$axios.post("/searchOperation", this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
           this.playerList = res.data.data;
         });
       } else {
@@ -183,11 +181,11 @@ export default {
     },
     dateChange(data) {
       if (this.infoVO.endDate && this.infoVO.endDate < data) {
-        this.infoVO.endDate = '';
+        this.infoVO.endDate = "";
       }
     },
     getBannerInfo(id) {
-      this.$axios.post('/getbannerbyid', this.$qs.stringify({ id })).then(res => {
+      this.$axios.post("/getbannerbyid", this.$qs.stringify({ id })).then(res => {
         if (res.data.data) {
           this.infoVO = res.data.data;
           this.remoteMethod(res.data.data.userName);
@@ -204,39 +202,40 @@ export default {
       });
     },
     getCountryList() {
-      this.$axios.post('/getcountry', this.$qs.stringify({ creatorId: sessionStorage.getItem('userId') })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
         this.countryList = res.data.data;
       });
     },
     uploadImg(data) {
       const File = data.file;
       const formData = new FormData();
-      formData.append('image', File);
+      formData.append("image", File);
       const P1 = new Promise((resolve, reject) => {
         this.$axios({
-          method: 'POST',
-          url: '/uploadPictures',
+          method: "POST",
+          url: "/uploadPictures",
           data: formData
         }).then(res => {
-          if (res.data.data) {
+          if (res.data.code === 1000) {
             resolve(res.data.data);
           } else {
-            reject(res.data.data);
+            reject(res.data.msg);
           }
         });
       });
       P1.then(value => {
         this.infoVO.image = value;
-        this.$axios.post('/operationbanner', this.infoVO).then(res => {
-          if (res.data.msg) {
-            this.$message(res.data.msg);
-          }
+        this.$axios.post("/operationbanner", this.infoVO).then(res => {
+          console.log(res);
+          // this.$message(res.data.msg);
         });
+      }).catch(err => {
+        this.$message(err);
       });
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
-      this.infoVO.image = '';
+      this.infoVO.image = "";
     }
   }
 };
