@@ -17,7 +17,7 @@
     </div>
 
     <el-row>
-      <el-col :span="2" class="lineClass">
+      <el-col :span="1" class="lineClass">
         <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
       </el-col>
     </el-row>

@@ -15,7 +15,7 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="infoVO.operationId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
-            <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
+            <el-option v-for="item in playerList" :key="item.operationId" :label="item.operationName" :value="item.operationId"> </el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -210,12 +210,12 @@ export default {
       this.search();
     },
     getOoperatorList() {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.infoVO.userId })).then(res => {
         this.operatorList = res.data.data;
       });
     },
     getCountryList() {
-      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.infoVO.userId })).then(res => {
         this.countryList = res.data.data;
         this.infoVO.countryId = res.data.data[0].id;
         this.search();
@@ -223,7 +223,11 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post("/accountplayerlist", this.$qs.stringify({ account: value })).then(res => {
+        const obj = {
+          opeatorIdName: value,
+          userId: this.infoVO.userId
+        };
+        this.$axios.post("/searchOperation", this.$qs.stringify(obj)).then(res => {
           this.playerList = res.data.data;
         });
       } else {

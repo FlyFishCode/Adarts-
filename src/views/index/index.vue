@@ -78,7 +78,7 @@
             <el-menu-item-group>
               <el-menu-item index="news">{{ $t("all.tip595") }}</el-menu-item>
               <el-menu-item index="banner">{{ $t("all.tip608") }}</el-menu-item>
-              <el-menu-item index="icon">{{ $t("all.tip619") }}</el-menu-item>
+              <!-- <el-menu-item index="icon">{{ $t("all.tip619") }}</el-menu-item> -->
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -91,8 +91,8 @@
   </div>
 </template>
 <script>
-import Header from '@/views/index/header';
-import BreadCrumb from '@/views/index/breadCrumb';
+import Header from "@/views/index/header";
+import BreadCrumb from "@/views/index/breadCrumb";
 
 export default {
   components: {

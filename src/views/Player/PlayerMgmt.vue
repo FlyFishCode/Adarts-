@@ -509,7 +509,6 @@ export default {
       playerDialog: false,
       name: "",
       activeName: "first",
-      SearchPlayerPageTotal: 0,
       ratingGrade: "league",
       shopList: [],
       continentArr: [],
@@ -527,8 +526,8 @@ export default {
         cardType: 0,
         timeSlot: 0,
         pmr: 3,
-        min: "",
-        max: "",
+        min: null,
+        max: null,
         pageNum: 1,
         pageSize: 10
       },
@@ -556,6 +555,7 @@ export default {
         homeShopName: "",
         regDate: ""
       },
+      SearchPlayerPageTotal: 0,
       SearchPlayerTableData: [],
       SearchByCompetitionTableData: [],
       competitionNameList: []
