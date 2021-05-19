@@ -141,7 +141,8 @@
               <template slot-scope="scope">
                 <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
                   {{ card.cardNumber }}
-                  <img class="leagueImg" :src="card.cardType === 5 ? staticObj.leagueImg : staticObj.adartsImg" alt="" />
+                  <img v-if="card.cardType === 1 || card.cardType === 2" class="leagueImg" :src="staticObj.adartsImg" />
+                  <img v-if="card.cardType === 5" class="leagueImg" :src="staticObj.leagueImg" />
                 </div>
               </template>
             </el-table-column>
@@ -244,7 +245,7 @@
               {{ $t("all.tip424") }}
             </el-col>
             <el-col :span="8">
-              <el-input v-model="dialog.password" type="password" clearable :placeholder="$t('placeholder.input')"> </el-input>
+              <el-input v-model="password" type="password" clearable :placeholder="$t('placeholder.input')"> </el-input>
             </el-col>
           </el-row>
           <el-row class="center-Row">
@@ -492,6 +493,7 @@
 
 <script>
 // @ is an alias to /src
+import md5 from "blueimp-md5";
 import { downloadFile, staticObj } from "@/components/common/Utils";
 
 export default {
@@ -501,6 +503,7 @@ export default {
     return {
       staticObj,
       person: require("../../assets/person.jpg"),
+      password: "",
       userId: "",
       playerDialog: false,
       name: "",
@@ -578,7 +581,10 @@ export default {
     },
     getAllCompetitionName() {
       this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
-        this.competitionNameList = res.data.data;
+        if (res.data.data) {
+          this.password = res.data.data.password;
+          this.competitionNameList = res.data.data;
+        }
       });
     },
     checkPhone() {
@@ -654,6 +660,7 @@ export default {
     save() {
       //  vm.$qs.stringify(vm.PlayerMgmtVO.dialog)
       const vm = this;
+      this.dialog.password = md5(`${this.password}kitekey`).toUpperCase();
       this.$axios.post("/createPlayer", vm.dialog).then(res => {
         if (res.data.code === 1000) {
           this.PlayerSearch();
@@ -677,7 +684,9 @@ export default {
     },
     competitionSearch() {
       this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
-        this.SearchByCompetitionTableData = res.data.data.list;
+        if (res.data.data) {
+          this.SearchByCompetitionTableData = res.data.data.list;
+        }
       });
     },
     CompetitionDownload() {},

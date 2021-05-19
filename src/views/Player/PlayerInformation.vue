@@ -72,7 +72,7 @@
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.countryId" disabled></el-input> -->
                 <el-select v-model="playerInformationVO.countryId" :placeholder="$t('placeholder.select')" @change="countryChange" :disabled="disable">
-                  <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
+                  <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
                 </el-select>
               </el-col>
             </el-col>
@@ -97,7 +97,7 @@
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.areaId" disabled></el-input> -->
                 <el-select v-model="playerInformationVO.areaId" :placeholder="$t('placeholder.select')" disabled>
-                  <el-option v-for="item in continentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                  <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-col>
             </el-col>
@@ -327,8 +327,8 @@ export default {
       fileList: [],
       shopList: [],
       playerRatingList: [],
-      continentArr: [],
-      countryArr: [],
+      areaList: [],
+      countryList: [],
       yearList: [{ id: 2020, yaer: 2020 }],
       TeamInformationVO: {},
       rating: {
@@ -380,7 +380,6 @@ export default {
       this.getShopList();
       this.getPlayerInfomation(id);
       this.getCountry(id);
-      this.countryChange();
       this.initYear();
     },
     initYear() {
@@ -396,12 +395,17 @@ export default {
     },
     getCountry(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
-        this.countryArr = res.data.data;
+        this.countryList = res.data.data;
+      });
+    },
+    getAeraList() {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: this.playerInformationVO.countryId })).then(res => {
+        this.areaList = res.data.data;
       });
     },
     countryChange() {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: this.playerInformationVO.countryId })).then(res => {
-        this.continentArr = res.data.data;
+        this.areaList = res.data.data;
       });
       this.playerInformationVO.areaId = "";
     },
@@ -415,6 +419,7 @@ export default {
         }
         this.fileList.push({ url: imgUrl });
         this.playerInformationVO = res.data;
+        this.getAeraList();
       });
     },
     getRating(type, state = 0, year = 2020, id, currentType = 0) {
