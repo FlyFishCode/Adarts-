@@ -63,8 +63,8 @@
                 {{ $t("all.tip208") }}
               </el-col>
               <el-col :span="5" class="lineClass">
-                <el-radio v-model="playerInformationVO.gender" :label="0" disabled>{{ $t("all.tip209") }}</el-radio>
-                <el-radio v-model="playerInformationVO.gender" :label="1" disabled>{{ $t("all.tip210") }}</el-radio>
+                <el-radio v-model="playerInformationVO.gender" :label="1" disabled>{{ $t("all.tip209") }}</el-radio>
+                <el-radio v-model="playerInformationVO.gender" :label="0" disabled>{{ $t("all.tip210") }}</el-radio>
               </el-col>
               <el-col class="label-g" :span="3">
                 {{ $t("all.tip17") }}
@@ -97,7 +97,7 @@
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.areaId" disabled></el-input> -->
                 <el-select v-model="playerInformationVO.areaId" :placeholder="$t('placeholder.select')" disabled>
-                  <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                  <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
                 </el-select>
               </el-col>
             </el-col>

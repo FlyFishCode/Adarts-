@@ -23,7 +23,7 @@
     </div>
 
     <el-row>
-      <el-col :span="2" class="lineClass">
+      <el-col :span="1" class="lineClass">
         <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
       </el-col>
     </el-row>
@@ -40,7 +40,7 @@
         <el-table-column prop="description" :label="$t('all.tip49')" min-width="10%"> </el-table-column>
         <el-table-column :label="$t('all.tip433')" min-width="10%">
           <template slot-scope="scope">
-            <div>{{ scope.row.createTime | capitalize }}</div>
+            <div>{{ scope.row.createTime }}</div>
           </template>
         </el-table-column>
         <el-table-column min-width="10%">
@@ -122,7 +122,7 @@
           {{ $t("all.tip424") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="creatorVo.operPassword" type="password" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="createPasswword" type="password" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -160,6 +160,7 @@
 
 <script>
 // @ is an alias to /src
+import md5 from "blueimp-md5";
 
 export default {
   name: "Holiday",
@@ -170,6 +171,7 @@ export default {
       agentList: [],
       CreatDialog: false,
       changeDiolog: false,
+      createPasswword: "",
       operatorVO: {
         userId: "",
         operId: "",
@@ -204,8 +206,8 @@ export default {
   filters: {
     capitalize(value) {
       if (!value) return "";
-      const [year, time] = value.split("T");
-      return `${year} ${time.slice(0, 5)}`;
+      const [year, time] = value.split(" ");
+      return `${year} ${time.slice(0, 8)}`;
     }
   },
   methods: {
@@ -243,6 +245,7 @@ export default {
       this.changeDiolog = true;
     },
     changeCreator() {
+      this.changeVo.operPassword = md5(`${this.changeVo.operPassword}kitekey`).toUpperCase();
       this.$axios.post("/operation/updateoperationbyid", this.$qs.stringify(this.changeVo)).then(res => {
         this.$message(res.data.msg);
         this.changeVo.operAccount = "";
@@ -256,6 +259,7 @@ export default {
     },
     save() {
       this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
+      this.creatorVo.operPassword = md5(`${this.createPasswword}kitekey`).toUpperCase();
       this.$axios.post("/operation/addoperation", this.creatorVo).then(res => {
         this.$message(res.data.msg);
         this.creatorVo.operAccount = "";
@@ -263,11 +267,11 @@ export default {
         this.creatorVo.agentId = "";
         this.creatorVo.operName = "";
         this.creatorVo.description = "";
+        this.createPasswword = "";
         this.search();
       });
       this.CreatDialog = false;
     },
-    delete() {},
     search() {
       this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
         this.tableData = res.data.data.list;

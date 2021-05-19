@@ -97,6 +97,7 @@ body {
 }
 .formImgBox {
   height: 80px;
+  width: 80px;
 }
 .formImgBox img {
   width: 100%;

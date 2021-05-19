@@ -115,7 +115,7 @@
           </el-row>
         </el-row>
         <el-row>
-          <el-col :span="2" class="buttonBox">
+          <el-col :span="1" class="buttonBox">
             <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
           </el-col>
         </el-row>
@@ -129,13 +129,13 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="userId" :label="$t('all.tip456')" min-width="4%"> </el-table-column>
+            <el-table-column prop="account" :label="$t('all.tip456')" min-width="4%"> </el-table-column>
             <el-table-column :label="$t('all.tip412')" min-width="4%">
               <template slot-scope="scope">
                 <div class="tableLink" @click="push(scope.row.id)">{{ scope.row.nickName }}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="teamName" :label="$t('all.tip316')" min-width="6%"> </el-table-column>
+            <el-table-column prop="teamName" :label="$t('all.tip316')" min-width="5%"> </el-table-column>
             <el-table-column prop="homeShop" :label="$t('all.tip455')" min-width="5%"> </el-table-column>
             <el-table-column :label="$t('all.tip426')" min-width="8%">
               <template slot-scope="scope">
@@ -146,27 +146,28 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('all.tip17')" min-width="4%">
-              <template slot-scope="scope">
+            <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="4%">
+              <!-- <template slot-scope="scope">
                 <div v-for="item in scope.row.countryList" :key="item.index">
                   {{ item.countryName }}
                 </div>
-              </template>
+              </template> -->
             </el-table-column>
-            <el-table-column :label="$t('all.tip442')" min-width="3%">
-              <template slot-scope="scope">
+            <el-table-column prop="areaName" :label="$t('all.tip442')" min-width="4%">
+              <!-- <template slot-scope="scope">
                 <div v-for="item in scope.row.countryList" :key="item.index">
                   {{ item.areaName }}
                 </div>
-              </template>
+              </template> -->
             </el-table-column>
-            <el-table-column :label="$t('all.tip208')" min-width="4%">
+            <el-table-column :label="$t('all.tip208')" min-width="3%">
               <template slot-scope="scope">
-                <div>{{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}</div>
+                <div v-if="scope.row.gender === 0">{{ $t("all.tip210") }}</div>
+                <div v-if="scope.row.gender === 1">{{ $t("all.tip209") }}</div>
               </template>
             </el-table-column>
             <el-table-column label="Adarts">
-              <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="3%">
+              <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="4%">
                 <template slot-scope="scope">
                   <div>{{ scope.row.adartsRating }}</div>
                   <div v-if="scope.row.adartsRatingNum">{{ `(${scope.row.adartsRatingNum})` }}</div>
@@ -186,7 +187,7 @@
               </el-table-column>
             </el-table-column>
             <el-table-column prop="address" :label="$t('all.tip1')" min-width="3%">
-              <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
+              <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="4%"> </el-table-column>
               <el-table-column prop="leaguePPd" :label="$t('all.tip155')" min-width="3%">
                 <template slot-scope="scope">
                   <div>{{ scope.row.leaguePPd }}</div>
@@ -201,7 +202,7 @@
               </el-table-column>
             </el-table-column>
             <el-table-column prop="address" :label="$t('all.tip491')" min-width="3%">
-              <el-table-column prop="totalRating" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
+              <el-table-column prop="totalRating" :label="$t('all.tip154')" min-width="4%"> </el-table-column>
               <el-table-column :label="$t('all.tip155')" min-width="3%">
                 <template slot-scope="scope">
                   <div>{{ scope.row.totalPPd }}</div>
@@ -516,7 +517,7 @@ export default {
       operList: [],
       creteList: [],
       searchPlayer: {
-        userId: "",
+        account: "",
         userName: "",
         cardNember: "",
         gender: null,

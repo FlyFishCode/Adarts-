@@ -78,14 +78,14 @@
           </el-row>
         </el-row>
         <el-row>
-          <el-col :span="2" class="lineClass">
+          <el-col :span="1" class="lineClass">
             <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
           </el-col>
         </el-row>
 
         <div class="table">
           <el-table :data="SearchTeamTableData" border style="width: 100%">
-            <el-table-column :sortable="true" :label="$t('all.tip458')" min-width="3%">
+            <el-table-column :label="$t('all.tip458')" min-width="3%">
               <template slot-scope="scope">
                 <div class="formImgBox">
                   <img v-if="scope.row.imgUrl" :src="scope.row.imgUrl" alt="" />
@@ -93,8 +93,8 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="teamId" :sortable="true" :label="$t('all.tip315')" min-width="3%"> </el-table-column>
-            <el-table-column :sortable="true" :label="$t('all.tip492')" min-width="5%">
+            <el-table-column prop="teamId" :label="$t('all.tip315')" min-width="3%"> </el-table-column>
+            <el-table-column :label="$t('all.tip492')" min-width="5%">
               <template slot-scope="scope">
                 <div class="tableLink" @click="detali(scope.row.teamId)">{{ scope.row.teamName + "(" + scope.row.players + ")" }}</div>
               </template>
@@ -105,20 +105,20 @@
                 <div>{{ `${scope.row.homeShopName}[${scope.row.machineCount}]` }}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="creatorName" :sortable="true" :label="$t('all.tip382')" min-width="3%"> </el-table-column>
+            <el-table-column prop="creatorName" :label="$t('all.tip382')" min-width="3%"> </el-table-column>
             <el-table-column :label="$t('all.tip461')">
-              <el-table-column prop="topPlayerRating" :sortable="true" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
+              <el-table-column prop="topPlayerRating" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
               <el-table-column prop="topPlayerPPd" :sortable="true" :label="$t('all.tip155')" min-width="3%"> </el-table-column>
               <el-table-column prop="topPlayerMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"> </el-table-column>
             </el-table-column>
             <el-table-column :label="$t('all.tip1')">
               <el-table-column prop="address" :label="$t('all.tip76')" min-width="3%">
-                <el-table-column prop="leagueRating" :sortable="true" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
+                <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
                 <el-table-column prop="leaguePPd" :sortable="true" :label="$t('all.tip155')" min-width="3%"> </el-table-column>
                 <el-table-column prop="leagueMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"> </el-table-column>
               </el-table-column>
               <el-table-column prop="address" :label="$t('all.tip420')" min-width="3%">
-                <el-table-column prop="totalRating" :sortable="true" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
+                <el-table-column prop="totalRating" :label="$t('all.tip154')" min-width="3%"> </el-table-column>
                 <el-table-column prop="totalPPd" :sortable="true" :label="$t('all.tip155')" min-width="3%"> </el-table-column>
                 <el-table-column prop="totalMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"> </el-table-column>
               </el-table-column>

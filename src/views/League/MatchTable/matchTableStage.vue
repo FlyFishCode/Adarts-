@@ -979,20 +979,23 @@ export default {
       });
     },
     getTimeTableData(id) {
-      const vm = this;
       this.$axios.get(`/matchTable/getTimeTableFightInfo?matchTableId=${id}`).then(res => {
         if (res.data.data) {
-          vm.TimeTableData = res.data.data;
+          this.TimeTableData = res.data.data;
         }
       });
     },
+    // getTeamSatus(id) {
+    //   this.$axios.get(`/matchTable/getTeamLineU?id=${id}`).then(res => {
+    //     console.log(res);
+    //   });
+    // },
     getTemplatelTableData(id) {
-      const vm = this;
       this.$axios.post(`/templateview?confrontationId=${id}`).then(res => {
         if (res.data.data) {
-          vm.TemplatelReadyData = res.data.data[0].list;
-          vm.TemplatelInPlayData = res.data.data[1].list;
-          vm.TemplatelFinishedData = res.data.data[2].list;
+          this.TemplatelReadyData = res.data.data[0].list;
+          this.TemplatelInPlayData = res.data.data[1].list;
+          this.TemplatelFinishedData = res.data.data[2].list;
         }
       });
     },
