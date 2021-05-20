@@ -210,27 +210,16 @@ export default {
       const File = data.file;
       const formData = new FormData();
       formData.append("image", File);
-      const P1 = new Promise((resolve, reject) => {
-        this.$axios({
-          method: "POST",
-          url: "/uploadPictures",
-          data: formData
-        }).then(res => {
-          if (res.data.code === 1000) {
-            resolve(res.data.data);
-          } else {
-            reject(res.data.msg);
-          }
-        });
-      });
-      P1.then(value => {
-        this.infoVO.image = value;
-        this.$axios.post("/operationbanner", this.infoVO).then(res => {
-          console.log(res);
-          // this.$message(res.data.msg);
-        });
-      }).catch(err => {
-        this.$message(err);
+      this.$axios({
+        method: "POST",
+        url: "/uploadPictures",
+        data: formData
+      }).then(res => {
+        if (res.data.code === 1000) {
+          this.infoVO.image = res.data.data;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     handleRemove(file, fileList) {

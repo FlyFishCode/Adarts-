@@ -283,6 +283,15 @@
       </div>
     </el-dialog>
     <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
+    <div>
+      <el-dialog :title="$t('all.tip631')" :visible.sync="modeVisible" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false" width="30%" center>
+        <span>{{ $t("all.tip630") }}</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="small" type="primary" @click="handleModeCancel">{{ $t("all.tip30") }}</el-button>
+          <el-button size="small" type="danger" @click="handleModeOk">{{ $t("all.tip47") }}</el-button>
+        </span>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -329,9 +338,11 @@ export default {
       copyRadio: 0,
       deleteLegId: 0,
       deleteLegIndex: 0,
+      oldModeValue: null,
       copyBox: false,
       idDisabled: false,
       deleteVisible: false,
+      modeVisible: false,
       copyBoxData: [],
       choicesData: [],
       maxPlayer: 1,
@@ -424,6 +435,14 @@ export default {
         // set不勾选上阶段游戏
         this.setData(this.$route.query.id, newValue);
       }
+    },
+    modeValue(newValue, oldValue) {
+      this.oldModeValue = oldValue;
+    }
+  },
+  computed: {
+    modeValue() {
+      return this.set.mode;
     }
   },
   methods: {
@@ -444,7 +463,6 @@ export default {
           } else {
             Object.assign(vm.setGameList, res.data.data.setGameOption);
           }
-          debugger;
           vm.legList = res.data.data.legList;
           if (res.data.data.ratingMaximum) {
             vm.maxRating = 1;
@@ -631,25 +649,25 @@ export default {
       });
     },
     modeChange(value) {
-      // 301 501 701 901  标准米老鼠 标准高分赛 计时高分赛 减半
-      const singlesGameList = [
-        { value: 1, label: "all.tip499" },
-        { value: 2, label: "all.tip500" },
-        { value: 3, label: "all.tip501" },
-        { value: 4, label: "all.tip502" },
-        { value: 5, label: "all.tip505" },
-        { value: 7, label: "all.tip507" },
-        { value: 8, label: "all.tip508" },
-        { value: 9, label: "all.tip509" }
-      ];
-      // 雪分 队际米老鼠
-      const manyGameList = [
-        { value: 10, label: "all.tip177" },
-        { value: 11, label: "all.tip554" },
-        { value: 12, label: "all.tip555" },
-        { value: 13, label: "all.tip556" },
-        { value: 14, label: "all.tip557" }
-      ];
+      // // 301 501 701 901  标准米老鼠 标准高分赛 计时高分赛 减半
+      // const singlesGameList = [
+      //   { value: 1, label: "all.tip499" },
+      //   { value: 2, label: "all.tip500" },
+      //   { value: 3, label: "all.tip501" },
+      //   { value: 4, label: "all.tip502" },
+      //   { value: 5, label: "all.tip505" },
+      //   { value: 7, label: "all.tip507" },
+      //   { value: 8, label: "all.tip508" },
+      //   { value: 9, label: "all.tip509" }
+      // ];
+      // // 雪分 队际米老鼠
+      // const manyGameList = [
+      //   { value: 10, label: "all.tip177" },
+      //   { value: 11, label: "all.tip554" },
+      //   { value: 12, label: "all.tip555" },
+      //   { value: 13, label: "all.tip556" },
+      //   { value: 14, label: "all.tip557" }
+      // ];
       switch (value) {
         case 1:
           this.maxPlayer = 1;
@@ -670,24 +688,15 @@ export default {
           this.maxPlayer = 4;
           break;
       }
-      switch (value) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-          this.allGameList = singlesGameList;
-          // singlesGameList.forEach(i => {
-          //   this.legList = this.legList.filter(j => i.value === j.gameName);
-          // });
-          break;
-        default:
-          this.allGameList = manyGameList;
-          // manyGameList.forEach(i => {
-          //   this.legList = this.legList.filter(j => i.value === j.gameName);
-          // });
-          break;
-      }
-      console.log(this.allGameList);
+      this.modeVisible = true;
+    },
+    handleModeCancel() {
+      this.set.mode = this.oldModeValue;
+      this.modeVisible = false;
+    },
+    handleModeOk() {
+      this.getLegGameList();
+      this.modeVisible = false;
     },
     handleCancel() {
       this.deleteVisible = false;
@@ -781,6 +790,7 @@ export default {
         });
       });
       pro.then(res => {
+        this.stageGameIdList = [{ value: 0, label: this.$t("all.tip521") }];
         res.forEach(i => {
           vm.allGameList.forEach(j => {
             if (i.gameName === j.value) {

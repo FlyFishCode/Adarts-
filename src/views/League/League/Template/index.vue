@@ -258,9 +258,8 @@ export default {
           [key]: value,
           name
         };
-        data.children.push(newChild);
         this.$axios.post(`/${whoUrl}`, resquestData).then(res => {
-          if (res.data.data) {
+          if (res.data.code === 1000) {
             let id = "";
             for (const val of Object.values(res.data.data)) {
               id = `${val}`;
@@ -273,7 +272,10 @@ export default {
               item.id = res.data.data.setId;
               item.url = "set";
             }
+            data.children.push(newChild);
             this.$store.commit("changeMenuList", changeMenus(this.treeDataList, newChild.id, item));
+          } else {
+            this.$message(res.data.msg);
           }
         });
       }
@@ -284,7 +286,6 @@ export default {
       const parent = node.parent;
       const children = parent.data.children || parent.data;
       const index = children.findIndex(d => d.id === data.id);
-      children.splice(index, 1);
       switch (data.url) {
         case "category":
           whoUrl = "delcategorybyid";
@@ -300,14 +301,17 @@ export default {
           break;
       }
       this.$axios.post(`/${whoUrl}?id=${data.id}`).then(res => {
-        if (res) {
+        if (res.data.code === 1000) {
           vm.$axios.post(`/allsubset?competitionId=${this.treeDataList[0].id}`).then(msg => {
             vm.treeDataList = msg.data.data;
             vm.changeLegName(msg.data.data);
           });
+          children.splice(index, 1);
+          this.returnFatherNode(parent.data);
+        } else {
+          this.$message(res.data.msg);
         }
       });
-      this.returnFatherNode(parent.data);
     },
     returnFatherNode(data) {
       if (JSON.stringify(data) !== "{}" && data) {

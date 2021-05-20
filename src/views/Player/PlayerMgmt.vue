@@ -8,7 +8,7 @@
               {{ $t("all.tip456") }}
             </el-col>
             <el-col :span="3">
-              <el-input v-model.number="searchPlayer.userId" clearable :placeholder="$t('placeholder.input')"> </el-input>
+              <el-input v-model.number="searchPlayer.account" clearable :placeholder="$t('placeholder.input')"> </el-input>
             </el-col>
             <el-col class="label-g" :span="2">
               {{ $t("all.tip259") }}

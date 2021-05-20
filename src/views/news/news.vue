@@ -6,7 +6,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
@@ -14,7 +14,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.category" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.category" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in categoryList" :key="item.value" :value="item.value" :label="$t(item.label)"></el-option>
           </el-select>
         </el-col>
@@ -33,7 +33,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.opeatorIdName" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+          <el-select v-model="infoVO.opeatorIdName" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
             <el-option v-for="item in playerList" :key="item.operationId" :label="item.operationName" :value="item.operationId"> </el-option>
           </el-select>
         </el-col>
@@ -48,8 +48,8 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')">
-            <el-option :value="0" :label="$t('all.tip600')"></el-option>
-            <el-option :value="1" :label="$t('all.tip601')"></el-option>
+            <el-option :value="1" :label="$t('all.tip600')"></el-option>
+            <el-option :value="0" :label="$t('all.tip601')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
@@ -136,7 +136,6 @@ export default {
       infoVO: {
         countryId: "",
         category: 1,
-        operatorId: "",
         registerStartDate: "",
         registerEndDate: "",
         opeatorIdName: "",
@@ -152,7 +151,7 @@ export default {
   mounted() {
     this.search();
     this.getCountryList();
-    this.getOoperatorList();
+    // this.getOoperatorList();
   },
   methods: {
     create() {
@@ -211,7 +210,6 @@ export default {
         this.$message(res.data.msg);
       });
     },
-    save() {},
     dateChange(data) {
       if (this.infoVO.registerEndDate && this.infoVO.registerEndDate < data) {
         this.infoVO.registerEndDate = "";
@@ -228,7 +226,6 @@ export default {
     getOoperatorList() {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.userId })).then(res => {
         this.operatorList = res.data.data;
-        this.infoVO.operatorId = res.data.data[0].creatorId;
       });
     },
     getCountryList() {
@@ -259,6 +256,7 @@ export default {
 }
 .imgBox {
   height: 60px;
+  width: 60px;
 }
 .imgBox img {
   height: 100%;

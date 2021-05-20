@@ -74,7 +74,7 @@
           {{ $t("all.tip316") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.teamName" :placeholder="$t('placeholder.select')">
+          <el-select v-model="resultMgmtVO.serchList.teamName" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in teamList" :key="item.teamId" :label="item.teamName" :value="item.teamName"></el-option>
           </el-select>
         </el-col>

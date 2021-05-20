@@ -50,8 +50,8 @@
         </el-col>
         <el-col :span="3">
           <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')">
-            <el-option :value="0" :label="$t('all.tip601')"></el-option>
             <el-option :value="1" :label="$t('all.tip600')"></el-option>
+            <el-option :value="0" :label="$t('all.tip601')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
@@ -107,7 +107,7 @@ export default {
         opeatorId: "",
         registerDate: "",
         title: "",
-        display: 0,
+        display: 1,
         thumbnail: "",
         contents: ""
       }
@@ -236,27 +236,16 @@ export default {
       const File = data.file;
       const formData = new FormData();
       formData.append("image", File);
-      const P1 = new Promise((resolve, reject) => {
-        this.$axios({
-          method: "POST",
-          url: "/uploadPictures",
-          data: formData
-        }).then(res => {
-          if (res.data.code === 1000) {
-            resolve(res.data.data);
-          } else {
-            reject(res.data.msg);
-          }
-        });
-      });
-      P1.then(value => {
-        this.infoVO.thumbnail = value;
-        this.$axios.post("/addleaguenews", this.infoVO).then(res => {
-          console.log(res);
-          // this.$message(res.data.msg);
-        });
-      }).catch(err => {
-        this.$message(err);
+      this.$axios({
+        method: "POST",
+        url: "/uploadPictures",
+        data: formData
+      }).then(res => {
+        if (res.data.code === 1000) {
+          this.infoVO.thumbnail = res.data.data;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     handleRemove(file, fileList) {
