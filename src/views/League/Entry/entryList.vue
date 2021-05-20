@@ -12,7 +12,9 @@
           {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
-          {{ $t(detial.status) }}
+          <div v-if="detial.status == 1">{{ $t("all.tip26") }}</div>
+          <div v-if="detial.status == 2">{{ $t("all.tip27") }}</div>
+          <div v-if="detial.status == 3">{{ $t("all.tip28") }}</div>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip4") }}
@@ -291,7 +293,6 @@ export default {
   },
   methods: {
     init(data) {
-      const vm = this;
       this.EntryList.competitionId = data.id;
       this.topBoxData.competitionId = data.id;
       this.detial.competitionName = data.competitionName;
@@ -299,24 +300,18 @@ export default {
       this.detial.competitionEndPeriod = data.competitionEndPeriod;
       this.detial.entryStartPeriod = data.entryStartPeriod;
       this.detial.entryEndPeriod = data.entryEndPeriod;
+      this.detial.status = data.status;
       if (data.type === 1) {
         this.detial.type = "all.tip40";
       } else {
         this.detial.type = "all.tip41";
-      }
-      if (data.status === "1") {
-        this.detial.status = "all.tip26";
-      } else if (data.status === "2") {
-        this.detial.status = "all.tip27";
-      } else {
-        this.detial.status = "all.tip28";
       }
       data.countryList.forEach(i => {
         let str = "";
         if (i.areaName) {
           str = `,${i.areaName}`;
         }
-        vm.detial.area += `${i.countryName}${str};`;
+        this.detial.area += `${i.countryName}${str};`;
       });
     },
     isShowSelect(row) {
@@ -328,17 +323,11 @@ export default {
         this.total = res.data.data.total;
       });
     },
-    upload() {
-      console.log("upload");
-    },
     download() {
       const vm = this;
       this.$axios.post("/download", vm.EntryList).then(res => {
         downloadFile(res);
       });
-    },
-    create() {
-      console.log("Create");
     },
     push(value) {
       this.$router.push({

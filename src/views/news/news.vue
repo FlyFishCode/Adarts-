@@ -84,7 +84,7 @@
         <el-table-column prop="opeatorName" :label="$t('all.tip9')" min-width="10%"> </el-table-column>
         <el-table-column prop="registerDate" :label="$t('all.tip598')" min-width="10%">
           <template slot-scope="scope">
-            <div>{{ scope.row.registerDate | showDate }}</div>
+            <div>{{ scope.row.registerDate }}</div>
           </template>
         </el-table-column>
         <el-table-column prop="visitCount" :label="$t('all.tip599')" min-width="10%"> </el-table-column>

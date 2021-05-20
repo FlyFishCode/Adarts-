@@ -37,7 +37,7 @@
           {{ $t("all.tip436") }}
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="infoVO.registerDate" type="date" :disabled="flag" default-time="00:00:00" clearable> </el-date-picker>
+          <el-date-picker v-model="infoVO.registerDate" type="date" :disabled="flag" default-time="00:00:00" value-format="yyyy-MM-dd HH:mm:ss" clearable> </el-date-picker>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip597") }}
@@ -200,7 +200,7 @@ export default {
     },
     save() {
       if (this.infoVO.thumbnail) {
-        this.$axios.post("/addleaguenews", this.$qs.stringify(this.infoVO)).then(res => {
+        this.$axios.post("/addleaguenews", this.infoVO).then(res => {
           this.$message(res.data.msg);
         });
       } else {
