@@ -41,6 +41,10 @@ http.interceptors.request.use(
             // eslint-disable-next-line no-param-reassign
             config.headers.token = token;
         }
+        // else {
+        //     console.log("未登录");
+        //     window.location.href = window.location.href.split("#")[0];
+        // }
         return config;
     },
     err => Promise.reject(err)

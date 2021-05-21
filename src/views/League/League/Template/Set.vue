@@ -695,8 +695,16 @@ export default {
       this.modeVisible = false;
     },
     handleModeOk() {
-      this.getLegGameList();
-      this.modeVisible = false;
+      this.$axios.post("/deleteAllLeg", this.$qs.stringify({ setId: this.$route.query.id })).then(res => {
+        if (res.data.code === 1000) {
+          this.modeVisible = false;
+          this.legList = [];
+          this.bus.$emit("setNode", this.$route.query.id);
+        } else {
+          this.set.mode = this.oldModeValue;
+          this.$message(res.data.msg);
+        }
+      });
     },
     handleCancel() {
       this.deleteVisible = false;

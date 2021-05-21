@@ -327,8 +327,10 @@ export default {
       // eslint-disable-next-line no-unused-expressions
       this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
       this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
+        if (res.data.data) {
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        }
         // eslint-disable-next-line no-unused-expressions
         this.LeagueMgmtVO.status === null ? (this.LeagueMgmtVO.status = 0) : this.LeagueMgmtVO.status;
       });
@@ -340,12 +342,16 @@ export default {
     },
     getOperationdata() {
       this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
-        this.operList = res.data.data.list;
+        if (res.data.data) {
+          this.operList = res.data.data.list;
+        }
       });
     },
     getCretetionData() {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
-        this.creteList = res.data.data;
+        if (res.data.data) {
+          this.creteList = res.data.data;
+        }
       });
     },
     sizeChange(value) {
