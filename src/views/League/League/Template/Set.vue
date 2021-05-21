@@ -166,7 +166,7 @@
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="4">
-          {{ $t("all.tip177") }}
+          {{ $t("all.tip494") }}
         </el-col>
       </el-row>
       <el-row class="center-Row">

@@ -27,7 +27,7 @@
           {{ $t("all.tip4") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button type="primary" size="mini" @click="SaveCompetitionAreaDialog">{{ $t("all.tip4") }}</el-button>
+          <el-button type="primary" size="mini" @click="() => (this.CompetitionAreaDialog = true)">{{ $t("all.tip4") }}</el-button>
         </el-col>
         <el-col :span="14" style="display:flex" class="lineClass">
           <div v-for="(item, index) in CountryShowArr" :key="index">{{ item.countryName }}{{ item.areaName ? ">" + item.areaName : " " }};</div>
@@ -385,7 +385,7 @@
           <el-button type="primary" size="mini" @click="ShopDialogClick">{{ $t("all.tip91") }}</el-button>
         </el-col>
         <el-col :span="2" class="cursor lineClass">
-          <div @click="showDetails">{{ `shop(${this.showShopList.length})` }}</div>
+          <div @click="() => (this.ShopList = true)">{{ `shop(${this.showShopList.length})` }}</div>
         </el-col>
       </el-row>
     </div>
@@ -690,8 +690,8 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="Shop.countryId" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
+          <el-select v-model="Shop.countryId" @change="dialogCounteyChange" clearable :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="4">
@@ -699,7 +699,7 @@
         </el-col>
         <el-col :span="4">
           <el-select v-model="Shop.areaId" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
+            <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -775,16 +775,16 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="countryId" @change="ContinentChange" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+          <el-select v-model="countryId" @change="countryChange" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip442") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="areaId" @change="CountryChange" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+          <el-select v-model="areaId" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3" class="lineClass">
@@ -805,7 +805,7 @@
       </div>
     </el-dialog>
     <div>
-      <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
+      <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="() => (this.deleteVisible = false)" @handleOk="handleOk" />
     </div>
   </div>
 </template>
@@ -1013,8 +1013,8 @@ export default {
       },
       agentList: [],
       CountryShowArr: [],
-      ContinentArr: [],
-      CountryArr: [],
+      countryList: [],
+      areaList: [],
       CompetitionAreaList: [],
       checked: true,
       OperatorList: [],
@@ -1064,6 +1064,7 @@ export default {
         this.OperAtorSearch();
       }
       this.getOperationdata();
+      this.getCountry();
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -1198,26 +1199,29 @@ export default {
       this.CountryShowArr = this.CompetitionAreaList;
       this.CompetitionAreaDialog = false;
     },
-    SaveCompetitionAreaDialog() {
-      this.CompetitionAreaDialog = true;
-      const vm = this;
-      this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: this.searchOperator.userId })).then(res => {
-        vm.ContinentArr = res.data.data;
+    getCountry() {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.searchOperator.userId })).then(res => {
+        this.countryList = res.data.data;
       });
     },
-    ContinentChange() {
-      const vm = this;
-      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: vm.countryId })).then(res => {
-        vm.CountryArr = res.data.data;
+    countryChange() {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: this.countryId })).then(res => {
+        this.areaList = res.data.data;
       });
       this.areaId = "";
+    },
+    dialogCounteyChange() {
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: this.Shop.countryId })).then(res => {
+        this.areaList = res.data.data;
+      });
+      this.Shop.areaId = "";
     },
     addContinent() {
       if (this.countryId) {
         const vm = this;
         let flag = true;
-        const ContinentName = this.findName(this.ContinentArr, this.countryId);
-        const CountryName = this.findName(this.CountryArr, this.areaId) || "";
+        const ContinentName = this.findName(this.countryList, this.countryId);
+        const CountryName = this.findName(this.areaList, this.areaId) || "";
         if (!this.areaId) {
           this.areaId = 0;
         }
@@ -1258,14 +1262,6 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
       console.log(fileList);
-    },
-    download() {},
-    showDetail() {},
-    showDetails() {
-      this.ShopList = true;
-    },
-    handleCancel() {
-      this.deleteVisible = false;
     },
     handleOk(type) {
       if (type) {
@@ -1328,13 +1324,13 @@ export default {
       vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
       const saveMethods = () => {
         // 保存 结果查询时间
-        sessionStorage.setItem(
-          "time",
-          JSON.stringify({
-            begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
-            end: this.AddCompetitionRequest.competition.competitionEndPeriod
-          })
-        );
+        // sessionStorage.setItem(
+        //   "time",
+        //   JSON.stringify({
+        //     begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
+        //     end: this.AddCompetitionRequest.competition.competitionEndPeriod
+        //   })
+        // );
         this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
           if (res.data) {
             const url = "competition";
@@ -1560,8 +1556,7 @@ export default {
         this.AddCompetitionRequest.shopIdList = [...new Set(arr.map(i => i.shopId))];
       }
       this.ShopDialog = false;
-    },
-    CountryChange() {}
+    }
   }
 };
 </script>

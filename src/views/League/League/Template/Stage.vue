@@ -51,6 +51,7 @@
               default-time="00:00:00"
               :clearable="false"
               :placeholder="$t('placeholder.datePicker')"
+              @change="dateChange"
             ></el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
@@ -63,7 +64,6 @@
               :clearable="false"
               :placeholder="$t('placeholder.datePicker')"
               :picker-options="pickerOptions"
-              @change="dateChange"
             ></el-date-picker>
           </el-col>
         </el-col>
@@ -505,7 +505,9 @@ export default {
         { value: 3, label: "all.tip501" },
         { value: 4, label: "all.tip502" },
         { value: 5, label: "all.tip503" },
-        { value: 6, label: "all.tip504" }
+        { value: 6, label: "all.tip504" },
+        { value: 11, label: "all.tip554" },
+        { value: 12, label: "all.tip555" }
       ],
       stageGameData: [],
       saveGameList: [],
@@ -634,16 +636,17 @@ export default {
       const vm = this;
       this.$axios.post(`/getstage?id=${id}`).then(res => {
         if (res.data.data) {
+          debugger;
           vm.stage = res.data.data.stage;
           vm.numFight = res.data.data.numFight;
           vm.idDisabled = res.data.data.stage.isDefaultdivision === 1;
           vm.saveGameList = res.data.data.gameList;
           vm.stageGameData = [];
-          if (sessionStorage.getItem("time")) {
-            const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
-            vm.stage.startTime = vm.stage.startTime ? vm.stage.startTime : begin;
-            vm.stage.endTime = vm.stage.endTime ? vm.stage.endTime : end;
-          }
+          // if (sessionStorage.getItem("time")) {
+          //   const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
+          //   vm.stage.startTime = vm.stage.startTime ? vm.stage.startTime : begin;
+          //   vm.stage.endTime = vm.stage.endTime ? vm.stage.endTime : end;
+          // }
           res.data.data.gameList.forEach(i => {
             const obj = {};
             for (const [key, value] of Object.entries(i)) {
@@ -693,13 +696,14 @@ export default {
         vm.setList = res.data.data;
       });
     },
-    dateChange(data) {
-      const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
-      if (data && data > new Date(end)) {
-        console.log(begin);
-        this.$message(this.$t("all.tip569"));
-        this.stage.endTime = "";
-      }
+    dateChange() {
+      this.stage.endTime = '';
+      // const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
+      // if (data && data > new Date(end)) {
+      //   console.log(begin);
+      //   this.$message(this.$t("all.tip569"));
+      //   this.stage.endTime = "";
+      // }
     },
     Save() {
       const vm = this;
@@ -778,15 +782,15 @@ export default {
             { value: 1, label: "all.tip499" },
             { value: 2, label: "all.tip500" },
             { value: 3, label: "all.tip501" },
-            { value: 4, label: "all.tip502" }
-            // { value: 5, label: 'all.tip503' },
-            // { value: 6, label: 'all.tip504' }
+            { value: 4, label: "all.tip502" },
+            { value: 11, label: "all.tip554" },
+            { value: 12, label: "all.tip555" }
           ];
           this.gameList.gameName = 1;
           this.gameList.round = 10;
           break;
         case 2:
-          this.gameNameList = [{ value: 5, label: "all.tip505" }, { value: 6, label: "all.tip506" }];
+          this.gameNameList = [{ value: 5, label: "all.tip505" }, { value: 6, label: "all.tip506" }, { value: 10, label: "all.tip177" }];
           this.gameList.gameName = 5;
           this.gameList.round = 20;
           break;
@@ -796,7 +800,7 @@ export default {
           this.gameList.round = 8;
           break;
         default:
-          this.gameNameList = [{ value: 9, label: "all.tip509" }, { value: 10, label: "all.tip177" }, { value: 11, label: "all.tip554" }, { value: 12, label: "all.tip555" }];
+          this.gameNameList = [{ value: 9, label: "all.tip509" }];
           this.gameList.gameName = 9;
           this.gameList.round = 9;
           break;

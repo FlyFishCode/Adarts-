@@ -774,8 +774,9 @@ export default {
       this.Stage.MatchTableOption.stageId = data.stageId;
       this.matchTableId = data.matchTableId;
       // 从时间表进来状态是3（结束），从对阵表进来是1（已创建）
-      this.hasData = data.state === 1 || data.state === 3;
+      // this.hasData = data.state === 1 || data.state === 3;
       if (this.matchTableId) {
+        this.hasData = true;
         this.getTimeTableData(this.matchTableId);
         this.getMatchTableData(this.matchTableId);
         this.getMatchTableOption(this.matchTableId);
@@ -952,20 +953,18 @@ export default {
       }
       this.Stage.MatchTableOption.cycle = this.cycle * data;
       this.$axios.post("/generateagainst", vm.Stage.MatchTableOption).then(res => {
-        if (res.data.data) {
+        if (res.data.code === 1000) {
           vm.matchTableId = res.data.data;
           vm.getTimeTableData(res.data.data);
           vm.getMatchTableOption(res.data.data);
           vm.getMatchTableData(res.data.data);
           vm.hasData = true;
-          this.$message({
-            message: res.data.msg
-          });
         }
         if (res.data.code === 1061) {
           this.errorMsg = res.data.msg;
           this.errorDialogVisible = true;
         }
+        this.$message(res.data.msg);
         this.changeType("toBoolen");
       });
     },
