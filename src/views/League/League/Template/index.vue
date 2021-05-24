@@ -258,6 +258,10 @@ export default {
           [key]: value,
           name
         };
+        if (value === "1" && whoUrl === "addcategory") {
+          this.$message("请先保存比赛之后再创建下一阶段！");
+          return;
+        }
         this.$axios.post(`/${whoUrl}`, resquestData).then(res => {
           if (res.data.code === 1000) {
             let id = "";
@@ -449,74 +453,20 @@ export default {
       this.dialogTableVisible = true;
     },
     SaveTemplate() {
-      const flag = this.$route.query.showData;
       const currentUserId = sessionStorage.getItem("LeagueUserId");
-      let data = {};
-      if (flag) {
-        data = {
+      if (currentUserId) {
+        const data = {
           competition: { id: this.$route.query.id },
           isHaveComp: 1,
           userId: currentUserId,
           name: this.template.name,
           description: this.template.description
         };
-      } else {
-        const { competition, competitionBasicOption, competitionOption, countryList, operatorList, shopIdList } = this.treeDataList[0].current;
-        const categoryList = [];
-        data = {
-          userId: currentUserId,
-          name: this.template.name,
-          description: this.template.description,
-          isHaveComp: 2,
-          competition,
-          competitionBasicOption,
-          competitionOption,
-          countryList,
-          operatorList,
-          shopIdList,
-          categoryList
-        };
-        this.treeDataList.forEach(i => {
-          if (i.children.length) {
-            i.children.forEach(j => {
-              // "category"
-              // eslint-disable-next-line no-param-reassign
-              j.current.divisionList = [];
-              // eslint-disable-next-line no-unused-expressions
-              j.current && categoryList.push(j.current);
-              if (j.children.length) {
-                j.children.forEach(k => {
-                  // "division"
-                  // eslint-disable-next-line no-param-reassign
-                  k.current.stageList = [];
-                  // eslint-disable-next-line no-unused-expressions
-                  k.current && j.current.divisionList.push(k.current);
-                  if (k.children.length) {
-                    k.children.forEach(n => {
-                      // stage
-                      // eslint-disable-next-line no-param-reassign
-                      n.current.setList = [];
-                      // eslint-disable-next-line no-unused-expressions
-                      n.current && k.current.stageList.push(n.current);
-                      if (n.children.length) {
-                        n.children.forEach(m => {
-                          // set
-                          // eslint-disable-next-line no-unused-expressions
-                          m.current && n.current.setList.push(m.current);
-                        });
-                      }
-                    });
-                  }
-                });
-              }
-            });
-          }
+        this.$axios.post("/template/addcompetitiontemplate", data).then(res => {
+          this.$message(res.data.msg);
+          this.dialogTableVisible = false;
         });
       }
-      this.$axios.post("/template/addcompetitiontemplate", data).then(res => {
-        this.$message(res.data.msg);
-        this.dialogTableVisible = false;
-      });
     }
   }
 };
