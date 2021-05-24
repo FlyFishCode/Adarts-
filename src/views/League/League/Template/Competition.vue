@@ -1343,6 +1343,7 @@ export default {
             });
             if (competitionId) {
               vm.uploadCompetitionId = competitionId;
+              changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
               sessionStorage.setItem("competitionId", competitionId);
               item = {
                 label: vm.AddCompetitionRequest.competition.competitionName,
@@ -1356,7 +1357,6 @@ export default {
               };
             }
             this.$refs.upload.submit();
-            changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
             this.$store.commit("changeMenuList", changeMenus(vm.$store.state.menuList, id, item));
             // changeMEenuList(this.$store.state.menuList, id, item);
             // this.getList(id);

@@ -425,7 +425,6 @@ export default {
             vm.$message({
               message: res.data.msg
             });
-
             if (res.data.data) {
               for (const value of Object.values(res.data.data)) {
                 type = `${value}`;

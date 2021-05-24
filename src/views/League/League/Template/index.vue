@@ -450,12 +450,13 @@ export default {
     },
     SaveTemplate() {
       const flag = this.$route.query.showData;
+      const currentUserId = sessionStorage.getItem("LeagueUserId");
       let data = {};
       if (flag) {
         data = {
           competition: { id: this.$route.query.id },
           isHaveComp: 1,
-          userId: sessionStorage.getItem("LeagueUserId"),
+          userId: currentUserId,
           name: this.template.name,
           description: this.template.description
         };
@@ -463,7 +464,7 @@ export default {
         const { competition, competitionBasicOption, competitionOption, countryList, operatorList, shopIdList } = this.treeDataList[0].current;
         const categoryList = [];
         data = {
-          userId: sessionStorage.getItem("LeagueUserId"),
+          userId: currentUserId,
           name: this.template.name,
           description: this.template.description,
           isHaveComp: 2,
