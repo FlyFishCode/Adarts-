@@ -208,7 +208,7 @@ export default {
         competitionEndPeriod: null,
         entryStartPeriod: null,
         entryEndPeriod: null,
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: localStorage.getItem("LeagueUserId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -217,7 +217,7 @@ export default {
   },
   mounted() {
     const vm = this;
-    this.userId = sessionStorage.getItem("LeagueUserId");
+    this.userId = localStorage.getItem("LeagueUserId");
     this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.userId })).then(res => {
       vm.ContinentArr = res.data.data;
     });
@@ -234,7 +234,7 @@ export default {
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },

@@ -641,7 +641,7 @@ export default {
       }
     },
     getCopyList() {
-      const id = sessionStorage.getItem("competitionId");
+      const id = localStorage.getItem("competitionId");
       this.$axios.post("/getcompetitionallset", this.$qs.stringify({ competitionId: id })).then(res => {
         if (res.data.data) {
           this.copyBoxData = res.data.data.map(i => ({ ...i, number: "" }));

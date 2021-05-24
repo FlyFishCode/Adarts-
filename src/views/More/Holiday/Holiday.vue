@@ -139,7 +139,7 @@ export default {
       ContinentArr: [],
       holidayDialog: false,
       holidayDialogVO: {
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: localStorage.getItem("LeagueUserId"),
         countryId: "",
         holidayName: "",
         holidayStartTime: "",
@@ -152,7 +152,7 @@ export default {
     };
   },
   mounted() {
-    this.holidayVO.userId = sessionStorage.getItem("LeagueUserId");
+    this.holidayVO.userId = localStorage.getItem("LeagueUserId");
     this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.holidayVO.userId })).then(res => {
       this.ContinentArr = res.data.data;
     });
@@ -193,7 +193,7 @@ export default {
       } else {
         url = "holiday/modifyholiday";
         this.holidayDialogVO.id = this.id;
-        this.holidayDialogVO.userId = sessionStorage.getItem("LeagueUserId");
+        this.holidayDialogVO.userId = localStorage.getItem("LeagueUserId");
       }
       this.$axios.post(`/${url}`, this.holidayDialogVO).then(res => {
         this.$message(res.data.msg);
@@ -217,7 +217,7 @@ export default {
     },
     deleteHoliday(id) {
       const data = {
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: localStorage.getItem("LeagueUserId"),
         id
       };
       this.$axios.post("/holiday/delholidaybyid", this.$qs.stringify(data)).then(res => {

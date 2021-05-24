@@ -10,7 +10,7 @@ Vue.use(VueI18n);
 
 // 从sessionStorage中拿到用户的语言选择，如果没有，那默认中文。
 const i18n = new VueI18n({
-    locale: sessionStorage.lang || "jtzh",
+    locale: localStorage.lang || "jtzh",
     silentTranslationWarn: true,
     messages
 });

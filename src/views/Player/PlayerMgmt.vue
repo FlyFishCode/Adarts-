@@ -562,7 +562,7 @@ export default {
     };
   },
   mounted() {
-    this.userId = sessionStorage.getItem("LeagueUserId");
+    this.userId = localStorage.getItem("LeagueUserId");
     this.name = this.$route.params.name;
     this.getCounry(this.userId);
     this.PlayerSearch();
@@ -581,7 +581,7 @@ export default {
       }
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
         if (res.data.data) {
           this.password = res.data.data.password;
           this.competitionNameList = res.data.data;
@@ -641,7 +641,7 @@ export default {
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem("LeagueUserId");
+      const userId = localStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });

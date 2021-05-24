@@ -61,9 +61,9 @@ export default {
         if (res.data.errorCode) {
           vm.check(res.data.msg);
         } else {
-          sessionStorage.setItem("LeagueToken", res.data.data.token);
-          sessionStorage.setItem("LeagueUserId", res.data.data.id);
-          sessionStorage.setItem("LeagueUserType", res.data.data.userType);
+          localStorage.setItem("LeagueToken", res.data.data.token);
+          localStorage.setItem("LeagueUserId", res.data.data.id);
+          localStorage.setItem("LeagueUserType", res.data.data.userType);
           vm.$router.push({
             path: "/league"
           });

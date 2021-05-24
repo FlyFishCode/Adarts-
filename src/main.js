@@ -36,7 +36,7 @@ Vue.prototype.$axios = http;
 http.interceptors.request.use(
     config => {
         NProgress.start();
-        const token = sessionStorage.getItem("LeagueToken");
+        const token = localStorage.getItem("LeagueToken");
         if (!config.headers.token) {
             // eslint-disable-next-line no-param-reassign
             config.headers.token = token;
@@ -69,7 +69,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$qs = qs;
 
 // router.beforeEach((to, from, next) => {
-//     const identity = sessionStorage.getItem('identity');
+//     const identity = localStorage.getItem('identity');
 //     if (identity === 9527) {
 //         let flag = false;
 //         // 代理商无法访问的页面

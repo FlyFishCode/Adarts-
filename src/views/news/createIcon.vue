@@ -148,7 +148,7 @@ export default {
     },
     remoteMethod(value) {
       if (value) {
-        this.$axios.post("/searchOperation", this.$qs.stringify({ opeatorIdName: value, userId: sessionStorage.getItem("LeagueUserId") })).then(res => {
+        this.$axios.post("/searchOperation", this.$qs.stringify({ opeatorIdName: value, userId: localStorage.getItem("LeagueUserId") })).then(res => {
           this.playerList = res.data.data;
         });
       } else {
@@ -178,7 +178,7 @@ export default {
       });
     },
     getCountryList() {
-      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: sessionStorage.getItem("LeagueUserId") })).then(res => {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: localStorage.getItem("LeagueUserId") })).then(res => {
         this.countryList = res.data.data;
       });
     },

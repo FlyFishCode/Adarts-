@@ -112,7 +112,7 @@ export default {
     };
   },
   mounted() {
-    const creatorId = sessionStorage.getItem("LeagueUserId");
+    const creatorId = localStorage.getItem("LeagueUserId");
     this.getcountry(creatorId);
     this.search();
     this.getAllCompetitionName();
@@ -149,7 +149,7 @@ export default {
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     }

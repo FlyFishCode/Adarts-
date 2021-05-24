@@ -127,7 +127,7 @@ export default {
         leagueType: "",
         agentUserId: "",
         operUserId: "",
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: localStorage.getItem("LeagueUserId"),
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1
       },
@@ -139,7 +139,7 @@ export default {
     };
   },
   mounted() {
-    const userId = sessionStorage.getItem("LeagueUserId");
+    const userId = localStorage.getItem("LeagueUserId");
     this.getOperationdata(userId);
     this.getCretetionData(userId);
     this.search();
@@ -160,7 +160,7 @@ export default {
       this.scheduleVO.areaId = null;
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },

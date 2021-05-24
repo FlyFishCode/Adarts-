@@ -267,7 +267,7 @@ export default {
       });
     },
     getCopyList() {
-      const id = sessionStorage.getItem("competitionId");
+      const id = localStorage.getItem("competitionId");
       const data = {
         competitionId: id,
         divisionName: this.copyName
@@ -396,7 +396,7 @@ export default {
       }
     },
     getMenuList() {
-      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${localStorage.getItem("competitionId")}`).then(res => {
         if (res.data.data) {
           this.$store.state.menuList = res.data.data;
         }

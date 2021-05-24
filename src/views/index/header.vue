@@ -49,7 +49,7 @@ export default {
   methods: {
     selectLanguage(value) {
       this.$i18n.locale = value;
-      sessionStorage.setItem("lang", value);
+      localStorage.setItem("lang", value);
       this.bus.$emit("change", window.treeList);
     },
     loginOut() {
@@ -60,9 +60,9 @@ export default {
         type: "warning"
       })
         .then(() => {
-          sessionStorage.removeItem("LeagueToken");
-          sessionStorage.removeItem("LeagueUserId");
-          sessionStorage.removeItem("LeagueUserType");
+          localStorage.removeItem("LeagueToken");
+          localStorage.removeItem("LeagueUserId");
+          localStorage.removeItem("LeagueUserType");
           vm.$router.push({ path: "/" });
         })
         .catch(() => {

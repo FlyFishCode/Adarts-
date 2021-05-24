@@ -72,11 +72,11 @@ function deleteStage(id, list) {
 }
 
 function saveQuery(url, data) {
-    sessionStorage.setItem(url, JSON.stringify(data));
+    localStorage.setItem(url, JSON.stringify(data));
 }
 
 function getQuery(url) {
-    return JSON.parse(sessionStorage.getItem(url));
+    return JSON.parse(localStorage.getItem(url));
 }
 
 function handle(value) {

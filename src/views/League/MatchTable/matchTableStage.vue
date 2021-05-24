@@ -854,7 +854,7 @@ export default {
       });
     },
     getShopList() {
-      const userId = sessionStorage.getItem("LeagueUserId");
+      const userId = localStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.ShopList = res.data.data.list;
       });

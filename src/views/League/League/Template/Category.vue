@@ -491,7 +491,7 @@ export default {
       this.deleteDivisitionId = id;
     },
     getMenuList() {
-      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${localStorage.getItem("competitionId")}`).then(res => {
         if (res.data.data) {
           this.$store.state.menuList = res.data.data;
         }

@@ -89,7 +89,7 @@ export default {
     };
   },
   mounted() {
-    this.templateVO.userId = sessionStorage.getItem("LeagueUserId");
+    this.templateVO.userId = localStorage.getItem("LeagueUserId");
     this.search();
     this.getOperationdata(this.templateVO.userId);
   },
