@@ -688,8 +688,8 @@ export default {
       const vm = this;
       this.lineUpTopBoxDetialData = {
         date: data.time,
-        HomeType: data.HomeType,
-        AwayType: data.AwayType,
+        HomeType: data.homeManageStatus,
+        AwayType: data.visitingManageStatus,
         homeTeam: data.homeTeamName,
         awayTeam: data.visitingTeamName
       };

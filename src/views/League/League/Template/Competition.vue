@@ -213,7 +213,7 @@
             class="uploadBg"
             action=" "
             ref="upload"
-            :auto-upload="false"
+            :auto-upload="true"
             list-type="picture-card"
             :on-preview="handlePictureCardPreview"
             :on-remove="handleRemove"
@@ -266,9 +266,9 @@
         </el-col>
         <el-col :span="20">
           <el-select v-model="AddCompetitionRequest.competitionOption.cardType" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip70')"></el-option>
+            <el-option :value="0" :label="$t('all.tip70')"></el-option>
+            <el-option :value="1" :label="$t('all.tip68')"></el-option>
             <el-option :value="2" :label="$t('all.tip69')"></el-option>
-            <el-option :value="3" :label="$t('all.tip68')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -1067,11 +1067,12 @@ export default {
       this.getCountry();
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+      const typeList = ["image/jpeg", "image/png", "image/jpg"];
+      if (!typeList.includes(file.type)) {
+        this.$message.error("上传联赛图片只能是【JPG,JPEG,PNG】格式!");
+        return false;
       }
-      return isJPG;
+      return true;
     },
     setData(id) {
       const vm = this;

@@ -101,6 +101,7 @@
           :on-remove="handleRemove"
           :file-list="fileList"
           :multiple="false"
+          :before-upload="beforeAvatarUpload"
         >
           <i class="el-icon-plus"></i>
         </el-upload>
@@ -152,6 +153,14 @@ export default {
   methods: {
     init() {
       this.getCountryList();
+    },
+    beforeAvatarUpload(file) {
+      const typeList = ["image/jpeg", "image/png", "image/jpg"];
+      if (!typeList.includes(file.type)) {
+        this.$message.error("上传图片只能是【JPG,JPEG,PNG】格式!");
+        return false;
+      }
+      return true;
     },
     save() {
       if (this.infoVO.useType === 1) {
