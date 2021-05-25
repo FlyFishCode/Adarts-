@@ -21,7 +21,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="templateVO.operator" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="templateVO.operatorId" :placeholder="$t('placeholder.select')" clearable>
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -81,7 +81,7 @@ export default {
         userId: "",
         leagueType: 1,
         name: "",
-        operator: "",
+        operatorId: "",
         pageNum: 1,
         pageSize: 10
       },

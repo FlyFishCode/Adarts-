@@ -403,10 +403,10 @@
         <el-dialog :title="$t('all.tip529')" width="50%" :visible.sync="changeCaptain" top="25px">
           <el-row class="center-Row">
             <el-col :span="3" class="label-g">
-              {{ $t("all.tip268") }}
+              {{ $t("all.tip456") }}
             </el-col>
             <el-col :span="8">
-              <el-input v-model="captainDialogData.id" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="captainDialogData.account" clearable :placeholder="$t('placeholder.input')"></el-input>
             </el-col>
             <el-col :span="3" class="label-g">
               {{ $t("all.tip324") }}
@@ -442,9 +442,14 @@
                   <el-radio :label="scope.row.id" v-model="radioId" @change.native="radioChange(scope.row)"><span></span></el-radio>
                 </template>
               </el-table-column>
-              <el-table-column property="account" :label="$t('all.tip456')" min-width="6%"></el-table-column>
+              <el-table-column property="account" :label="$t('all.tip456')" min-width="7%"></el-table-column>
               <el-table-column property="userName" :label="$t('all.tip412')" min-width="10%"></el-table-column>
-              <el-table-column :label="$t('all.tip426')" min-width="6%">
+              <el-table-column :label="$t('all.tip208')" min-width="6%">
+                <template slot-scope="scope">
+                  <div>{{ scope.row.gender === 1 ? $t("all.tip209") : $t("all.tip210") }}</div>
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('all.tip426')" min-width="15%">
                 <template slot-scope="scope">
                   <div v-for="card in scope.row.cardList" :key="card.cardId" class="leagueImgBox">
                     {{ card.cardNumber }}
@@ -452,15 +457,15 @@
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column :sortable="true" label="Adarts">
-                <el-table-column prop="adartsRating" :sortable="true" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
-                <el-table-column prop="adartsPPd" :sortable="true" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
-                <el-table-column prop="adartsMpr" :sortable="true" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
+              <el-table-column label="Adarts">
+                <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
+                <el-table-column prop="adartsPPd" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
+                <el-table-column prop="adartsMpr" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
               </el-table-column>
-              <el-table-column :sortable="true" :label="$t('all.tip1')">
-                <el-table-column prop="leagueRating" :sortable="true" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
-                <el-table-column prop="leaguePPd" :sortable="true" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
-                <el-table-column prop="leagueMpr" :sortable="true" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
+              <el-table-column :label="$t('all.tip1')">
+                <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
+                <el-table-column prop="leaguePPd" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
+                <el-table-column prop="leagueMpr" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
               </el-table-column>
             </el-table>
           </div>
@@ -652,7 +657,7 @@ export default {
       },
       editTeamInfo: {},
       captainDialogData: {
-        id: "",
+        account: "",
         name: "",
         cardNo: "",
         gender: "",

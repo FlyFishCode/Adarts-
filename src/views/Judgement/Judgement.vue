@@ -19,7 +19,7 @@
           {{ $t("all.tip536") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="judgementVO.status" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="judgementVO.status" :placeholder="$t('placeholder.select')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip26')"></el-option>
             <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -54,7 +54,7 @@
           {{ $t("all.tip537") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="judgementVO.type" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="judgementVO.type" :placeholder="$t('placeholder.select')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip42')"></el-option>
             <el-option :value="2" :label="$t('all.tip43')"></el-option>

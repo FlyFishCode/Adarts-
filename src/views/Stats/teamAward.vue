@@ -16,7 +16,7 @@
           {{ $t("all.tip539") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="teamVO.competitionName" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="teamVO.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
@@ -32,7 +32,7 @@
             <el-date-picker v-model="teamVO.endPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
           </el-col>
         </el-col>
-        <el-col :span="4" class="lineClass">
+        <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
           <!-- <el-button type="primary" size="mini" @click="search">{{ $t("all.tip11") }}</el-button> -->
         </el-col>

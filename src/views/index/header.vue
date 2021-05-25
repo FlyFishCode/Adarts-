@@ -78,7 +78,7 @@ export default {
 <style scoped>
 .header {
   height: 50px;
-  line-height: 50px;
+  line-height: 48px;
   background: rgb(70, 76, 91);
   color: rgb(26, 188, 156);
   font-size: 18px;

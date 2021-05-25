@@ -70,17 +70,15 @@
         </el-col>
       </el-row>
     </div>
-    <el-row class="center">
-      <el-form label-width="100px">
-        <el-col :span="4">
-          <el-form-item :label="$t('all.tip12')">
-            <el-select v-model="CreateValue" :placeholder="$t('placeholder.select')">
-              <el-option value="1" :label="$t('all.tip13')"></el-option>
-              <el-option value="2" :label="$t('all.tip14')"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-form>
+
+    <el-row class="center-Row">
+      <el-col class="label-g" :span="2">{{ $t("all.tip12") }}</el-col>
+      <el-col :span="2">
+        <el-select v-model="createValue" :placeholder="$t('placeholder.select')">
+          <el-option value="1" :label="$t('all.tip13')"></el-option>
+          <el-option value="2" :label="$t('all.tip14')"></el-option>
+        </el-select>
+      </el-col>
       <el-col :span="2" class="lineClass">
         <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
       </el-col>
@@ -268,7 +266,7 @@ export default {
       ContinentArr: [],
       CountryArr: [],
       competitionNameList: [],
-      CreateValue: "1",
+      createValue: "1",
       LeagueMgmtVO: {
         areaId: "",
         countryId: "",
@@ -394,7 +392,7 @@ export default {
       console.log("Download");
     },
     create() {
-      if (this.CreateValue === "1") {
+      if (this.createValue === "1") {
         this.ModularVisible = true;
       } else {
         this.getTemplateTopBoxData();

@@ -488,7 +488,7 @@ const en = {
         tip453: "Player Information",
         tip454: "League Information",
         tip455: "Home Shop",
-        tip456: "User ID",
+        tip456: "User account",
         tip457: "Agent",
         tip458: "Team image",
         tip459: "Result management",

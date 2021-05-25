@@ -399,7 +399,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="userId" :label="$t('all.tip456')" min-width="4%"> </el-table-column>
+            <el-table-column prop="account" :label="$t('all.tip456')" min-width="4%"> </el-table-column>
             <el-table-column :label="$t('all.tip412')" min-width="6%">
               <template slot-scope="scope">
                 <div class="tableLink" @click="push(scope.row.id)">{{ scope.row.nickName }}</div>
@@ -412,22 +412,8 @@
                 <div>{{ `${scope.row.cardNumber}` }}({{ scope.row.cardType === 5 ? $t("all.tip69") : $t("all.tip68") }})</div>
               </template>
             </el-table-column> -->
-            <el-table-column prop="userId" :label="$t('all.tip382')" min-width="4%"> </el-table-column>
-            <el-table-column prop="operId" :label="$t('all.tip9')" min-width="4%"> </el-table-column>
-            <el-table-column :label="$t('all.tip17')" min-width="4%">
-              <template slot-scope="scope">
-                <div v-for="item in scope.row.countryList" :key="item.index">
-                  {{ item.countryName }}
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('all.tip442')" min-width="3%">
-              <template slot-scope="scope">
-                <div v-for="item in scope.row.countryList" :key="item.index">
-                  {{ item.areaName }}
-                </div>
-              </template>
-            </el-table-column>
+            <el-table-column prop="countryName"  :label="$t('all.tip17')" min-width="4%"></el-table-column>
+            <el-table-column prop="areaName"  :label="$t('all.tip442')" min-width="3%"></el-table-column>
             <el-table-column label="Adarts">
               <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="3%">
                 <template slot-scope="scope">
@@ -484,9 +470,18 @@
             </el-table-column>
           </el-table>
         </div>
-        <!-- <div class="page">
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400"> </el-pagination>
-        </div> -->
+        <div class="page">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="1"
+            :page-sizes="[10, 50, 100, 200]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="leagueTotal"
+          >
+          </el-pagination>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -555,6 +550,7 @@ export default {
         homeShopName: "",
         regDate: ""
       },
+      leagueTotal: 0,
       SearchPlayerPageTotal: 0,
       SearchPlayerTableData: [],
       SearchByCompetitionTableData: [],
@@ -622,22 +618,36 @@ export default {
         this.creteList = res.data.data;
       });
     },
+    handleSizeChange(value) {
+      this.searchByCompetition.pageSize = value;
+      this.competitionSearch();
+    },
+    handleCurrentChange(value) {
+      this.searchByCompetition.pageNum = value;
+      this.competitionSearch();
+    },
     SearchPlayerHandleSizeChange(value) {
       this.searchPlayer.pageSize = value;
-      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
-        this.SearchPlayerTableData = res.data.data.list;
-      });
+      this.PlayerSearch();
     },
     SearchPlayerHandleCurrentChange(value) {
       this.searchPlayer.pageNum = value;
-      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
-        this.SearchPlayerTableData = res.data.data.list;
-      });
+      this.PlayerSearch();
     },
     PlayerSearch() {
       this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
-        this.SearchPlayerPageTotal = res.data.data.total;
-        this.SearchPlayerTableData = res.data.data.list;
+        if (res.data.data) {
+          this.SearchPlayerPageTotal = res.data.data.total;
+          this.SearchPlayerTableData = res.data.data.list;
+        }
+      });
+    },
+    competitionSearch() {
+      this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
+        if (res.data.data) {
+          this.SearchByCompetitionTableData = res.data.data.list;
+          this.leagueTotal = res.data.data.total;
+        }
       });
     },
     getShopList() {
@@ -683,14 +693,6 @@ export default {
         }
       });
     },
-    competitionSearch() {
-      this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
-        if (res.data.data) {
-          this.SearchByCompetitionTableData = res.data.data.list;
-        }
-      });
-    },
-    CompetitionDownload() {},
     create() {
       this.playerDialog = true;
     },

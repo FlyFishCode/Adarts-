@@ -23,16 +23,13 @@
         <el-col class="label-g" :span="1">
           {{ $t("all.tip436") }}
         </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="EntryMgmt.startPeriod" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="EntryMgmt.endPeriod" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
-          </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="EntryMgmt.startPeriod" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
         </el-col>
-        <el-col :span="4" class="lineClass">
+        <el-col :span="3">
+          <el-date-picker v-model="EntryMgmt.endPeriod" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+        </el-col>
+        <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
           <!-- <el-button type="primary" size="mini" @click="search">{{ $t("all.tip11") }}</el-button> -->
         </el-col>
