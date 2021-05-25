@@ -43,7 +43,7 @@
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip5") }}</el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="LeagueMgmtVO.type" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="LeagueMgmtVO.type" :placeholder="$t('placeholder.select')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip42')"></el-option>
             <el-option :value="2" :label="$t('all.tip43')"></el-option>

@@ -333,7 +333,7 @@ export default {
         { id: 13, label: "all.tip511" },
         { id: 14, label: "all.tip512" }
       ],
-      stageGameIdList: [{ value: 0, label: this.$t("all.tip521") }],
+      stageGameIdList: [],
       choicesList: [{ id: 2, label: "all.tip513" }, { id: 3, label: "all.tip514" }],
       copyRadio: 0,
       deleteLegId: 0,
@@ -375,6 +375,7 @@ export default {
       value: 0,
       setId: "set",
       allGameList: [
+        { value: 0, label: "all.tip521" },
         { value: 1, label: "all.tip499" },
         { value: 2, label: "all.tip500" },
         { value: 3, label: "all.tip501" },
@@ -472,6 +473,7 @@ export default {
           if (newValue) {
             vm.idDisabled = res.data.data.isDefaultStage === 1;
           }
+          debugger;
           res.data.data.legList.forEach(i => {
             const flag = vm.stageGameIdList.every(j => i.stageGameId !== j.value);
             if (flag) {
@@ -499,7 +501,6 @@ export default {
               this.maxPlayer = 4;
               break;
           }
-          // this.getLegGameList();
           changeCurrentObj(id, "set", this.$store.state.menuList, vm.set);
         }
       });
@@ -755,50 +756,50 @@ export default {
       this.copyBox = false;
     },
     create() {
-      this.set.stageId = this.$route.query.parentId;
-      if (!this.set.stageId) {
-        return;
-      }
-      for (let index = 0; index < this.howMany; index += 1) {
-        this.value += 1;
-        this.legList.push({
-          number: this.value,
-          stageGameId: "",
-          setId: this.$route.query.id,
-          legId: 0,
-          choices: 1,
-          isDefaultSet: this.idDisabled ? 1 : 2,
-          legGameOption: {
-            gameIn: this.set.setGameOption.gameIn,
-            gameOut: this.set.setGameOption.gameOut,
-            freezeOption: this.set.setGameOption.freezeOption,
-            bull: this.set.setGameOption.bull,
-            outTips: this.set.setGameOption.outTips,
-            inCriteria: this.set.setGameOption.inCriteria,
-            overkill: this.set.setGameOption.overkill,
-            outCriteria: this.set.setGameOption.outCriteria,
-            scoreGap: this.set.setGameOption.scoreGap
-          }
-        });
-      }
-      this.getLegGameList();
-    },
-    getLegGameList() {
       const vm = this;
       const obj = {
         stageId: this.set.stageId,
         mode: this.set.mode
       };
+      this.set.stageId = this.$route.query.parentId;
+      if (!this.set.stageId) {
+        return;
+      }
       const pro = new Promise((resolve, reject) => {
         this.$axios.post("/getgamelist", vm.$qs.stringify(obj)).then(res => {
-          if (res.data.data) {
+          if (res.data.data && res.data.data.length) {
+            for (let index = 0; index < this.howMany; index += 1) {
+              this.value += 1;
+              this.legList.push({
+                number: this.value,
+                stageGameId: "",
+                setId: this.$route.query.id,
+                legId: 0,
+                choices: 1,
+                isDefaultSet: this.idDisabled ? 1 : 2,
+                legGameOption: {
+                  gameIn: this.set.setGameOption.gameIn,
+                  gameOut: this.set.setGameOption.gameOut,
+                  freezeOption: this.set.setGameOption.freezeOption,
+                  bull: this.set.setGameOption.bull,
+                  outTips: this.set.setGameOption.outTips,
+                  inCriteria: this.set.setGameOption.inCriteria,
+                  overkill: this.set.setGameOption.overkill,
+                  outCriteria: this.set.setGameOption.outCriteria,
+                  scoreGap: this.set.setGameOption.scoreGap
+                }
+              });
+            }
             resolve(res.data.data);
           }
-          reject(res);
+          reject(res.data.msg);
         });
       });
       pro.then(res => {
-        this.stageGameIdList = [{ value: 0, label: this.$t("all.tip521") }];
+        // 如果有一个游戏是可选择，则添加，否则不添加
+        if (res.some(i => i.choice === 1)) {
+          this.stageGameIdList = [{ value: 0, label: this.$t("all.tip521") }];
+        }
         res.forEach(i => {
           vm.allGameList.forEach(j => {
             if (i.gameName === j.value) {
@@ -811,6 +812,7 @@ export default {
         });
       });
       pro.catch(err => {
+        this.$message("请至少添加一个游戏！");
         console.log(err);
       });
     }

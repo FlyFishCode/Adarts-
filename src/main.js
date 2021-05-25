@@ -95,6 +95,13 @@ Vue.filter("showDate", value => {
     if (!value) return "";
     return value.split("T")[0];
 });
+
+// eslint-disable-next-line func-names
+window.onunload = function() {
+    // localStorage.removeItem("LeagueToken");
+    // localStorage.removeItem("LeagueUserId");
+    // localStorage.removeItem("LeagueUserType");
+};
 new Vue({
     router,
     i18n,

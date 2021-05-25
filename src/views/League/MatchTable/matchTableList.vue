@@ -269,7 +269,7 @@ export default {
       });
     },
     stageClick(value) {
-      const data = Object.assign(value, { matchTableName: this.MatchTableListVO.competitionname });
+      const data = Object.assign(value, { competitionName: this.MatchTableListVO.competitionname });
       this.$router.push({
         path: "/matchTableStage",
         query: {

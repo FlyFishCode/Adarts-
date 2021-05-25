@@ -58,15 +58,15 @@ export default {
         return;
       }
       this.$axios.post("/login/login", vm.user).then(res => {
-        if (res.data.errorCode) {
-          vm.check(res.data.msg);
-        } else {
+        if (res.data.code === 1000) {
           localStorage.setItem("LeagueToken", res.data.data.token);
           localStorage.setItem("LeagueUserId", res.data.data.id);
           localStorage.setItem("LeagueUserType", res.data.data.userType);
           vm.$router.push({
             path: "/league"
           });
+        } else {
+          vm.check(res.data.msg);
         }
       });
     },

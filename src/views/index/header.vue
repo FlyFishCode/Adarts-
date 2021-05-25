@@ -49,7 +49,7 @@ export default {
   methods: {
     selectLanguage(value) {
       this.$i18n.locale = value;
-      localStorage.setItem("lang", value);
+      localStorage.setItem("LeagueLang", value);
       this.bus.$emit("change", window.treeList);
     },
     loginOut() {
