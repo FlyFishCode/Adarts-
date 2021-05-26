@@ -335,7 +335,7 @@
         </el-table>
       </div>
       <div slot="footer" class="DialogButton">
-        <el-button size="mini" @click="Add" type="primary">{{ $t("all.tip132") }}</el-button>
+        <el-button size="mini" @click="handleCopyClick" type="primary">{{ $t("all.tip132") }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -913,18 +913,23 @@ export default {
     Search() {
       this.getCopyList();
     },
-    Add() {
-      const copyNumber = this.copyBoxData.find(i => i.stageId === this.copyRadio).number;
-      const data = {
-        divisionId: this.$route.query.parentId,
-        stageId: this.copyRadio,
-        number: Number(copyNumber)
-      };
-      this.$axios.post("/copystage", this.$qs.stringify(data)).then(res => {
-        this.$message(res.data.msg);
-        // this.getList();
-      });
-      this.copyBox = false;
+    handleCopyClick() {
+      if (this.copyRadio) {
+        const copyNumber = this.copyBoxData.find(i => i.stageId === this.copyRadio).number;
+        const data = {
+          divisionId: this.$route.query.parentId,
+          stageId: this.copyRadio,
+          number: Number(copyNumber)
+        };
+        this.$axios.post("/copystage", this.$qs.stringify(data)).then(res => {
+          if (res.data.code === 1000) {
+            this.bus.$emit("setNode", this.$route.query.id);
+          } else {
+            this.$message(res.data.msg);
+          }
+        });
+        this.copyBox = false;
+      }
     }
   }
 };

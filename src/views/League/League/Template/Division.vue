@@ -195,7 +195,7 @@
         </el-table>
       </div>
       <div slot="footer" class="DialogButton">
-        <el-button size="mini" @click="Add" type="primary">{{ $t("all.tip132") }}</el-button>
+        <el-button size="mini" @click="handleCopyClick" type="primary">{{ $t("all.tip132") }}</el-button>
       </div>
     </el-dialog>
     <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
@@ -218,7 +218,7 @@ export default {
       deleteVisible: false,
       copyBox: false,
       copyName: "",
-      copyRadio: 1,
+      copyRadio: 0,
       deleteStageId: 0,
       copyBoxInput: "",
       isCurrentSave: "",
@@ -363,18 +363,23 @@ export default {
     CopyFrom() {
       this.copyBox = true;
     },
-    Add() {
-      const copyNumber = this.copyBoxData.find(i => i.divisionId === this.copyRadio).number;
-      const data = {
-        categoryId: this.$route.query.parentId,
-        divisionId: this.copyRadio,
-        number: Number(copyNumber)
-      };
-      this.$axios.post("/copydivision", this.$qs.stringify(data)).then(res => {
-        this.$message(res.data.msg);
-        // this.getList();
-      });
-      this.copyBox = false;
+    handleCopyClick() {
+      if (this.copyRadio) {
+        const copyNumber = this.copyBoxData.find(i => i.divisionId === this.copyRadio).number;
+        const data = {
+          categoryId: this.$route.query.parentId,
+          divisionId: this.copyRadio,
+          number: Number(copyNumber)
+        };
+        this.$axios.post("/copydivision", this.$qs.stringify(data)).then(res => {
+          if (res.data.code === 1000) {
+            this.bus.$emit("setNode", this.$route.query.id);
+          } else {
+            this.$message(res.data.msg);
+          }
+        });
+        this.copyBox = false;
+      }
     },
     handleCancel() {
       this.deleteVisible = false;

@@ -279,7 +279,7 @@
         </el-table>
       </div>
       <div slot="footer" class="DialogButton">
-        <el-button size="mini" @click="Add" type="primary">{{ $t("all.tip132") }}</el-button>
+        <el-button size="mini" @click="handleCopyClick" type="primary">{{ $t("all.tip132") }}</el-button>
       </div>
     </el-dialog>
     <DeleteDialog :deleteVisible="deleteVisible" @handleCancel="handleCancel" @handleOk="handleOk" />
@@ -742,18 +742,23 @@ export default {
     CopyFrom() {
       this.copyBox = true;
     },
-    Add() {
-      const copyNumber = this.copyBoxData.find(i => i.setId === this.copyRadio).number;
-      const data = {
-        stageId: this.$route.query.parentId,
-        setId: this.copyRadio,
-        number: Number(copyNumber)
-      };
-      this.$axios.post("/copyset", this.$qs.stringify(data)).then(res => {
-        this.$message(res.data.msg);
-        // this.getList();
-      });
-      this.copyBox = false;
+    handleCopyClick() {
+      if (this.copyRadio) {
+        const copyNumber = this.copyBoxData.find(i => i.setId === this.copyRadio).number;
+        const data = {
+          stageId: this.$route.query.parentId,
+          setId: this.copyRadio,
+          number: Number(copyNumber)
+        };
+        this.$axios.post("/copyset", this.$qs.stringify(data)).then(res => {
+          if (res.data.code === 1000) {
+            this.bus.$emit("setNode", this.$route.query.id);
+          } else {
+            this.$message(res.data.msg);
+          }
+        });
+        this.copyBox = false;
+      }
     },
     create() {
       const vm = this;

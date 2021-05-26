@@ -235,10 +235,18 @@
                     <div class="tableLink" @click="showTopBox(scope.row)">{{ scope.row.homeTeamName }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="homeResult" :sortable="true" :label="$t('all.tip309')" min-width="6%"></el-table-column>
+                <el-table-column prop="homeResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
+                  <template slot-scope="scope">
+                    <div>{{ scope.row.homeResult ? $t("all.tip107") : $t("all.tip109") }}</div>
+                  </template>
+                </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip326')">
-                <el-table-column prop="visitingResult" :sortable="true" :label="$t('all.tip309')" min-width="6%"></el-table-column>
+                <el-table-column prop="visitingResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
+                  <template slot-scope="scope">
+                    <div>{{ scope.row.visitingResult ? $t("all.tip107") : $t("all.tip109") }}</div>
+                  </template>
+                </el-table-column>
                 <el-table-column :sortable="true" :label="$t('all.tip324')" min-width="9%">
                   <template slot-scope="scope">
                     <div class="tableLink" @click="showTopBox(scope.row)">{{ scope.row.visitingTeamName }}</div>
@@ -789,14 +797,17 @@ export default {
   methods: {
     deleteMatchtable() {
       this.$axios.post(`/deleteagainst?confrontationId=${this.matchTableId}`).then(res => {
-        this.$message(res.data.msg);
-        this.getTimeTableData(this.matchTableId);
-        // this.getMatchTableData(this.matchTableId);
-        this.handleData = [];
-        this.MatchTableData = [];
-        this.allMatchTableData = [];
-        this.tableHeader = [{ index: 0 }];
-        this.hasData = false;
+        if (res.data.code === 1000) {
+          this.getTimeTableData(this.matchTableId);
+          // this.getMatchTableData(this.matchTableId);
+          this.handleData = [];
+          this.MatchTableData = [];
+          this.allMatchTableData = [];
+          this.tableHeader = [{ index: 0 }];
+          this.hasData = false;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     getMatchTableOption(id) {
