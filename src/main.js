@@ -14,7 +14,7 @@ import Vue from "vue";
 import ElementUI from "element-ui"; // element-ui的全部组件
 import Axiso from "axios";
 import qs from "qs";
-import NProgress from "nprogress"; // 引入nprogress插件
+import NProgress from "nprogress"; // 引入nprogress插件(进度条)
 import "nprogress/nprogress.css"; // 这个nprogress样式必须引入
 // eslint-disable-next-line import/extensions
 import App from "./App.vue";

@@ -103,7 +103,12 @@
         <el-table-column prop="id" :label="$t('all.tip322')" min-width="8%"> </el-table-column>
         <el-table-column :label="$t('all.tip323')">
           <el-table-column prop="homeTeamName" :label="$t('all.tip324')" min-width="8%"> </el-table-column>
-          <el-table-column prop="homeResult" :label="$t('all.tip309')" min-width="5%"> </el-table-column>
+          <el-table-column prop="homeResult" :label="$t('all.tip309')" min-width="5%">
+            <template slot-scope="scope">
+              <div v-if="scope.row.homeResult === 0">{{ $t("all.tip109") }}</div>
+              <div v-if="scope.row.homeResult === 1">{{ $t("all.tip107") }}</div>
+            </template>
+          </el-table-column>
           <el-table-column :label="$t('all.tip327')" min-width="5%">
             <template slot-scope="scope">
               <div v-if="scope.row.homeManageStatus === 0">{{ $t("all.tip329") }}</div>
@@ -120,7 +125,12 @@
               <div v-if="scope.row.visitingManageStatus === 2">{{ $t("all.tip328") }}</div>
             </template>
           </el-table-column>
-          <el-table-column prop="visitingResult" :label="$t('all.tip309')" min-width="5%"> </el-table-column>
+          <el-table-column prop="visitingResult" :label="$t('all.tip309')" min-width="5%">
+            <template slot-scope="scope">
+              <div v-if="scope.row.visitingResult === 0">{{ $t("all.tip109") }}</div>
+              <div v-if="scope.row.visitingResult === 1">{{ $t("all.tip107") }}</div>
+            </template>
+          </el-table-column>
           <el-table-column prop="visitingTeamName" :label="$t('all.tip324')" min-width="8%"> </el-table-column>
         </el-table-column>
         <el-table-column prop="date" :label="$t('all.tip331')" min-width="10%">
@@ -277,6 +287,7 @@ export default {
   data() {
     return {
       lineUpTopBoxVisible: false,
+      lineUpId: 0,
       categoryList: [],
       divisionList: [],
       stageList: [],
@@ -424,7 +435,7 @@ export default {
     },
     search() {
       this.$axios.post("/getconfrontationresult", this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
-        if (!res.data.errorCode) {
+        if (res.data.code === 1000) {
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
         } else {
@@ -477,7 +488,17 @@ export default {
       }
       this.$axios.post("/matchTable/playerIntoLeg", data).then(res => {
         this.$message(res.data.msg);
-        this.lineUpTopBoxVisible = false;
+        this.getTeamSatus();
+      });
+    },
+    getTeamSatus() {
+      this.$axios.post("/getconfrontationresult", this.$qs.stringify(this.resultMgmtVO.serchList)).then(res => {
+        if (res.data.data) {
+          this.tableData = res.data.data.list;
+          const obj = this.tableData.find(i => i.id === this.lineUpId);
+          this.lineUpTopBoxDetialData.HomeType = obj.homeManageStatus;
+          this.lineUpTopBoxDetialData.AwayType = obj.visitingManageStatus;
+        }
       });
     },
     categoryChange() {
@@ -503,7 +524,6 @@ export default {
       const prePlayerList = [];
       const currentPlayerList = [];
       const NextPlayerList = [];
-      const isAllSelect = [];
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
@@ -519,9 +539,9 @@ export default {
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList.forEach(i => {
         i.playerList.forEach(e => {
           if (type === 1) {
-            isAllSelect.push(e.homePlayerId);
+            LegAllSelect.push(e.homePlayerId);
           } else {
-            isAllSelect.push(e.visitingPlayerId);
+            LegAllSelect.push(e.visitingPlayerId);
           }
         });
       });
@@ -531,11 +551,6 @@ export default {
           homePlayer: i.homePlayerId,
           awayPlayer: i.visitingPlayerId
         });
-        if (type === 1) {
-          LegAllSelect.push(i.homePlayerId);
-        } else {
-          LegAllSelect.push(i.visitingPlayerId);
-        }
       });
       CurrentLegPlayerList.forEach((i, index) => {
         CurrentLegPlayerList.forEach((j, jndex) => {
@@ -693,6 +708,7 @@ export default {
         homeTeam: data.homeTeamName,
         awayTeam: data.visitingTeamName
       };
+      this.lineUpId = data.id;
       const TeamLinePromise = new Promise((resovle, reject) => {
         this.$axios.get(`/matchTable/getTeamLineU?id=${data.id}`).then(res => {
           if (res.data.data) {

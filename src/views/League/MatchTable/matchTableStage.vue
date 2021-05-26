@@ -237,14 +237,16 @@
                 </el-table-column>
                 <el-table-column prop="homeResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
                   <template slot-scope="scope">
-                    <div>{{ scope.row.homeResult ? $t("all.tip107") : $t("all.tip109") }}</div>
+                    <div v-if="scope.row.homeResult === 0">{{ $t("all.tip109") }}</div>
+                    <div v-if="scope.row.homeResult === 1">{{ $t("all.tip107") }}</div>
                   </template>
                 </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip326')">
                 <el-table-column prop="visitingResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
                   <template slot-scope="scope">
-                    <div>{{ scope.row.visitingResult ? $t("all.tip107") : $t("all.tip109") }}</div>
+                    <div v-if="scope.row.visitingResult === 0">{{ $t("all.tip109") }}</div>
+                    <div v-if="scope.row.visitingResult === 1">{{ $t("all.tip107") }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column :sortable="true" :label="$t('all.tip324')" min-width="9%">
@@ -689,6 +691,7 @@ export default {
       errorMsg: "",
       MatchingTableList: [],
       MatchingTableData: [],
+      lineUpId: 0,
       cycleType: 1,
       cycle: 1,
       siteType: 1,
@@ -995,11 +998,6 @@ export default {
         }
       });
     },
-    // getTeamSatus(id) {
-    //   this.$axios.get(`/matchTable/getTeamLineU?id=${id}`).then(res => {
-    //     console.log(res);
-    //   });
-    // },
     getTemplatelTableData(id) {
       this.$axios.post(`/templateview?confrontationId=${id}`).then(res => {
         if (res.data.data) {
@@ -1111,7 +1109,6 @@ export default {
       const prePlayerList = [];
       const currentPlayerList = [];
       const NextPlayerList = [];
-      const isAllSelect = [];
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
@@ -1127,9 +1124,9 @@ export default {
       vm.lineUpTopBoxTableList[currentSetIndex].legGameList.forEach(i => {
         i.playerList.forEach(e => {
           if (type === 1) {
-            isAllSelect.push(e.homePlayerId);
+            LegAllSelect.push(e.homePlayerId);
           } else {
-            isAllSelect.push(e.visitingPlayerId);
+            LegAllSelect.push(e.visitingPlayerId);
           }
         });
       });
@@ -1139,11 +1136,6 @@ export default {
           homePlayer: i.homePlayerId,
           awayPlayer: i.visitingPlayerId
         });
-        if (type === 1) {
-          LegAllSelect.push(i.homePlayerId);
-        } else {
-          LegAllSelect.push(i.visitingPlayerId);
-        }
       });
       CurrentLegPlayerList.forEach((i, index) => {
         CurrentLegPlayerList.forEach((j, jndex) => {
@@ -1312,6 +1304,7 @@ export default {
         homeTeam: data.homeTeamName,
         awayTeam: data.visitingTeamName
       };
+      this.lineUpId = data.id;
       const TeamLinePromise = new Promise((resovle, reject) => {
         this.$axios.get(`/matchTable/getTeamLineU?id=${data.id}`).then(res => {
           if (res.data.data) {
@@ -1444,7 +1437,17 @@ export default {
       }
       this.$axios.post("/matchTable/playerIntoLeg", data).then(res => {
         this.$message(res.data.msg);
-        this.getTimeTableData(this.matchTableId);
+        this.getTeamSatus();
+      });
+    },
+    getTeamSatus() {
+      this.$axios.get(`/matchTable/getTimeTableFightInfo?matchTableId=${this.matchTableId}`).then(res => {
+        if (res.data.data) {
+          this.TimeTableData = res.data.data;
+          const obj = this.TimeTableData.find(i => i.id === this.lineUpId);
+          this.lineUpTopBoxDetialData.HomeType = obj.homeManageStatus;
+          this.lineUpTopBoxDetialData.AwayType = obj.visitingManageStatus;
+        }
       });
     },
     result(id) {
