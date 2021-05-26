@@ -37,14 +37,12 @@ http.interceptors.request.use(
     config => {
         NProgress.start();
         const token = localStorage.getItem("LeagueToken");
-        if (!config.headers.token) {
+        if (!config.headers.token && !token && !config.url.includes("/login")) {
+            window.location.href = window.location.href.split("#")[0];
+        } else {
             // eslint-disable-next-line no-param-reassign
             config.headers.token = token;
         }
-        // else {
-        //     console.log("未登录");
-        //     window.location.href = window.location.href.split("#")[0];
-        // }
         return config;
     },
     err => Promise.reject(err)
@@ -96,11 +94,10 @@ Vue.filter("showDate", value => {
     return value.split("T")[0];
 });
 
-// eslint-disable-next-line func-names
-window.onunload = function() {
-    // localStorage.removeItem("LeagueToken");
-    // localStorage.removeItem("LeagueUserId");
-    // localStorage.removeItem("LeagueUserType");
+window.onunload = function unload() {
+    localStorage.removeItem("LeagueToken");
+    localStorage.removeItem("LeagueUserId");
+    localStorage.removeItem("LeagueUserType");
 };
 new Vue({
     router,
