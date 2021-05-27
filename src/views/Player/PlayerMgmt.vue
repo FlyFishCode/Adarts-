@@ -412,8 +412,8 @@
                 <div>{{ `${scope.row.cardNumber}` }}({{ scope.row.cardType === 5 ? $t("all.tip69") : $t("all.tip68") }})</div>
               </template>
             </el-table-column> -->
-            <el-table-column prop="countryName"  :label="$t('all.tip17')" min-width="4%"></el-table-column>
-            <el-table-column prop="areaName"  :label="$t('all.tip442')" min-width="3%"></el-table-column>
+            <el-table-column prop="countryName" :label="$t('all.tip17')" min-width="4%"></el-table-column>
+            <el-table-column prop="areaName" :label="$t('all.tip442')" min-width="3%"></el-table-column>
             <el-table-column label="Adarts">
               <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="3%">
                 <template slot-scope="scope">
@@ -558,7 +558,7 @@ export default {
     };
   },
   mounted() {
-    this.userId = localStorage.getItem("LeagueUserId");
+    this.userId = sessionStorage.getItem("LeagueUserId");
     this.name = this.$route.params.name;
     this.getCounry(this.userId);
     this.PlayerSearch();
@@ -577,7 +577,7 @@ export default {
       }
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
         if (res.data.data) {
           this.password = res.data.data.password;
           this.competitionNameList = res.data.data;
@@ -651,7 +651,7 @@ export default {
       });
     },
     getShopList() {
-      const userId = localStorage.getItem("LeagueUserId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });

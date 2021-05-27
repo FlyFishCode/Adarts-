@@ -230,7 +230,7 @@ export default {
       this.MatchTableListVO.matchTable.divisionId = "";
     },
     matchTableCreate(value) {
-      const data = Object.assign(value, { matchTableName: this.MatchTableListVO.competitionname, isKnockout: 1 });
+      const data = Object.assign(value, { competitionName: this.MatchTableListVO.competitionname, isKnockout: 1 });
       this.$router.push({
         name: "matchTableStage",
         query: {

@@ -143,7 +143,7 @@ export default {
   },
   mounted() {
     if ((this.$route.query.showData && this.$route.query.id) || this.$route.query.isTemplate) {
-      this.$axios.post(`/allsubset?competitionId=${localStorage.getItem("competitionId")}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
         if (res.data.data) {
           this.treeDataList = res.data.data;
         }
@@ -153,7 +153,7 @@ export default {
       this.isTemplate = false;
     }
     this.bus.$on("setNode", data => {
-      this.$axios.post(`/allsubset?competitionId=${localStorage.getItem("competitionId")}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
         this.treeDataList = res.data.data;
         this.currentNodeId = data;
         this.returnFatherNode(this.getNode(res.data.data[0], data));
@@ -453,7 +453,7 @@ export default {
       this.dialogTableVisible = true;
     },
     SaveTemplate() {
-      const currentUserId = localStorage.getItem("LeagueUserId");
+      const currentUserId = sessionStorage.getItem("LeagueUserId");
       if (currentUserId) {
         const data = {
           competition: { id: this.$route.query.id },

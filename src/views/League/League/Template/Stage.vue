@@ -580,7 +580,7 @@ export default {
   },
   methods: {
     getCopyList() {
-      const id = localStorage.getItem("competitionId");
+      const id = sessionStorage.getItem("competitionId");
       const data = {
         competitionId: id,
         stageName: this.copyName
@@ -642,8 +642,8 @@ export default {
           vm.idDisabled = res.data.data.stage.isDefaultdivision === 1;
           vm.saveGameList = res.data.data.gameList;
           vm.stageGameData = [];
-          // if (localStorage.getItem("time")) {
-          //   const { begin, end } = JSON.parse(localStorage.getItem("time"));
+          // if (sessionStorage.getItem("time")) {
+          //   const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
           //   vm.stage.startTime = vm.stage.startTime ? vm.stage.startTime : begin;
           //   vm.stage.endTime = vm.stage.endTime ? vm.stage.endTime : end;
           // }
@@ -698,7 +698,7 @@ export default {
     },
     dateChange() {
       this.stage.endTime = "";
-      // const { begin, end } = JSON.parse(localStorage.getItem("time"));
+      // const { begin, end } = JSON.parse(sessionStorage.getItem("time"));
       // if (data && data > new Date(end)) {
       //   console.log(begin);
       //   this.$message(this.$t("all.tip569"));

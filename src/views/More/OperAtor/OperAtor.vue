@@ -199,7 +199,7 @@ export default {
     };
   },
   mounted() {
-    this.operatorVO.userId = localStorage.getItem("LeagueUserId");
+    this.operatorVO.userId = sessionStorage.getItem("LeagueUserId");
     this.search();
     this.getCreatorList();
   },
@@ -218,7 +218,7 @@ export default {
       });
     },
     getCreatorList() {
-      const userId = localStorage.getItem("LeagueUserId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post(`/operation/getcreatorlist?userId=${userId}`).then(res => {
         this.creatorList = res.data.data;
         this.agentList = res.data.data;
@@ -258,7 +258,7 @@ export default {
       this.changeDiolog = false;
     },
     save() {
-      this.creatorVo.createId = localStorage.getItem("LeagueUserId");
+      this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
       this.creatorVo.operPassword = md5(`${this.createPasswword}kitekey`).toUpperCase();
       this.$axios.post("/operation/addoperation", this.creatorVo).then(res => {
         this.$message(res.data.msg);

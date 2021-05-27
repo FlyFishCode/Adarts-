@@ -36,7 +36,7 @@ Vue.prototype.$axios = http;
 http.interceptors.request.use(
     config => {
         NProgress.start();
-        const token = localStorage.getItem("LeagueToken");
+        const token = sessionStorage.getItem("LeagueToken");
         if (!config.headers.token && !token && !config.url.includes("/login")) {
             window.location.href = window.location.href.split("#")[0];
         } else {
@@ -67,7 +67,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$qs = qs;
 
 // router.beforeEach((to, from, next) => {
-//     const identity = localStorage.getItem('identity');
+//     const identity = sessionStorage.getItem('identity');
 //     if (identity === 9527) {
 //         let flag = false;
 //         // 代理商无法访问的页面
@@ -95,9 +95,9 @@ Vue.filter("showDate", value => {
 });
 
 window.onunload = function unload() {
-    localStorage.removeItem("LeagueToken");
-    localStorage.removeItem("LeagueUserId");
-    localStorage.removeItem("LeagueUserType");
+    // sessionStorage.removeItem("LeagueToken");
+    // sessionStorage.removeItem("LeagueUserId");
+    // sessionStorage.removeItem("LeagueUserType");
 };
 new Vue({
     router,

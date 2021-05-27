@@ -108,8 +108,8 @@
         </el-table-column>
         <el-table-column prop="stage" :sortable="true" :label="$t('all.tip21')" min-width="7%"></el-table-column>
         <el-table-column :label="$t('all.tip520')">
-          <el-table-column prop="application" :sortable="true" :label="$t('all.tip23')" min-width="10%"> </el-table-column>
-          <el-table-column prop="approve" :sortable="true" :label="$t('all.tip24')" min-width="9%"></el-table-column>
+          <el-table-column prop="application" :label="$t('all.tip23')" min-width="10%"> </el-table-column>
+          <el-table-column prop="approve" :label="$t('all.tip24')" min-width="9%"></el-table-column>
         </el-table-column>
         <el-table-column :label="$t('all.tip7')" min-width="14%">
           <template slot-scope="scope">
@@ -277,7 +277,7 @@ export default {
         competitionName: "",
         operatorId: "",
         creatorId: "",
-        userId: localStorage.getItem("LeagueUserId"),
+        userId: sessionStorage.getItem("LeagueUserId"),
         pageNum: 1,
         pageSize: 10
       },
@@ -311,7 +311,7 @@ export default {
   },
   mounted() {
     const vm = this;
-    this.LeagueMgmtVO.userId = localStorage.getItem("LeagueUserId");
+    this.LeagueMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
     this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.LeagueMgmtVO.userId })).then(res => {
       vm.ContinentArr = res.data.data;
     });
@@ -334,7 +334,7 @@ export default {
       });
     },
     getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${localStorage.getItem("LeagueUserId")}`).then(res => {
+      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },

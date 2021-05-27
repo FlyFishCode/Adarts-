@@ -821,7 +821,7 @@ export default {
   data() {
     const vm = this;
     return {
-      userType: localStorage.getItem("LeagueUserType"),
+      userType: sessionStorage.getItem("LeagueUserType"),
       competitionEndPeriodPickerOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.AddCompetitionRequest.competition.competitionStartPeriod);
@@ -1044,9 +1044,9 @@ export default {
       const query = this.$route.query;
       if (query.id || query.currentId) {
         this.uploadCompetitionId = query.id || query.currentId;
-        localStorage.setItem("competitionId", this.uploadCompetitionId);
+        sessionStorage.setItem("competitionId", this.uploadCompetitionId);
       }
-      const userId = localStorage.getItem("LeagueUserId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.searchOperator.userId = userId;
       this.AddCompetitionRequest.competition.userId = userId;
       this.Shop.userId = userId;
@@ -1142,7 +1142,7 @@ export default {
     getOperationdata() {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
         this.agentList = res.data.data;
-        this.Shop.agentId = Number(localStorage.getItem("LeagueUserId"));
+        this.Shop.agentId = Number(sessionStorage.getItem("LeagueUserId"));
         this.shopSearch();
       });
     },
@@ -1277,7 +1277,7 @@ export default {
       }
     },
     getMenuList() {
-      this.$axios.post(`/allsubset?competitionId=${localStorage.getItem("competitionId")}`).then(res => {
+      this.$axios.post(`/allsubset?competitionId=${sessionStorage.getItem("competitionId")}`).then(res => {
         if (res.data.data) {
           this.$store.state.menuList = res.data.data;
         }
@@ -1325,7 +1325,7 @@ export default {
       vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
       const saveMethods = () => {
         // 保存 结果查询时间
-        // localStorage.setItem(
+        // sessionStorage.setItem(
         //   "time",
         //   JSON.stringify({
         //     begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
@@ -1345,7 +1345,7 @@ export default {
             if (competitionId) {
               vm.uploadCompetitionId = competitionId;
               changeHash(window.location.hash.split("&")[0], "competition", competitionId || id);
-              localStorage.setItem("competitionId", competitionId);
+              sessionStorage.setItem("competitionId", competitionId);
               item = {
                 label: vm.AddCompetitionRequest.competition.competitionName,
                 id: competitionId,

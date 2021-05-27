@@ -127,7 +127,7 @@ export default {
           return time.getTime() < date1;
         }
       },
-      userId: localStorage.getItem("LeagueUserId"),
+      userId: sessionStorage.getItem("LeagueUserId"),
       total: 0,
       tableData: [],
       countryList: [],

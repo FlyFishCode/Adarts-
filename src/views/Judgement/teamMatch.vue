@@ -146,7 +146,7 @@
             <div v-if="scope.row.judge === 2">
               <div class="tableLink" @click="show">{{ $t("all.tip551") }}</div>
             </div> -->
-            <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip551") }}</div>
+            <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip309") }}</div>
           </template>
         </el-table-column>
         <!-- <el-table-column prop="address" :label="$t('all.tip33')" min-width="5%">
@@ -267,7 +267,7 @@ export default {
     init(data) {
       this.matchVO.competitionId = data.competitionId;
       this.matchVO.teamId = data.teamId;
-      this.matchVO.userId = localStorage.getItem("LeagueUserId");
+      this.matchVO.userId = sessionStorage.getItem("LeagueUserId");
       this.match.competitionName = data.competitionName;
       this.match.status = data.status;
       this.match.start = data.competitionStartPeriod.split(" ")[0];
@@ -284,11 +284,11 @@ export default {
     },
     search() {
       this.$axios.post("/judgement/getMatch", this.matchVO).then(res => {
-        if (res.data.errCode) {
-          this.$message(res.data.msg);
-        } else {
+        if (res.data.code === 1000) {
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
         }
       });
     },
@@ -299,25 +299,11 @@ export default {
     },
     currentChange(val) {
       this.matchVO.pageNum = val;
-      this.$axios.post("/judgement/getMatch", this.matchVO).then(res => {
-        if (res.data.data) {
-          this.$message(res.data.msg);
-        } else {
-          this.tableData = res.data.data.list;
-          this.total = res.data.data.total;
-        }
-      });
+      this.search();
     },
     sizeChange(val) {
       this.matchVO.pageSize = val;
-      this.$axios.post("/judgement/getMatch", this.matchVO).then(res => {
-        if (res.data.errCode) {
-          this.$message(res.data.msg);
-        } else {
-          this.tableData = res.data.data.list;
-          this.total = res.data.data.total;
-        }
-      });
+      this.search();
     },
     view(data) {
       this.$router.push({

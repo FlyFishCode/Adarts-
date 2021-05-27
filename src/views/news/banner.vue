@@ -139,7 +139,7 @@ export default {
       operatorList: [],
       infoVO: {
         countryId: "",
-        userId: localStorage.getItem("LeagueUserId"),
+        userId: sessionStorage.getItem("LeagueUserId"),
         operationId: "",
         useType: null,
         startDate: "",

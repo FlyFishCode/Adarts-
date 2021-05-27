@@ -35,7 +35,7 @@
               {{ $t("all.tip456") }}
             </el-col>
             <el-col :span="5" class="lineClass">
-              <el-input v-model="playerInformationVO.id" disabled></el-input>
+              <el-input v-model="playerInformationVO.userId" disabled></el-input>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip389") }}
@@ -344,7 +344,7 @@ export default {
       },
       defaultName: "first",
       playerInformationVO: {
-        id: "",
+        userId: "",
         regDate: "",
         nickName: "",
         gender: "1",
@@ -551,7 +551,7 @@ export default {
       });
     },
     getShopList() {
-      const userId = localStorage.getItem("LeagueUserId");
+      const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });
@@ -597,7 +597,7 @@ export default {
     },
     save() {
       this.$axios.post("/editorPlayerInfo", this.playerInformationVO).then(res => {
-        console.log(res);
+        this.$message(res.data.msg);
       });
     },
     fileChange(file, fileList) {

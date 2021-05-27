@@ -59,9 +59,9 @@ export default {
       }
       this.$axios.post("/login/login", vm.user).then(res => {
         if (res.data.code === 1000) {
-          localStorage.setItem("LeagueToken", res.data.data.token);
-          localStorage.setItem("LeagueUserId", res.data.data.id);
-          localStorage.setItem("LeagueUserType", res.data.data.userType);
+          sessionStorage.setItem("LeagueToken", res.data.data.token);
+          sessionStorage.setItem("LeagueUserId", res.data.data.id);
+          sessionStorage.setItem("LeagueUserType", res.data.data.userType);
           vm.$router.push({
             path: "/league"
           });

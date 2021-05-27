@@ -128,6 +128,7 @@ export default {
     init(flag = false) {
       const editor = new E("#editorElem");
       this.$nextTick(() => {
+        const vm = this;
         editor.config.onchange = html => {
           this.infoVO.contents = html;
         };
@@ -147,7 +148,7 @@ export default {
           "justify", // 对齐方式
           // 'quote', // 引用
           // 'emoticon', // 表情
-          // 'image', // 插入图片
+          "image", // 插入图片
           // 'table', // 表格
           // 'video', // 插入视频
           // 'code', // 插入代码
@@ -164,20 +165,6 @@ export default {
         // };
         // editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 限制图片大小为2M
         // eslint-disable-next-line func-names
-        editor.config.linkImgCallback = function(url) {
-          const arr = url.split(",");
-          const mime = arr[0].match(/:(.*?);/)[1];
-          const encodeStr = atob(arr[1]);
-          let n = encodeStr.length;
-          const u8Arr = new Uint8Array(n);
-          // eslint-disable-next-line no-plusplus
-          while (n--) {
-            u8Arr[n] = encodeStr.charCodeAt(n);
-          }
-          this.infoVO.thumbnail = new Blob([u8Arr], { type: mime });
-          // url 即插入图片的地址
-        };
-        // eslint-disable-next-line func-names
         editor.config.linkCheck = function(text, link) {
           console.log(text); // 插入的文字
           console.log(link); // 插入的链接
@@ -191,8 +178,37 @@ export default {
         // 隐藏“网络图片”tab
         editor.config.showLinkImg = false;
         // 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
-        editor.config.uploadImgShowBase64 = true; // 使用 base64 保存图片不建议使用这种，我只是图个方便
-        // editor.config.uploadImgServer = '/upload'; // 上传图片到服务器
+        // editor.config.uploadImgShowBase64 = true; // 使用 base64 保存图片不建议使用这种，我只是图个方便
+        // editor.config.uploadImgServer = "http://47.113.88.23:9091/darts/uploadPictures"; // 上传图片到服务器
+        editor.config.customUploadImg = function a(resultFiles, insertImgFn) {
+          const fd = new FormData();
+          fd.append("image", resultFiles[0]);
+          vm.$axios({
+            method: "POST",
+            url: "/uploadPictures",
+            data: fd
+          }).then(res => {
+            if (res.data.code === 1000) {
+              insertImgFn(`http://adartstest.adarts-cn.com/${res.data.data.substring(2)}`);
+            } else {
+              vm.$message(res.data.msg);
+            }
+          });
+        };
+        editor.config.linkImgCallback = function a(src, alt, href) {
+          console.log(src, alt, href);
+          // const arr = url.split(",");
+          // const mime = arr[0].match(/:(.*?);/)[1];
+          // const encodeStr = atob(arr[1]);
+          // let n = encodeStr.length;
+          // const u8Arr = new Uint8Array(n);
+          // eslint-disable-next-line no-plusplus
+          // while (n--) {
+          // u8Arr[n] = encodeStr.charCodeAt(n);
+          // }
+          // this.infoVO.thumbnail = new Blob([u8Arr], { type: mime });
+          // url 即插入图片的地址
+        };
         editor.create();
         if (flag) {
           editor.txt.html(this.infoVO.contents);
