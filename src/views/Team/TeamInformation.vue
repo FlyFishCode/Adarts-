@@ -199,40 +199,34 @@
               </el-select>
             </el-col>
             <div class="table">
-              <el-table :data="entryHistoryList" border style="width: 100%">
-                <el-table-column prop="date" :label="$t('all.tip5')" min-width="7%">
+              <el-table :data="entryHistoryList" border>
+                <el-table-column prop="date" :label="$t('all.tip5')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueType === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="leagueName" :label="$t('all.tip1')" min-width="6%"> </el-table-column>
-                <el-table-column :label="$t('all.tip403')" min-width="10%">
+                <el-table-column prop="leagueName" :label="$t('all.tip1')" min-width="15%"> </el-table-column>
+                <el-table-column :label="$t('all.tip403')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueStartTime.split(" ")[0] }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column :label="$t('all.tip404')" min-width="10%">
+                <el-table-column :label="$t('all.tip404')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueEndTime.split(" ")[0] }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip25')" min-width="4%">
                   <template slot-scope="scope">
-                    <div v-if="scope.row.leagueStatus === 1">
-                      {{ $t("all.tip26") }}
-                    </div>
-                    <div v-if="scope.row.leagueStatus === 2">
-                      {{ $t("all.tip27") }}
-                    </div>
-                    <div v-if="scope.row.leagueStatus === 3">
-                      {{ $t("all.tip28") }}
-                    </div>
+                    <div v-if="scope.row.leagueStatus === 1">{{ $t("all.tip26") }}</div>
+                    <div v-if="scope.row.leagueStatus === 2">{{ $t("all.tip27") }}</div>
+                    <div v-if="scope.row.leagueStatus === 3">{{ $t("all.tip28") }}</div>
                   </template>
                 </el-table-column>
                 <el-table-column prop="teamName" :label="$t('all.tip405')" min-width="5%"> </el-table-column>
                 <el-table-column :label="$t('all.tip406')">
-                  <el-table-column prop="divisionName" :label="$t('all.tip52')" min-width="6%"> </el-table-column>
-                  <el-table-column prop="stageName" :label="$t('all.tip21')" min-width="6%"> </el-table-column>
+                  <el-table-column prop="divisionName" :label="$t('all.tip52')" min-width="5%"> </el-table-column>
+                  <el-table-column prop="stageName" :label="$t('all.tip21')" min-width="5%"> </el-table-column>
                 </el-table-column>
                 <el-table-column :label="$t('all.tip407')">
                   <el-table-column :label="$t('all.tip53')">
@@ -364,7 +358,7 @@
                 <el-table-column prop="leaguePPd" :sortable="true" :label="$t('all.tip155')" min-width="3%"></el-table-column>
                 <el-table-column prop="leagueMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"></el-table-column>
               </el-table-column>
-              <el-table-column :sortable="true" min-width="5%">
+              <el-table-column min-width="5%">
                 <template slot-scope="scope">
                   <div v-if="scope.row.isViceCaptain === 2">{{ $t("all.tip246") }}</div>
                   <div v-else>

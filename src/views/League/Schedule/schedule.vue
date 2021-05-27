@@ -7,12 +7,12 @@
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="scheduleVO.countryId" clearable :placeholder="$t('placeholder.select')" @change="change">
-            <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+            <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="scheduleVO.areaId" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+            <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -41,8 +41,8 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12" id="divBoxWidth">
-            <el-select v-model="scheduleVO.leagueType" clearable :placeholder="$t('placeholder.select')">
-              <el-option :value="0" :label="$t('all.tip0')"></el-option>
+            <el-select v-model="scheduleVO.leagueType" :placeholder="$t('placeholder.select')">
+              <el-option value="" :label="$t('all.tip0')"></el-option>
               <el-option :value="1" :label="$t('all.tip42')"></el-option>
               <el-option :value="2" :label="$t('all.tip43')"></el-option>
             </el-select>
@@ -127,12 +127,12 @@ export default {
         leagueType: "",
         agentUserId: "",
         operUserId: "",
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: "",
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1
       },
-      ContinentArr: [],
-      CountryArr: [],
+      countryList: [],
+      areaList: [],
       matchArr: [],
       competitionNameList: [],
       historyObj: []
@@ -140,28 +140,33 @@ export default {
   },
   mounted() {
     const userId = sessionStorage.getItem("LeagueUserId");
-    this.getOperationdata(userId);
-    this.getCretetionData(userId);
-    this.search();
-    this.getCounarr(userId);
-    this.getAllCompetitionName();
+    this.scheduleVO.userId = userId;
+    this.init(userId);
   },
   methods: {
-    getCounarr(userId) {
+    init(userId) {
+      this.getOperationdata(userId);
+      this.getCretetionData(userId);
+      this.getCountryList(userId);
+      this.getAllCompetitionName(userId);
+      this.search();
+    },
+    getCountryList(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
-        this.ContinentArr = res.data.data;
+        this.countryList = res.data.data;
       });
     },
     change(value) {
-      const vm = this;
-      this.$axios.post("/getareabycountryid", vm.$qs.stringify({ countryId: value })).then(res => {
-        vm.CountryArr = res.data.data;
+      this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
+        this.areaList = res.data.data;
       });
       this.scheduleVO.areaId = null;
     },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
-        this.competitionNameList = res.data.data;
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
+        if (res.data.code === 1000) {
+          this.competitionNameList = res.data.data;
+        }
       });
     },
     timeChange(value) {
@@ -181,19 +186,23 @@ export default {
     },
     search() {
       this.$axios.post("/getSchedule", this.scheduleVO).then(res => {
-        if (res.data.data) {
+        if (res.data.code === 1000) {
           this.matchArr = res.data.data;
         }
       });
     },
     getOperationdata(userId) {
       this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
-        this.operList = res.data.data.list;
+        if (res.data.code === 1000) {
+          this.operList = res.data.data.list;
+        }
       });
     },
     getCretetionData(userId) {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
-        this.creteList = res.data.data;
+        if (res.data.code === 1000) {
+          this.creteList = res.data.data;
+        }
       });
     },
     mgmt() {
@@ -249,7 +258,7 @@ export default {
               data.pageNum = obj.num;
               vm.historyObj.push(obj);
             }
-            data.pageSize = 7;
+            data.pageSize = 10;
             data.day = day.substr(8);
             if (flag) {
               data = Object.assign(vm.scheduleVO, data);

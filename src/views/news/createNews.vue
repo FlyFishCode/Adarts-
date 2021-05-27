@@ -185,30 +185,30 @@ export default {
           fd.append("image", resultFiles[0]);
           vm.$axios({
             method: "POST",
-            url: "/uploadPictures",
+            url: "/uploadAbsolutelyPictures",
             data: fd
           }).then(res => {
             if (res.data.code === 1000) {
-              insertImgFn(`http://adartstest.adarts-cn.com/${res.data.data.substring(2)}`);
+              insertImgFn(res.data.data);
             } else {
               vm.$message(res.data.msg);
             }
           });
         };
-        editor.config.linkImgCallback = function a(src, alt, href) {
-          console.log(src, alt, href);
-          // const arr = url.split(",");
-          // const mime = arr[0].match(/:(.*?);/)[1];
-          // const encodeStr = atob(arr[1]);
-          // let n = encodeStr.length;
-          // const u8Arr = new Uint8Array(n);
-          // eslint-disable-next-line no-plusplus
-          // while (n--) {
-          // u8Arr[n] = encodeStr.charCodeAt(n);
-          // }
-          // this.infoVO.thumbnail = new Blob([u8Arr], { type: mime });
-          // url 即插入图片的地址
-        };
+        // editor.config.linkImgCallback = function a(src, alt, href) {
+        // console.log(src, alt, href);
+        // const arr = url.split(",");
+        // const mime = arr[0].match(/:(.*?);/)[1];
+        // const encodeStr = atob(arr[1]);
+        // let n = encodeStr.length;
+        // const u8Arr = new Uint8Array(n);
+        // eslint-disable-next-line no-plusplus
+        // while (n--) {
+        // u8Arr[n] = encodeStr.charCodeAt(n);
+        // }
+        // this.infoVO.thumbnail = new Blob([u8Arr], { type: mime });
+        // url 即插入图片的地址
+        // };
         editor.create();
         if (flag) {
           editor.txt.html(this.infoVO.contents);

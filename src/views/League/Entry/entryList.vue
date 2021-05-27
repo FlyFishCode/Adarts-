@@ -83,12 +83,10 @@
         <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
       </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="4" class="buttonBox">
-        <el-button type="primary" size="mini" @click="agree">{{ $t("all.tip24") }}</el-button>
-        <el-button type="primary" size="mini" @click="reject">{{ $t("all.tip251") }}</el-button>
-        <el-button type="primary" size="mini" @click="addTeam">{{ $t("all.tip254") }}</el-button>
-      </el-col>
+    <el-row class="center-Row">
+      <el-button type="primary" size="mini" @click="agree">{{ $t("all.tip24") }}</el-button>
+      <el-button type="primary" size="mini" @click="reject">{{ $t("all.tip251") }}</el-button>
+      <el-button type="primary" size="mini" @click="addTeam">{{ $t("all.tip254") }}</el-button>
     </el-row>
     <div>
       <el-dialog :title="$t('all.tip254')" :visible.sync="dialogTableVisible" top="20px">
@@ -158,10 +156,8 @@
           >
           </el-pagination>
         </div>
-        <el-row style="display:flex;justify-content:center">
-          <el-col :span="2">
-            <el-button type="primary" size="mini" @click="add">{{ $t("all.tip132") }}</el-button>
-          </el-col>
+        <el-row style="display:flex;justify-content:center;margin:10px 0">
+          <el-button type="primary" size="mini" @click="add">{{ $t("all.tip132") }}</el-button>
         </el-row>
       </el-dialog>
     </div>
@@ -398,15 +394,15 @@ export default {
       });
     },
     add() {
-      // const vm = this;
       const teamIDS = returnType(this.multipleSelection, "teamId");
       this.$axios.post("/teamIntoCompetition", { teamIds: teamIDS, competitionId: this.EntryList.competitionId }).then(res => {
-        if (res.data.errorCode) {
+        if (res.data.code === 1000) {
+          this.search();
+          this.dialogTableVisible = false;
+        } else {
           this.$message(res.data.msg);
         }
-        this.search();
       });
-      this.dialogTableVisible = false;
     },
     TopboxSearch() {
       this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {

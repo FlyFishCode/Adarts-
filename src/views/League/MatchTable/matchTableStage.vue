@@ -235,19 +235,19 @@
                     <div class="tableLink" @click="showTopBox(scope.row)">{{ scope.row.homeTeamName }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="homeResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
-                  <template slot-scope="scope">
+                <el-table-column prop="homeResult" :sortable="true" :label="$t('all.tip229')" min-width="6%">
+                  <!-- <template slot-scope="scope">
                     <div v-if="scope.row.homeResult === 0">{{ $t("all.tip109") }}</div>
                     <div v-if="scope.row.homeResult === 1">{{ $t("all.tip107") }}</div>
-                  </template>
+                  </template> -->
                 </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip326')">
-                <el-table-column prop="visitingResult" :sortable="true" :label="$t('all.tip309')" min-width="6%">
-                  <template slot-scope="scope">
+                <el-table-column prop="visitingResult" :sortable="true" :label="$t('all.tip229')" min-width="6%">
+                  <!-- <template slot-scope="scope">
                     <div v-if="scope.row.visitingResult === 0">{{ $t("all.tip109") }}</div>
                     <div v-if="scope.row.visitingResult === 1">{{ $t("all.tip107") }}</div>
-                  </template>
+                  </template> -->
                 </el-table-column>
                 <el-table-column :sortable="true" :label="$t('all.tip324')" min-width="9%">
                   <template slot-scope="scope">

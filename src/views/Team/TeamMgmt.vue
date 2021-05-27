@@ -490,17 +490,19 @@ export default {
       });
     },
     save() {
-      const vm = this;
-      vm.Dialog.regDate = new Date(vm.Dialog.regDate);
-      this.$axios.post("/addTeam", vm.Dialog).then(res => {
-        this.$message(res.data.msg);
-        this.Dialog.teamName = "";
-        this.Dialog.captainId = "";
-        this.Dialog.shopId = "";
-        this.Dialog.regDate = "";
-        this.search();
+      this.Dialog.regDate = new Date(this.Dialog.regDate);
+      this.$axios.post("/addTeam", this.Dialog).then(res => {
+        if (res.data.code === 1000) {
+          this.Dialog.teamName = "";
+          this.Dialog.captainId = "";
+          this.Dialog.shopId = "";
+          this.Dialog.regDate = "";
+          this.dialogVisible = false;
+          this.search();
+        } else {
+          this.$message(res.data.msg);
+        }
       });
-      this.dialogVisible = false;
     },
     download() {},
     create() {

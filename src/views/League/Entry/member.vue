@@ -59,16 +59,16 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="homeShopName" sortable :label="$t('all.tip247')" min-width="8%"> </el-table-column>
+        <el-table-column prop="homeShopName" :label="$t('all.tip247')" min-width="8%"> </el-table-column>
         <el-table-column label="Adarts">
-          <el-table-column prop="adartsRating" sortable :label="$t('all.tip154')" min-width="6%"> </el-table-column>
-          <el-table-column prop="adartsPPd" sortable :label="$t('all.tip155')" min-width="5%"> </el-table-column>
-          <el-table-column prop="adartsMpr" sortable :label="$t('all.tip156')" min-width="5%"> </el-table-column>
+          <el-table-column prop="adartsRating" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
+          <el-table-column prop="adartsPPd" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
+          <el-table-column prop="adartsMpr" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
         <el-table-column :label="$t('all.tip1')">
-          <el-table-column prop="leagueRating" sortable :label="$t('all.tip154')" min-width="6%"> </el-table-column>
-          <el-table-column prop="leaguePPd" sortable :label="$t('all.tip155')" min-width="5%"> </el-table-column>
-          <el-table-column prop="leagueMpr" sortable :label="$t('all.tip156')" min-width="5%"> </el-table-column>
+          <el-table-column prop="leagueRating" :label="$t('all.tip154')" min-width="6%"> </el-table-column>
+          <el-table-column prop="leaguePPd" :label="$t('all.tip155')" min-width="5%"> </el-table-column>
+          <el-table-column prop="leagueMpr" :label="$t('all.tip156')" min-width="5%"> </el-table-column>
         </el-table-column>
         <el-table-column label="User Define">
           <el-table-column :label="$t('all.tip154')" min-width="8%">

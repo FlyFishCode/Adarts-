@@ -103,12 +103,6 @@
         <el-table-column prop="id" :label="$t('all.tip322')" min-width="8%"> </el-table-column>
         <el-table-column :label="$t('all.tip323')">
           <el-table-column prop="homeTeamName" :label="$t('all.tip324')" min-width="8%"> </el-table-column>
-          <el-table-column prop="homeResult" :label="$t('all.tip309')" min-width="5%">
-            <template slot-scope="scope">
-              <div v-if="scope.row.homeResult === 0">{{ $t("all.tip109") }}</div>
-              <div v-if="scope.row.homeResult === 1">{{ $t("all.tip107") }}</div>
-            </template>
-          </el-table-column>
           <el-table-column :label="$t('all.tip327')" min-width="5%">
             <template slot-scope="scope">
               <div v-if="scope.row.homeManageStatus === 0">{{ $t("all.tip329") }}</div>
@@ -116,19 +110,15 @@
               <div v-if="scope.row.homeManageStatus === 2">{{ $t("all.tip328") }}</div>
             </template>
           </el-table-column>
+          <el-table-column prop="homeResult" :label="$t('all.tip229')" min-width="5%"></el-table-column>
         </el-table-column>
         <el-table-column :label="$t('all.tip326')">
+          <el-table-column prop="visitingResult" :label="$t('all.tip229')" min-width="5%"></el-table-column>
           <el-table-column :label="$t('all.tip327')" min-width="5%">
             <template slot-scope="scope">
               <div v-if="scope.row.visitingManageStatus === 0">{{ $t("all.tip329") }}</div>
               <div v-if="scope.row.visitingManageStatus === 1">{{ $t("all.tip330") }}</div>
               <div v-if="scope.row.visitingManageStatus === 2">{{ $t("all.tip328") }}</div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="visitingResult" :label="$t('all.tip309')" min-width="5%">
-            <template slot-scope="scope">
-              <div v-if="scope.row.visitingResult === 0">{{ $t("all.tip109") }}</div>
-              <div v-if="scope.row.visitingResult === 1">{{ $t("all.tip107") }}</div>
             </template>
           </el-table-column>
           <el-table-column prop="visitingTeamName" :label="$t('all.tip324')" min-width="8%"> </el-table-column>
