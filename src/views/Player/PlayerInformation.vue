@@ -553,7 +553,9 @@ export default {
     getShopList() {
       const userId = sessionStorage.getItem("LeagueUserId");
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
-        this.shopList = res.data.data.list;
+        if (res.data.code === 1000) {
+          this.shopList = res.data.data.list;
+        }
       });
     },
     uploadImg(data) {

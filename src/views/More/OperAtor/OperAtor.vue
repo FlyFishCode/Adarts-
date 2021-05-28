@@ -93,7 +93,7 @@
         </el-col>
         <el-col :span="20" id="divBoxWidth">
           <el-select v-model="changeVo.agentId" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in creatorList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
+            <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -139,7 +139,7 @@
         </el-col>
         <el-col :span="20" id="divBoxWidth">
           <el-select v-model="creatorVo.agentId" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in creatorList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
+            <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -194,7 +194,6 @@ export default {
         operName: "",
         description: ""
       },
-      creatorList: [],
       tableData: []
     };
   },
@@ -218,9 +217,7 @@ export default {
       });
     },
     getCreatorList() {
-      const userId = sessionStorage.getItem("LeagueUserId");
-      this.$axios.post(`/operation/getcreatorlist?userId=${userId}`).then(res => {
-        this.creatorList = res.data.data;
+      this.$axios.post(`/operation/getagentlist?userId=${this.operatorVO.userId}`).then(res => {
         this.agentList = res.data.data;
       });
     },
@@ -282,17 +279,11 @@ export default {
     },
     currentChange(val) {
       this.operatorVO.pageNo = val;
-      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
-      });
+      this.search();
     },
     sizeChange(val) {
       this.operatorVO.pageSize = val;
-      this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
-      });
+      this.search();
     }
   }
 };

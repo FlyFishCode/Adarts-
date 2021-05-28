@@ -350,10 +350,10 @@
               {{ $t("all.tip7") }}
             </el-col>
             <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="datetime" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
             </el-col>
             <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip5") }}

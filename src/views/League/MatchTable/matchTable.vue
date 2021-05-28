@@ -42,11 +42,10 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12">
-            <el-date-picker v-model="MatchTableMgmtVO.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange">
-            </el-date-picker>
+            <el-date-picker v-model="MatchTableMgmtVO.competitionStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"> </el-date-picker>
           </el-col>
           <el-col :span="12">
-            <el-date-picker v-model="MatchTableMgmtVO.competitionEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
+            <el-date-picker v-model="MatchTableMgmtVO.competitionEndPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
             </el-date-picker>
           </el-col>
         </el-col>
@@ -61,21 +60,21 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip9") }}
-        </el-col>
-        <el-col :span="3">
-          <el-select v-model="MatchTableMgmtVO.operId" filterable clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
-          </el-select>
-        </el-col>
-      </el-row>
-      <el-row class="center-Row">
-        <el-col class="label-g" :span="3">
           {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="MatchTableMgmtVO.createId" filterable :default-first-option="true" clearable :placeholder="$t('placeholder.select')">
             <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-row class="center-Row">
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip9") }}
+        </el-col>
+        <el-col :span="3">
+          <el-select v-model="MatchTableMgmtVO.operId" filterable clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
+            <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">

@@ -42,13 +42,12 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionChange">
-            </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionChange"> </el-date-picker>
           </el-col>
           <el-col :span="12">
             <el-date-picker
               v-model="EntryMgmt.competitionEndPeriod"
-              type="datetime"
+              type="date"
               :placeholder="$t('placeholder.datePicker')"
               default-time="23:59:59"
               :picker-options="competitionOptions"
@@ -80,10 +79,10 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
           </el-col>
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
           </el-col>
         </el-col>
         <el-col class="label-g" :span="3">
