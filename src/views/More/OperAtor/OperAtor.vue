@@ -160,7 +160,7 @@
 
 <script>
 // @ is an alias to /src
-import md5 from "blueimp-md5";
+// import md5 from "blueimp-md5";
 
 export default {
   name: "Holiday",
@@ -245,7 +245,8 @@ export default {
       this.changeDiolog = true;
     },
     changeCreator() {
-      this.changeVo.operPassword = md5(`${this.changeVo.operPassword}kitekey`).toUpperCase();
+      // this.changeVo.operPassword = md5(`${this.changeVo.operPassword}kitekey`).toUpperCase();
+      this.changeVo.operPassword = this.changeVo.operPassword;
       this.$axios.post("/operation/updateoperationbyid", this.$qs.stringify(this.changeVo)).then(res => {
         this.$message(res.data.msg);
         this.changeVo.operAccount = "";
@@ -259,7 +260,8 @@ export default {
     },
     save() {
       this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
-      this.creatorVo.operPassword = md5(`${this.createPasswword}kitekey`).toUpperCase();
+      // this.creatorVo.operPassword = md5(`${this.createPasswword}kitekey`).toUpperCase();
+      this.creatorVo.operPassword = this.createPasswword;
       this.$axios.post("/operation/addoperation", this.creatorVo).then(res => {
         this.$message(res.data.msg);
         this.creatorVo.operAccount = "";

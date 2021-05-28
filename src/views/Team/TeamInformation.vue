@@ -488,7 +488,7 @@
           {{ $t("all.tip456") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="addMemberVO.playerId" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="addMemberVO.account" clearable :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip259") }}
@@ -599,7 +599,7 @@ export default {
       dialogVisible: false,
       addMemberTopBox: false,
       addMemberVO: {
-        playerId: "",
+        account: "",
         teamId: "",
         homeShopName: "",
         cardNumber: "",

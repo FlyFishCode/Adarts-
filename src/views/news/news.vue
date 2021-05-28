@@ -149,7 +149,6 @@ export default {
     };
   },
   mounted() {
-    this.search();
     this.getCountryList();
     // this.getOoperatorList();
   },
@@ -178,9 +177,10 @@ export default {
     },
     deleteNews(id) {
       this.$axios.post("/delleaguenewsbyid", this.$qs.stringify({ id })).then(res => {
-        if (res.data.msg) {
-          this.$message(res.data.msg);
+        if (res.data.code === 1000) {
           this.search();
+        } else {
+          this.$message(res.data.msg);
         }
       });
     },
@@ -230,8 +230,11 @@ export default {
     },
     getCountryList() {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.userId })).then(res => {
-        this.countryList = res.data.data;
-        this.infoVO.countryId = res.data.data[0].id;
+        if (res.data.data) {
+          this.countryList = res.data.data;
+          this.infoVO.countryId = res.data.data[0].id;
+          this.search();
+        }
       });
     },
     remoteMethod(value) {

@@ -510,6 +510,11 @@ export default {
       countryArr: [],
       operList: [],
       creteList: [],
+      leagueTotal: 0,
+      SearchPlayerPageTotal: 0,
+      SearchPlayerTableData: [],
+      SearchByCompetitionTableData: [],
+      competitionNameList: [],
       searchPlayer: {
         account: "",
         userName: "",
@@ -549,12 +554,7 @@ export default {
         homeShopId: "",
         homeShopName: "",
         regDate: ""
-      },
-      leagueTotal: 0,
-      SearchPlayerPageTotal: 0,
-      SearchPlayerTableData: [],
-      SearchByCompetitionTableData: [],
-      competitionNameList: []
+      }
     };
   },
   mounted() {
@@ -563,7 +563,7 @@ export default {
     this.getCounry(this.userId);
     this.PlayerSearch();
     this.competitionSearch();
-    this.getShopList();
+    this.getShopList(this.userId);
     this.getOperationdata(this.userId);
     this.getCretetionData(this.userId);
     this.getAllCompetitionName();
@@ -650,8 +650,7 @@ export default {
         }
       });
     },
-    getShopList() {
-      const userId = sessionStorage.getItem("LeagueUserId");
+    getShopList(userId) {
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });

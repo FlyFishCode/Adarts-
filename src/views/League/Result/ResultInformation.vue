@@ -71,21 +71,33 @@
                 <el-table-column prop="matchWin" :label="$t('all.tip107')" min-width="6%"></el-table-column>
                 <el-table-column prop="matchDrawn" :label="$t('all.tip108')" min-width="8%"></el-table-column>
                 <el-table-column prop="matchLose" :label="$t('all.tip109')" min-width="6%"></el-table-column>
-                <el-table-column prop="matchRatio" :label="$t('all.tip533')" min-width="6%"></el-table-column>
+                <el-table-column prop="matchRatio" :label="$t('all.tip533')" min-width="6%">
+                  <template slot-scope="scope">
+                    <div>{{ `${scope.row.matchRatio}%` }}</div>
+                  </template>
+                </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip53')">
                 <el-table-column prop="setTotal" :label="$t('all.tip34')" min-width="6%"></el-table-column>
                 <el-table-column prop="setWin" :label="$t('all.tip107')" min-width="6%"></el-table-column>
                 <el-table-column prop="setDrawn" :label="$t('all.tip108')" min-width="7%"></el-table-column>
                 <el-table-column prop="setLose" :label="$t('all.tip109')" min-width="6%"></el-table-column>
-                <el-table-column prop="setRatio" :label="$t('all.tip533')" min-width="6%"></el-table-column>
+                <el-table-column prop="setRatio" :label="$t('all.tip533')" min-width="6%">
+                  <template slot-scope="scope">
+                    <div>{{ `${scope.row.setRatio}%` }}</div>
+                  </template>
+                </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip54')">
                 <el-table-column prop="legTotal" :label="$t('all.tip34')" min-width="6%"></el-table-column>
                 <el-table-column prop="legWin" :label="$t('all.tip107')" min-width="6%"></el-table-column>
                 <el-table-column prop="legDrawn" :label="$t('all.tip108')" min-width="7%"></el-table-column>
                 <el-table-column prop="legLose" :label="$t('all.tip109')" min-width="6%"></el-table-column>
-                <el-table-column prop="legRatio" :label="$t('all.tip533')" min-width="6%"></el-table-column>
+                <el-table-column prop="legRatio" :label="$t('all.tip533')" min-width="6%">
+                  <template slot-scope="scope">
+                    <div>{{ `${scope.row.legRatio}%` }}</div>
+                  </template>
+                </el-table-column>
               </el-table-column>
               <el-table-column prop="setPoint" :label="$t('all.tip73')" min-width="9%"></el-table-column>
               <el-table-column prop="winningPoint" :label="$t('all.tip72')" min-width="9%"></el-table-column>

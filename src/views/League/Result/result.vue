@@ -21,8 +21,8 @@
         <el-col :span="3">
           <el-select v-model="ResultMgmtVO.status" :placeholder="$t('placeholder.select')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
-            <el-option :value="1" :label="$t('all.tip27')"></el-option>
-            <el-option :value="2" :label="$t('all.tip26')"></el-option>
+            <el-option :value="1" :label="$t('all.tip26')"></el-option>
+            <el-option :value="2" :label="$t('all.tip27')"></el-option>
             <el-option :value="3" :label="$t('all.tip28')"></el-option>
           </el-select>
         </el-col>

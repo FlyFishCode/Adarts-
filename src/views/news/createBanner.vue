@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="search">
-      <el-row>
+      <el-row class="center-Row">
         <el-col class="label-g" :span="3">
           {{ $t("all.tip17") }}
         </el-col>
@@ -28,7 +28,7 @@
           </el-select>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row class="center-Row">
         <el-col class="label-g" :span="3">
           {{ $t("all.tip612") }}
         </el-col>
@@ -54,7 +54,7 @@
           </el-select>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row class="center-Row">
         <el-col class="label-g" :span="3">
           {{ $t("all.tip615") }}
         </el-col>
