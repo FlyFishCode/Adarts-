@@ -32,14 +32,11 @@
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip7") }}</el-col>
-        <el-col :span="6">
-          <el-col :span="12">
-            <el-date-picker v-model="LeagueMgmtVO.competitionStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"></el-date-picker>
-          </el-col>
-          <el-col :span="12">
-            <el-date-picker v-model="LeagueMgmtVO.competitionEndPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions">
-            </el-date-picker>
-          </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="LeagueMgmtVO.competitionStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange"></el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="LeagueMgmtVO.competitionEndPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="pickerOptions"> </el-date-picker>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip5") }}</el-col>
         <el-col :span="3" id="divBoxWidth">

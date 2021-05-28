@@ -53,7 +53,7 @@
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="scheduleVO.agentUserId" clearable :placeholder="$t('placeholder.select')">
-            <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
+            <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -114,7 +114,7 @@ export default {
     return {
       time: "",
       value: new Date(),
-      creteList: [],
+      agentList: [],
       operList: [],
       day: "",
       lastTime: null,
@@ -199,9 +199,9 @@ export default {
       });
     },
     getCretetionData(userId) {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
+      this.$axios.post("/operation/getagentlist", this.$qs.stringify({ userId })).then(res => {
         if (res.data.code === 1000) {
-          this.creteList = res.data.data;
+          this.agentList = res.data.data;
         }
       });
     },

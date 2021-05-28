@@ -5,7 +5,7 @@
       <el-input :placeholder="$t('placeholder.user')" v-model="user.account" class="input" :clearable="clear">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
-      <el-input :placeholder="$t('placeholder.password')" v-model="user.password" type="password" class="input" :clearable="clear">
+      <el-input :placeholder="$t('placeholder.password')" v-model="user.password" @keyup.enter.native="login" type="password" class="input" :clearable="clear">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
       <div v-if="showTips" class="tips">
@@ -13,7 +13,7 @@
         <i class="el-icon-warning"></i>
         <span>{{ tipsText }}</span>
       </div>
-      <el-row class="LoginButton" ref="button" @keyup.enter="login">
+      <el-row class="LoginButton" ref="button">
         <el-button type="primary" size="mini" @click="login">{{ $t("message.login") }}</el-button>
       </el-row>
     </div>
@@ -40,11 +40,11 @@ export default {
   },
   // created() {
   //   const vm = this;
-  //   document.addEventListener('keydown', vm.login);
+  //   document.addEventListener("keydown", vm.login, false);
   // },
   // destroyed() {
   //   const vm = this;
-  //   document.removeEventListener('keydown', vm.login);
+  //   document.removeEventListener("keydown", vm.login);
   // },
   methods: {
     login() {

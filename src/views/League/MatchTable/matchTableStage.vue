@@ -28,8 +28,8 @@
         <el-col :span="4">
           <el-select v-model="Stage.MatchTableOption.matchTable" :disabled="hasData" :placeholder="$t('placeholder.select')">
             <el-option :value="1" :label="$t('all.tip277')"></el-option>
-            <el-option :value="2" :label="$t('all.tip449')"></el-option>
-            <el-option :value="3" :label="$t('all.tip490')"></el-option>
+            <!-- <el-option :value="2" :label="$t('all.tip449')"></el-option> -->
+            <!-- <el-option :value="3" :label="$t('all.tip490')"></el-option> -->
           </el-select>
         </el-col>
         <el-col :span="4">
@@ -452,7 +452,8 @@
                 <template slot-scope="scope">
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
-                      <img src="../../../assets/team.jpg" alt />
+                      <img v-if="scope.row.homeImg" :src="scope.row.homeImg" alt />
+                      <img v-else src="../../../assets/team.jpg" />
                     </div>
                     <div>{{ scope.row.teamName }}</div>
                   </div>
@@ -525,7 +526,8 @@
                 <template slot-scope="scope">
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
-                      <img src="../../../assets/team.jpg" alt />
+                      <img v-if="scope.row.awayImg" :src="scope.row.awayImg" alt />
+                      <img v-else src="../../../assets/team.jpg" />
                     </div>
                     <div>{{ scope.row.awayName }}</div>
                   </div>
@@ -554,7 +556,8 @@
               <template slot-scope="scope">
                 <div v-if="scope.row.photo">
                   <div class="formImgBox">
-                    <img src="../../../assets/team.jpg" alt />
+                    <img v-if="scope.row.homeImg" :src="scope.row.homeImg" alt />
+                    <img v-else src="../../../assets/team.jpg" />
                   </div>
                   <div>{{ scope.row.teamName }}</div>
                 </div>
@@ -627,7 +630,8 @@
               <template slot-scope="scope">
                 <div v-if="scope.row.photo">
                   <div class="formImgBox">
-                    <img src="../../../assets/team.jpg" alt />
+                    <img v-if="scope.row.awayImg" :src="scope.row.awayImg" alt />
+                    <img v-else src="../../../assets/team.jpg" />
                   </div>
                   <div>{{ scope.row.awayName }}</div>
                 </div>
@@ -1528,6 +1532,8 @@ export default {
                 obj.awaylist = [res.data.data[1].setPoint, res.data.data[1].winningPoint, res.data.data[1].penaltyPoint];
                 obj.teamName = res.data.data[0].teamName;
                 obj.awayName = res.data.data[1].teamName;
+                obj.homeImg = res.data.data[0].teamImgUrl;
+                obj.awayImg = res.data.data[1].teamImgUrl;
                 vm.matchTableTime = res.data.data[0].gameDate;
                 break;
               case 1:

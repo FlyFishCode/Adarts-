@@ -42,10 +42,12 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12" id="divBoxWidth">
-            <el-date-picker v-model="judgementVO.StartTime" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+            <el-date-picker v-model="judgementVO.competitionStartPeriod" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable>
+            </el-date-picker>
           </el-col>
           <el-col :span="12" id="divBoxWidth">
-            <el-date-picker v-model="judgementVO.EndTime" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+            <el-date-picker v-model="judgementVO.competitionEndPeriod" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
+            </el-date-picker>
           </el-col>
         </el-col>
 
@@ -162,7 +164,7 @@ export default {
       userId: "",
       pickerOptions: {
         disabledDate(time) {
-          const date1 = new Date(vm.judgementVO.StartTime);
+          const date1 = new Date(vm.judgementVO.competitionStartPeriod);
           return time.getTime() < date1;
         }
       },
@@ -178,8 +180,8 @@ export default {
         name: "",
         operatorId: "",
         creatorId: "",
-        StartTime: "",
-        EndTime: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
         userId: sessionStorage.getItem("LeagueUserId"),
         pageNum: 1,
         pageSize: 10
@@ -191,15 +193,21 @@ export default {
   },
   mounted() {
     this.userId = sessionStorage.getItem("LeagueUserId");
-    this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: this.userId })).then(res => {
-      this.ContinentArr = res.data.data;
-    });
-    this.getOperationdata(this.userId);
-    this.getCretetionData(this.userId);
-    this.search();
-    this.getAllCompetitionName();
+    this.init(this.userId);
   },
   methods: {
+    init(userId) {
+      this.getCountry(userId);
+      this.getAllCompetitionName(userId);
+      this.getOperationdata(userId);
+      this.getCretetionData(userId);
+      this.search();
+    },
+    getCountry(userId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
+        this.ContinentArr = res.data.data;
+      });
+    },
     search() {
       this.$axios.post("/matchTable/getMatchTableCompetitionList", this.judgementVO).then(res => {
         if (res.data.data) {
@@ -208,22 +216,22 @@ export default {
         }
       });
     },
-    currentChange(value) {
-      this.judgementVO.pageNum = value;
-      this.search();
-    },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
-        this.competitionNameList = res.data.data;
-      });
-    },
     sizeChange(value) {
       this.judgementVO.pageSize = value;
       this.search();
     },
+    currentChange(value) {
+      this.judgementVO.pageNum = value;
+      this.search();
+    },
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
+        this.competitionNameList = res.data.data;
+      });
+    },
     dateChange(data) {
-      if (this.judgementVO.EndTime && this.judgementVO.EndTime < data) {
-        this.judgementVO.EndTime = "";
+      if (this.judgementVO.competitionEndPeriod && this.judgementVO.competitionEndPeriod < data) {
+        this.judgementVO.competitionEndPeriod = "";
       }
     },
     AreaChange(value) {
