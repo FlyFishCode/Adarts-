@@ -226,6 +226,9 @@ export default {
     save() {
       if (this.infoVO.thumbnail) {
         this.$axios.post("/addleaguenews", this.infoVO).then(res => {
+          if (res.data.code === 1000) {
+            this.infoVO.id = res.data.data;
+          }
           this.$message(res.data.msg);
         });
       } else {

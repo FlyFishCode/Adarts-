@@ -166,7 +166,7 @@ export default {
     },
     search() {
       this.$axios.post("/getLeagueNewsList", this.infoVO).then(res => {
-        if (res.data.data) {
+        if (res.data.code === 1000) {
           res.data.data.list.forEach(i => {
             // eslint-disable-next-line no-param-reassign
             i.display = Boolean(i.display);
