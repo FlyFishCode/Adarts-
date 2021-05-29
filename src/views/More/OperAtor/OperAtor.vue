@@ -199,6 +199,7 @@ export default {
   },
   mounted() {
     this.operatorVO.userId = sessionStorage.getItem("LeagueUserId");
+    this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
     this.search();
     this.getCreatorList();
   },
@@ -256,25 +257,30 @@ export default {
       this.changeDiolog = false;
     },
     save() {
-      this.creatorVo.createId = sessionStorage.getItem("LeagueUserId");
       // this.creatorVo.operPassword = md5(`${this.createPasswword}kitekey`).toUpperCase();
       this.creatorVo.operPassword = this.createPasswword;
       this.$axios.post("/operation/addoperation", this.creatorVo).then(res => {
+        if (res.data.code === 1000) {
+          this.creatorVo.operAccount = "";
+          this.creatorVo.operPassword = "";
+          this.creatorVo.agentId = "";
+          this.creatorVo.operName = "";
+          this.creatorVo.description = "";
+          this.createPasswword = "";
+          this.CreatDialog = false;
+          this.search();
+        }
         this.$message(res.data.msg);
-        this.creatorVo.operAccount = "";
-        this.creatorVo.operPassword = "";
-        this.creatorVo.agentId = "";
-        this.creatorVo.operName = "";
-        this.creatorVo.description = "";
-        this.createPasswword = "";
-        this.search();
       });
-      this.CreatDialog = false;
     },
     search() {
       this.$axios.post("/operation/getoperationlist", this.$qs.stringify(this.operatorVO)).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
+        if (res.data.code === 1000) {
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     currentChange(val) {

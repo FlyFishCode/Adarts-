@@ -456,7 +456,7 @@ export default {
       const currentUserId = sessionStorage.getItem("LeagueUserId");
       if (currentUserId) {
         const data = {
-          competition: { id: this.$route.query.id },
+          competition: { id: sessionStorage.getItem("competitionId") },
           isHaveComp: 1,
           userId: currentUserId,
           name: this.template.name,
