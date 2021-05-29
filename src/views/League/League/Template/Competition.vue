@@ -955,7 +955,7 @@ export default {
         },
         competitionOption: {
           approveEntry: 1,
-          cardType: 1,
+          cardType: 0,
           ratingType: 1,
           cdateInt: "",
           entryFee: 1,

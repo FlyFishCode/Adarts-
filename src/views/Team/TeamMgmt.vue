@@ -99,7 +99,8 @@
                 <div class="tableLink" @click="detali(scope.row.teamId)">{{ scope.row.teamName + "(" + scope.row.players + ")" }}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="captainName" :sortable="true" :label="$t('all.tip246')" min-width="5%"> </el-table-column>
+            <el-table-column prop="captainAccount" :label="$t('all.tip632')" min-width="5%"></el-table-column>
+            <el-table-column prop="captainName" :label="$t('all.tip246')" min-width="5%"> </el-table-column>
             <el-table-column :sortable="true" :label="$t('all.tip247')" min-width="5%">
               <template slot-scope="scope">
                 <div>{{ `${scope.row.homeShopName}[${scope.row.machineCount}]` }}</div>
@@ -292,7 +293,7 @@
           <el-input v-model="Dialog.teamName" clearable maxlength="20" show-word-limit :placeholder="$t('placeholder.input')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
-          {{ $t("all.tip246") }}
+          {{ $t("all.tip632") }}
         </el-col>
         <el-col :span="8" id="divBoxWidth">
           <el-select v-model="Dialog.captainId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">

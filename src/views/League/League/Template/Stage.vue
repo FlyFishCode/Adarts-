@@ -472,7 +472,7 @@ export default {
         timming: 60,
         credits: 1,
         parityPlay: 2,
-        choice: 2
+        choice: 1
       },
       idDisabled: true,
       oldValue: {},

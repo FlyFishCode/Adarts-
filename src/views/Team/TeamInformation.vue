@@ -828,12 +828,6 @@ export default {
         }
       });
     },
-    getScheduleResultList() {
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
-      });
-    },
     entryHistoryCurrentChange(value) {
       this.entryHistoryVO.pageNum = value;
       this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
@@ -880,18 +874,6 @@ export default {
         this.addMemberList = res.data.data.list;
       });
     },
-    scheduleResultListCurrentChange(val) {
-      this.scheduleResultVO.pageNum = val;
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-      });
-    },
-    scheduleResultListSizeChange(val) {
-      this.scheduleResultVO.pageSize = val;
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-      });
-    },
     getPlayerList() {
       this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
         this.playerList = res.data.data.list;
@@ -911,30 +893,35 @@ export default {
         this.playerListTotal = res.data.data.total;
       });
     },
-    leagueTypeChange(value) {
-      this.scheduleResultVO.leagueType = value;
+    getScheduleResultList() {
       this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
         this.scheduleResultList = res.data.data.list;
         this.scheduleResultTotal = res.data.data.total;
       });
     },
+    scheduleResultListCurrentChange(val) {
+      this.scheduleResultVO.pageNum = val;
+      this.getScheduleResultList();
+    },
+    scheduleResultListSizeChange(val) {
+      this.scheduleResultVO.pageSize = val;
+      this.getScheduleResultList();
+    },
+    leagueTypeChange(value) {
+      this.scheduleResultVO.leagueType = value;
+      this.getScheduleResultList();
+    },
     scheduleResultYearChange(value) {
       this.scheduleResultVO.year = value;
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-      });
+      this.getScheduleResultList();
     },
     competitionIdChange(value) {
       this.scheduleResultVO.competitionId = value;
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-      });
+      this.getScheduleResultList();
     },
     matchStatusChange(value) {
       this.scheduleResultVO.matchStatus = value;
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-      });
+      this.getScheduleResultList();
     },
     getCompetitionList(id) {
       this.$axios.post(`/getTeamCompetitionList?teamId=${id}`).then(res => {
