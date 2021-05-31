@@ -852,20 +852,7 @@ export default {
       showShopListTotal: 0,
       operatorSelectionList: [],
       removeList: [],
-      setFirstList: [
-        {
-          value: 1,
-          label: "all.tip323"
-        },
-        {
-          value: 2,
-          label: "all.tip112"
-        },
-        {
-          value: 3,
-          label: "all.tip113"
-        }
-      ],
+      setFirstList: [{ value: 1, label: "all.tip323" }, { value: 2, label: "all.tip112" }, { value: 3, label: "all.tip113" }, { value: 4, label: "all.tip517" }, { value: 5, label: "all.tip518" }],
       operatorTotal: 1,
       searchOperator: {
         userId: "",
@@ -1050,9 +1037,9 @@ export default {
       this.searchOperator.userId = userId;
       this.AddCompetitionRequest.competition.userId = userId;
       this.Shop.userId = userId;
-      if (query.type !== "1") {
-        this.setFirstList.push({ value: 4, label: "all.tip517" });
-        this.setFirstList.push({ value: 5, label: "all.tip518" });
+      if (Number(query.type) === 2) {
+        this.AddCompetitionRequest.competitionBasicOption.setFirst = 4;
+        this.setFirstList = [{ value: 4, label: "all.tip517" }, { value: 5, label: "all.tip518" }];
       }
       this.AddCompetitionRequest.competition.type = query.type;
       // 获取保存的阶段数据

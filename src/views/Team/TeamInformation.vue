@@ -282,31 +282,23 @@
           </el-row>
           <div class="table">
             <el-table :data="scheduleResultList" border style="width: 100%">
-              <el-table-column :label="$t('all.tip321')" min-width="10%">
-                <template slot-scope="scope">
-                  <div>{{ scope.row.confrontationDate.split(" ")[0] }}</div>
-                </template>
-              </el-table-column>
-              <el-table-column :label="$t('all.tip409')" min-width="10%">
-                <template slot-scope="scope">
-                  <div>{{ scope.row.confrontationDate.split(" ")[1] }}</div>
-                </template>
-              </el-table-column>
+              <el-table-column prop="date" :label="$t('all.tip321')" min-width="10%"></el-table-column>
+              <el-table-column prop="time" :label="$t('all.tip409')" min-width="10%"></el-table-column>
               <el-table-column prop="homeTeamName" :label="$t('all.tip323')" min-width="10%"></el-table-column>
-              <el-table-column prop="matchState" :label="$t('all.tip410')" min-width="10%">
+              <el-table-column prop="matchStatus" :label="$t('all.tip410')" min-width="10%">
                 <template slot-scope="scope">
-                  <div v-if="scope.row.matchState === 1">
+                  <div v-if="scope.row.matchStatus === 1">
                     {{ $t("all.tip289") }}
                   </div>
-                  <div v-if="scope.row.matchState === 2">
+                  <div v-if="scope.row.matchStatus === 2">
                     {{ $t("all.tip288") }}
                   </div>
-                  <div v-if="scope.row.matchState === 3">
-                    {{ scope.row.matchResult }}
+                  <div v-if="scope.row.matchStatus === 3">
+                    {{ `${scope.row.homeResult} / ${scope.row.visitingResult}` }}
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="visitTeamName" :label="$t('all.tip326')" min-width="10%"></el-table-column>
+              <el-table-column prop="visitingTeamName" :label="$t('all.tip326')" min-width="10%"></el-table-column>
             </el-table>
             <div class="page">
               <el-pagination
@@ -894,9 +886,11 @@ export default {
       });
     },
     getScheduleResultList() {
-      this.$axios.post("/getTeamSchedule", this.scheduleResultVO).then(res => {
-        this.scheduleResultList = res.data.data.list;
-        this.scheduleResultTotal = res.data.data.total;
+      this.$axios.post("/teamConfrontation", this.scheduleResultVO).then(res => {
+        if (res.data.code === 1000) {
+          this.scheduleResultList = res.data.data.list;
+          this.scheduleResultTotal = res.data.data.total;
+        }
       });
     },
     scheduleResultListCurrentChange(val) {

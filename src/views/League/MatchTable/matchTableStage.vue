@@ -1116,6 +1116,7 @@ export default {
       const LegAllSelect = [];
       const AllSetObj = [];
       const CurrentLegPlayerList = [];
+      const allPlayerModeList = [];
       const LegObj = {};
       const vm = this;
       let obj = "homePlayerId";
@@ -1235,15 +1236,32 @@ export default {
         }
         // 参加模式的最大数校验，玩家参加同一SET算一次
         if (vm.lineUpTopBoxTableList[currentSetIndex].entryType === 1) {
-          let currentList = [];
+          let flag = false;
+          const tempObj = {};
           for (let i = 0; i < AllSetObj.length; i += 1) {
             if (AllSetObj[i][obj]) {
-              currentList = AllSetObj.filter(j => AllSetObj[i][obj] === j[obj] && AllSetObj[i].mode === j.mode && AllSetObj[i].setId !== j.setId);
-              if (currentList.length > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum - 1) {
-                this.$message(this.$t("all.tip582") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
-                vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
-                break;
+              const temp = {
+                setId: AllSetObj[i].setId,
+                modeType: AllSetObj[i].mode
+              };
+              flag = allPlayerModeList.every(e => e.setId !== AllSetObj[i].setId);
+              if (flag) {
+                allPlayerModeList.push(temp);
               }
+            }
+          }
+          allPlayerModeList.forEach(i => {
+            if (tempObj[i.modeType]) {
+              tempObj[i.modeType] += 1;
+            } else {
+              tempObj[i.modeType] = 1;
+            }
+          });
+          for (const value of Object.values(tempObj)) {
+            if (value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
+              this.$message(this.$t("all.tip582") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
+              vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
+              break;
             }
           }
         }

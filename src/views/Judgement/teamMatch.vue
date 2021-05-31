@@ -112,8 +112,8 @@
     <div class="table">
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="date" :label="$t('all.tip321')" min-width="10%"></el-table-column>
-        <el-table-column prop="setNumber" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
-        <el-table-column prop="legId" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
+        <el-table-column prop="setNum" :label="$t('all.tip53')" min-width="7%"> </el-table-column>
+        <el-table-column prop="legNum" :label="$t('all.tip54')" min-width="7%"> </el-table-column>
         <el-table-column :label="$t('all.tip226')" min-width="6%">
           <template slot-scope="scope">
             <div v-if="scope.row.gameMode === 1">

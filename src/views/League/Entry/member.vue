@@ -254,10 +254,10 @@ export default {
     this.TopBox.competitionTeamId = this.MemberVO.competitionTeamId;
     this.playerListVO.competitionId = this.MemberVO.competitionId;
     this.playerListVO.competitionTeamId = this.MemberVO.competitionTeamId;
-    this.init();
+    this.getPlayerList();
   },
   methods: {
-    init() {
+    getPlayerList() {
       const vm = this;
       this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
         vm.tableTotal = res.data.data.total;
@@ -265,6 +265,12 @@ export default {
           i.cardList.forEach((j, index) => {
             if (j.isEntryCard) {
               Object.assign(j, { selectValue: index });
+              // eslint-disable-next-line no-param-reassign
+              i.leagueMpr = j.leagueMpr;
+              // eslint-disable-next-line no-param-reassign
+              i.leaguePPd = j.leaguePPd;
+              // eslint-disable-next-line no-param-reassign
+              i.leagueRating = j.leagueRating;
             } else {
               Object.assign(j, { selectValue: "" });
             }
@@ -274,36 +280,12 @@ export default {
       });
     },
     sizeChange(value) {
-      const vm = this;
       this.playerListVO.pageSize = value;
-      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
-        res.data.data.list.forEach(i => {
-          i.cardList.forEach((j, index) => {
-            if (j.isEntryCard) {
-              Object.assign(j, { selectValue: index });
-            } else {
-              Object.assign(j, { selectValue: "" });
-            }
-          });
-        });
-        vm.tableData = res.data.data.list;
-      });
+      this.getPlayerList();
     },
     currentChange(value) {
-      const vm = this;
       this.playerListVO.pageNum = value;
-      this.$axios.post("/getCompPlayerTeamList", this.$qs.stringify(this.playerListVO)).then(res => {
-        res.data.data.list.forEach(i => {
-          i.cardList.forEach((j, index) => {
-            if (j.isEntryCard) {
-              Object.assign(j, { selectValue: index });
-            } else {
-              Object.assign(j, { selectValue: "" });
-            }
-          });
-        });
-        vm.tableData = res.data.data.list;
-      });
+      this.getPlayerList();
     },
     topBoxSearch() {
       const vm = this;
@@ -318,12 +300,13 @@ export default {
       this.dialogTableVisible = true;
     },
     save(row) {
+      const cardId = row.cardList.find(i => typeof i.selectValue === "number").selectValue;
       const obj = {
         competitionPlayerId: row.competitionPlayerId,
         defineRating: row.defineRating,
         definePpd: row.definePpd,
         defineMpr: row.defineMpr,
-        userCardId: row.cardList[row.cardList[0].selectValue].cardId
+        userCardId: row.cardList[cardId].cardId
       };
       this.$axios.post("/updateDefineRating", [obj]).then(res => {
         this.$message(res.data.msg);
@@ -507,7 +490,7 @@ export default {
         playerIdList: [...this.multipleSelection.map(i => i.userId)]
       };
       this.$axios.post("/compPlayerIntoTeam", data).then(() => {
-        this.init();
+        this.getPlayerList();
       });
       this.dialogTableVisible = false;
     },
@@ -515,7 +498,7 @@ export default {
       const vm = this;
       this.$axios.get(`/compTeamRemovePlayer?competitionPlayerId=${id}`).then(res => {
         if (res.data) {
-          vm.init();
+          vm.getPlayerList();
         }
       });
     },
