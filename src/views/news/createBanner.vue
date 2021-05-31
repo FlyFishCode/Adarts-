@@ -86,8 +86,8 @@
         <div class="label-g">{{ $t("all.tip498") }}</div>
         <div>{{ `1：${$t("all.tip3872")}` }}</div>
         <div>{{ `2：${$t("all.tip3873")}` }}</div>
-        <div>{{ `3：(${$t("all.tip610")})${$t("all.tip621")} 1000px X 250px` }}</div>
-        <div>{{ `4：(${$t("all.tip611")})${$t("all.tip621")} 330px X 250px` }}</div>
+        <div>{{ `3：(${$t("all.tip610")})${$t("all.tip621")} 1000px X 300px` }}</div>
+        <div>{{ `4：(${$t("all.tip611")})${$t("all.tip621")} 330px X 300px` }}</div>
       </el-col>
       <el-col :span="18">
         <el-upload
@@ -170,9 +170,10 @@ export default {
       }
       if (this.infoVO.image) {
         this.$axios.post("/operationbanner", this.infoVO).then(res => {
-          if (res.data.msg) {
-            this.$message(res.data.msg);
+          if (res.data.code === 1000) {
+            this.infoVO.id = res.data.data;
           }
+          this.$message(res.data.msg);
         });
       } else {
         this.$refs.upload.submit();

@@ -101,7 +101,7 @@
             </el-table-column>
             <el-table-column prop="captainAccount" :label="$t('all.tip632')" min-width="5%"></el-table-column>
             <el-table-column prop="captainName" :label="$t('all.tip246')" min-width="5%"> </el-table-column>
-            <el-table-column :sortable="true" :label="$t('all.tip247')" min-width="5%">
+            <el-table-column :label="$t('all.tip247')" min-width="5%">
               <template slot-scope="scope">
                 <div>{{ `${scope.row.homeShopName}[${scope.row.machineCount}]` }}</div>
               </template>
