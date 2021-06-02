@@ -1237,33 +1237,39 @@ export default {
         // 参加模式的最大数校验，玩家参加同一SET算一次
         if (vm.lineUpTopBoxTableList[currentSetIndex].entryType === 1) {
           let flag = false;
-          const tempObj = {};
+          const finalList = [];
           for (let i = 0; i < AllSetObj.length; i += 1) {
             if (AllSetObj[i][obj]) {
               const temp = {
                 setId: AllSetObj[i].setId,
-                modeType: AllSetObj[i].mode
+                modeType: AllSetObj[i].mode,
+                playerId: AllSetObj[i][obj]
               };
-              flag = allPlayerModeList.every(e => e.setId !== AllSetObj[i].setId);
+              flag = allPlayerModeList.every(e => e.setId !== AllSetObj[i].setId || e.playerId !== AllSetObj[i][obj]);
               if (flag) {
                 allPlayerModeList.push(temp);
               }
             }
           }
           allPlayerModeList.forEach(i => {
-            if (tempObj[i.modeType]) {
-              tempObj[i.modeType] += 1;
+            const tempObj = {
+              modeType: i.modeType,
+              playerId: i.playerId,
+              count: 1
+            };
+            if (finalList.length && finalList.find(f => i.playerId === f.playerId && i.modeType === f.modeType)) {
+              finalList.find(f => i.playerId === f.playerId && i.modeType === f.modeType).count += 1;
             } else {
-              tempObj[i.modeType] = 1;
+              finalList.push(tempObj);
             }
           });
-          for (const value of Object.values(tempObj)) {
-            if (value > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
+          finalList.forEach(i => {
+            if (i.count > vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum) {
               this.$message(this.$t("all.tip582") + vm.lineUpTopBoxTableList[currentSetIndex].entryTypeNum);
               vm.lineUpTopBoxTableList[currentSetIndex].legGameList[LegIndex].playerList[PlayerIndex][obj] = "";
-              break;
+              console.log(finalList);
             }
-          }
+          });
         }
       }
       // 当前set人员不可以和上一set人员相同校验
