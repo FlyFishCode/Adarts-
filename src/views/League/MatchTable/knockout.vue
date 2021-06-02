@@ -2,7 +2,7 @@
   <div class="content">
     <el-row class="search">
       <el-row class="center-Row">
-        <el-col class="label-g" :span="3">{{ $t("all.tip3") }}</el-col>
+        <el-col class="label-g" :span="3">{{ $t("all.tip1") }}</el-col>
         <el-col :span="21" class="overFlowStyle">{{ competition }}</el-col>
       </el-row>
     </el-row>
@@ -13,20 +13,20 @@
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip270") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip449')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="2">{{ $t("all.tip226") }}</el-col>
         <el-col :span="2">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip541") }}</el-col>
         <el-col :span="2">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip107") }}</el-col>
       </el-row>
@@ -43,55 +43,55 @@
         <el-col class="label-g" :span="3">{{ $t("all.tip566") }}</el-col>
         <el-col class="label-g" :span="2">{{ $t("all.tip51") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip484')"></el-option>
             <el-option value="2" :label="$t('all.tip485')"></el-option>
-            <el-option value="3" :label="$t('all.tip486')"></el-option>
+            <el-option value="3" :label="$t('all.ti102')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">{{ $t("all.tip52") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip484')"></el-option>
             <el-option value="2" :label="$t('all.tip485')"></el-option>
-            <el-option value="3" :label="$t('all.tip486')"></el-option>
+            <el-option value="3" :label="$t('all.ti102')"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">{{ $t("all.tip21") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip484')"></el-option>
             <el-option value="2" :label="$t('all.tip485')"></el-option>
-            <el-option value="3" :label="$t('all.tip486')"></el-option>
+            <el-option value="3" :label="$t('all.ti102')"></el-option>
           </el-select>
         </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip278") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip484')"></el-option>
             <el-option value="2" :label="$t('all.tip485')"></el-option>
-            <el-option value="3" :label="$t('all.tip486')"></el-option>
+            <el-option value="3" :label="$t('all.ti102')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip279") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.type" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.type" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip519')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip281") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.DayType" :placeholder="$t('placeholder.select')" @change="DayTypeChange">
+          <el-select v-model="knockoutVO.DayType" :placeholder="$t('all.tip516')" @change="DayTypeChange">
             <el-option :value="1" :label="$t('all.tip487')"></el-option>
             <el-option :value="2" :label="$t('all.tip488')"></el-option>
             <el-option :value="3" :label="$t('all.tip0')"></el-option>
@@ -99,7 +99,7 @@
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip282") }}</el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="knockoutVO.Agent" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.Agent" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip87')"></el-option>
             <el-option value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -133,19 +133,19 @@
         <el-col class="label-g" :span="2">{{ $t("all.tip284") }}</el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip285") }}</el-col>
         <el-col :span="2">
-          <el-select v-model="knockoutVO.hour" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.hour" :placeholder="$t('all.tip516')">
             <el-option v-for="item in HourArr" :key="item.index" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip286") }}</el-col>
         <el-col :span="2">
-          <el-select v-model="knockoutVO.minute" :placeholder="$t('placeholder.select')">
+          <el-select v-model="knockoutVO.minute" :placeholder="$t('all.tip516')">
             <el-option v-for="item in MinuteArr" :key="item.index" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip287") }}</el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" id="divBoxWidth" class="lineClass">
           <el-button type="primary" size="mini" @click="createAgainstPlan">{{ $t("all.tip16") }}</el-button>
@@ -179,15 +179,15 @@
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip315") }}</el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip316") }}</el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip455") }}</el-col>
         <el-col :span="4">
-          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="knockoutVO.Competition" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="3" class="lineClass">
           <el-button size="mini" @click="AddCompetitiorTopBoxSearch" type="primary">{{ $t("all.tip10") }}</el-button>
@@ -199,19 +199,19 @@
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">{{ $t("all.tip51") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="TopBox.categoryId" :placeholder="$t('placeholder.select')" clearable @change="categoryChange">
+          <el-select v-model="TopBox.categoryId" :placeholder="$t('all.tip516')" clearable @change="categoryChange">
             <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip52") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="TopBox.divisionId" :placeholder="$t('placeholder.select')" clearable @change="divisionChange">
+          <el-select v-model="TopBox.divisionId" :placeholder="$t('all.tip516')" clearable @change="divisionChange">
             <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">{{ $t("all.tip21") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="TopBox.stageId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="TopBox.stageId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -301,7 +301,7 @@
   </div>
 </template>
 <script>
-import echarts from 'echarts';
+import echarts from "echarts";
 
 export default {
   data() {
@@ -310,7 +310,7 @@ export default {
       CompetitiorListTopBox: false,
       MatchingTableTopBox: false,
       MatchingTableList: [],
-      timeDate: '',
+      timeDate: "",
       isKnockout: 1,
       matchNum: 0,
       leftDivNums: [],
@@ -318,11 +318,11 @@ export default {
       isOddNumber: false,
       showLeftBox: false,
       showRightBox: false,
-      competition: '',
+      competition: "",
       TopBox: {
-        categoryId: '',
-        divisionId: '',
-        stageId: ''
+        categoryId: "",
+        divisionId: "",
+        stageId: ""
       },
       knockoutVO: {
         type: 1,
@@ -333,97 +333,97 @@ export default {
         isWed: true,
         isThu: true,
         isFri: true,
-        isSat: '',
-        isSun: '',
+        isSat: "",
+        isSun: "",
         hour: 1,
         minute: 1
       },
       HourArr: [
-        { label: '1', value: 1 },
-        { label: '2', value: 2 },
-        { label: '3', value: 3 },
-        { label: '4', value: 4 },
-        { label: '5', value: 5 },
-        { label: '6', value: 6 },
-        { label: '7', value: 7 },
-        { label: '8', value: 8 },
-        { label: '9', value: 9 },
-        { label: '10', value: 10 },
-        { label: '11', value: 11 },
-        { label: '12', value: 12 },
-        { label: '13', value: 13 },
-        { label: '14', value: 14 },
-        { label: '15', value: 15 },
-        { label: '16', value: 16 },
-        { label: '17', value: 17 },
-        { label: '18', value: 18 },
-        { label: '19', value: 19 },
-        { label: '20', value: 20 },
-        { label: '21', value: 21 },
-        { label: '22', value: 22 },
-        { label: '23', value: 23 },
-        { label: '24', value: 24 }
+        { label: "1", value: 1 },
+        { label: "2", value: 2 },
+        { label: "3", value: 3 },
+        { label: "4", value: 4 },
+        { label: "5", value: 5 },
+        { label: "6", value: 6 },
+        { label: "7", value: 7 },
+        { label: "8", value: 8 },
+        { label: "9", value: 9 },
+        { label: "10", value: 10 },
+        { label: "11", value: 11 },
+        { label: "12", value: 12 },
+        { label: "13", value: 13 },
+        { label: "14", value: 14 },
+        { label: "15", value: 15 },
+        { label: "16", value: 16 },
+        { label: "17", value: 17 },
+        { label: "18", value: 18 },
+        { label: "19", value: 19 },
+        { label: "20", value: 20 },
+        { label: "21", value: 21 },
+        { label: "22", value: 22 },
+        { label: "23", value: 23 },
+        { label: "24", value: 24 }
       ],
       MinuteArr: [
-        { label: '1', value: 1 },
-        { label: '2', value: 2 },
-        { label: '3', value: 3 },
-        { label: '4', value: 4 },
-        { label: '5', value: 5 },
-        { label: '6', value: 6 },
-        { label: '7', value: 7 },
-        { label: '8', value: 8 },
-        { label: '9', value: 9 },
-        { label: '10', value: 10 },
-        { label: '11', value: 11 },
-        { label: '12', value: 12 },
-        { label: '13', value: 13 },
-        { label: '14', value: 14 },
-        { label: '15', value: 15 },
-        { label: '16', value: 16 },
-        { label: '17', value: 17 },
-        { label: '18', value: 18 },
-        { label: '19', value: 19 },
-        { label: '20', value: 20 },
-        { label: '21', value: 21 },
-        { label: '22', value: 22 },
-        { label: '23', value: 23 },
-        { label: '24', value: 24 },
-        { label: '25', value: 25 },
-        { label: '26', value: 26 },
-        { label: '27', value: 27 },
-        { label: '28', value: 28 },
-        { label: '29', value: 29 },
-        { label: '30', value: 30 },
-        { label: '31', value: 31 },
-        { label: '32', value: 32 },
-        { label: '33', value: 33 },
-        { label: '34', value: 34 },
-        { label: '35', value: 35 },
-        { label: '36', value: 36 },
-        { label: '37', value: 37 },
-        { label: '38', value: 38 },
-        { label: '39', value: 39 },
-        { label: '40', value: 40 },
-        { label: '41', value: 41 },
-        { label: '42', value: 42 },
-        { label: '43', value: 43 },
-        { label: '44', value: 44 },
-        { label: '45', value: 45 },
-        { label: '46', value: 46 },
-        { label: '47', value: 47 },
-        { label: '48', value: 48 },
-        { label: '49', value: 49 },
-        { label: '50', value: 50 },
-        { label: '51', value: 51 },
-        { label: '52', value: 52 },
-        { label: '53', value: 53 },
-        { label: '54', value: 54 },
-        { label: '55', value: 55 },
-        { label: '56', value: 56 },
-        { label: '57', value: 57 },
-        { label: '58', value: 58 },
-        { label: '59', value: 59 }
+        { label: "1", value: 1 },
+        { label: "2", value: 2 },
+        { label: "3", value: 3 },
+        { label: "4", value: 4 },
+        { label: "5", value: 5 },
+        { label: "6", value: 6 },
+        { label: "7", value: 7 },
+        { label: "8", value: 8 },
+        { label: "9", value: 9 },
+        { label: "10", value: 10 },
+        { label: "11", value: 11 },
+        { label: "12", value: 12 },
+        { label: "13", value: 13 },
+        { label: "14", value: 14 },
+        { label: "15", value: 15 },
+        { label: "16", value: 16 },
+        { label: "17", value: 17 },
+        { label: "18", value: 18 },
+        { label: "19", value: 19 },
+        { label: "20", value: 20 },
+        { label: "21", value: 21 },
+        { label: "22", value: 22 },
+        { label: "23", value: 23 },
+        { label: "24", value: 24 },
+        { label: "25", value: 25 },
+        { label: "26", value: 26 },
+        { label: "27", value: 27 },
+        { label: "28", value: 28 },
+        { label: "29", value: 29 },
+        { label: "30", value: 30 },
+        { label: "31", value: 31 },
+        { label: "32", value: 32 },
+        { label: "33", value: 33 },
+        { label: "34", value: 34 },
+        { label: "35", value: 35 },
+        { label: "36", value: 36 },
+        { label: "37", value: 37 },
+        { label: "38", value: 38 },
+        { label: "39", value: 39 },
+        { label: "40", value: 40 },
+        { label: "41", value: 41 },
+        { label: "42", value: 42 },
+        { label: "43", value: 43 },
+        { label: "44", value: 44 },
+        { label: "45", value: 45 },
+        { label: "46", value: 46 },
+        { label: "47", value: 47 },
+        { label: "48", value: 48 },
+        { label: "49", value: 49 },
+        { label: "50", value: 50 },
+        { label: "51", value: 51 },
+        { label: "52", value: 52 },
+        { label: "53", value: 53 },
+        { label: "54", value: 54 },
+        { label: "55", value: 55 },
+        { label: "56", value: 56 },
+        { label: "57", value: 57 },
+        { label: "58", value: 58 },
+        { label: "59", value: 59 }
       ],
       compertitorList: [],
       tableData: [],
@@ -445,26 +445,26 @@ export default {
   methods: {
     DayTypeChange(value) {
       switch (value) {
-      case 1:
-        this.knockoutVO.isMon = true;
-        this.knockoutVO.isTue = true;
-        this.knockoutVO.isWed = true;
-        this.knockoutVO.isThu = true;
-        this.knockoutVO.isFri = true;
-        this.knockoutVO.isSat = false;
-        this.knockoutVO.isSun = false;
-        break;
-      case 2:
-        this.knockoutVO.isMon = false;
-        this.knockoutVO.isTue = false;
-        this.knockoutVO.isWed = false;
-        this.knockoutVO.isThu = false;
-        this.knockoutVO.isFri = false;
-        this.knockoutVO.isSat = true;
-        this.knockoutVO.isSun = true;
-        break;
-      default:
-        break;
+        case 1:
+          this.knockoutVO.isMon = true;
+          this.knockoutVO.isTue = true;
+          this.knockoutVO.isWed = true;
+          this.knockoutVO.isThu = true;
+          this.knockoutVO.isFri = true;
+          this.knockoutVO.isSat = false;
+          this.knockoutVO.isSun = false;
+          break;
+        case 2:
+          this.knockoutVO.isMon = false;
+          this.knockoutVO.isTue = false;
+          this.knockoutVO.isWed = false;
+          this.knockoutVO.isThu = false;
+          this.knockoutVO.isFri = false;
+          this.knockoutVO.isSat = true;
+          this.knockoutVO.isSun = true;
+          break;
+        default:
+          break;
       }
     },
     AddCompetitior() {
@@ -484,42 +484,42 @@ export default {
     },
     getData() {
       this.leftData = {
-        name: '2020-7-31',
+        name: "2020-7-31",
         value: 14,
         state: 1,
         children: [
           {
-            name: '2020-7-31',
+            name: "2020-7-31",
             value: 12,
             state: 2,
             children: [
               {
-                name: '2020-7-31',
+                name: "2020-7-31",
                 value: 8,
                 children: [
                   {
-                    name: '2020-7-31',
+                    name: "2020-7-31",
                     value: 1,
                     state: 3
                   },
                   {
-                    name: '2020-7-32',
+                    name: "2020-7-32",
                     value: 2,
                     state: 1
                   }
                 ]
               },
               {
-                name: '2020-7-31',
+                name: "2020-7-31",
                 value: 9,
                 children: [
                   {
-                    name: '2020-7-33',
+                    name: "2020-7-33",
                     value: 3,
                     state: 1
                   },
                   {
-                    name: '2020-7-34',
+                    name: "2020-7-34",
                     value: 4,
                     state: 2
                   }
@@ -528,36 +528,36 @@ export default {
             ]
           },
           {
-            name: '2020-7-31',
+            name: "2020-7-31",
             value: 13,
             children: [
               {
-                name: '2020-7-31',
+                name: "2020-7-31",
                 value: 10,
                 children: [
                   {
-                    name: '2020-7-35',
+                    name: "2020-7-35",
                     value: 5,
                     state: 1
                   },
                   {
-                    name: '2020-7-36',
+                    name: "2020-7-36",
                     value: 6,
                     state: 2
                   }
                 ]
               },
               {
-                name: '2020-7-31',
+                name: "2020-7-31",
                 value: 11,
                 children: [
                   {
-                    name: '2020-7-37',
+                    name: "2020-7-37",
                     value: 7,
                     state: 3
                   },
                   {
-                    name: 'Bye',
+                    name: "Bye",
                     value: 17,
                     state: null
                   }
@@ -587,40 +587,40 @@ export default {
       this.showLeftBox = true;
       this.showRightBox = true;
       this.$nextTick(() => {
-        const leftDiv = document.getElementById('leftBox');
-        const rightDiv = document.getElementById('rightBox');
+        const leftDiv = document.getElementById("leftBox");
+        const rightDiv = document.getElementById("rightBox");
         const leftEchars = echarts.init(leftDiv);
         const rightEchars = echarts.init(rightDiv);
         leftEchars.setOption({
           series: [
             {
-              type: 'tree',
+              type: "tree",
               data: [this.leftData],
-              top: '0%',
-              right: '20%',
-              bottom: '0%',
-              edgeShape: 'polyline',
-              edgeForkPosition: '50%',
+              top: "0%",
+              right: "20%",
+              bottom: "0%",
+              edgeShape: "polyline",
+              edgeForkPosition: "50%",
               label: {
-                position: 'inside',
+                position: "inside",
                 show: true,
                 normal: {
                   formatter: params => `{seedNo|${params.value}}${params.data.name}\n{hr|}{matchNum|${params.data.value}}\n{seedNo|${params.value}}`,
-                  backgroundColor: '#eee',
+                  backgroundColor: "#eee",
                   rich: {
                     hr: {
-                      borderColor: '#aaa',
+                      borderColor: "#aaa",
                       width: 98,
                       borderWidth: 1,
                       height: 1
                     },
                     matchNum: {
-                      fontWeight: 'bold',
-                      color: 'blue'
+                      fontWeight: "bold",
+                      color: "blue"
                     },
                     seedNo: {
-                      color: '#fff',
-                      backgroundColor: '#000',
+                      color: "#fff",
+                      backgroundColor: "#000",
                       height: 14,
                       width: 14,
                       borderRadius: 14,
@@ -629,9 +629,9 @@ export default {
                   }
                 }
               },
-              symbol: 'rect',
-              orient: 'RL',
-              width: '50%',
+              symbol: "rect",
+              orient: "RL",
+              width: "50%",
               symbolSize: [90, 50],
               lineStyle: {
                 curveness: 0
@@ -641,8 +641,8 @@ export default {
             }
           ],
           tooltip: {
-            trigger: 'item',
-            triggerOn: 'click',
+            trigger: "item",
+            triggerOn: "click",
             formatter: params => {
               console.log(params.data.value);
               this.MatchingTableTopBox = true;
@@ -655,33 +655,33 @@ export default {
         rightEchars.setOption({
           series: [
             {
-              type: 'tree',
+              type: "tree",
               data: [this.leftData],
-              top: '0%',
-              left: '20%',
-              bottom: '0%',
-              edgeShape: 'polyline',
-              edgeForkPosition: '50%',
+              top: "0%",
+              left: "20%",
+              bottom: "0%",
+              edgeShape: "polyline",
+              edgeForkPosition: "50%",
               label: {
-                position: 'inside',
+                position: "inside",
                 show: true,
                 normal: {
                   formatter: params => `{seedNo|${params.value}}${params.data.name}\n{hr|}{matchNum|${params.data.value}}\n{seedNo|${params.value}}`,
-                  backgroundColor: '#eee',
+                  backgroundColor: "#eee",
                   rich: {
                     hr: {
-                      borderColor: '#aaa',
+                      borderColor: "#aaa",
                       width: 98,
                       borderWidth: 1,
                       height: 1
                     },
                     matchNum: {
-                      fontWeight: 'bold',
-                      color: 'blue'
+                      fontWeight: "bold",
+                      color: "blue"
                     },
                     seedNo: {
-                      color: '#fff',
-                      backgroundColor: '#000',
+                      color: "#fff",
+                      backgroundColor: "#000",
                       height: 14,
                       width: 14,
                       borderRadius: 14,
@@ -690,17 +690,17 @@ export default {
                   }
                 }
               },
-              symbol: 'rect',
-              orient: 'LR',
-              width: '50%',
+              symbol: "rect",
+              orient: "LR",
+              width: "50%",
               symbolSize: [90, 50],
               initialTreeDepth: undefined,
               expandAndCollapse: false
             }
           ],
           tooltip: {
-            trigger: 'item',
-            triggerOn: 'click',
+            trigger: "item",
+            triggerOn: "click",
             formatter: params => {
               console.log(params.data.value);
               this.MatchingTableTopBox = true;
@@ -710,45 +710,45 @@ export default {
                 for (let j = 0; j < 7; j += 1) {
                   const obj = {};
                   switch (j) {
-                  case 0:
-                    obj.id = params.data.value;
-                    obj.photo = true;
-                    obj.title = ['Set Point', 'Winning Point', 'Penalty Point'];
-                    obj.homelist = '';
-                    obj.awaylist = '';
-                    obj.teamName = '';
-                    obj.awayName = '';
-                    break;
-                  case 1:
-                    obj.label = 'all.tip316';
-                    obj.homeCaptainName = '';
-                    obj.awayCaptainName = '';
-                    break;
-                  case 2:
-                    obj.label = 'all.tip246';
-                    obj.button = '1';
-                    break;
-                  case 3:
-                    obj.label = 'all.tip215';
-                    obj.select = '1';
-                    obj.homePlayShopId = '';
-                    obj.awayPlayShopId = '';
-                    break;
-                  case 4:
-                    obj.label = 'all.tip574';
-                    obj.homeMachine = '';
-                    obj.awayMachine = '';
-                    break;
-                  case 5:
-                    obj.label = 'all.tip25';
-                    obj.homeForceAttend = '';
-                    obj.awayForceAttend = '';
-                    break;
-                  default:
-                    obj.label = 'all.tip573';
-                    obj.homePlayerChange = '';
-                    obj.awayPlayerChange = '';
-                    break;
+                    case 0:
+                      obj.id = params.data.value;
+                      obj.photo = true;
+                      obj.title = ["Set Point", "Winning Point", "Penalty Point"];
+                      obj.homelist = "";
+                      obj.awaylist = "";
+                      obj.teamName = "";
+                      obj.awayName = "";
+                      break;
+                    case 1:
+                      obj.label = "all.tip316";
+                      obj.homeCaptainName = "";
+                      obj.awayCaptainName = "";
+                      break;
+                    case 2:
+                      obj.label = "all.tip246";
+                      obj.button = "1";
+                      break;
+                    case 3:
+                      obj.label = "all.tip215";
+                      obj.select = "1";
+                      obj.homePlayShopId = "";
+                      obj.awayPlayShopId = "";
+                      break;
+                    case 4:
+                      obj.label = "all.tip574";
+                      obj.homeMachine = "";
+                      obj.awayMachine = "";
+                      break;
+                    case 5:
+                      obj.label = "all.tip25";
+                      obj.homeForceAttend = "";
+                      obj.awayForceAttend = "";
+                      break;
+                    default:
+                      obj.label = "all.tip573";
+                      obj.homePlayerChange = "";
+                      obj.awayPlayerChange = "";
+                      break;
                   }
                   console.log(obj);
                   if (Object.keys(obj).length > 0) {
@@ -790,28 +790,28 @@ export default {
       const vm = this;
       list.forEach(i => {
         const Cobj = {
-          label: '',
-          id: ''
+          label: "",
+          id: ""
         };
-        if (i.url === 'category') {
+        if (i.url === "category") {
           Cobj.label = i.label;
           Cobj.id = i.id;
           vm.categoryList.push(Cobj);
           i.children.forEach(j => {
             const Dobj = {
-              label: '',
-              id: ''
+              label: "",
+              id: ""
             };
-            if (j.url === 'division') {
+            if (j.url === "division") {
               Dobj.label = j.label;
               Dobj.id = j.id;
               vm.divisionList.push(Dobj);
               j.children.forEach(k => {
                 const Sobj = {
-                  label: '',
-                  id: ''
+                  label: "",
+                  id: ""
                 };
-                if (k.url === 'stage') {
+                if (k.url === "stage") {
                   Sobj.label = k.label;
                   Sobj.id = k.id;
                   vm.stageList.push(Sobj);
@@ -826,11 +826,11 @@ export default {
       });
     },
     categoryChange() {
-      this.TopBox.divisionId = '';
-      this.TopBox.stageId = '';
+      this.TopBox.divisionId = "";
+      this.TopBox.stageId = "";
     },
     divisionChange() {
-      this.TopBox.stageId = '';
+      this.TopBox.stageId = "";
     }
   }
 };
@@ -880,7 +880,7 @@ export default {
   width: 80px;
   margin: 0 auto;
 }
-.winerBox{
+.winerBox {
   height: 50px;
   border: 1px solid #666;
 }

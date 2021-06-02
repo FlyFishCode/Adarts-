@@ -71,7 +71,7 @@
               </el-col>
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.countryId" disabled></el-input> -->
-                <el-select v-model="playerInformationVO.countryId" :placeholder="$t('placeholder.select')" @change="countryChange" :disabled="disable">
+                <el-select v-model="playerInformationVO.countryId" :placeholder="$t('all.tip516')" @change="countryChange" :disabled="disable">
                   <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
                 </el-select>
               </el-col>
@@ -96,7 +96,7 @@
               </el-col>
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.areaId" disabled></el-input> -->
-                <el-select v-model="playerInformationVO.areaId" :placeholder="$t('placeholder.select')" disabled>
+                <el-select v-model="playerInformationVO.areaId" :placeholder="$t('all.tip516')" disabled>
                   <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="String(item.id)"></el-option>
                 </el-select>
               </el-col>
@@ -109,7 +109,7 @@
               </el-col>
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.homeShopName" disabled></el-input> -->
-                <el-select v-model="playerInformationVO.homeShopName" :placeholder="$t('placeholder.select')" :disabled="disable">
+                <el-select v-model="playerInformationVO.homeShopName" :placeholder="$t('all.tip516')" :disabled="disable">
                   <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"></el-option>
                 </el-select>
               </el-col>
@@ -145,7 +145,7 @@
               </el-col>
               <el-col :span="5" class="lineClass">
                 <el-input v-model="playerInformationVO.teamName" :disabled="disable"></el-input>
-                <!-- <el-select v-model="playerInformationVO.teamName" :placeholder="$t('placeholder.select')" :disabled="disable">
+                <!-- <el-select v-model="playerInformationVO.teamName" :placeholder="$t('all.tip516')" :disabled="disable">
                   <el-option label="EEF" value="1"></el-option>
                   <el-option label="GDFSG" value="2"></el-option>
                   <el-option label="Gteam" value="3"></el-option>
@@ -157,7 +157,7 @@
               </el-col>
               <el-col :span="5" class="lineClass">
                 <!-- <el-input v-model="playerInformationVO.valid" disabled></el-input> -->
-                <el-select v-model="playerInformationVO.valid" :placeholder="$t('placeholder.select')" :disabled="disable">
+                <el-select v-model="playerInformationVO.valid" :placeholder="$t('all.tip516')" :disabled="disable">
                   <el-option :label="$t('all.tip545')" :value="0"></el-option>
                   <el-option :label="$t('all.tip475')" :value="1"></el-option>
                 </el-select>
@@ -235,14 +235,14 @@
           </el-row>
           <div class="SelectClass">
             <el-col :span="10">
-              <el-select v-model="rating.type" :placeholder="$t('placeholder.select')" @change="typeChange">
+              <el-select v-model="rating.type" :placeholder="$t('all.tip516')" @change="typeChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip42')" :value="1"></el-option>
                 <el-option :label="$t('all.tip43')" :value="2"></el-option>
               </el-select>
             </el-col>
             <el-col :span="10">
-              <el-select v-model="rating.year" :placeholder="$t('placeholder.select')" @change="yearChange">
+              <el-select v-model="rating.year" :placeholder="$t('all.tip516')" @change="yearChange">
                 <el-option v-for="item in yearList" :key="item.id" :label="item.year" :value="item.id"></el-option>
               </el-select>
             </el-col>
@@ -251,7 +251,7 @@
         <el-tab-pane :label="$t('all.tip398')" name="second">
           <el-row>
             <el-col :span="4">
-              <el-select v-model="entryHistoryVO.leagueType" :placeholder="$t('placeholder.select')" @change="entryHistoryTypeChange">
+              <el-select v-model="entryHistoryVO.leagueType" :placeholder="$t('all.tip516')" @change="entryHistoryTypeChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip42')" :value="1"></el-option>
                 <el-option :label="$t('all.tip43')" :value="2"></el-option>

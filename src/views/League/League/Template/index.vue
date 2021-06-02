@@ -27,7 +27,7 @@
           {{ $t("all.tip48") }}
         </el-col>
         <el-col :span="19">
-          <el-input v-model="template.name" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="template.name" maxlength="100" show-word-limit clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="input-Row">
@@ -35,7 +35,7 @@
           {{ $t("all.tip138") }}
         </el-col>
         <el-col :span="19">
-          <el-input v-model="template.description" type="textarea" :autosize="{ minRows: 6, maxRows: 6 }" maxlength="100" show-word-limit clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="template.description" type="textarea" :autosize="{ minRows: 6, maxRows: 6 }" maxlength="100" show-word-limit clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="button-Row">

@@ -3,7 +3,7 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col :span="2" class="label-g">
-          {{ $t("all.tip3") }}
+          {{ $t("all.tip1") }}
         </el-col>
         <el-col :span="4" class="overFlowStyle lineClass">
           {{ AssignVO.Detial.competitionName }}
@@ -69,14 +69,14 @@
         <el-table-column :label="$t('all.tip51')" min-width="5%">
           <div slot-scope="scope" class="tableStyle">
             <div class="tableLink" @click="divClick(scope.row, '1', scope.$index)">{{ `${scope.row.categoryName}(${scope.row.categoryTeamCount})` }}</div>
-            <el-button size="mini" type="primary" @click="TableAssign(scope.row, '1')">{{ $t("all.tip264") }}</el-button>
+            <el-button size="mini" type="primary" @click="TableAssign(scope.row, '1')">{{ $t("all.tip64") }}</el-button>
           </div>
         </el-table-column>
         <el-table-column :label="$t('all.tip52')" min-width="5%">
           <div slot-scope="scope">
             <div class="tableStyle" v-for="(item, index) in scope.row.competitionDivisionList" :key="item.index" :style="setHeight(item.competitionStageList.length)">
               <div class="tableLink" @click="divClick(scope.row, '2', '', '', index)">{{ `${item.divisionName}(${item.divisionTeamCount})` }}</div>
-              <el-button size="mini" type="primary" @click="TableAssign(scope.row, '2', index)">{{ $t("all.tip264") }}</el-button>
+              <el-button size="mini" type="primary" @click="TableAssign(scope.row, '2', index)">{{ $t("all.tip64") }}</el-button>
             </div>
           </div>
         </el-table-column>
@@ -85,7 +85,7 @@
             <div v-for="(item, index) in scope.row.competitionDivisionList" :key="item.index">
               <div class="tableStyle" v-for="(child, mineIndex) in item.competitionStageList" :key="child.index">
                 <div class="tableLink" @click="divClick(scope.row, '3', scope.$index, index, mineIndex)">{{ `${child.stageName}(${child.stageTeamCount})` }}</div>
-                <el-button size="mini" type="primary" @click="TableAssign(scope.row, '3', index, mineIndex)">{{ $t("all.tip264") }}</el-button>
+                <el-button size="mini" type="primary" @click="TableAssign(scope.row, '3', index, mineIndex)">{{ $t("all.tip64") }}</el-button>
               </div>
             </div>
           </div>
@@ -106,19 +106,19 @@
             {{ $t("all.tip315") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AssignVO.AssignDialog.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip316") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AssignVO.AssignDialog.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip455") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AssignVO.AssignDialog.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -126,31 +126,31 @@
             {{ $t("all.tip154") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.rating1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.rating1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.rating2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.rating2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="2">
             {{ $t("all.tip155") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.ppd1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.ppd1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.ppd2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.ppd2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="2">
             {{ $t("all.tip156") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.mpr1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.mpr1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="2">
-            <el-input v-model="AssignVO.AssignDialog.mpr2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.AssignDialog.mpr2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="4" class="lineClass">
             <el-button type="primary" size="mini" @click="AssignDiologSearch">{{ $t("all.tip10") }}</el-button>
@@ -175,7 +175,7 @@
         </div>
         <el-row style="display:flex;justify-content:center">
           <el-col :span="2">
-            <el-button type="primary" size="mini" @click="Assign">{{ $t("all.tip264") }}</el-button>
+            <el-button type="primary" size="mini" @click="Assign">{{ $t("all.tip64") }}</el-button>
           </el-col>
         </el-row>
       </el-dialog>
@@ -187,19 +187,19 @@
             {{ $t("all.tip315") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model.number="AssignVO.StageAssignDialog.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="AssignVO.StageAssignDialog.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip316") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AssignVO.StageAssignDialog.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip455") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AssignVO.StageAssignDialog.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -207,31 +207,31 @@
             {{ $t("all.tip154") }}
           </el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.rating1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.rating1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.rating2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.rating2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="1">
             {{ $t("all.tip155") }}
           </el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.ppd1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.ppd1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.ppd2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.ppd2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="2">
             {{ $t("all.tip156") }}
           </el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.mpr1" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.mpr1" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="0.5" class="lineClass">-</el-col>
           <el-col :span="3">
-            <el-input v-model="AssignVO.StageAssignDialog.mpr2" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AssignVO.StageAssignDialog.mpr2" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="1" class="lineClass">
             <el-button type="primary" size="mini" @click="DialogSearch">{{ $t("all.tip10") }}</el-button>
@@ -245,7 +245,7 @@
             {{ $t("all.tip51") }}
           </el-col>
           <el-col :span="4">
-            <el-select v-model="AssignVO.StageAssignDialog.categoryId" :placeholder="$t('placeholder.select')" clearable @change="competitionIdChange">
+            <el-select v-model="AssignVO.StageAssignDialog.categoryId" :placeholder="$t('all.tip516')" clearable @change="competitionIdChange">
               <el-option v-for="item in categoryList" :key="item.categoryId" :label="item.categoryName" :value="item.categoryId"> </el-option>
             </el-select>
           </el-col>
@@ -253,7 +253,7 @@
             {{ $t("all.tip52") }}
           </el-col>
           <el-col :span="4">
-            <el-select v-model="AssignVO.StageAssignDialog.divisionId" :placeholder="$t('placeholder.select')" clearable @change="categoryIdChange">
+            <el-select v-model="AssignVO.StageAssignDialog.divisionId" :placeholder="$t('all.tip516')" clearable @change="categoryIdChange">
               <el-option v-for="item in divisionList" :key="item.divisionId" :label="item.divisionName" :value="item.divisionId"> </el-option>
             </el-select>
           </el-col>
@@ -261,7 +261,7 @@
             {{ $t("all.tip21") }}
           </el-col>
           <el-col :span="4">
-            <el-select v-model="AssignVO.StageAssignDialog.stageId" :placeholder="$t('placeholder.select')" clearable @change="stageIdChange">
+            <el-select v-model="AssignVO.StageAssignDialog.stageId" :placeholder="$t('all.tip516')" clearable @change="stageIdChange">
               <el-option v-for="item in stageList" :key="item.stageId" :label="item.stageName" :value="item.stageId"> </el-option>
             </el-select>
           </el-col>
@@ -297,7 +297,7 @@
         </div>
         <el-row style="display:flex;justify-content:center">
           <el-col :span="2">
-            <el-button type="primary" size="mini" @click="DialogAssign">{{ $t("all.tip264") }}</el-button>
+            <el-button type="primary" size="mini" @click="DialogAssign">{{ $t("all.tip64") }}</el-button>
           </el-col>
         </el-row>
       </el-dialog>

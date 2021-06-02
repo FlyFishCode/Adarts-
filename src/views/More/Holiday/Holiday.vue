@@ -6,19 +6,19 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="holidayVO.countryId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="holidayVO.countryId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>
 
     <el-row>
       <el-col :span="1" class="lineClass">
-        <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
+        <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
       </el-col>
     </el-row>
 
@@ -63,7 +63,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="20" id="divBoxWidth">
-          <el-select v-model="holidayDialogVO.countryId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="holidayDialogVO.countryId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -81,12 +81,11 @@
           {{ $t("all.tip436") }}
         </el-col>
         <el-col :span="9">
-          <el-date-picker v-model="holidayDialogVO.holidayStartTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" clearable @change="change"> </el-date-picker>
+          <el-date-picker v-model="holidayDialogVO.holidayStartTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('all.tip516')" clearable @change="change"> </el-date-picker>
         </el-col>
         <el-col :span="2" class="lineClass">-</el-col>
         <el-col :span="9">
-          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable>
-          </el-date-picker>
+          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="center-Row">

@@ -111,19 +111,19 @@
             {{ $t("all.tip268") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="TopBox.playerId" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="TopBox.playerId" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="3" class="label-g">
             {{ $t("all.tip324") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="TopBox.playerName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="TopBox.playerName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="3" class="label-g">
             {{ $t("all.tip426") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="TopBox.cardNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="TopBox.cardNumber" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -131,7 +131,7 @@
             {{ $t("all.tip208") }}
           </el-col>
           <el-col :span="4">
-            <el-select v-model="TopBox.gender" clearable :placeholder="$t('placeholder.select')">
+            <el-select v-model="TopBox.gender" clearable :placeholder="$t('all.tip516')">
               <el-option value="1" :label="$t('all.tip209')"></el-option>
               <el-option value="2" :label="$t('all.tip210')"></el-option>
             </el-select>
@@ -140,10 +140,10 @@
             {{ $t("all.tip455") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="TopBox.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="TopBox.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="3" class="lineClass">
-            <el-button type="primary" size="mini" @click="topBoxSearch">{{ $t("form.SearchButton") }}</el-button>
+            <el-button type="primary" size="mini" @click="topBoxSearch">{{ $t("all.tip10") }}</el-button>
           </el-col>
         </el-row>
         <div>

@@ -2,7 +2,7 @@
   <div>
     <div class="search">
       <el-row class="center-Row">
-        <el-col :span="3" class="label-g">{{ $t("all.tip3") }}</el-col>
+        <el-col :span="3" class="label-g">{{ $t("all.tip1") }}</el-col>
         <el-col :span="3" :title="detail.competitionName" class="overFlowStyle lineClass">{{ detail.competitionName }}</el-col>
         <el-col :span="3" class="label-g">{{ $t("all.tip6") }}</el-col>
         <el-col :span="3" class="overFlowStyle lineClass">{{ detail.status === "1" ? $t("all.tip26") : $t("all.tip27") }}</el-col>
@@ -25,21 +25,21 @@
           <el-form label-width="145px">
             <el-col :span="8">
               <el-form-item :label="$t('all.tip51')">
-                <el-select v-model="rankingVO.categoryId" :placeholder="$t('placeholder.select')" clearable @change="rankingCategoryChange">
+                <el-select v-model="rankingVO.categoryId" :placeholder="$t('all.tip516')" clearable @change="rankingCategoryChange">
                   <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item :label="$t('all.tip52')">
-                <el-select v-model="rankingVO.divisionId" :placeholder="$t('placeholder.select')" clearable @change="rankingDivisionChange">
+                <el-select v-model="rankingVO.divisionId" :placeholder="$t('all.tip516')" clearable @change="rankingDivisionChange">
                   <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item :label="$t('all.tip21')">
-                <el-select v-model="rankingVO.stageId" :placeholder="$t('placeholder.select')" clearable>
+                <el-select v-model="rankingVO.stageId" :placeholder="$t('all.tip516')" clearable>
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
@@ -54,7 +54,7 @@
               >
             </el-col>
             <el-col :span="8" class="lineClass">
-              <el-button type="primary" size="mini" @click="getRankingList">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="getRankingList">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
         </el-row>
@@ -127,27 +127,27 @@
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip51')">
-                <el-select v-model="result.categoryId" :placeholder="$t('placeholder.select')" clearable @change="resultCategoryIdCG">
+                <el-select v-model="result.categoryId" :placeholder="$t('all.tip516')" clearable @change="resultCategoryIdCG">
                   <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip52')">
-                <el-select v-model="result.divisionId" :placeholder="$t('placeholder.select')" clearable @change="resultDivisionIdCG">
+                <el-select v-model="result.divisionId" :placeholder="$t('all.tip516')" clearable @change="resultDivisionIdCG">
                   <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip21')">
-                <el-select v-model="result.stageId" :placeholder="$t('placeholder.select')" clearable>
+                <el-select v-model="result.stageId" :placeholder="$t('all.tip516')" clearable>
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="4" class="lineClass">
-              <el-button type="primary" size="mini" @click="getResultList">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="getResultList">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
         </el-row>
@@ -261,7 +261,7 @@
                 <el-table-column prop="teamName" :label="$t('all.tip324')" min-width="5%"></el-table-column>
                 <el-table-column :label="$t('all.tip309')" min-width="5%">
                   <template slot-scope="scope">
-                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')">
+                    <el-select v-model="scope.row.num" :placeholder="$t('all.tip516')">
                       <el-option v-for="item in gameScoreList" :key="item.index" :label="item.label" :value="item.id"></el-option>
                     </el-select>
                   </template>
@@ -288,7 +288,7 @@
                 <el-table-column prop="teamName" :label="$t('all.tip324')" min-width="5%"></el-table-column>
                 <el-table-column :label="$t('all.tip223')" min-width="5%">
                   <template slot-scope="scope">
-                    <el-select v-model="scope.row.num" :placeholder="$t('placeholder.select')">
+                    <el-select v-model="scope.row.num" :placeholder="$t('all.tip516')">
                       <el-option v-for="item in penaltyScoreList" :key="item.index" :label="item.label" :value="item.id"></el-option>
                     </el-select>
                   </template>
@@ -304,7 +304,7 @@
               <el-col :span="6">
                 <el-col :span="4">{{ "Set" }}</el-col>
                 <el-col :span="8">
-                  <el-select v-model="defaultSet" :placeholder="$t('placeholder.select')" @change="setChange">
+                  <el-select v-model="defaultSet" :placeholder="$t('all.tip516')" @change="setChange">
                     <el-option v-for="item in setList" :key="item.setResultId" :label="item.setName" :value="item.setResultId"></el-option>
                   </el-select>
                 </el-col>
@@ -341,7 +341,7 @@
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
                         <div v-for="(item, index) in scope.row.homePlayerList" :key="index">
-                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')" disabled>
+                          <el-select v-model="item.playerId" :placeholder="$t('all.tip516')" disabled>
                             <el-option v-for="item in scope.row.homePlayerList" :key="item.playerResultId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
@@ -363,14 +363,14 @@
                   <el-table-column :label="$t('all.tip309')" min-width="7%">
                     <el-table-column :label="$t('all.tip111')" min-width="7%">
                       <template slot-scope="scope">
-                        <el-select v-model="scope.row.homeIsWin" :placeholder="$t('placeholder.select')">
+                        <el-select v-model="scope.row.homeIsWin" :placeholder="$t('all.tip516')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
                         </el-select>
                       </template>
                     </el-table-column>
                     <el-table-column :label="$t('all.tip325')" min-width="7%">
                       <template slot-scope="scope">
-                        <el-select v-model="scope.row.visitingIsWin" :placeholder="$t('placeholder.select')">
+                        <el-select v-model="scope.row.visitingIsWin" :placeholder="$t('all.tip516')">
                           <el-option v-for="item in gameResultList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
                         </el-select>
                       </template>
@@ -392,7 +392,7 @@
                     <el-table-column :label="$t('all.tip445')" min-width="7%">
                       <template slot-scope="scope">
                         <div v-for="(item, index) in scope.row.visitingPlayerList" :key="index">
-                          <el-select v-model="item.playerId" :placeholder="$t('placeholder.select')" disabled>
+                          <el-select v-model="item.playerId" :placeholder="$t('all.tip516')" disabled>
                             <el-option v-for="item in scope.row.visitingPlayerList" :key="item.playerResultId" :label="item.playerName" :value="item.playerId"></el-option>
                           </el-select>
                         </div>
@@ -404,7 +404,7 @@
               <div class="allBox">
                 <el-col :span="1">{{ "Leg" }}</el-col>
                 <el-col :span="2">
-                  <el-select v-model="defaultLeg" :placeholder="$t('placeholder.select')" @change="legChange">
+                  <el-select v-model="defaultLeg" :placeholder="$t('all.tip516')" @change="legChange">
                     <el-option v-for="item in legList" :key="item.legResultId" :label="item.legName" :value="item.legResultId"></el-option>
                   </el-select>
                 </el-col>
@@ -625,21 +625,21 @@
           <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip51')">
-                <el-select v-model="PlayerVO.categoryId" :placeholder="$t('placeholder.select')" clearable @change="categoryChange">
+                <el-select v-model="PlayerVO.categoryId" :placeholder="$t('all.tip516')" clearable @change="categoryChange">
                   <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip52')">
-                <el-select v-model="PlayerVO.divisionId" :placeholder="$t('placeholder.select')" clearable @change="divisionChange">
+                <el-select v-model="PlayerVO.divisionId" :placeholder="$t('all.tip516')" clearable @change="divisionChange">
                   <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip21')">
-                <el-select v-model="PlayerVO.stageId" :placeholder="$t('placeholder.select')" clearable>
+                <el-select v-model="PlayerVO.stageId" :placeholder="$t('all.tip516')" clearable>
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
@@ -650,12 +650,12 @@
           <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip445')">
-                <el-input v-model="PlayerVO.playerName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerVO.playerName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip316')">
-                <el-input v-model="PlayerVO.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerVO.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
           </el-form>
@@ -664,24 +664,24 @@
           <el-form label-width="110px">
             <el-col :span="6" class="towInput">
               <el-form-item :label="$t('all.tip154')">
-                <el-input v-model="PlayerVO.minRating" clearable :placeholder="$t('placeholder.input')"></el-input>-
-                <el-input v-model="PlayerVO.maxRating" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerVO.minRating" clearable :placeholder="$t('all.tip38')"></el-input>-
+                <el-input v-model="PlayerVO.maxRating" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" class="towInput">
               <el-form-item :label="$t('all.tip155')">
-                <el-input v-model="PlayerVO.minPpd" clearable :placeholder="$t('placeholder.input')"></el-input>-
-                <el-input v-model="PlayerVO.maxPpd" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerVO.minPpd" clearable :placeholder="$t('all.tip38')"></el-input>-
+                <el-input v-model="PlayerVO.maxPpd" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" class="towInput">
               <el-form-item :label="$t('all.tip156')">
-                <el-input v-model="PlayerVO.minMpr" clearable :placeholder="$t('placeholder.input')"></el-input>-
-                <el-input v-model="PlayerVO.maxMpr" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerVO.minMpr" clearable :placeholder="$t('all.tip38')"></el-input>-
+                <el-input v-model="PlayerVO.maxMpr" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="playerSearch">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="playerSearch">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
           <div class="table">
@@ -746,21 +746,21 @@
           <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip51')">
-                <el-select v-model="PlayerAwardVO.categoryId" :placeholder="$t('placeholder.select')" clearable @change="change">
+                <el-select v-model="PlayerAwardVO.categoryId" :placeholder="$t('all.tip516')" clearable @change="change">
                   <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip52')">
-                <el-select v-model="PlayerAwardVO.divisionId" :placeholder="$t('placeholder.select')" clearable @change="change">
+                <el-select v-model="PlayerAwardVO.divisionId" :placeholder="$t('all.tip516')" clearable @change="change">
                   <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip21')">
-                <el-select v-model="PlayerAwardVO.stageId" :placeholder="$t('placeholder.select')" clearable @change="change">
+                <el-select v-model="PlayerAwardVO.stageId" :placeholder="$t('all.tip516')" clearable @change="change">
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
@@ -771,24 +771,24 @@
           <el-form label-width="110px">
             <el-col :span="6">
               <el-form-item :label="$t('all.tip445')">
-                <el-input v-model="PlayerAwardVO.playerName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerAwardVO.playerName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip316')">
-                <el-input v-model="PlayerAwardVO.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="PlayerAwardVO.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item :label="$t('all.tip208')">
-                <el-select v-model="PlayerAwardVO.gender" clearable :placeholder="$t('placeholder.select')">
+                <el-select v-model="PlayerAwardVO.gender" clearable :placeholder="$t('all.tip516')">
                   <el-option :value="1" :label="$t('all.tip209')"></el-option>
                   <el-option :value="0" :label="$t('all.tip210')"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="getPlayerAwardList">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="getPlayerAwardList">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
         </el-row>
@@ -837,32 +837,32 @@
           <el-form label-width="110px">
             <el-col :span="5">
               <el-form-item :label="$t('all.tip51')">
-                <el-select v-model="TeamAwardVO.categoryId" :placeholder="$t('placeholder.select')" clearable @change="TeamAwardCategoryChange">
+                <el-select v-model="TeamAwardVO.categoryId" :placeholder="$t('all.tip516')" clearable @change="TeamAwardCategoryChange">
                   <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item :label="$t('all.tip52')">
-                <el-select v-model="TeamAwardVO.divisionId" :placeholder="$t('placeholder.select')" clearable @change="TeamAwardDivisionChange">
+                <el-select v-model="TeamAwardVO.divisionId" :placeholder="$t('all.tip516')" clearable @change="TeamAwardDivisionChange">
                   <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item :label="$t('all.tip21')">
-                <el-select v-model="TeamAwardVO.stageId" :placeholder="$t('placeholder.select')" clearable>
+                <el-select v-model="TeamAwardVO.stageId" :placeholder="$t('all.tip516')" clearable>
                   <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item :label="$t('all.tip316')">
-                <el-input v-model="TeamAwardVO.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="TeamAwardVO.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="getTeamAwardList">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="getTeamAwardList">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
         </el-row>

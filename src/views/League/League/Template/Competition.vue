@@ -39,13 +39,7 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker
-              v-model="AddCompetitionRequest.competition.competitionStartPeriod"
-              type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="00:00:00"
-              @change="competitionStartTime"
-            >
+            <el-date-picker v-model="AddCompetitionRequest.competition.competitionStartPeriod" type="datetime" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="competitionStartTime">
             </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
@@ -53,7 +47,7 @@
             <el-date-picker
               v-model="AddCompetitionRequest.competition.competitionEndPeriod"
               type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               default-time="23:59:59"
               :picker-options="competitionEndPeriodPickerOptions"
               @change="competitionEndTime"
@@ -68,7 +62,7 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker v-model="AddCompetitionRequest.competition.entryStartPeriod" type="datetime" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryDateChange">
+            <el-date-picker v-model="AddCompetitionRequest.competition.entryStartPeriod" type="datetime" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="entryDateChange">
             </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
@@ -76,7 +70,7 @@
             <el-date-picker
               v-model="AddCompetitionRequest.competition.entryEndPeriod"
               type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               default-time="23:59:59"
               :picker-options="entryEndPeriodPickerOptions"
             >
@@ -93,7 +87,7 @@
             <el-date-picker
               v-model="AddCompetitionRequest.competition.advertisementStartPeriod"
               type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               default-time="00:00:00"
               @change="advertisementDateChange"
             >
@@ -104,7 +98,7 @@
             <el-date-picker
               v-model="AddCompetitionRequest.competition.advertisementEndPeriod"
               type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               default-time="23:59:59"
               :picker-options="advertisementEndPeriodPickerOptions"
             >
@@ -118,13 +112,7 @@
         </el-col>
         <el-col :span="8">
           <el-col :span="11">
-            <el-date-picker
-              v-model="AddCompetitionRequest.competition.resultStartPeriod"
-              type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="00:00:00"
-              @change="resultDateChange"
-            >
+            <el-date-picker v-model="AddCompetitionRequest.competition.resultStartPeriod" type="datetime" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="resultDateChange">
             </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
@@ -132,7 +120,7 @@
             <el-date-picker
               v-model="AddCompetitionRequest.competition.resultEndPeriod"
               type="datetime"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               default-time="23:59:59"
               :picker-options="resultEndPeriodPickerOptions"
             >
@@ -145,14 +133,7 @@
           {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="20">
-          <el-input
-            v-model.trim="AddCompetitionRequest.competition.competitionName"
-            filterable
-            :show-word-limit="showLimit"
-            clearable
-            maxlength="100"
-            :placeholder="$t('placeholder.input')"
-          ></el-input>
+          <el-input v-model.trim="AddCompetitionRequest.competition.competitionName" filterable :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -167,7 +148,7 @@
             :show-word-limit="showLimit"
             clearable
             maxlength="100"
-            :placeholder="$t('placeholder.input')"
+            :placeholder="$t('all.tip38')"
           ></el-input>
         </el-col>
       </el-row>
@@ -183,7 +164,7 @@
             :show-word-limit="showLimit"
             clearable
             maxlength="100"
-            :placeholder="$t('placeholder.input')"
+            :placeholder="$t('all.tip38')"
           ></el-input>
         </el-col>
       </el-row>
@@ -199,7 +180,7 @@
             :show-word-limit="showLimit"
             clearable
             maxlength="100"
-            :placeholder="$t('placeholder.input')"
+            :placeholder="$t('all.tip38')"
           ></el-input>
         </el-col>
       </el-row>
@@ -237,7 +218,7 @@
           <img width="100%" :src="dialogImageUrl" alt="" />
         </el-dialog>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="selectPhoto" type="primary" size="mini">{{ $t("all.tip135") }}</el-button>
+          <el-button @click="selectPhoto" type="primary" size="mini">{{ $t("all.tip10") }}</el-button>
         </span>
       </el-dialog> -->
       <el-row class="center-Row">
@@ -265,7 +246,7 @@
           {{ $t("all.tip427") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.cardType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.cardType" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip70')"></el-option>
             <el-option :value="1" :label="$t('all.tip68')"></el-option>
             <el-option :value="2" :label="$t('all.tip69')"></el-option>
@@ -277,8 +258,8 @@
           {{ $t("all.tip467") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.ratingType" :placeholder="$t('placeholder.select')">
-            <el-option :value="1" :label="$t('all.tip468')"></el-option>
+          <el-select v-model="AddCompetitionRequest.competitionOption.ratingType" :placeholder="$t('all.tip516')">
+            <el-option :value="1" :label="$t('all.tip76')"></el-option>
             <el-option :value="2" :label="$t('all.tip469')"></el-option>
           </el-select>
         </el-col>
@@ -288,7 +269,7 @@
           {{ $t("all.tip71") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.rankingDecision" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.rankingDecision" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip72')"></el-option>
             <el-option :value="2" :label="$t('all.tip73')"></el-option>
           </el-select>
@@ -299,11 +280,11 @@
           {{ $t("all.tip74") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.rankingCalculationScope" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.rankingCalculationScope" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip21')"></el-option>
             <el-option :value="2" :label="$t('all.tip52')"></el-option>
             <el-option :value="3" :label="$t('all.tip51')"></el-option>
-            <el-option :value="4" :label="$t('all.tip3')"></el-option>
+            <el-option :value="4" :label="$t('all.tip1')"></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -312,9 +293,9 @@
           {{ $t("all.tip75") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.rankingDecision" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.rankingDecision" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip51')"></el-option>
-            <el-option value="3" :label="$t('all.tip3')"></el-option>
+            <el-option value="3" :label="$t('all.tip1')"></el-option>
           </el-select>
         </el-col>
       </el-row> -->
@@ -323,7 +304,7 @@
           {{ $t("all.tip78") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.photoRecord" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.photoRecord" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip470')"></el-option>
             <el-option :value="2" :label="$t('all.tip80')"></el-option>
             <el-option :value="3" :label="$t('all.tip81')"></el-option>
@@ -335,7 +316,7 @@
           {{ $t("all.tip88") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.entryPhotoShooting" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.entryPhotoShooting" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -346,7 +327,7 @@
           {{ $t("all.tip85") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionOption.approveEntry" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.approveEntry" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -357,14 +338,14 @@
           {{ $t("all.tip82") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionOption.entryFee" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionOption.entryFee" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip84')"></el-option>
             <el-option :value="2" :label="$t('all.tip83')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="6">
           <div v-if="AddCompetitionRequest.competitionOption.entryFee === 1">
-            <el-input v-model="AddCompetitionRequest.competitionOption.entryFeePay" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddCompetitionRequest.competitionOption.entryFeePay" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
           </div>
         </el-col>
       </el-row>
@@ -401,7 +382,7 @@
           {{ $t("all.tip95") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.participationType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.participationType" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip244')"></el-option>
             <el-option :value="2" :label="$t('all.tip311')"></el-option>
           </el-select>
@@ -409,14 +390,14 @@
         <el-col :span="16" v-if="AddCompetitionRequest.competitionBasicOption.participationType === 1">
           <el-col class="label-g" :span="4">{{ $t("all.tip96") }}</el-col>
           <el-col :span="4">
-            <el-select v-model="AddCompetitionRequest.competitionBasicOption.includeWoman" :placeholder="$t('placeholder.select')">
+            <el-select v-model="AddCompetitionRequest.competitionBasicOption.includeWoman" :placeholder="$t('all.tip516')">
               <el-option :value="1" :label="$t('all.tip87')"></el-option>
               <el-option :value="2" :label="$t('all.tip86')"></el-option>
             </el-select>
           </el-col>
           <div v-if="AddCompetitionRequest.competitionBasicOption.includeWoman === 1">
             <el-col :span="4">
-              <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.womanNum" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.womanNum" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
           </div>
         </el-col>
@@ -429,13 +410,13 @@
           {{ $t("all.tip98") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.minimum" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.minimum" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip99") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.maximum" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.maximum" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -443,17 +424,17 @@
           {{ $t("all.tip94") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.playerChangeAvailable" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.playerChangeAvailable" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
         <div v-show="AddCompetitionRequest.competitionBasicOption.playerChangeAvailable === 1">
           <el-col :span="4">
-            <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.playerChangeNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.playerChangeNumber" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="4">
-            <el-select v-model="AddCompetitionRequest.competitionBasicOption.playerChangeType" :placeholder="$t('placeholder.select')">
+            <el-select v-model="AddCompetitionRequest.competitionBasicOption.playerChangeType" :placeholder="$t('all.tip516')">
               <el-option :value="0" :label="$t('all.tip523')"></el-option>
               <el-option :value="1" label="Set"></el-option>
               <el-option :value="2" label="Leg"></el-option>
@@ -466,13 +447,13 @@
           {{ $t("all.tip106") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.forceAttend" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.forceAttend" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
         </el-col>
         <el-col v-show="AddCompetitionRequest.competitionBasicOption.forceAttend === 1" :span="4">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.forceAttendNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.forceAttendNumber" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -483,23 +464,23 @@
           {{ $t("all.tip101") }}
         </el-col>
         <el-col :span="2">
-          <el-input v-model.number="timeRangeBefore" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="timeRangeBefore" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">
           {{ $t("all.tip102") }}
         </el-col>
         <el-col :span="2">
-          <el-input v-model.number="timeRangeBeforehours" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="timeRangeBeforehours" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="2"> {{ $t("all.tip285") }}-{{ $t("all.tip104") }} </el-col>
         <el-col :span="2">
-          <el-input v-model.number="timeRangeAfter" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="timeRangeAfter" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">
           {{ $t("all.tip102") }}
         </el-col>
         <el-col :span="2">
-          <el-input v-model.number="timeRangeAfterhours" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="timeRangeAfterhours" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">
           {{ $t("all.tip285") }}
@@ -513,19 +494,19 @@
           {{ $t("all.tip107") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointWin" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointWin" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1.5">
           {{ $t("all.tip108") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointDrawn" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointDrawn" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="1">
           {{ $t("all.tip109") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointLose" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.winningPointLose" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -533,7 +514,7 @@
           {{ $t("all.tip586") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.giveUp" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.giveUp" :placeholder="$t('all.tip516')">
             <el-option v-for="item in giveUpList" :label="$t(item.label)" :key="item.value" :value="item.value"></el-option>
           </el-select>
         </el-col>
@@ -543,7 +524,7 @@
           {{ $t("all.tip466") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.setFirst" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.setFirst" :placeholder="$t('all.tip516')">
             <el-option v-for="item in setFirstList" :label="$t(item.label)" :key="item.value" :value="item.value"></el-option>
           </el-select>
         </el-col>
@@ -553,7 +534,7 @@
           {{ $t("all.tip522") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.legScoreDraw" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.legScoreDraw" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip116')"></el-option>
             <el-option :value="2" :label="$t('all.tip473')"></el-option>
           </el-select>
@@ -564,7 +545,7 @@
           {{ $t("all.tip117") }}
         </el-col>
         <el-col :span="20">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.lineUpType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.lineUpType" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip118')"></el-option>
             <el-option :value="2" :label="$t('all.tip295')"></el-option>
             <el-option :value="3" :label="$t('all.tip474')"></el-option>
@@ -576,7 +557,7 @@
           {{ $t("all.tip119") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.lineUpDeadline" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.lineUpDeadline" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -589,19 +570,19 @@
             {{ $t("all.tip101") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model.number="fromMatchTimeBefore" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="fromMatchTimeBefore" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="1.5">
             {{ $t("all.tip102") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model.number="fromMatchTimeBeforeHours" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="fromMatchTimeBeforeHours" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="1.5">
             {{ $t("all.tip285") }}
           </el-col>
           <el-col :span="2">
-            <el-input v-model.number="fromMatchTimeBeforeMinute" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="fromMatchTimeBeforeMinute" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="1.5">
             {{ $t("all.tip121") }}
@@ -613,19 +594,19 @@
           {{ $t("all.tip122") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.entryMaxSetCount" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.entryMaxSetCount" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip124") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="AddCompetitionRequest.competitionBasicOption.entryType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="AddCompetitionRequest.competitionBasicOption.entryType" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip125')"></el-option>
             <el-option :value="2" :label="$t('all.tip126')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3">
-          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.entryTypeNum" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="AddCompetitionRequest.competitionBasicOption.entryTypeNum" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <div class="box">
@@ -652,13 +633,13 @@
           {{ $t("all.tip140") }}
         </el-col>
         <el-col :span="5">
-          <el-input v-model="searchOperator.operId" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="searchOperator.operId" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="5">
           {{ $t("all.tip63") }}
         </el-col>
         <el-col :span="5">
-          <el-input v-model="searchOperator.operName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="searchOperator.operName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-button size="mini" type="primary" @click="OperAtorSearch">{{ $t("all.tip10") }}</el-button>
@@ -681,7 +662,7 @@
         </el-pagination>
       </div>
       <div slot="footer" class="DialogButton">
-        <el-button size="mini" @click="Select" type="primary">{{ $t("all.tip135") }}</el-button>
+        <el-button size="mini" @click="Select" type="primary">{{ $t("all.tip10") }}</el-button>
       </div>
     </el-dialog>
     <el-dialog :title="$t('all.tip91')" :visible.sync="ShopDialog" top="5vh">
@@ -690,7 +671,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="Shop.countryId" @change="dialogCounteyChange" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="Shop.countryId" @change="dialogCounteyChange" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
           </el-select>
         </el-col>
@@ -698,7 +679,7 @@
           {{ $t("all.tip442") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="Shop.areaId" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="Shop.areaId" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id" clearable></el-option>
           </el-select>
         </el-col>
@@ -708,19 +689,19 @@
           {{ $t("all.tip142") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="Shop.shopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="Shop.shopName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip141") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="Shop.shopId" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="Shop.shopId" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="2">
           {{ $t("all.tip457") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="Shop.agentId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="Shop.agentId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -775,7 +756,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="countryId" @change="countryChange" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
+          <el-select v-model="countryId" @change="countryChange" clearable :default-first-option="true" :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -783,7 +764,7 @@
           {{ $t("all.tip442") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="areaId" clearable :default-first-option="true" :placeholder="$t('placeholder.select')">
+          <el-select v-model="areaId" clearable :default-first-option="true" :placeholder="$t('all.tip516')">
             <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -1127,9 +1108,8 @@ export default {
       });
     },
     getOperationdata() {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
+      this.$axios.post("/operation/getagentlist", this.$qs.stringify({ userId: this.searchOperator.userId })).then(res => {
         this.agentList = res.data.data;
-        this.Shop.agentId = Number(sessionStorage.getItem("LeagueUserId"));
         this.shopSearch();
       });
     },

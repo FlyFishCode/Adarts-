@@ -6,7 +6,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="6">
-          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.countryId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
@@ -14,7 +14,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('all.tip38')">
             <el-option v-for="item in playerList" :key="item.operationId" :label="item.operationName" :value="item.operationId"> </el-option>
           </el-select>
         </el-col>
@@ -22,7 +22,7 @@
           {{ $t("all.tip609") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.useType" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip610')"></el-option>
             <el-option :value="2" :label="$t('all.tip611')"></el-option>
           </el-select>
@@ -33,10 +33,12 @@
           {{ $t("all.tip612") }}
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="infoVO.startDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+          <el-date-picker v-model="infoVO.startDate" type="datetime" default-time="00:00:00" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('all.tip516')" @change="dateChange" clearable>
+          </el-date-picker>
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="infoVO.endDate" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+          <el-date-picker v-model="infoVO.endDate" type="datetime" default-time="23:59:59" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable>
+          </el-date-picker>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip597") }}
@@ -48,7 +50,7 @@
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.status" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.status" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip601')"></el-option>
             <el-option :value="1" :label="$t('all.tip600')"></el-option>
           </el-select>
@@ -65,7 +67,7 @@
           {{ $t("all.tip616") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.target" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.target" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip617')"></el-option>
             <el-option :value="2" :label="$t('all.tip618')"></el-option>
           </el-select>
@@ -190,6 +192,7 @@ export default {
       }
     },
     dateChange(data) {
+      console.log(data);
       if (this.infoVO.endDate && this.infoVO.endDate < data) {
         this.infoVO.endDate = "";
       }

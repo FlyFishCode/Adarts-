@@ -19,7 +19,7 @@
           {{ $t("all.tip185") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="stage.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="stage.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -27,15 +27,7 @@
           {{ $t("all.tip186") }}
         </el-col>
         <el-col :span="20">
-          <el-input
-            v-model="stage.description"
-            type="textarea"
-            :autosize="{ minRows: 4, maxRows: 4 }"
-            :show-word-limit="showLimit"
-            clearable
-            maxlength="100"
-            :placeholder="$t('placeholder.input')"
-          ></el-input>
+          <el-input v-model="stage.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -50,7 +42,7 @@
               format="yyyy-MM-dd HH:mm:ss"
               default-time="00:00:00"
               :clearable="false"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               @change="dateChange"
             ></el-date-picker>
           </el-col>
@@ -62,7 +54,7 @@
               format="yyyy-MM-dd HH:mm:ss"
               default-time="23:59:59"
               :clearable="false"
-              :placeholder="$t('placeholder.datePicker')"
+              :placeholder="$t('all.tip516')"
               :picker-options="pickerOptions"
             ></el-date-picker>
           </el-col>
@@ -80,12 +72,12 @@
           {{ $t("all.tip236") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="gameList.gameType" :placeholder="$t('placeholder.select')" @change="gameTypeChange">
+          <el-select v-model="gameList.gameType" :placeholder="$t('all.tip516')" @change="gameTypeChange">
             <el-option v-for="item in gameTypeList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="gameList.gameName" :placeholder="$t('placeholder.select')" @change="gameSubtypeChange">
+          <el-select v-model="gameList.gameName" :placeholder="$t('all.tip516')" @change="gameSubtypeChange">
             <el-option v-for="item in gameNameList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
           </el-select>
         </el-col>
@@ -96,7 +88,7 @@
             {{ $t("all.tip508") }}
           </el-col>
           <el-col :span="4" class="lineClass">
-            <el-input v-model="gameList.timming" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="gameList.timming" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </div>
         <div v-else>
@@ -104,7 +96,7 @@
             {{ $t("all.tip189") }}
           </el-col>
           <el-col :span="4" class="lineClass">
-            <el-select v-model="gameList.round" :placeholder="$t('placeholder.select')">
+            <el-select v-model="gameList.round" :placeholder="$t('all.tip516')">
               <el-option v-for="item in roundList" :key="item.value" :label="item.label" :value="item.value"> </el-option>
             </el-select>
           </el-col>
@@ -113,7 +105,7 @@
           {{ $t("all.tip190") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="gameList.credits" :placeholder="$t('placeholder.select')">
+          <el-select v-model="gameList.credits" :placeholder="$t('all.tip516')">
             <el-option v-for="item in creditsList" :key="item.value" :label="item.label" :value="item.value"> </el-option>
           </el-select>
         </el-col>
@@ -123,7 +115,7 @@
           {{ $t("all.tip191") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="gameList.parityPlay" :placeholder="$t('placeholder.select')">
+          <el-select v-model="gameList.parityPlay" :placeholder="$t('all.tip516')">
             <el-option v-for="item in parityPlayList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
           </el-select>
         </el-col>
@@ -131,7 +123,7 @@
           {{ $t("all.tip192") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="gameList.choice" :placeholder="$t('placeholder.select')">
+          <el-select v-model="gameList.choice" :placeholder="$t('all.tip516')">
             <el-option v-for="item in choiceList" :key="item.value" :label="$t(item.label)" :value="item.value"> </el-option>
           </el-select>
         </el-col>
@@ -179,7 +171,7 @@
           {{ $t("all.tip163") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.gameIn" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.gameIn" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="2" :label="$t('all.tip165')"></el-option>
             <el-option :value="3" :label="$t('all.tip167')"></el-option>
@@ -191,7 +183,7 @@
           {{ $t("all.tip164") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.gameOut" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.gameOut" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="3" :label="$t('all.tip165')"></el-option>
             <el-option :value="2" :label="$t('all.tip167')"></el-option>
@@ -210,7 +202,7 @@
           {{ $t("all.tip172") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.freezeOption" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.freezeOption" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip175')"></el-option>
             <el-option :value="2" :label="$t('all.tip176')"></el-option>
           </el-select>
@@ -219,7 +211,7 @@
           {{ $t("all.tip171") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.bull" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.bull" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip479')"></el-option>
             <el-option :value="2" :label="$t('all.tip478')"></el-option>
           </el-select>
@@ -230,7 +222,7 @@
           {{ $t("all.tip477") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.outTips" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.outTips" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -246,7 +238,7 @@
           {{ $t("all.tip481") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.inCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.inCriteria" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -255,7 +247,7 @@
           {{ $t("all.tip181") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.overkill" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.overkill" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -266,7 +258,7 @@
           {{ $t("all.tip482") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="stageGameOption.outCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="stageGameOption.outCriteria" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -276,7 +268,7 @@
             {{ $t("all.tip182") }}
           </el-col>
           <el-col :span="4" class="lineClass">
-            <el-input v-model.number="stageGameOption.scoreGap" :disabled="idDisabled" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="stageGameOption.scoreGap" :disabled="idDisabled" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </div>
       </el-row>
@@ -311,7 +303,7 @@
           {{ $t("all.tip158") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="copyName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="copyName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-button size="mini" type="primary" @click="Search">{{ $t("all.tip10") }}</el-button>

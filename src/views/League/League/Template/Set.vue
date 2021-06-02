@@ -22,7 +22,7 @@
           {{ $t("all.tip199") }}
         </el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="set.mode" :placeholder="$t('placeholder.select')" @change="modeChange">
+          <el-select v-model="set.mode" :placeholder="$t('all.tip516')" @change="modeChange">
             <el-option v-for="item in modeList" :key="item.id" :label="$t(item.label)" :value="item.id"> </el-option>
           </el-select>
         </el-col>
@@ -30,7 +30,7 @@
           {{ $t("all.tip206") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="maxPlayer" disabled :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="maxPlayer" disabled :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -38,7 +38,7 @@
           {{ $t("all.tip73") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="set.point" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="set.point" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -46,7 +46,7 @@
           {{ $t("all.tip524") }}
         </el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="set.bullStartFirst" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.bullStartFirst" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip323')"></el-option>
             <el-option :value="2" :label="$t('all.tip526')"></el-option>
           </el-select>
@@ -57,14 +57,14 @@
           {{ $t("all.tip208") }}
         </el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="set.gender" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.gender" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip209')"></el-option>
             <el-option :value="2" :label="$t('all.tip210')"></el-option>
             <el-option :value="3" :label="$t('all.tip81')"></el-option>
           </el-select>
         </el-col>
         <el-col v-show="set.gender !== 3" :span="4">
-          <el-input v-model.number="set.genderNum" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="set.genderNum" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -72,7 +72,7 @@
           {{ $t("all.tip525") }}
         </el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="set.memberLimit" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.memberLimit" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip86')"></el-option>
             <el-option :value="2" :label="$t('all.tip87')"></el-option>
           </el-select>
@@ -83,7 +83,7 @@
           {{ $t("all.tip585") }}
         </el-col>
         <el-col :span="4" id="divBoxWidth">
-          <el-select v-model="maxRating" :placeholder="$t('placeholder.select')" @change="maxRatingChange">
+          <el-select v-model="maxRating" :placeholder="$t('all.tip516')" @change="maxRatingChange">
             <el-option :value="0" :label="$t('all.tip86')"></el-option>
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
           </el-select>
@@ -112,7 +112,7 @@
           {{ $t("all.tip163") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.gameIn" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.gameIn" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="2" :label="$t('all.tip165')"></el-option>
             <el-option :value="3" :label="$t('all.tip167')"></el-option>
@@ -124,7 +124,7 @@
           {{ $t("all.tip164") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.gameOut" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.gameOut" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="3" :label="$t('all.tip165')"></el-option>
             <el-option :value="2" :label="$t('all.tip167')"></el-option>
@@ -138,7 +138,7 @@
           {{ $t("all.tip172") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.freezeOption" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.freezeOption" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip175')"></el-option>
             <el-option :value="2" :label="$t('all.tip176')"></el-option>
           </el-select>
@@ -147,7 +147,7 @@
           {{ $t("all.tip171") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.bull" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.bull" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip479')"></el-option>
             <el-option :value="2" :label="$t('all.tip478')"></el-option>
           </el-select>
@@ -158,7 +158,7 @@
           {{ $t("all.tip477") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.outTips" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.outTips" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -174,7 +174,7 @@
           {{ $t("all.tip481") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.inCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.inCriteria" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -183,7 +183,7 @@
           {{ $t("all.tip181") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.overkill" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.overkill" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -194,7 +194,7 @@
           {{ $t("all.tip482") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="set.setGameOption.outCriteria" :disabled="idDisabled" :placeholder="$t('placeholder.select')">
+          <el-select v-model="set.setGameOption.outCriteria" :disabled="idDisabled" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -204,7 +204,7 @@
             {{ $t("all.tip182") }}
           </el-col>
           <el-col :span="4" class="lineClass">
-            <el-input v-model.number="set.setGameOption.scoreGap" :disabled="idDisabled" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="set.setGameOption.scoreGap" :disabled="idDisabled" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </div>
       </el-row>
@@ -228,7 +228,7 @@
           {{ $t("all.tip54") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="howMany" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="howMany" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-button size="mini" type="primary" @click="create">{{ $t("all.tip16") }}</el-button>
@@ -239,14 +239,14 @@
           <el-table-column type="index" :label="$t('all.tip54')" min-width="9%"> </el-table-column>
           <el-table-column :label="$t('all.tip213')" min-width="9%">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.stageGameId" :placeholder="$t('placeholder.select')" @change="stageGameChange($event, scope.row)">
+              <el-select v-model="scope.row.stageGameId" :placeholder="$t('all.tip516')" @change="stageGameChange($event, scope.row)">
                 <el-option v-for="item in stageGameIdList" :key="item.stageGameId" :label="$t(item.label)" :value="item.value"> </el-option>
               </el-select>
             </template>
           </el-table-column>
           <el-table-column min-width="9%">
             <template slot-scope="scope" v-if="scope.row.stageGameId === 0">
-              <el-select v-model="scope.row.choices" :placeholder="$t('placeholder.select')">
+              <el-select v-model="scope.row.choices" :placeholder="$t('all.tip516')">
                 <el-option v-for="item in choicesList" :key="item.id" :label="$t(item.label)" :value="item.id"> </el-option>
               </el-select>
             </template>

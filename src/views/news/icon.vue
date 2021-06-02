@@ -6,7 +6,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.countryId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
@@ -20,7 +20,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
+          <el-select v-model="infoVO.userId" filterable remote :remote-method="remoteMethod" :placeholder="$t('all.tip38')" clearable>
             <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
           </el-select>
         </el-col>
@@ -28,19 +28,19 @@
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="infoVO.display" :placeholder="$t('all.tip516')" clearable>
             <el-option :value="0" :label="$t('all.tip600')"></el-option>
             <el-option :value="1" :label="$t('all.tip601')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </el-row>
     <el-row class="searchBox">
       <el-col :span="1">
-        <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
+        <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
       </el-col>
     </el-row>
     <div class="table">

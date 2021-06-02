@@ -2,10 +2,10 @@
   <div class="login">
     <div class="confim">
       <p class="font">Adarts</p>
-      <el-input :placeholder="$t('placeholder.user')" v-model="user.account" class="input" :clearable="clear">
+      <el-input :placeholder="$t('all.tip538')" v-model="user.account" class="input" :clearable="clear">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
-      <el-input :placeholder="$t('placeholder.password')" v-model="user.password" @keyup.enter.native="login" type="password" class="input" :clearable="clear">
+      <el-input :placeholder="$t('all.tip539')" v-model="user.password" @keyup.enter.native="login" type="password" class="input" :clearable="clear">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
       <div v-if="showTips" class="tips">
@@ -14,7 +14,7 @@
         <span>{{ tipsText }}</span>
       </div>
       <el-row class="LoginButton" ref="button">
-        <el-button type="primary" size="mini" @click="login">{{ $t("message.login") }}</el-button>
+        <el-button type="primary" size="mini" @click="login">{{ $t("all.tip3") }}</el-button>
       </el-row>
     </div>
   </div>
@@ -50,11 +50,11 @@ export default {
     login() {
       const vm = this;
       if (!this.user.account) {
-        this.check(this.$t("message.tips2"));
+        this.check(this.$t("all.tip537"));
         return;
       }
       if (!this.user.password) {
-        this.check(this.$t("message.tips3"));
+        this.check(this.$t("all.tip536"));
         return;
       }
       this.$axios.post("/login/login", vm.user).then(res => {

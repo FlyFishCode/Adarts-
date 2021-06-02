@@ -55,7 +55,7 @@
           {{ $t("all.tip214") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="teamListVO.ranking" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="teamListVO.ranking" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in rankingList" :key="item.id" :label="$t(item.label)" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -63,7 +63,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="teamListVO.categoryId" clearable :placeholder="$t('placeholder.select')" @change="categoryChange">
+          <el-select v-model="teamListVO.categoryId" clearable :placeholder="$t('all.tip516')" @change="categoryChange">
             <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -71,7 +71,7 @@
           {{ $t("all.tip52") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="teamListVO.divisionId" clearable :placeholder="$t('placeholder.select')" @change="divisionChange">
+          <el-select v-model="teamListVO.divisionId" clearable :placeholder="$t('all.tip516')" @change="divisionChange">
             <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -79,12 +79,12 @@
           {{ $t("all.tip21") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="teamListVO.stageId" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="teamListVO.stageId" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>

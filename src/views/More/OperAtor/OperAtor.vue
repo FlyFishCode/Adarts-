@@ -6,7 +6,7 @@
           {{ $t("all.tip457") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="operatorVO.agentId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="operatorVO.agentId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -14,17 +14,17 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="operatorVO.operName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="operatorVO.operName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>
 
     <el-row>
       <el-col :span="1" class="lineClass">
-        <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
+        <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
       </el-col>
     </el-row>
 
@@ -70,13 +70,13 @@
           {{ $t("all.tip423") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="changeVo.operAccount" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="changeVo.operAccount" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip424") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="changeVo.operPassword" type="password" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="changeVo.operPassword" type="password" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -84,7 +84,7 @@
           {{ $t("all.tip63") }}
         </el-col>
         <el-col :span="20" id="divBoxWidth">
-          <el-input v-model="changeVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="changeVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -92,7 +92,7 @@
           {{ $t("all.tip457") }}
         </el-col>
         <el-col :span="20" id="divBoxWidth">
-          <el-select v-model="changeVo.agentId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="changeVo.agentId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -102,7 +102,7 @@
           {{ $t("all.tip49") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="changeVo.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" show-word-limit maxlength="100" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="changeVo.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" show-word-limit maxlength="100" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <div slot="footer" class="DialogButton">
@@ -116,13 +116,13 @@
           {{ $t("all.tip423") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="creatorVo.operAccount" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="creatorVo.operAccount" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip424") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="createPasswword" type="password" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="createPasswword" type="password" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -130,7 +130,7 @@
           {{ $t("all.tip63") }}
         </el-col>
         <el-col :span="20" id="divBoxWidth">
-          <el-input v-model="creatorVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="creatorVo.operName" show-word-limit maxlength="30" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -138,7 +138,7 @@
           {{ $t("all.tip457") }}
         </el-col>
         <el-col :span="20" id="divBoxWidth">
-          <el-select v-model="creatorVo.agentId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="creatorVo.agentId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -148,7 +148,7 @@
           {{ $t("all.tip49") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="creatorVo.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" show-word-limit maxlength="100" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="creatorVo.description" type="textarea" :autosize="{ minRows: 4, maxRows: 4 }" show-word-limit maxlength="100" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <div slot="footer" class="DialogButton">

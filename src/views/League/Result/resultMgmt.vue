@@ -3,7 +3,7 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip3") }}
+          {{ $t("all.tip1") }}
         </el-col>
         <el-col :title="detail.name" :span="3" class="overFlowStyle lineClass">
           {{ detail.name }}
@@ -42,7 +42,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.categoryId" :placeholder="$t('placeholder.select')" clearable @change="categoryChange">
+          <el-select v-model="resultMgmtVO.serchList.categoryId" :placeholder="$t('all.tip516')" clearable @change="categoryChange">
             <el-option v-for="item in categoryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -50,7 +50,7 @@
           {{ $t("all.tip52") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.divisionId" :placeholder="$t('placeholder.select')" clearable @change="divisionChange">
+          <el-select v-model="resultMgmtVO.serchList.divisionId" :placeholder="$t('all.tip516')" clearable @change="divisionChange">
             <el-option v-for="item in divisionList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -58,7 +58,7 @@
           {{ $t("all.tip21") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.stageId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="resultMgmtVO.serchList.stageId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in stageList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -68,18 +68,18 @@
           {{ $t("all.tip315") }}
         </el-col>
         <el-col :span="3">
-          <el-input v-model="resultMgmtVO.serchList.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="resultMgmtVO.serchList.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip316") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="resultMgmtVO.serchList.teamName" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="resultMgmtVO.serchList.teamName" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in teamList" :key="item.teamId" :label="item.teamName" :value="item.teamName"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -137,13 +137,13 @@
         </el-table-column>
         <!-- <el-table-column prop="date" :label="$t('all.tip336')" min-width="12%">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="down(scope.row)">{{ $t("form.DownloadButton") }}</el-button>
+            <el-button size="mini" type="primary" @click="down(scope.row)">{{ $t("all.tip521") }}</el-button>
             <el-button size="mini" type="primary" @click="upload(scope.row)">{{ $t("all.tip338") }}</el-button>
           </template>
         </el-table-column> -->
         <el-table-column :label="$t('all.tip339')" min-width="10%">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="result(scope.row)">{{ $t("form.showButton") }}</el-button>
+            <el-button size="mini" type="primary" @click="result(scope.row)">{{ $t("all.tip486") }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -209,7 +209,7 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('placeholder.select')">
+                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('all.tip516')">
                         <el-option
                           v-for="item in homeTeamPlayers"
                           :key="item.jndex"
@@ -232,7 +232,7 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('placeholder.select')">
+                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('all.tip516')">
                         <el-option
                           v-for="item in awayTeamPlayers"
                           :key="item.jndex"

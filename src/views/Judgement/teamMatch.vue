@@ -49,7 +49,7 @@
           {{ $t("all.tip368") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="matchVO.judgeStatus" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="matchVO.judgeStatus" :placeholder="$t('all.tip516')" clearable>
             <el-option :value="1" :label="$t('all.tip376')"></el-option>
             <el-option :value="2" :label="$t('all.tip551')"></el-option>
           </el-select>
@@ -58,7 +58,7 @@
           {{ $t("all.tip226") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="matchVO.mode" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="matchVO.mode" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in modeList" :key="item.id" :label="$t(item.label)" :value="item.id"> </el-option>
           </el-select>
         </el-col>
@@ -66,7 +66,7 @@
           {{ $t("all.tip213") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="matchVO.gameNameNum" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="matchVO.gameNameNum" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in gameNameList" :key="item.value" :label="item.label" :value="item.value"> </el-option>
           </el-select>
         </el-col>
@@ -74,7 +74,7 @@
           {{ $t("all.tip367") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="matchVO.vsTeam" :placeholder="$t('placeholder.select')">
+          <el-select v-model="matchVO.vsTeam" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -86,25 +86,16 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="11">
-            <el-date-picker v-model="matchVO.startPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange" clearable>
-            </el-date-picker>
+            <el-date-picker v-model="matchVO.startPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="dateChange" clearable> </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker
-              v-model="matchVO.endPeriod"
-              type="datetime"
-              format="yyyy-MM-dd"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="23:59:59"
-              :picker-options="pickerOptions"
-              clearable
-            >
+            <el-date-picker v-model="matchVO.endPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="23:59:59" :picker-options="pickerOptions" clearable>
             </el-date-picker>
           </el-col>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>

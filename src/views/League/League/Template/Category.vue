@@ -20,7 +20,7 @@
           {{ $t("all.tip146") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="AddCategoryRequest.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -35,7 +35,7 @@
             :show-word-limit="showLimit"
             clearable
             maxlength="100"
-            :placeholder="$t('placeholder.input')"
+            :placeholder="$t('all.tip38')"
           ></el-input>
         </el-col>
       </el-row>
@@ -54,11 +54,11 @@
           <el-radio v-model="AddCategoryRequest.ratingLimit" :label="1">{{ $t("all.tip154") }}</el-radio>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.ratingMin" clearable :disabled="ratingDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.ratingMin" clearable :disabled="ratingDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="1" class="lineClass">-</el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.ratingMax" clearable :disabled="ratingDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.ratingMax" clearable :disabled="ratingDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -67,11 +67,11 @@
           <el-radio v-model="AddCategoryRequest.ppdLimit" :label="1">{{ $t("all.tip155") }}</el-radio>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.ppdMin" clearable :disabled="ppdDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.ppdMin" clearable :disabled="ppdDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="1" class="lineClass">-</el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.ppdMax" clearable :disabled="ppdDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.ppdMax" clearable :disabled="ppdDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -80,11 +80,11 @@
           <el-radio v-model="AddCategoryRequest.mprLimit" :label="1">{{ $t("all.tip156") }}</el-radio>
         </el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.mprMin" clearable :disabled="mprDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.mprMin" clearable :disabled="mprDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="1" class="lineClass">-</el-col>
         <el-col :span="4">
-          <el-input v-model="AddCategoryRequest.mprMax" clearable :disabled="mprDisabled" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="AddCategoryRequest.mprMax" clearable :disabled="mprDisabled" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">

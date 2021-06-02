@@ -52,7 +52,7 @@
             <el-col>
               <el-col class="label-g" :span="6">{{ $t("all.tip316") }}</el-col>
               <el-col :span="6" class="lineClass">
-                <el-input v-model="TeamInformationVO.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+                <el-input v-model="TeamInformationVO.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
               </el-col>
               <el-col class="label-g" :span="6">{{ $t("all.tip382") }}</el-col>
               <el-col :span="6" class="lineClass">
@@ -79,7 +79,7 @@
             <el-col>
               <el-col class="label-g" :span="6">{{ $t("all.tip455") }}</el-col>
               <el-col :span="6" id="divBoxWidth">
-                <el-select v-model="TeamInformationVO.shopId" filterable remote :remote-method="getShopList" @change="$forceUpdate()" :placeholder="$t('placeholder.input')">
+                <el-select v-model="TeamInformationVO.shopId" filterable remote :remote-method="getShopList" @change="$forceUpdate()" :placeholder="$t('all.tip38')">
                   <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"> </el-option>
                 </el-select>
               </el-col>
@@ -176,14 +176,14 @@
           </el-row>
           <div class="SelectClass">
             <el-col :span="10">
-              <el-select v-model="rating.type" :placeholder="$t('placeholder.select')" @change="typeChange">
+              <el-select v-model="rating.type" :placeholder="$t('all.tip516')" @change="typeChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip42')" :value="1"></el-option>
                 <el-option :label="$t('all.tip43')" :value="2"></el-option>
               </el-select>
             </el-col>
             <el-col :span="10">
-              <el-select v-model="rating.year" :placeholder="$t('placeholder.select')" @change="yearChange">
+              <el-select v-model="rating.year" :placeholder="$t('all.tip516')" @change="yearChange">
                 <el-option v-for="item in yearList" :key="item.id" :label="item.year" :value="item.id"></el-option>
               </el-select>
             </el-col>
@@ -192,7 +192,7 @@
         <el-tab-pane :label="$t('all.tip398')" name="second">
           <el-row>
             <el-col :span="4">
-              <el-select v-model="entryHistoryVO.leagueType" :placeholder="$t('placeholder.select')" @change="entryHistoryTypeChange">
+              <el-select v-model="entryHistoryVO.leagueType" :placeholder="$t('all.tip516')" @change="entryHistoryTypeChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip42')" :value="1"></el-option>
                 <el-option :label="$t('all.tip43')" :value="2"></el-option>
@@ -256,24 +256,24 @@
         <el-tab-pane :label="$t('all.tip408')" name="third">
           <el-row>
             <el-col :span="4">
-              <el-select v-model="scheduleResultVO.leagueType" :placeholder="$t('placeholder.select')" @change="leagueTypeChange">
+              <el-select v-model="scheduleResultVO.leagueType" :placeholder="$t('all.tip516')" @change="leagueTypeChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip42')" :value="1"></el-option>
                 <el-option :label="$t('all.tip43')" :value="2"></el-option>
               </el-select>
             </el-col>
             <el-col :span="4">
-              <el-select v-model="scheduleResultVO.year" :placeholder="$t('placeholder.select')" @change="scheduleResultYearChange">
+              <el-select v-model="scheduleResultVO.year" :placeholder="$t('all.tip516')" @change="scheduleResultYearChange">
                 <el-option v-for="item in yearList" :key="item.id" :label="item.year" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="4">
-              <el-select v-model="scheduleResultVO.competitionId" :placeholder="$t('placeholder.select')" @change="competitionIdChange">
+              <el-select v-model="scheduleResultVO.competitionId" :placeholder="$t('all.tip516')" @change="competitionIdChange">
                 <el-option v-for="item in competitionList" :key="item.competitionId" :label="item.competitionName" :value="item.competitionId"></el-option>
               </el-select>
             </el-col>
             <el-col :span="4">
-              <el-select v-model="scheduleResultVO.matchStatus" :placeholder="$t('placeholder.select')" @change="matchStatusChange">
+              <el-select v-model="scheduleResultVO.matchStatus" :placeholder="$t('all.tip516')" @change="matchStatusChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip289')" :value="1"></el-option>
                 <el-option :label="$t('all.tip333')" :value="2"></el-option>
@@ -392,13 +392,13 @@
               {{ $t("all.tip456") }}
             </el-col>
             <el-col :span="8">
-              <el-input v-model="captainDialogData.account" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="captainDialogData.account" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col :span="3" class="label-g">
               {{ $t("all.tip324") }}
             </el-col>
             <el-col :span="8">
-              <el-input v-model="captainDialogData.name" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="captainDialogData.name" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
           </el-row>
           <el-row class="center-Row">
@@ -406,19 +406,19 @@
               {{ $t("all.tip426") }}
             </el-col>
             <el-col :span="8">
-              <el-input v-model="captainDialogData.cardNo" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="captainDialogData.cardNo" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col :span="3" class="label-g">
               {{ $t("all.tip208") }}
             </el-col>
             <el-col :span="8" id="divBoxWidth">
-              <el-select v-model="captainDialogData.gender" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="captainDialogData.gender" clearable :placeholder="$t('all.tip516')">
                 <el-option value="0" :label="$t('all.tip210')"></el-option>
                 <el-option value="1" :label="$t('all.tip209')"></el-option>
               </el-select>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="captainSearch">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="captainSearch">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-row>
           <div class="dialogtable">
@@ -480,19 +480,19 @@
           {{ $t("all.tip456") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="addMemberVO.account" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="addMemberVO.account" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip259") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="addMemberVO.userName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="addMemberVO.userName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip260") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="addMemberVO.cardNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="addMemberVO.cardNumber" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -500,7 +500,7 @@
           {{ $t("all.tip208") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="addMemberVO.gender" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="addMemberVO.gender" clearable :placeholder="$t('all.tip516')">
             <el-option value="0" :label="$t('all.tip210')"></el-option>
             <el-option value="1" :label="$t('all.tip209')"></el-option>
           </el-select>
@@ -509,7 +509,7 @@
           {{ $t("all.tip455") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="addMemberVO.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="addMemberVO.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="3" class="lineClass">
           <el-button type="primary" size="mini" @click="addMemberSearch">{{ $t("all.tip10") }}</el-button>

@@ -3,7 +3,7 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip3") }}
+          {{ $t("all.tip1") }}
         </el-col>
         <el-col :title="detial.competitionName" :span="3" class="overFlowStyle lineClass">
           {{ detial.competitionName }}
@@ -46,31 +46,31 @@
         {{ $t("all.tip316") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip315") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip246") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.captainName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.captainName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip455") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="1">
         {{ $t("all.tip25") }}
       </el-col>
       <el-col :span="2">
-        <el-select v-model="EntryList.status" :placeholder="$t('placeholder.select')">
+        <el-select v-model="EntryList.status" :placeholder="$t('all.tip516')">
           <el-option value=" " :label="$t('all.tip0')"></el-option>
           <el-option :value="1" :label="$t('all.tip242')"></el-option>
           <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -78,9 +78,9 @@
         </el-select>
       </el-col>
       <el-col :span="2" class="buttonBox">
-        <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+        <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         <!-- <el-button type="primary" size="mini" @click="upload">{{ $t("all.tip338") }}</el-button> -->
-        <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
+        <!-- <el-button type="primary" size="mini" @click="download">{{ $t("all.tip521") }}</el-button> -->
       </el-col>
     </el-row>
     <el-row class="center-Row">
@@ -95,13 +95,13 @@
             {{ $t("all.tip316") }}
           </el-col>
           <el-col :span="6">
-            <el-input v-model="topBoxData.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip315") }}
           </el-col>
           <el-col :span="6">
-            <el-input v-model="topBoxData.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -109,13 +109,13 @@
             {{ $t("all.tip246") }}
           </el-col>
           <el-col :span="6">
-            <el-input v-model="topBoxData.captainName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.captainName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip455") }}
           </el-col>
           <el-col :span="6">
-            <el-input v-model="topBoxData.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="3" class="lineClass">
             <el-button type="primary" size="mini" @click="TopboxSearch">{{ $t("all.tip10") }}</el-button>
@@ -285,7 +285,6 @@ export default {
     const data = handle(this.$route.query.data);
     this.init(data);
     this.search();
-    this.TopboxSearch();
   },
   methods: {
     init(data) {
@@ -333,17 +332,19 @@ export default {
         }
       });
     },
-    topBoxTableDataCurrentChange(value) {
-      this.topBoxData.pageNum = value;
+    TopboxSearch() {
       this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
         this.topBoxTableData = res.data.data.list;
+        this.topBoxTableDataTotal = res.data.data.total;
       });
+    },
+    topBoxTableDataCurrentChange(value) {
+      this.topBoxData.pageNum = value;
+      this.TopboxSearch();
     },
     topBoxTableDataSizeChange(value) {
       this.topBoxData.pageSize = value;
-      this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
-        this.topBoxTableData = res.data.data.list;
-      });
+      this.TopboxSearch();
     },
     sizeChange(value) {
       const vm = this;
@@ -404,14 +405,9 @@ export default {
         }
       });
     },
-    TopboxSearch() {
-      this.$axios.post("/getNoEntryTeamList", this.topBoxData).then(res => {
-        this.topBoxTableData = res.data.data.list;
-        this.topBoxTableDataTotal = res.data.data.total;
-      });
-    },
     addTeam() {
       this.dialogTableVisible = true;
+      this.TopboxSearch();
     },
     tableDataSelection(val) {
       this.tableSelection = val;

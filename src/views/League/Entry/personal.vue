@@ -44,31 +44,31 @@
         {{ $t("all.tip261") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip262") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip260") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.captainName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.captainName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="2">
         {{ $t("all.tip208") }}
       </el-col>
       <el-col :span="2">
-        <el-input v-model="EntryList.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+        <el-input v-model="EntryList.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
       </el-col>
       <el-col class="label-g" :span="1">
         {{ $t("all.tip25") }}
       </el-col>
       <el-col :span="2">
-        <el-select v-model="EntryList.status" :placeholder="$t('placeholder.select')">
+        <el-select v-model="EntryList.status" :placeholder="$t('all.tip516')">
           <el-option :value="0" :label="$t('all.tip0')"></el-option>
           <el-option :value="1" :label="$t('all.tip26')"></el-option>
           <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -76,9 +76,9 @@
         </el-select>
       </el-col>
       <el-col :span="4" class="btnClass">
-        <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+        <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         <el-button type="primary" size="mini" @click="upload">{{ $t("all.tip338") }}</el-button>
-        <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
+        <!-- <el-button type="primary" size="mini" @click="download">{{ $t("all.tip521") }}</el-button> -->
       </el-col>
     </el-row>
     <el-row>
@@ -95,19 +95,19 @@
             {{ $t("all.tip259") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="topBoxData.userName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.userName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip456") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="topBoxData.userId" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.userId" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip260") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="topBoxData.cardNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.cardNumber" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -115,13 +115,13 @@
             {{ $t("all.tip208") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="topBoxData.gender" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.gender" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip455") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="topBoxData.homeShop" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="topBoxData.homeShop" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col :span="3" class="lineClass">
             <el-button type="primary" size="mini" @click="TopboxSearch">{{ $t("all.tip10") }}</el-button>
@@ -202,17 +202,26 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1" :page-sizes="[10, 50, 100, 200]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { downloadFile, returnType } from '@/components/common/Utils';
+import { downloadFile, returnType } from "@/components/common/Utils";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
@@ -221,34 +230,34 @@ export default {
       multipleSelection: [],
       tableSelection: [],
       topBox: {
-        a: '',
+        a: "",
         radio: false
       },
       detial: {
         status: 0,
-        competitionName: '',
-        type: '',
-        competitionStartPeriod: '',
-        competitionEndPeriod: '',
-        entryStartPeriod: '',
-        entryEndPeriod: '',
-        area: ''
+        competitionName: "",
+        type: "",
+        competitionStartPeriod: "",
+        competitionEndPeriod: "",
+        entryStartPeriod: "",
+        entryEndPeriod: "",
+        area: ""
       },
       EntryList: {
-        competitionId: '',
-        teamName: '',
-        teamId: '',
-        captainName: '',
-        homeShopName: '',
-        status: '',
+        competitionId: "",
+        teamName: "",
+        teamId: "",
+        captainName: "",
+        homeShopName: "",
+        status: "",
         pageNum: 1,
         pageSize: 10
       },
       topBoxData: {
-        teamName: '',
-        teamId: '',
-        captainName: '',
-        homeShopName: '',
+        teamName: "",
+        teamId: "",
+        captainName: "",
+        homeShopName: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -270,27 +279,27 @@ export default {
     },
     search() {
       const vm = this;
-      this.$axios.post('/getCompetitionTeamList', vm.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", vm.EntryList).then(res => {
         vm.tableData = res.data.data.list;
         vm.EntryList.pageNum = res.data.data.pageNum;
         vm.total = res.data.data.total;
       });
     },
     upload() {
-      console.log('upload');
+      console.log("upload");
     },
     download() {
       const vm = this;
-      this.$axios.post('/download', vm.EntryList).then(res => {
+      this.$axios.post("/download", vm.EntryList).then(res => {
         downloadFile(res);
       });
     },
     create() {
-      console.log('Create');
+      console.log("Create");
     },
     push(a) {
       this.$router.push({
-        name: 'member',
+        name: "member",
         query: {
           msg: JSON.stringify(a.row)
         }
@@ -299,7 +308,7 @@ export default {
     sizeChange(value) {
       const vm = this;
       vm.EntryList.pageSize = value;
-      this.$axios.post('/getCompetitionTeamList', vm.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", vm.EntryList).then(res => {
         vm.tableData = res.data.data.list;
         vm.EntryList.pageNum = res.data.data.pageNum;
         vm.total = res.data.data.total;
@@ -308,15 +317,15 @@ export default {
     currentChange(value) {
       const vm = this;
       vm.EntryList.pageNum = value;
-      this.$axios.post('/getCompetitionTeamList', vm.EntryList).then(res => {
+      this.$axios.post("/getCompetitionTeamList", vm.EntryList).then(res => {
         vm.tableData = res.data.data.list;
         vm.EntryList.pageSize = res.data.data.pageSize;
         vm.total = res.data.data.total;
       });
     },
     agree() {
-      const ids = returnType(this.tableSelection, 'id');
-      this.$axios.post('/approve', { ids, status: 2 }).then(res => {
+      const ids = returnType(this.tableSelection, "id");
+      this.$axios.post("/approve", { ids, status: 2 }).then(res => {
         this.search();
         if (res.data) {
           console.log(res.data);
@@ -324,8 +333,8 @@ export default {
       });
     },
     reject() {
-      const ids = returnType(this.tableSelection, 'id');
-      this.$axios.post('/approve', { ids, status: 3 }).then(res => {
+      const ids = returnType(this.tableSelection, "id");
+      this.$axios.post("/approve", { ids, status: 3 }).then(res => {
         this.search();
         if (res.data) {
           console.log(res.data);
@@ -336,7 +345,7 @@ export default {
       // const ids = returnType(this.tableSelection, 'id');
       const ids = data.id;
       console.log(data);
-      this.$axios.post('/approve', { ids, status: 1 }).then(res => {
+      this.$axios.post("/approve", { ids, status: 1 }).then(res => {
         this.search();
         if (res.data) {
           console.log(res.data);
@@ -345,8 +354,8 @@ export default {
     },
     add() {
       const vm = this;
-      const teamIDS = returnType(this.multipleSelection, 'teamId');
-      this.$axios.post('/teamIntoCompetition', { teamIds: teamIDS, competitionId: vm.detial.id }).then(res => {
+      const teamIDS = returnType(this.multipleSelection, "teamId");
+      this.$axios.post("/teamIntoCompetition", { teamIds: teamIDS, competitionId: vm.detial.id }).then(res => {
         console.log(res.data.statusText);
         this.search();
       });
@@ -355,7 +364,7 @@ export default {
     TopboxSearch() {
       const vm = this;
       this.topBoxData.competitionId = this.detial.id;
-      this.$axios.post('/getNoEntryTeamList', vm.topBoxData).then(res => {
+      this.$axios.post("/getNoEntryTeamList", vm.topBoxData).then(res => {
         vm.topBoxTableData = res.data;
       });
     },

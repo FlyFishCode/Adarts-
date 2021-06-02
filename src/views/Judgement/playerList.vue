@@ -53,7 +53,7 @@
           {{ $t("all.tip214") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -64,7 +64,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -75,7 +75,7 @@
           {{ $t("all.tip52") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -86,7 +86,7 @@
           {{ $t("all.tip21") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -94,7 +94,7 @@
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>

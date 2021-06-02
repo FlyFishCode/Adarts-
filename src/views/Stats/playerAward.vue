@@ -6,7 +6,7 @@
           {{ $t("all.tip537") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="EntryMgmt.type" :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.type" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip42')"></el-option>
             <el-option :value="2" :label="$t('all.tip43')"></el-option>
@@ -16,7 +16,7 @@
           {{ $t("all.tip539") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="EntryMgmt.name" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.name" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
@@ -24,13 +24,13 @@
           {{ $t("all.tip436") }}
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="EntryMgmt.startPeriod" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+          <el-date-picker v-model="EntryMgmt.startPeriod" type="date" default-time="00:00:00" :placeholder="$t('all.tip516')" @change="dateChange" clearable> </el-date-picker>
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="EntryMgmt.endPeriod" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+          <el-date-picker v-model="EntryMgmt.endPeriod" type="date" default-time="23:59:59" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
           <!-- <el-button type="primary" size="mini" @click="search">{{ $t("all.tip11") }}</el-button> -->
         </el-col>
       </el-row>

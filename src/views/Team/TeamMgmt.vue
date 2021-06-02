@@ -8,25 +8,25 @@
               {{ $t("all.tip315") }}
             </el-col>
             <el-col :span="3">
-              <el-input v-model="Competition.teamId" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="Competition.teamId" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col class="label-g" :span="2">
               {{ $t("all.tip316") }}
             </el-col>
             <el-col :span="3">
-              <el-input v-model="Competition.teamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="Competition.teamName" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col class="label-g" :span="2">
               {{ $t("all.tip246") }}
             </el-col>
             <el-col :span="3">
-              <el-input v-model="Competition.captain" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="Competition.captain" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col class="label-g" :span="2">
               {{ $t("all.tip455") }}
             </el-col>
             <el-col :span="3">
-              <el-input v-model="Competition.homeShopName" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model="Competition.homeShopName" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
           </el-row>
           <el-row class="center-Row">
@@ -34,12 +34,12 @@
               {{ $t("all.tip442") }}
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="Competition.countryId" clearable :placeholder="$t('placeholder.select')" @change="areaChange">
+              <el-select v-model="Competition.countryId" clearable :placeholder="$t('all.tip516')" @change="areaChange">
                 <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="Competition.areaId" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="Competition.areaId" clearable :placeholder="$t('all.tip516')">
                 <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
@@ -49,31 +49,31 @@
               {{ $t("all.tip154") }}
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="ratingType" :placeholder="$t('placeholder.select')">
-                <el-option :label="$t('all.tip468')" :value="1"></el-option>
+              <el-select v-model="ratingType" :placeholder="$t('all.tip516')">
+                <el-option :label="$t('all.tip76')" :value="1"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="Competition.timeSlot" :placeholder="$t('placeholder.select')">
+              <el-select v-model="Competition.timeSlot" :placeholder="$t('all.tip516')">
                 <el-option :label="$t('all.tip378')" :value="0"></el-option>
                 <el-option :label="$t('all.tip379')" :value="1"></el-option>
                 <el-option :label="$t('all.tip380')" :value="2"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="Competition.pmr" :placeholder="$t('placeholder.select')">
+              <el-select v-model="Competition.pmr" :placeholder="$t('all.tip516')">
                 <el-option :label="$t('all.tip155')" :value="1"></el-option>
                 <el-option :label="$t('all.tip156')" :value="2"></el-option>
                 <el-option :label="$t('all.tip154')" :value="3"></el-option>
               </el-select>
             </el-col>
             <el-col :span="4" class="lineInputClass">
-              <el-input v-model.number="Competition.min" clearable :placeholder="$t('placeholder.input')"></el-input> _
-              <el-input v-model.number="Competition.max" clearable :placeholder="$t('placeholder.input')"></el-input>
+              <el-input v-model.number="Competition.min" clearable :placeholder="$t('all.tip38')"></el-input> _
+              <el-input v-model.number="Competition.max" clearable :placeholder="$t('all.tip38')"></el-input>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
-              <!-- <el-button type="primary" size="mini" @click="download">{{ $t("form.DownloadButton") }}</el-button> -->
+              <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
+              <!-- <el-button type="primary" size="mini" @click="download">{{ $t("all.tip521") }}</el-button> -->
             </el-col>
           </el-row>
         </el-row>
@@ -124,7 +124,7 @@
                 <el-table-column prop="totalMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"> </el-table-column>
               </el-table-column>
               <el-table-column prop="address" :label="$t('all.tip128')" min-width="3%">
-                <el-table-column prop="participationLg" :sortable="true" :label="$t('all.tip385')" min-width="3%"> </el-table-column>
+                <el-table-column prop="participationLg" :sortable="true" :label="$t('all.tip1')" min-width="3%"> </el-table-column>
                 <el-table-column prop="participationSum" :sortable="true" :label="$t('all.tip386')" min-width="3%"> </el-table-column>
               </el-table-column>
             </el-table-column>
@@ -150,12 +150,12 @@
               {{ $t("all.tip4") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.countryId" clearable :placeholder="$t('placeholder.select')" @change="areaIdChange">
+              <el-select v-model="TeamMgmt.countryId" clearable :placeholder="$t('all.tip516')" @change="areaIdChange">
                 <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.areaId" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.areaId" clearable :placeholder="$t('all.tip516')">
                 <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
@@ -163,7 +163,7 @@
               {{ $t("all.tip6") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.status" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.status" clearable :placeholder="$t('all.tip516')">
                 <el-option :value="0" :label="$t('all.tip0')"></el-option>
                 <el-option :value="1" :label="$t('all.tip26')"></el-option>
                 <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -174,7 +174,7 @@
               {{ $t("all.tip8") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.name" clearable filterable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.name" clearable filterable :placeholder="$t('all.tip516')">
                 <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
               </el-select>
             </el-col>
@@ -185,17 +185,17 @@
             </el-col>
             <el-col :span="6">
               <el-col :span="12">
-                <el-date-picker v-model="TeamMgmt.competitionStartPeriod" type="datetime" default-time="00:00:00" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+                <el-date-picker v-model="TeamMgmt.competitionStartPeriod" type="datetime" default-time="00:00:00" clearable :placeholder="$t('all.tip516')"> </el-date-picker>
               </el-col>
               <el-col :span="12">
-                <el-date-picker v-model="TeamMgmt.competitionEndPeriod" type="datetime" default-time="23:59:59" clearable :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+                <el-date-picker v-model="TeamMgmt.competitionEndPeriod" type="datetime" default-time="23:59:59" clearable :placeholder="$t('all.tip516')"> </el-date-picker>
               </el-col>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip5") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.type" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.type" clearable :placeholder="$t('all.tip516')">
                 <el-option value="1" :label="$t('all.tip40')"></el-option>
                 <el-option value="2" :label="$t('all.tip41')"></el-option>
               </el-select>
@@ -204,7 +204,7 @@
               {{ $t("all.tip382") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.creatorId" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.creatorId" clearable :placeholder="$t('all.tip516')">
                 <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
               </el-select>
             </el-col>
@@ -214,7 +214,7 @@
               {{ $t("all.tip9") }}
             </el-col>
             <el-col :span="3">
-              <el-select v-model="TeamMgmt.operatorId" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="TeamMgmt.operatorId" clearable :placeholder="$t('all.tip516')">
                 <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
               </el-select>
             </el-col>
@@ -264,7 +264,7 @@
                 <el-table-column prop="totalMpr" :sortable="true" :label="$t('all.tip156')" min-width="3%"> </el-table-column>
               </el-table-column>
               <el-table-column :label="$t('all.tip128')" min-width="3%">
-                <el-table-column prop="participationLg" :sortable="true" :label="$t('all.tip385')" min-width="3%"> </el-table-column>
+                <el-table-column prop="participationLg" :sortable="true" :label="$t('all.tip1')" min-width="3%"> </el-table-column>
                 <el-table-column prop="participationSum" :sortable="true" :label="$t('all.tip386')" min-width="3%"> </el-table-column>
               </el-table-column>
             </el-table-column>
@@ -290,13 +290,13 @@
           {{ $t("all.tip316") }}
         </el-col>
         <el-col :span="8">
-          <el-input v-model="Dialog.teamName" clearable maxlength="20" show-word-limit :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="Dialog.teamName" clearable maxlength="20" show-word-limit :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">
           {{ $t("all.tip632") }}
         </el-col>
         <el-col :span="8" id="divBoxWidth">
-          <el-select v-model="Dialog.captainId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+          <el-select v-model="Dialog.captainId" filterable remote :remote-method="remoteMethod" :placeholder="$t('all.tip38')">
             <el-option v-for="item in playerList" :key="item.id" :label="item.account" :value="item.id"> </el-option>
           </el-select>
         </el-col>
@@ -306,7 +306,7 @@
           {{ $t("all.tip455") }}
         </el-col>
         <el-col :span="8" id="divBoxWidth">
-          <el-select v-model="Dialog.shopId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="Dialog.shopId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in shopList" :key="item.shopId" :label="item.shopName" :value="item.shopId"></el-option>
           </el-select>
         </el-col>
@@ -314,7 +314,7 @@
           {{ $t("all.tip389") }}
         </el-col>
         <el-col :span="8" id="divBoxWidth">
-          <el-date-picker v-model="Dialog.regDate" type="date" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')"> </el-date-picker>
+          <el-date-picker v-model="Dialog.regDate" type="date" format="yyyy-MM-dd" :placeholder="$t('all.tip516')"> </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="DialogButton">

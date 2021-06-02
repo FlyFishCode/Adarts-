@@ -5,7 +5,7 @@
         <el-row class="search">
           <el-row class="center-Row">
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip3") }}
+              {{ $t("all.tip1") }}
             </el-col>
             <el-col :span="21" class="overFlowStyle">
               {{ MatchTableListVO.competitionname }}
@@ -16,7 +16,7 @@
               {{ $t("all.tip51") }}
             </el-col>
             <el-col :span="5" id="divBoxWidth">
-              <el-select v-model="MatchTableListVO.matchTable.categoryId" clearable :placeholder="$t('placeholder.select')" @change="change">
+              <el-select v-model="MatchTableListVO.matchTable.categoryId" clearable :placeholder="$t('all.tip516')" @change="change">
                 <el-option v-for="item in categoryList" :key="item.categoryId" :label="item.categoryName" :value="item.categoryId"></el-option>
               </el-select>
             </el-col>
@@ -24,7 +24,7 @@
               {{ $t("all.tip52") }}
             </el-col>
             <el-col :span="5" id="divBoxWidth">
-              <el-select v-model="MatchTableListVO.matchTable.divisionId" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="MatchTableListVO.matchTable.divisionId" clearable :placeholder="$t('all.tip516')">
                 <el-option v-for="item in divisionList" :key="item.divisionId" :label="item.divisionName" :value="item.divisionId"></el-option>
               </el-select>
             </el-col>
@@ -34,7 +34,7 @@
               {{ $t("all.tip274") }}
             </el-col>
             <el-col :span="5" id="divBoxWidth">
-              <el-select v-model="MatchTableListVO.matchTable.matchTableType" clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="MatchTableListVO.matchTable.matchTableType" clearable :placeholder="$t('all.tip516')">
                 <el-option :label="$t('all.tip277')" :value="1"></el-option>
                 <el-option :label="$t('all.tip449')" :value="2"></el-option>
                 <el-option :label="$t('all.tip490')" :value="3"></el-option>
@@ -44,13 +44,13 @@
               {{ $t("all.tip273") }}
             </el-col>
             <el-col :span="5" id="divBoxWidth">
-              <el-select v-model="MatchTableListVO.matchTable.status" filterable clearable :placeholder="$t('placeholder.select')">
+              <el-select v-model="MatchTableListVO.matchTable.status" filterable clearable :placeholder="$t('all.tip516')">
                 <el-option :label="$t('all.tip532')" :value="1"></el-option>
                 <el-option :label="$t('all.tip515')" :value="2"></el-option>
               </el-select>
             </el-col>
             <el-col :span="2" class="lineClass">
-              <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+              <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-row>
         </el-row>
@@ -113,7 +113,7 @@
         <el-row class="search">
           <el-row class="center-Row">
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip3") }}
+              {{ $t("all.tip1") }}
             </el-col>
             <el-col :span="21" class="overFlowStyle">
               {{ MatchTableListVO.competitionname }}
@@ -124,7 +124,7 @@
               {{ $t("all.tip25") }}
             </el-col>
             <el-col :span="5" id="divBoxWidth">
-              <el-select v-model="Knockout.status" :placeholder="$t('placeholder.select')" @change="selectChange">
+              <el-select v-model="Knockout.status" :placeholder="$t('all.tip516')" @change="selectChange">
                 <el-option :value="1" :label="$t('all.tip0')"></el-option>
                 <el-option :value="2" :label="$t('all.tip532')"></el-option>
                 <el-option :value="3" :label="$t('all.tip515')"></el-option>

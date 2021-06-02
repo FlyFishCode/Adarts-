@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="center-Row">
-      <el-col class="label-g" :span="4">{{ $t("all.tip3") }}</el-col>
+      <el-col class="label-g" :span="4">{{ $t("all.tip1") }}</el-col>
       <el-col :span="20" class="textClass">{{ Stage.formList.competition }}</el-col>
     </el-row>
     <el-row class="center-Row">
@@ -26,42 +26,42 @@
       <el-row class="center-Row">
         <el-col class="label-g" :span="4">{{ $t("all.tip270") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="Stage.MatchTableOption.matchTable" :disabled="hasData" :placeholder="$t('placeholder.select')">
+          <el-select v-model="Stage.MatchTableOption.matchTable" :disabled="hasData" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip277')"></el-option>
             <!-- <el-option :value="2" :label="$t('all.tip449')"></el-option> -->
             <!-- <el-option :value="3" :label="$t('all.tip490')"></el-option> -->
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="Stage.MatchTableOption.round" :disabled="hasData" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="Stage.MatchTableOption.round" :disabled="hasData" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="4">{{ $t("all.tip278") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="cycleType" :placeholder="$t('placeholder.select')" :disabled="hasData">
+          <el-select v-model="cycleType" :placeholder="$t('all.tip516')" :disabled="hasData">
             <el-option :value="1" :label="$t('all.tip484')"></el-option>
             <el-option :value="2" :label="$t('all.tip485')"></el-option>
-            <el-option :value="3" :label="$t('all.tip486')"></el-option>
+            <el-option :value="3" :label="$t('all.ti102')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="cycle" clearable :disabled="hasData" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="cycle" clearable :disabled="hasData" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col class="label-g" :span="4">{{ $t("all.tip279") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="siteType" :disabled="hasData" :placeholder="$t('placeholder.select')">
+          <el-select v-model="siteType" :disabled="hasData" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip519')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4">
-          <el-input v-model.number="Stage.MatchTableOption.site" :disabled="hasData" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="Stage.MatchTableOption.site" :disabled="hasData" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
         <el-col class="label-g" :span="4">{{ $t("all.tip281") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="dayType" :placeholder="$t('placeholder.select')" :disabled="hasData">
+          <el-select v-model="dayType" :placeholder="$t('all.tip516')" :disabled="hasData">
             <el-option :value="1" :label="$t('all.tip487')"></el-option>
             <el-option :value="2" :label="$t('all.tip488')"></el-option>
             <el-option :value="3" :label="$t('all.tip0')"></el-option>
@@ -69,7 +69,7 @@
         </el-col>
         <el-col class="label-g" :span="4">{{ $t("all.tip282") }}</el-col>
         <el-col :span="4">
-          <el-select v-model="Stage.MatchTableOption.holiday" :placeholder="$t('placeholder.select')" :disabled="hasData">
+          <el-select v-model="Stage.MatchTableOption.holiday" :placeholder="$t('all.tip516')" :disabled="hasData">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -103,19 +103,19 @@
         <el-col class="label-g" :span="4">{{ $t("all.tip284") }}</el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip285") }}</el-col>
         <el-col :span="2">
-          <el-select v-model="Stage.MatchTableOption.hour" :placeholder="$t('placeholder.select')" :disabled="hasData">
+          <el-select v-model="Stage.MatchTableOption.hour" :placeholder="$t('all.tip516')" :disabled="hasData">
             <el-option v-for="item in HourArr" :key="item.index" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="1">{{ $t("all.tip286") }}</el-col>
         <el-col :span="2">
-          <el-select v-model="Stage.MatchTableOption.minute" :placeholder="$t('placeholder.select')" :disabled="hasData">
+          <el-select v-model="Stage.MatchTableOption.minute" :placeholder="$t('all.tip516')" :disabled="hasData">
             <el-option v-for="item in MinuteArr" :key="item.index" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="2">{{ $t("all.tip287") }}</el-col>
         <el-col :span="2">
-          <el-input v-model.number="Stage.MatchTableOption.intervalTime" clearable :disabled="hasData" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model.number="Stage.MatchTableOption.intervalTime" clearable :disabled="hasData" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="2" v-if="!hasData" class="lineClass">
           <el-button size="mini" @click="create" type="primary">{{ $t("all.tip516") }}</el-button>
@@ -373,7 +373,7 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('placeholder.select')">
+                      <el-select v-model="leg.playerList[jndex].homePlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 1)" :placeholder="$t('all.tip516')">
                         <el-option
                           v-for="item in homeTeamPlayers"
                           :key="item.jndex"
@@ -396,7 +396,7 @@
                   <div v-for="(item, jndex) in new Array(scope.row.MaxPlayer).fill(scope.row.MaxPlayer)" :key="jndex">
                     <!-- // leg 每一leg -->
                     <div class="tableselectBox">
-                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('placeholder.select')">
+                      <el-select v-model="leg.playerList[jndex].visitingPlayerId" @change="HomePlayerSelect($event, scope, index, jndex, 2)" :placeholder="$t('all.tip516')">
                         <el-option
                           v-for="item in awayTeamPlayers"
                           :key="item.jndex"
@@ -434,7 +434,7 @@
         <el-row class="center-Row">
           <el-col class="label-g" :span="4">{{ $t("all.tip5") }}</el-col>
           <el-col :span="4">
-            <el-select v-model="LeagueMgmtVO.DialogMoudleName" :placeholder="$t('placeholder.select')">
+            <el-select v-model="LeagueMgmtVO.DialogMoudleName" :placeholder="$t('all.tip516')">
               <el-option value="1" :label="$t('all.tip0')"></el-option>
               <el-option value="2" :label="$t('all.tip42')"></el-option>
               <el-option value="3" :label="$t('all.tip43')"></el-option>
@@ -538,7 +538,7 @@
           <el-row>
             <el-col class="label-g" :span="4">{{ $t("all.tip299") }}</el-col>
             <el-col :span="6" class="timeStyle">
-              <el-date-picker v-model="matchTableTime" type="datetime" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" default-time="00:00:00"></el-date-picker>
+              <el-date-picker v-model="matchTableTime" type="datetime" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" default-time="00:00:00"></el-date-picker>
             </el-col>
             <el-col :span="4" class="button">
               <el-button size="mini" type="success" @click="save">{{ $t("all.tip136") }}</el-button>

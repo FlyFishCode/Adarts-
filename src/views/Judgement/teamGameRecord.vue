@@ -67,7 +67,7 @@
           {{ $t("all.tip53") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="gameRecordVO.setId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="gameRecordVO.setId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in setList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -75,12 +75,12 @@
           {{ $t("all.tip54") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="gameRecordVO.legId" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="gameRecordVO.legId" :placeholder="$t('all.tip516')" clearable>
             <el-option v-for="item in legList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="getData">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="getData">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -123,7 +123,7 @@
           {{ $t("all.tip445") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="updata.playerResultId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="updata.playerResultId" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -134,7 +134,7 @@
           {{ $t("all.tip368") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="updata.judge" :placeholder="$t('placeholder.select')">
+          <el-select v-model="updata.judge" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip551')"></el-option>
             <el-option value="2" :label="$t('all.tip376')"></el-option>
           </el-select>
@@ -143,7 +143,7 @@
           {{ $t("all.tip370") }}
         </el-col>
         <el-col :span="7" id="divBoxWidth">
-          <el-input v-model="updata.judgement" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="updata.judgement" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="save">{{ $t("all.tip136") }}</el-button>

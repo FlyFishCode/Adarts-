@@ -6,7 +6,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.countryId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
@@ -14,7 +14,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.operationId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')" clearable>
+          <el-select v-model="infoVO.operationId" filterable remote :remote-method="remoteMethod" :placeholder="$t('all.tip38')" clearable>
             <el-option v-for="item in playerList" :key="item.operationId" :label="item.operationName" :value="item.operationId"> </el-option>
           </el-select>
         </el-col>
@@ -22,10 +22,10 @@
           {{ $t("all.tip436") }}
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('placeholder.datePicker')" @change="dateChange" clearable> </el-date-picker>
+          <el-date-picker v-model="infoVO.startDate" type="date" default-time="00:00:00" :placeholder="$t('all.tip516')" @change="dateChange" clearable> </el-date-picker>
         </el-col>
         <el-col :span="3">
-          <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('placeholder.datePicker')" :picker-options="pickerOptions" clearable> </el-date-picker>
+          <el-date-picker v-model="infoVO.endDate" type="date" default-time="23:59:59" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
       </el-row>
       <el-row>
@@ -33,7 +33,7 @@
           {{ $t("all.tip609") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.useType" :placeholder="$t('placeholder.select')" clearable>
+          <el-select v-model="infoVO.useType" :placeholder="$t('all.tip516')" clearable>
             <el-option :value="1" :label="$t('all.tip610')"></el-option>
             <el-option :value="2" :label="$t('all.tip611')"></el-option>
           </el-select>
@@ -48,19 +48,19 @@
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.status" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.status" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip601')"></el-option>
             <el-option :value="1" :label="$t('all.tip600')"></el-option>
           </el-select>
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </el-row>
     <el-row class="searchBox">
       <el-col :span="1">
-        <el-button type="primary" size="mini" @click="create">{{ $t("form.Createbutton") }}</el-button>
+        <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
       </el-col>
     </el-row>
     <div class="table">

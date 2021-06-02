@@ -6,12 +6,12 @@
           {{ $t("all.tip4") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="EntryMgmt.countryId" clearable :placeholder="$t('placeholder.select')" @change="change">
+          <el-select v-model="EntryMgmt.countryId" clearable :placeholder="$t('all.tip516')" @change="change">
             <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="EntryMgmt.areaId" clearable :placeholder="$t('placeholder.select')" @change="areaIdChange">
+          <el-select v-model="EntryMgmt.areaId" clearable :placeholder="$t('all.tip516')" @change="areaIdChange">
             <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -19,7 +19,7 @@
           {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="EntryMgmt.status" :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.status" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip26')"></el-option>
             <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -30,7 +30,7 @@
           {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="EntryMgmt.creator" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.creator" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -42,23 +42,17 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="competitionChange"> </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.competitionStartPeriod" type="date" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="competitionChange"> </el-date-picker>
           </el-col>
           <el-col :span="12">
-            <el-date-picker
-              v-model="EntryMgmt.competitionEndPeriod"
-              type="date"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="23:59:59"
-              :picker-options="competitionOptions"
-            ></el-date-picker>
+            <el-date-picker v-model="EntryMgmt.competitionEndPeriod" type="date" :placeholder="$t('all.tip516')" default-time="23:59:59" :picker-options="competitionOptions"></el-date-picker>
           </el-col>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="EntryMgmt.type" :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.type" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip42')"></el-option>
             <el-option :value="2" :label="$t('all.tip43')"></el-option>
@@ -68,7 +62,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="4">
-          <el-select v-model="EntryMgmt.operator" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.operator" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -79,22 +73,22 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.entryStartPeriod" type="date" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="entryChange"> </el-date-picker>
           </el-col>
           <el-col :span="12">
-            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="date" :placeholder="$t('placeholder.datePicker')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
+            <el-date-picker v-model="EntryMgmt.entryEndPeriod" type="date" :placeholder="$t('all.tip516')" default-time="23:59:59" :picker-options="entryOptions"> </el-date-picker>
           </el-col>
         </el-col>
         <el-col class="label-g" :span="3">
           {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="EntryMgmt.competitionName" clearable filterable :placeholder="$t('placeholder.select')">
+          <el-select v-model="EntryMgmt.competitionName" clearable filterable :placeholder="$t('all.tip516')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </el-row>
@@ -107,7 +101,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('all.tip3')" min-width="10%">
+        <el-table-column :label="$t('all.tip1')" min-width="10%">
           <template slot-scope="scope">
             <div class="tableLink" @click="push(scope.row)">{{ scope.row.competitionName }}</div>
           </template>
@@ -154,7 +148,7 @@
         <el-table-column min-width="10%">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="mgmt(scope.row)">{{ $t("all.tip241") }}</el-button>
-            <el-button size="mini" type="primary" @click="assign(scope.row)">{{ $t("all.tip264") }}</el-button>
+            <el-button size="mini" type="primary" @click="assign(scope.row)">{{ $t("all.tip64") }}</el-button>
           </template>
         </el-table-column>
       </el-table>

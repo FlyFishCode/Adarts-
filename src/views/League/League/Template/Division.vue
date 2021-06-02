@@ -19,7 +19,7 @@
           {{ $t("all.tip158") }}
         </el-col>
         <el-col :span="20">
-          <el-input v-model="division.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="division.name" :show-word-limit="showLimit" clearable maxlength="100" :placeholder="$t('all.tip38')"></el-input>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -34,7 +34,7 @@
             :show-word-limit="showLimit"
             clearable
             maxlength="100"
-            :placeholder="$t('placeholder.input')"
+            :placeholder="$t('all.tip38')"
           ></el-input>
         </el-col>
       </el-row>
@@ -50,7 +50,7 @@
           {{ $t("all.tip163") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.gameIn" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.gameIn" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="2" :label="$t('all.tip165')"></el-option>
             <el-option :value="3" :label="$t('all.tip167')"></el-option>
@@ -62,7 +62,7 @@
           {{ $t("all.tip164") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.gameOut" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.gameOut" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip31')"></el-option>
             <el-option :value="3" :label="$t('all.tip165')"></el-option>
             <el-option :value="2" :label="$t('all.tip167')"></el-option>
@@ -76,7 +76,7 @@
           {{ $t("all.tip172") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.freezeOption" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.freezeOption" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip175')"></el-option>
             <el-option :value="2" :label="$t('all.tip176')"></el-option>
           </el-select>
@@ -85,7 +85,7 @@
           {{ $t("all.tip171") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.bull" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.bull" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip479')"></el-option>
             <el-option :value="2" :label="$t('all.tip478')"></el-option>
             <!-- <el-option :value=3 :label="$t('all.tip480')"></el-option> -->
@@ -97,7 +97,7 @@
           {{ $t("all.tip477") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.outTips" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.outTips" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -113,7 +113,7 @@
           {{ $t("all.tip481") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.inCriteria" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.inCriteria" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -122,7 +122,7 @@
           {{ $t("all.tip181") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.overkill" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.overkill" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip87')"></el-option>
             <el-option :value="2" :label="$t('all.tip86')"></el-option>
           </el-select>
@@ -133,7 +133,7 @@
           {{ $t("all.tip482") }}
         </el-col>
         <el-col :span="4" class="lineClass">
-          <el-select v-model="division.outCriteria" :placeholder="$t('placeholder.select')">
+          <el-select v-model="division.outCriteria" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip179')"></el-option>
             <el-option :value="2" :label="$t('all.tip180')"></el-option>
           </el-select>
@@ -143,7 +143,7 @@
             {{ $t("all.tip182") }}
           </el-col>
           <el-col :span="4" class="lineClass">
-            <el-input v-model.number="division.scoreGap" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model.number="division.scoreGap" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </div>
       </el-row>
@@ -172,7 +172,7 @@
           {{ $t("all.tip158") }}
         </el-col>
         <el-col :span="4">
-          <el-input v-model="copyName" clearable :placeholder="$t('placeholder.input')"></el-input>
+          <el-input v-model="copyName" clearable :placeholder="$t('all.tip38')"></el-input>
         </el-col>
         <el-col :span="4" class="lineClass">
           <el-button size="mini" type="primary" @click="Search">{{ $t("all.tip10") }}</el-button>

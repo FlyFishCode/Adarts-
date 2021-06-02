@@ -3,7 +3,7 @@
     <div class="box">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip3") }}
+          {{ $t("all.tip1") }}
         </el-col>
         <el-col :span="4" class="overFlowStyle">
           {{ AddMemberVO.competition }}
@@ -63,7 +63,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400"
+      >
+      </el-pagination>
     </div>
     <div>
       <el-dialog title="Add Member" :visible.sync="dialogTableVisible">
@@ -72,19 +81,19 @@
             {{ $t("all.tip268") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AddMemberVO.ID" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddMemberVO.ID" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip324") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AddMemberVO.Name" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddMemberVO.Name" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip260") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AddMemberVO.CardNumber" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddMemberVO.CardNumber" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
         <el-row class="center-Row">
@@ -92,25 +101,25 @@
             {{ $t("all.tip208") }}
           </el-col>
           <el-col :span="4">
-            <el-select v-model="AddMemberVO.Gender" :placeholder="$t('placeholder.select')">
+            <el-select v-model="AddMemberVO.Gender" :placeholder="$t('all.tip516')">
               <el-option :label="$t('all.tip209')" value="1"></el-option>
               <el-option :label="$t('all.tip210')" value="2"></el-option>
             </el-select>
           </el-col>
           <el-col class="label-g" :span="4">
-            {{ 'Home Shop' }}
+            {{ "Home Shop" }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AddMemberVO.HomeShop" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddMemberVO.HomeShop" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
           <el-col class="label-g" :span="4">
             {{ $t("all.tip316") }}
           </el-col>
           <el-col :span="4">
-            <el-input v-model="AddMemberVO.TeamName" clearable :placeholder="$t('placeholder.input')"></el-input>
+            <el-input v-model="AddMemberVO.TeamName" clearable :placeholder="$t('all.tip38')"></el-input>
           </el-col>
         </el-row>
-        <el-row  class="DialogButton">
+        <el-row class="DialogButton">
           <el-col :span="2">
             <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
           </el-col>
@@ -146,27 +155,27 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
       dialogTableVisible: false,
       multipleSelection: [],
       AddMemberVO: {
-        ID: '',
-        Name: '',
-        CardNumber: '',
-        Gender: '',
-        HomeShop: '',
-        TeamName: ''
+        ID: "",
+        Name: "",
+        CardNumber: "",
+        Gender: "",
+        HomeShop: "",
+        TeamName: ""
       },
       tableData: [
         {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
+          date: "2016-05-03",
+          name: "王小虎",
+          province: "上海",
+          city: "普陀区",
+          address: "上海市普陀区金沙江路 1518 弄",
           zip: 200333
         }
       ]
@@ -182,9 +191,7 @@ export default {
     addTopbox() {
       this.dialogTableVisible = false;
     },
-    search() {
-
-    },
+    search() {},
     remove() {},
     sizeChange(a) {
       console.log(a);

@@ -8,9 +8,9 @@
         </div>
       </el-col> -->
       <el-col :span="3">
-        <!-- <el-form-item :label="$t('message.language')"> -->
+        <!-- <el-form-item :label="$t('all.tip385')"> -->
         <span class="languageClass">{{ $t("all.tip460") }}</span>
-        <el-select v-model="language" :placeholder="$t('placeholder.select')" size="mini" @change="selectLanguage" class="selectClass">
+        <el-select v-model="language" :placeholder="$t('all.tip516')" size="mini" @change="selectLanguage" class="selectClass">
           <el-option value="jtzh" label="简体中文"></el-option>
           <el-option value="ftzh" label="繁體中文"></el-option>
           <el-option value="en" label="English"></el-option>
@@ -19,7 +19,7 @@
       </el-col>
       <el-col :span="2">
         <div @click="loginOut" class="loginOut">
-          {{ $t("message.loginOut") }}
+          {{ $t("all.tip385") }}
         </div>
       </el-col>
     </el-row>

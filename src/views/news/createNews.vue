@@ -6,7 +6,7 @@
           {{ $t("all.tip17") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.countryId" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.countryId" :placeholder="$t('all.tip516')">
             <el-option v-for="item in countryList" :key="item.id" :value="item.id" :label="item.label"></el-option>
           </el-select>
         </el-col>
@@ -14,7 +14,7 @@
           {{ $t("all.tip51") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.category" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.category" :placeholder="$t('all.tip516')">
             <el-option v-for="item in categoryList" :key="item.value" :value="item.value" :label="$t(item.label)"></el-option>
           </el-select>
         </el-col>
@@ -26,7 +26,7 @@
             <el-input v-model="infoVO.opeatorName" disabled></el-input>
           </div>
           <div v-else>
-            <el-select v-model="infoVO.opeatorId" filterable remote :remote-method="remoteMethod" :placeholder="$t('placeholder.input')">
+            <el-select v-model="infoVO.opeatorId" filterable remote :remote-method="remoteMethod" :placeholder="$t('all.tip38')">
               <el-option v-for="item in opeatorList" :key="item.operationId" :value="item.operationId" :label="item.operationName"> </el-option>
             </el-select>
           </div>
@@ -49,7 +49,7 @@
           {{ $t("all.tip600") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="infoVO.display" :placeholder="$t('placeholder.select')">
+          <el-select v-model="infoVO.display" :placeholder="$t('all.tip516')">
             <el-option :value="1" :label="$t('all.tip600')"></el-option>
             <el-option :value="0" :label="$t('all.tip601')"></el-option>
           </el-select>

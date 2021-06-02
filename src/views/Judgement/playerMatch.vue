@@ -67,7 +67,7 @@
           {{ $t("all.tip368") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -78,7 +78,7 @@
           {{ $t("all.tip226") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -89,7 +89,7 @@
           {{ $t("all.tip213") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -100,7 +100,7 @@
           {{ $t("all.tip367") }}
         </el-col>
         <el-col :span="2">
-          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('placeholder.select')">
+          <el-select v-model="ResultMgmtVO.StatusValue" :placeholder="$t('all.tip516')">
             <el-option value="1" :label="$t('all.tip0')"></el-option>
             <el-option value="2" :label="$t('all.tip27')"></el-option>
             <el-option value="3" :label="$t('all.tip26')"></el-option>
@@ -112,24 +112,17 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('placeholder.datePicker')" default-time="00:00:00" @change="dateChange">
+            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="dateChange">
             </el-date-picker>
           </el-col>
           <el-col :span="1" class="lineClass">-</el-col>
           <el-col :span="11">
-            <el-date-picker
-              v-model="ResultMgmtVO.competitionEndPeriod"
-              type="datetime"
-              format="yyyy-MM-dd"
-              :placeholder="$t('placeholder.datePicker')"
-              default-time="23:59:59"
-              :picker-options="pickerOptions"
-            >
+            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="23:59:59" :picker-options="pickerOptions">
             </el-date-picker>
           </el-col>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </div>

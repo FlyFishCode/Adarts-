@@ -6,12 +6,12 @@
           {{ $t("all.tip4") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="scheduleVO.countryId" clearable :placeholder="$t('placeholder.select')" @change="change">
+          <el-select v-model="scheduleVO.countryId" clearable :placeholder="$t('all.tip516')" @change="change">
             <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="scheduleVO.areaId" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="scheduleVO.areaId" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -19,7 +19,7 @@
           {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="scheduleVO.leagueName" clearable filterable :placeholder="$t('placeholder.select')">
+          <el-select v-model="scheduleVO.leagueName" clearable filterable :placeholder="$t('all.tip516')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
@@ -27,7 +27,7 @@
           {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="scheduleVO.status" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="scheduleVO.status" clearable :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip27')"></el-option>
             <el-option :value="2" :label="$t('all.tip26')"></el-option>
@@ -41,7 +41,7 @@
         </el-col>
         <el-col :span="6">
           <el-col :span="12" id="divBoxWidth">
-            <el-select v-model="scheduleVO.leagueType" :placeholder="$t('placeholder.select')">
+            <el-select v-model="scheduleVO.leagueType" :placeholder="$t('all.tip516')">
               <el-option value="" :label="$t('all.tip0')"></el-option>
               <el-option :value="1" :label="$t('all.tip42')"></el-option>
               <el-option :value="2" :label="$t('all.tip43')"></el-option>
@@ -52,7 +52,7 @@
           {{ $t("all.tip457") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="scheduleVO.agentUserId" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="scheduleVO.agentUserId" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in agentList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -60,19 +60,19 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="scheduleVO.operUserId" clearable :placeholder="$t('placeholder.select')">
+          <el-select v-model="scheduleVO.operUserId" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="2" class="lineClass">
-          <el-button type="primary" size="mini" @click="search">{{ $t("form.SearchButton") }}</el-button>
+          <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>
         </el-col>
       </el-row>
     </el-row>
     <el-row>
       <el-col :span="14" class="timeBox">
         <el-col :span="8">
-          <el-date-picker v-model="time" type="month" value-format="yyyy-M" :placeholder="$t('placeholder.datePicker')" @change="timeChange"> </el-date-picker>
+          <el-date-picker v-model="time" type="month" value-format="yyyy-M" :placeholder="$t('all.tip516')" @change="timeChange"> </el-date-picker>
         </el-col>
       </el-col>
       <el-col :span="10" class="timeBox">
