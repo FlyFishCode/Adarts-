@@ -3,10 +3,11 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip537") }}
+          {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="templateVO.leagueType" :placeholder="$t('all.tip516')">
+            <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip42')"></el-option>
             <el-option :value="2" :label="$t('all.tip43')"></el-option>
           </el-select>
@@ -33,7 +34,11 @@
 
     <div class="table">
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="type" :label="$t('all.tip537')" min-width="10%"> </el-table-column>
+        <el-table-column prop="type" :label="$t('all.tip5')" min-width="10%">
+          <!-- <template slot-scope="scope">
+            <div>{{ scope.row.type === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
+          </template> -->
+        </el-table-column>
         <el-table-column prop="date" :label="$t('all.tip48')" min-width="10%">
           <div slot-scope="scope" class="tableStyle">
             <div class="tableLink" @click="push(scope.row.competitionId)">{{ scope.row.name }}</div>
@@ -79,7 +84,7 @@ export default {
       total: 1,
       templateVO: {
         userId: "",
-        leagueType: 1,
+        leagueType: 0,
         name: "",
         operatorId: "",
         pageNum: 1,

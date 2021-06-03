@@ -3,7 +3,7 @@
     <el-row class="search">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip535") }}
+          {{ $t("all.tip4") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="judgementVO.countryId" :placeholder="$t('all.tip516')" @change="AreaChange" clearable>
@@ -16,7 +16,7 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip536") }}
+          {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="judgementVO.status" :placeholder="$t('all.tip516')">
@@ -27,7 +27,7 @@
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip539") }}
+          {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3">
           <el-select v-model="judgementVO.name" clearable :placeholder="$t('all.tip516')">
@@ -38,7 +38,7 @@
 
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip538") }}
+          {{ $t("all.tip7") }}
         </el-col>
         <el-col :span="6">
           <el-col :span="12" id="divBoxWidth">
@@ -50,7 +50,7 @@
         </el-col>
 
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip537") }}
+          {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="judgementVO.type" :placeholder="$t('all.tip516')">
@@ -85,7 +85,7 @@
 
     <div class="table">
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="date" :label="$t('all.tip537')" min-width="7%">
+        <el-table-column prop="date" :label="$t('all.tip5')" min-width="7%">
           <template slot-scope="scope">
             <div>{{ scope.row.type === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
           </template>
@@ -109,7 +109,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="name" :label="$t('all.tip538')" min-width="8%">
+        <el-table-column prop="name" :label="$t('all.tip7')" min-width="8%">
           <template slot-scope="scope">
             {{ scope.row.competitionStartPeriod | showDate }}-{{ scope.row.competitionEndPeriod | showDate }}
           </template>

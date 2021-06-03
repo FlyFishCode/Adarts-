@@ -288,11 +288,13 @@ export default {
       this.getPlayerList();
     },
     topBoxSearch() {
-      const vm = this;
       this.$axios.post("/getCompNoPlayTeamList", this.TopBox).then(res => {
-        this.$message(res.data.msg);
-        vm.topBoxTotal = res.data.data.total;
-        vm.topBoxTableData = res.data.data.list;
+        if (res.data.code === 1000) {
+          this.topBoxTotal = res.data.data.total;
+          this.topBoxTableData = res.data.data.list;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     addMember() {

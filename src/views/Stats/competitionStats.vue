@@ -3,10 +3,10 @@
     <div class="table">
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="year" :label="$t('all.tip544')" min-width="7%"> </el-table-column>
-        <el-table-column :label="$t('all.tip537')" min-width="7%">
+        <el-table-column :label="$t('all.tip5')" min-width="7%">
           <template slot-scope="scope">
             <div>
-              {{scope.row.leagueType === 1?$t('all.tip40'):$t('all.tip41')}}
+              {{ scope.row.leagueType === 1 ? $t("all.tip40") : $t("all.tip41") }}
             </div>
           </template>
         </el-table-column>
@@ -23,7 +23,16 @@
       </el-table>
     </div>
     <div class="page">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page='1' :page-sizes="[10, 50, 100, 200]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="1"
+        :page-sizes="[10, 50, 100, 200]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -32,7 +41,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
+  name: "home",
   components: {},
   data() {
     return {
@@ -49,7 +58,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$axios.post('/leaguestats', this.info).then(res => {
+      this.$axios.post("/leaguestats", this.info).then(res => {
         if (res.data.errorCode) {
           this.$message(res.data.msg);
         } else {

@@ -3,7 +3,7 @@
     <el-row class="search">
       <el-row class="center-Row">
         <el-col class="label-g" :span="3">
-          {{ $t("all.tip537") }}
+          {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3">
           <el-select v-model="teamVO.competitionType" :placeholder="$t('all.tip516')">
@@ -12,25 +12,22 @@
             <el-option :value="2" :label="$t('all.tip43')"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="2">
-          {{ $t("all.tip539") }}
+        <el-col class="label-g" :span="3">
+          {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3">
           <el-select v-model="teamVO.competitionName" clearable filterable :placeholder="$t('all.tip516')">
             <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-col>
-        <el-col class="label-g" :span="1">
+        <el-col class="label-g" :span="2">
           {{ $t("all.tip436") }}
         </el-col>
-        <el-col :span="7">
-          <el-col :span="11">
-            <el-date-picker v-model="teamVO.startPeriod" type="datetime" default-time="00:00:00" :placeholder="$t('all.tip516')" @change="dateChange" clearable> </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="teamVO.endPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
-          </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="teamVO.startPeriod" type="datetime" default-time="00:00:00" :placeholder="$t('all.tip516')" @change="dateChange" clearable> </el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="teamVO.endPeriod" type="datetime" default-time="23:59:59" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
         <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>

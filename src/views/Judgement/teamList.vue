@@ -9,7 +9,7 @@
           {{ teamList.competitionName }}
         </el-col>
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip536") }}
+          {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
           <div v-if="teamList.status === 1">{{ this.$t("all.tip26") }}</div>
@@ -25,13 +25,13 @@
       </el-row>
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip537") }}
+          {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
           {{ teamList.leagueType === 1 ? $t("all.tip42") : $t("all.tip43") }}
         </el-col>
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip538") }}
+          {{ $t("all.tip7") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass"> {{ teamList.competitionStartPeriod | showDate }}~{{ teamList.competitionEndPeriod | showDate }} </el-col>
         <el-col :span="3" class="label-g">

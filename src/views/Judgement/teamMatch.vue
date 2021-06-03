@@ -9,7 +9,7 @@
           {{ match.competitionName }}
         </el-col>
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip536") }}
+          {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
           <div v-if="match.status === 1">{{ this.$t("all.tip26") }}</div>
@@ -25,13 +25,13 @@
       </el-row>
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip537") }}
+          {{ $t("all.tip5") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass">
           {{ match.leagueType === 1 ? $t("all.tip42") : $t("all.tip43") }}
         </el-col>
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip538") }}
+          {{ $t("all.tip7") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass"> {{ match.start }}~{{ match.end }} </el-col>
         <el-col :span="3" class="label-g">
@@ -137,13 +137,13 @@
         <el-table-column prop="vsTeam" :label="$t('all.tip367')" min-width="5%"> </el-table-column>
         <el-table-column prop="judge" :label="$t('all.tip368')" min-width="5%">
           <template slot-scope="scope">
-            <!-- <div v-if="scope.row.judge === 1">
-              <div class="tableLink" @click="show">{{ $t("all.tip376") }}</div>
+            <div v-if="scope.row.judge === 1">
+              <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip376") }}</div>
             </div>
             <div v-if="scope.row.judge === 2">
-              <div class="tableLink" @click="show">{{ $t("all.tip551") }}</div>
-            </div> -->
-            <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip309") }}</div>
+              <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip551") }}</div>
+            </div>
+            <!-- <div class="tableLink" @click="showResult(scope.row)">{{ $t("all.tip309") }}</div> -->
           </template>
         </el-table-column>
         <!-- <el-table-column prop="address" :label="$t('all.tip33')" min-width="5%">
@@ -160,7 +160,7 @@
 
     <el-dialog :title="$t('all.tip540')" :visible.sync="dialogTableVisible">
       <el-table :data="dialogData">
-        <el-table-column prop="date" :label="$t('all.tip321')" min-width="10%">
+        <el-table-column prop="date" :label="$t('all.tip321')" min-width="12%">
           <template slot-scope="scope">
             <div>{{ scope.row.date | showDate }}</div>
           </template>
@@ -315,17 +315,21 @@ export default {
     },
     showResult(data) {
       this.$axios.post(`/judgement/getJudge?playerResultId=${data.playerResultId}`).then(res => {
-        const obj = {
-          date: data.date,
-          value: `${data.setId}/${data.legId}`,
-          team: data.vsTeam,
-          judge: res.data.data.judge,
-          reson: res.data.data.judgement || "-",
-          editor: res.data.data.editor || "-"
-        };
-        this.dialogData = [obj];
+        if (res.data.code === 1000) {
+          const obj = {
+            date: data.date,
+            value: `${data.setNum}/${data.legNum}`,
+            team: data.vsTeam,
+            judge: res.data.data.judge,
+            reson: res.data.data.judgement || "-",
+            editor: res.data.data.editor || "-"
+          };
+          this.dialogData = [obj];
+          this.dialogTableVisible = true;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
-      this.dialogTableVisible = true;
     }
   }
 };

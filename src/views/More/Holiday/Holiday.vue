@@ -168,11 +168,13 @@ export default {
       return label;
     },
     search() {
-      this.holidayVO.countryId = this.holidayVO.countryId || -1;
       this.$axios.post("/holiday/getholiday", this.holidayVO).then(res => {
-        this.total = res.data.data.total;
-        this.tableData = res.data.data.list;
-        this.holidayVO.countryId = "";
+        if (res.data.code === 1000) {
+          this.total = res.data.data.total;
+          this.tableData = res.data.data.list;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     create() {
@@ -198,8 +200,9 @@ export default {
         if (res.data.code === 1000) {
           this.search();
           this.holidayDialog = false;
+        } else {
+          this.$message(res.data.msg);
         }
-        this.$message(res.data.msg);
       });
     },
     modify(id) {

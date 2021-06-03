@@ -16,7 +16,7 @@
         <el-col class="label-g" :span="3">{{ $t("all.tip6") }}</el-col>
         <el-col :span="3">
           <el-select v-model="LeagueMgmtVO.status" :placeholder="$t('all.tip516')">
-            <el-option :value="0" :label="$t('all.tip0')"></el-option>
+            <el-option :value="null" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip26')"></el-option>
             <el-option :value="2" :label="$t('all.tip27')"></el-option>
           </el-select>
@@ -267,7 +267,7 @@ export default {
       LeagueMgmtVO: {
         areaId: "",
         countryId: "",
-        status: 0,
+        status: null,
         type: 0,
         competitionStartPeriod: "",
         competitionEndPeriod: "",
@@ -307,70 +307,57 @@ export default {
     };
   },
   mounted() {
-    const vm = this;
-    this.LeagueMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
-    this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.LeagueMgmtVO.userId })).then(res => {
-      vm.ContinentArr = res.data.data;
-    });
-    this.search();
-    this.getOperationdata();
-    this.getCretetionData();
-    this.getAllCompetitionName();
+    this.init();
   },
   methods: {
+    init() {
+      this.LeagueMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
+      this.getCountry(this.LeagueMgmtVO.userId);
+      this.search();
+      this.getOperationdata(this.LeagueMgmtVO.userId);
+      this.getCretetionData(this.LeagueMgmtVO.userId);
+      this.getAllCompetitionName(this.LeagueMgmtVO.userId);
+    },
     search() {
-      // eslint-disable-next-line no-unused-expressions
-      this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
       this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
-        if (res.data.data) {
+        if (res.data.code === 1000) {
           this.tableData = res.data.data.list;
           this.total = res.data.data.total;
-        }
-        // eslint-disable-next-line no-unused-expressions
-        this.LeagueMgmtVO.status === null ? (this.LeagueMgmtVO.status = 0) : this.LeagueMgmtVO.status;
-      });
-    },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
-        this.competitionNameList = res.data.data;
-      });
-    },
-    getOperationdata() {
-      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
-        if (res.data.data) {
-          this.operList = res.data.data.list;
-        }
-      });
-    },
-    getCretetionData() {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.LeagueMgmtVO.userId })).then(res => {
-        if (res.data.data) {
-          this.creteList = res.data.data;
+        } else {
+          this.$message(res.data.msg);
         }
       });
     },
     sizeChange(value) {
-      const vm = this;
       this.LeagueMgmtVO.pageSize = value;
-      // eslint-disable-next-line no-unused-expressions
-      this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
-      this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
-        // eslint-disable-next-line no-unused-expressions
-        this.LeagueMgmtVO.status === null ? (this.LeagueMgmtVO.status = 0) : this.LeagueMgmtVO.status;
-      });
+      this.search();
     },
     currentChange(value) {
-      const vm = this;
       this.LeagueMgmtVO.pageNum = value;
-      // eslint-disable-next-line no-unused-expressions
-      this.LeagueMgmtVO.status === 0 ? (this.LeagueMgmtVO.status = null) : this.LeagueMgmtVO.status;
-      this.$axios.post("/getcompetitionList", this.LeagueMgmtVO).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
-        // eslint-disable-next-line no-unused-expressions
-        this.LeagueMgmtVO.status === null ? (this.LeagueMgmtVO.status = 0) : this.LeagueMgmtVO.status;
+      this.search();
+    },
+    getCountry(creatorId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
+        this.ContinentArr = res.data.data;
+      });
+    },
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
+        this.competitionNameList = res.data.data;
+      });
+    },
+    getOperationdata(userId) {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
+        if (res.data.code === 1000) {
+          this.operList = res.data.data.list;
+        }
+      });
+    },
+    getCretetionData(userId) {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
+        if (res.data.code === 1000) {
+          this.creteList = res.data.data;
+        }
       });
     },
     dateChange(data) {
