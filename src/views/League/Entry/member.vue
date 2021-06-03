@@ -266,11 +266,11 @@ export default {
             if (j.isEntryCard) {
               Object.assign(j, { selectValue: index });
               // eslint-disable-next-line no-param-reassign
-              i.leagueMpr = j.leagueMpr;
+              // i.leagueMpr = j.leagueMpr;
               // eslint-disable-next-line no-param-reassign
-              i.leaguePPd = j.leaguePPd;
+              // i.leaguePPd = j.leaguePPd;
               // eslint-disable-next-line no-param-reassign
-              i.leagueRating = j.leagueRating;
+              // i.leagueRating = j.leagueRating;
             } else {
               Object.assign(j, { selectValue: "" });
             }

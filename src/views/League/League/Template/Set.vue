@@ -375,7 +375,7 @@ export default {
       value: 0,
       setId: "set",
       allGameList: [
-        { value: 0, label: "all.tip521" },
+        { value: 0, label: "all.tip44" },
         { value: 1, label: "all.tip499" },
         { value: 2, label: "all.tip500" },
         { value: 3, label: "all.tip501" },
@@ -803,7 +803,7 @@ export default {
       pro.then(res => {
         // 如果有一个游戏是可选择，则添加，否则不添加
         if (res.some(i => i.choice === 1)) {
-          this.stageGameIdList = [{ value: 0, label: this.$t("all.tip521") }];
+          this.stageGameIdList = [{ value: 0, label: this.$t("all.tip44") }];
         }
         res.forEach(i => {
           vm.allGameList.forEach(j => {
