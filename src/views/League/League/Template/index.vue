@@ -6,7 +6,7 @@
     <el-row class="tac">
       <el-col :span="5" class="menuBox">
         <div class="treeList">
-          <el-tree :data="treeDataList" ref="tree" node-key="id" current-node-key="1" default-expand-all :expand-on-click-node="false" highlight-current @node-click="entryDetail">
+          <el-tree :data="treeDataList" ref="tree" :node-key="getTreeId + 'id'" current-node-key="1" default-expand-all :expand-on-click-node="false" highlight-current @node-click="entryDetail">
             <div class="custom-tree-node" slot-scope="{ node, data }" :data="data.id">
               <div class="labelStyle" :title="data.label">{{ data.label }}</div>
               <div class="button">
@@ -168,6 +168,9 @@ export default {
       set(newData) {
         this.$store.state.menuList = newData;
       }
+    },
+    getTreeId() {
+      return String(Math.random() + 1);
     }
   },
   methods: {

@@ -3,7 +3,7 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip1") }}
+          {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3" class="overFlowStyle lineClass" :title="match.competitionName">
           {{ match.competitionName }}

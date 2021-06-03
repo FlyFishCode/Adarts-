@@ -329,7 +329,7 @@
               {{ $t("all.tip6") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="searchByCompetition.status" clearable :placeholder="$t('all.tip516')">
+              <el-select v-model="searchByCompetition.status" :placeholder="$t('all.tip516')">
                 <el-option :value="0" :label="$t('all.tip0')"></el-option>
                 <el-option :value="1" :label="$t('all.tip26')"></el-option>
                 <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -350,16 +350,16 @@
               {{ $t("all.tip7") }}
             </el-col>
             <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="date" default-time="00:00:00" :placeholder="$t('all.tip516')"> </el-date-picker>
+              <el-date-picker v-model="searchByCompetition.competitionStartPeriod" type="date" :placeholder="$t('all.tip516')"> </el-date-picker>
             </el-col>
             <el-col :span="3">
-              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="date" default-time="23:59:59" :placeholder="$t('all.tip516')"> </el-date-picker>
+              <el-date-picker v-model="searchByCompetition.competitionEndPeriod" type="date" :placeholder="$t('all.tip516')"> </el-date-picker>
             </el-col>
             <el-col class="label-g" :span="3">
               {{ $t("all.tip5") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="searchByCompetition.type" clearable :placeholder="$t('all.tip516')">
+              <el-select v-model="searchByCompetition.type" :placeholder="$t('all.tip516')">
                 <el-option :value="0" :label="$t('all.tip0')"></el-option>
                 <el-option :value="1" :label="$t('all.tip42')"></el-option>
                 <el-option :value="2" :label="$t('all.tip43')"></el-option>
@@ -534,8 +534,8 @@ export default {
       searchByCompetition: {
         countryId: "",
         areaId: "",
-        status: "",
-        type: "",
+        status: 0,
+        type: 0,
         competitionStartPeriod: "",
         competitionEndPeriod: "",
         competitionName: "",

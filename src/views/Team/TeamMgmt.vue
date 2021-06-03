@@ -163,7 +163,7 @@
               {{ $t("all.tip6") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.status" clearable :placeholder="$t('all.tip516')">
+              <el-select v-model="TeamMgmt.status" :placeholder="$t('all.tip516')">
                 <el-option :value="0" :label="$t('all.tip0')"></el-option>
                 <el-option :value="1" :label="$t('all.tip26')"></el-option>
                 <el-option :value="2" :label="$t('all.tip27')"></el-option>
@@ -195,9 +195,10 @@
               {{ $t("all.tip5") }}
             </el-col>
             <el-col :span="3" class="lineClass">
-              <el-select v-model="TeamMgmt.type" clearable :placeholder="$t('all.tip516')">
-                <el-option value="1" :label="$t('all.tip40')"></el-option>
-                <el-option value="2" :label="$t('all.tip41')"></el-option>
+              <el-select v-model="TeamMgmt.type" :placeholder="$t('all.tip516')">
+                <el-option :value="0" :label="$t('all.tip0')"></el-option>
+                <el-option :value="1" :label="$t('all.tip42')"></el-option>
+                <el-option :value="2" :label="$t('all.tip43')"></el-option>
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
@@ -347,8 +348,8 @@ export default {
       TeamMgmt: {
         areaId: "",
         countryId: "",
-        status: "",
-        type: "",
+        status: 0,
+        type: 0,
         competitionStartPeriod: null,
         competitionEndPeriod: null,
         name: "",

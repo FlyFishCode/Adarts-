@@ -27,7 +27,7 @@
           {{ $t("all.tip6") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="scheduleVO.status" clearable :placeholder="$t('all.tip516')">
+          <el-select v-model="scheduleVO.status" :placeholder="$t('all.tip516')">
             <el-option :value="0" :label="$t('all.tip0')"></el-option>
             <el-option :value="1" :label="$t('all.tip27')"></el-option>
             <el-option :value="2" :label="$t('all.tip26')"></el-option>
@@ -123,7 +123,7 @@ export default {
         countryId: "",
         areaId: "",
         leagueName: "",
-        status: "",
+        status: 0,
         leagueType: "",
         agentUserId: "",
         operUserId: "",

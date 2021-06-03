@@ -3,7 +3,7 @@
     <div class="search">
       <el-row class="center-Row">
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip1") }}
+          {{ $t("all.tip8") }}
         </el-col>
         <el-col :span="3" :title="teamList.competitionName" class="overFlowStyle lineClass">
           {{ teamList.competitionName }}
@@ -17,7 +17,7 @@
           <div v-if="teamList.status === 3">{{ this.$t("all.tip28") }}</div>
         </el-col>
         <el-col :span="3" class="label-g">
-          {{ $t("all.tip535") }}
+          {{ $t("all.tip4") }}
         </el-col>
         <el-col :span="9" class="overFlowStyle lineClass">
           {{ teamList.area }}

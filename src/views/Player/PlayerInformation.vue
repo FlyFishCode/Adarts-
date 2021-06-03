@@ -369,7 +369,6 @@ export default {
   },
   mounted() {
     console.log(process.env.VUE_APP_IMGURL);
-    console.log(getYearList());
     this.id = this.$route.query.id;
     this.init(this.id);
   },
@@ -496,32 +495,26 @@ export default {
       });
     },
     getEntryHistoryList() {
-      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
-        if (res.data.errorCode) {
-          this.$message(res.data.msg);
-        } else {
+      this.$axios.post("/playerEntryHistory", this.entryHistoryVO).then(res => {
+        if (res.data.code === 1000) {
           this.entryHistoryList = res.data.data.list;
           this.total = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
         }
       });
+    },
+    currentChange(value) {
+      this.entryHistoryVO.pageNum = value;
+      this.getEntryHistoryList();
+    },
+    sizeChange(value) {
+      this.entryHistoryVO.pageSize = value;
+      this.getEntryHistoryList();
     },
     entryHistoryTypeChange(value) {
       this.entryHistoryVO.leagueType = value;
       this.getEntryHistoryList();
-    },
-    currentChange(value) {
-      this.entryHistoryVO.pageNum = value;
-      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
-        this.entryHistoryList = res.data.data.list;
-        this.total = res.data.data.total;
-      });
-    },
-    sizeChange(value) {
-      this.entryHistoryVO.pageSize = value;
-      this.$axios.post("/getEntryHistory", this.entryHistoryVO).then(res => {
-        this.entryHistoryList = res.data.data.list;
-        this.total = res.data.data.total;
-      });
     },
     typeChange(value) {
       this.getRating("player", value, this.rating.year, this.id, this.currentType);

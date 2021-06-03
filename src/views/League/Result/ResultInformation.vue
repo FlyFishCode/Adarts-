@@ -47,13 +47,13 @@
             <el-col :span="8">
               <el-form-item :label="$t('all.tip71')">{{ rankingValue.rankingDecision === 1 ? $t("all.tip73") : $t("all.tip72") + $t("all.tip73") }}</el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="6">
               <el-form-item :label="$t('all.tip72')"
                 >{{ this.$t("all.tip107") }}{{ rankingValue.winningPointWin + "," }}{{ this.$t("all.tip108") }}{{ rankingValue.winningPointDrawn + "," }}{{ this.$t("all.tip109")
                 }}{{ rankingValue.winningPointLose + "," }}</el-form-item
               >
             </el-col>
-            <el-col :span="8" class="lineClass">
+            <el-col :span="2" class="lineClass">
               <el-button type="primary" size="mini" @click="getRankingList">{{ $t("all.tip10") }}</el-button>
             </el-col>
           </el-form>
