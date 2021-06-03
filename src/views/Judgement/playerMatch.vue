@@ -110,16 +110,20 @@
         <el-col class="label-g" :span="1">
           {{ $t("all.tip321") }}
         </el-col>
-        <el-col :span="6">
-          <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="dateChange">
-            </el-date-picker>
-          </el-col>
-          <el-col :span="1" class="lineClass">-</el-col>
-          <el-col :span="11">
-            <el-date-picker v-model="ResultMgmtVO.competitionEndPeriod" type="datetime" format="yyyy-MM-dd" :placeholder="$t('all.tip516')" default-time="23:59:59" :picker-options="pickerOptions">
-            </el-date-picker>
-          </el-col>
+        <el-col :span="3">
+          <el-date-picker v-model="ResultMgmtVO.competitionStartPeriod" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" :placeholder="$t('all.tip516')" default-time="00:00:00" @change="dateChange">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="3">
+          <el-date-picker
+            v-model="ResultMgmtVO.competitionEndPeriod"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            :placeholder="$t('all.tip516')"
+            default-time="23:59:59"
+            :picker-options="pickerOptions"
+          >
+          </el-date-picker>
         </el-col>
         <el-col :span="2" class="lineClass">
           <el-button type="primary" size="mini" @click="search">{{ $t("all.tip10") }}</el-button>

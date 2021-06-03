@@ -268,7 +268,7 @@
               </el-select>
             </el-col>
             <el-col :span="4">
-              <el-select v-model="scheduleResultVO.competitionId" :placeholder="$t('all.tip516')" @change="competitionIdChange">
+              <el-select v-model="scheduleResultVO.competitionId" :placeholder="$t('all.tip516')" @change="competitionIdChange" clearable>
                 <el-option v-for="item in competitionList" :key="item.competitionId" :label="item.competitionName" :value="item.competitionId"></el-option>
               </el-select>
             </el-col>
@@ -276,7 +276,7 @@
               <el-select v-model="scheduleResultVO.matchStatus" :placeholder="$t('all.tip516')" @change="matchStatusChange">
                 <el-option :label="$t('all.tip0')" :value="0"></el-option>
                 <el-option :label="$t('all.tip289')" :value="1"></el-option>
-                <el-option :label="$t('all.tip333')" :value="2"></el-option>
+                <el-option :label="$t('all.tip333')" :value="3"></el-option>
               </el-select>
             </el-col>
           </el-row>
@@ -565,7 +565,7 @@
   </div>
 </template>
 <script>
-import { returnType, staticObj } from "@/components/common/Utils";
+import { returnType, staticObj, getYearList } from "@/components/common/Utils";
 
 export default {
   data() {
@@ -579,10 +579,10 @@ export default {
       competitionList: [],
       addMemberListTotal: 1,
       playerListTotal: 1,
-      yearList: [{ id: 2020, year: 2020 }],
+      yearList: getYearList(),
       rating: {
         type: 0,
-        year: 2020
+        year: new Date().getFullYear()
       },
       captain: "",
       quarterList: [],
@@ -602,7 +602,7 @@ export default {
       scheduleResultVO: {
         leagueType: 0,
         matchStatus: 0,
-        year: 2020,
+        year: new Date().getFullYear(),
         competitionId: "",
         teamId: "",
         pageNum: 1,
@@ -677,12 +677,6 @@ export default {
     init() {
       const upLoad = document.getElementsByClassName("el-upload")[0];
       upLoad.style.visibility = "hidden";
-      if (new Date().getFullYear() !== this.yearList[0].id) {
-        this.yearList.push({
-          id: new Date().getFullYear(),
-          year: new Date().getFullYear()
-        });
-      }
       this.captainSearch();
       this.addMemberSearch();
       this.getPlayerList();
@@ -733,7 +727,7 @@ export default {
         }
       });
     },
-    getRating(type, state = 0, year = 2020, id, currentType = 0) {
+    getRating(type, state = 0, year = this.rating.year, id, currentType = 0) {
       const data = {
         competitorType: type,
         leagueType: state,

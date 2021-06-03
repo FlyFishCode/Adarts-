@@ -119,4 +119,15 @@ const staticObj = {
     leagueImg: require("@/assets/League.png"),
     adartsImg: require("@/assets/Adarts.png")
 };
-export { findCity, downloadFile, returnType, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash, changeMenus, staticObj };
+const getYearList = () => {
+    const year = new Date().getFullYear();
+    const list = [{ id: 2020, year: 2020 }];
+    for (let index = 2020; index < year; index += 1) {
+        list.push({
+            id: index + 1,
+            year: index + 1
+        });
+    }
+    return list;
+};
+export { findCity, downloadFile, returnType, deleteStage, saveQuery, getQuery, handle, changeCurrentObj, changeHash, changeMenus, staticObj, getYearList };

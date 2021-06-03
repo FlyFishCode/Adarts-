@@ -81,11 +81,11 @@
           {{ $t("all.tip436") }}
         </el-col>
         <el-col :span="9">
-          <el-date-picker v-model="holidayDialogVO.holidayStartTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('all.tip516')" clearable @change="change"> </el-date-picker>
+          <el-date-picker v-model="holidayDialogVO.holidayStartTime" type="date" :placeholder="$t('all.tip516')" clearable @change="change"> </el-date-picker>
         </el-col>
         <el-col :span="2" class="lineClass">-</el-col>
         <el-col :span="9">
-          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" value-format="yyyy-MM-dd" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
+          <el-date-picker v-model="holidayDialogVO.holidayEndTime" type="date" :placeholder="$t('all.tip516')" :picker-options="pickerOptions" clearable> </el-date-picker>
         </el-col>
       </el-row>
       <el-row class="center-Row">
@@ -195,10 +195,12 @@ export default {
         this.holidayDialogVO.userId = sessionStorage.getItem("LeagueUserId");
       }
       this.$axios.post(`/${url}`, this.holidayDialogVO).then(res => {
+        if (res.data.code === 1000) {
+          this.search();
+          this.holidayDialog = false;
+        }
         this.$message(res.data.msg);
-        this.search();
       });
-      this.holidayDialog = false;
     },
     modify(id) {
       this.flag = 2;

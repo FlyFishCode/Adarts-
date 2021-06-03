@@ -259,18 +259,18 @@
             </el-col>
             <div class="table">
               <el-table :data="entryHistoryList" border style="width: 100%">
-                <el-table-column prop="date" :label="$t('all.tip5')" min-width="7%">
+                <el-table-column prop="date" :label="$t('all.tip5')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueType === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="leagueName" :label="$t('all.tip1')" min-width="6%"> </el-table-column>
-                <el-table-column :label="$t('all.tip403')" min-width="10%">
+                <el-table-column prop="leagueName" :label="$t('all.tip1')" min-width="10%"> </el-table-column>
+                <el-table-column :label="$t('all.tip403')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueStartTime.split(" ")[0] }}</div>
                   </template>
                 </el-table-column>
-                <el-table-column :label="$t('all.tip404')" min-width="10%">
+                <el-table-column :label="$t('all.tip404')" min-width="5%">
                   <template slot-scope="scope">
                     <div>{{ scope.row.leagueEndTime.split(" ")[0] }}</div>
                   </template>
@@ -288,7 +288,7 @@
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="teamName" :label="$t('all.tip405')" min-width="5%"> </el-table-column>
+                <el-table-column prop="teamName" :label="$t('all.tip405')" min-width="10%"> </el-table-column>
                 <el-table-column :label="$t('all.tip406')">
                   <el-table-column prop="divisionName" :label="$t('all.tip52')" min-width="6%"> </el-table-column>
                   <el-table-column prop="stageName" :label="$t('all.tip21')" min-width="6%"> </el-table-column>
@@ -316,6 +316,8 @@
   </div>
 </template>
 <script>
+import { getYearList } from "@/components/common/Utils";
+
 export default {
   data() {
     return {
@@ -329,11 +331,11 @@ export default {
       playerRatingList: [],
       areaList: [],
       countryList: [],
-      yearList: [{ id: 2020, yaer: 2020 }],
+      yearList: getYearList(),
       TeamInformationVO: {},
       rating: {
         type: 0,
-        year: 2020
+        year: new Date().getFullYear()
       },
       entryHistoryVO: {
         id: "",
@@ -367,6 +369,7 @@ export default {
   },
   mounted() {
     console.log(process.env.VUE_APP_IMGURL);
+    console.log(getYearList());
     this.id = this.$route.query.id;
     this.init(this.id);
   },
@@ -384,14 +387,7 @@ export default {
     },
     initYear() {
       const upLoad = document.getElementsByClassName("el-upload")[0];
-      const currentYear = new Date().getFullYear();
       upLoad.style.visibility = "hidden";
-      if (currentYear !== this.yearList[0].id) {
-        this.yearList.push({
-          id: currentYear,
-          year: currentYear
-        });
-      }
     },
     getCountry(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
@@ -422,7 +418,7 @@ export default {
         this.getAeraList();
       });
     },
-    getRating(type, state = 0, year = 2020, id, currentType = 0) {
+    getRating(type, state = 0, year = this.rating.year, id, currentType = 0) {
       const data = {
         competitorType: type,
         leagueType: state,
