@@ -165,7 +165,7 @@ export default {
         operatorId: "",
         competitionStartPeriod: "",
         competitionEndPeriod: "",
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -180,25 +180,43 @@ export default {
   },
   methods: {
     init() {
-      const userId = sessionStorage.getItem("LeagueUserId");
+      this.ResultMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
+      this.search();
+      this.getCountry(this.ResultMgmtVO.userId);
+      this.getOperationdata(this.ResultMgmtVO.userId);
+      this.getCretetionData(this.ResultMgmtVO.userId);
+      this.getAllCompetitionName(this.ResultMgmtVO.userId);
+    },
+    search() {
       this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
+        if (res.data.code === 1000) {
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
-      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
+    },
+    sizeChange(value) {
+      this.ResultMgmtVO.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.ResultMgmtVO.pageNum = value;
+      this.search();
+    },
+    getCountry(creatorId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
         this.ContinentArr = res.data.data;
       });
-      this.getOperationdata(userId);
-      this.getCretetionData(userId);
-      this.getAllCompetitionName();
     },
     getOperationdata(userId) {
       this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
@@ -218,36 +236,6 @@ export default {
       if (this.ResultMgmtVO.competitionEndPeriod && this.ResultMgmtVO.competitionEndPeriod < data) {
         this.ResultMgmtVO.competitionEndPeriod = "";
       }
-    },
-    sizeChange(value) {
-      const vm = this;
-      this.ResultMgmtVO.pageSize = value;
-      // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === "0" ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
-      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
-        // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = "0") : this.ResultMgmtVO.status;
-      });
-    },
-    currentChange(value) {
-      const vm = this;
-      this.ResultMgmtVO.pageNum = value;
-      // eslint-disable-next-line no-unused-expressions
-      this.ResultMgmtVO.status === "0" ? (this.ResultMgmtVO.status = null) : this.ResultMgmtVO.status;
-      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
-        // eslint-disable-next-line no-unused-expressions
-        this.ResultMgmtVO.status === null ? (this.ResultMgmtVO.status = "0") : this.ResultMgmtVO.status;
-      });
-    },
-    search() {
-      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.ResultMgmtVO).then(res => {
-        this.tableData = res.data.data.list;
-        this.total = res.data.data.total;
-      });
     },
     push(data) {
       this.$router.push({

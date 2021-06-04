@@ -184,7 +184,7 @@ export default {
     },
     deleteNews(id) {
       this.$axios.post("/delbannerbyid", this.$qs.stringify({ id })).then(res => {
-        if (res.data.msg) {
+        if (res.data.code === 1000) {
           this.$message(res.data.msg);
           this.search();
         }

@@ -30,7 +30,7 @@
           {{ $t("all.tip9") }}
         </el-col>
         <el-col :span="3">
-          <el-select v-model="MatchTableMgmtVO.operId" filterable clearable :default-first-option="true" :placeholder="$t('all.tip516')">
+          <el-select v-model="MatchTableMgmtVO.operatorId" filterable clearable :default-first-option="true" :placeholder="$t('all.tip516')">
             <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
           </el-select>
         </el-col>
@@ -62,7 +62,7 @@
           {{ $t("all.tip382") }}
         </el-col>
         <el-col :span="3" id="divBoxWidth">
-          <el-select v-model="MatchTableMgmtVO.createId" filterable :default-first-option="true" clearable :placeholder="$t('all.tip516')">
+          <el-select v-model="MatchTableMgmtVO.creatorId" filterable :default-first-option="true" clearable :placeholder="$t('all.tip516')">
             <el-option v-for="item in creteList" :key="item.creatorId" :label="item.creatorName" :value="item.creatorId"></el-option>
           </el-select>
         </el-col>
@@ -181,9 +181,9 @@ export default {
         competitionStartPeriod: null,
         competitionEndPeriod: null,
         competitionName: "",
-        userId: sessionStorage.getItem("LeagueUserId"),
-        operId: "",
-        createId: "",
+        userId: "",
+        operatorId: "",
+        creatorId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -194,14 +194,17 @@ export default {
     };
   },
   mounted() {
-    const creatorId = sessionStorage.getItem("LeagueUserId");
-    this.search();
-    this.getCounarr(creatorId);
-    this.getOperationdata(creatorId);
-    this.getCretetionData(creatorId);
-    this.getAllCompetitionName();
+    this.init();
   },
   methods: {
+    init() {
+      this.MatchTableMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
+      this.search();
+      this.getCounarr(this.MatchTableMgmtVO.userId);
+      this.getOperationdata(this.MatchTableMgmtVO.userId);
+      this.getCretetionData(this.MatchTableMgmtVO.userId);
+      this.getAllCompetitionName(this.MatchTableMgmtVO.userId);
+    },
     getCounarr(creatorId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
         this.ContinentArr = res.data.data;
@@ -213,8 +216,8 @@ export default {
         this.operList = res.data.data.list;
       });
     },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
@@ -234,6 +237,14 @@ export default {
         this.total = res.data.data.total;
       });
     },
+    sizeChange(value) {
+      this.MatchTableMgmtVO.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.MatchTableMgmtVO.pageNum = value;
+      this.search();
+    },
     change(value) {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
         this.CountryArr = res.data.data;
@@ -245,18 +256,6 @@ export default {
       this.$router.push({
         name: "matchTableList",
         query: { data: JSON.stringify(data) }
-      });
-    },
-    sizeChange(value) {
-      this.MatchTableMgmtVO.pageSize = value;
-      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.MatchTableMgmtVO).then(res => {
-        this.tableData = res.data.data.list;
-      });
-    },
-    currentChange(value) {
-      this.MatchTableMgmtVO.pageNum = value;
-      this.$axios.post("/matchTable/getMatchTableCompetitionList", this.MatchTableMgmtVO).then(res => {
-        this.tableData = res.data.data.list;
       });
     }
   }

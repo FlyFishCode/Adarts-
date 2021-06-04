@@ -217,9 +217,21 @@ export default {
   methods: {
     search() {
       this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
-        this.matchTableData = res.data.data.list;
-        this.matchTabletotal = res.data.data.total;
+        if (res.data.code === 1000) {
+          this.matchTableData = res.data.data.list;
+          this.matchTabletotal = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
+    },
+    sizeChange(value) {
+      this.MatchTableListVO.matchTable.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.MatchTableListVO.matchTable.pageNum = value;
+      this.search();
     },
     change(value) {
       if (value) {
@@ -238,18 +250,6 @@ export default {
         }
       });
     },
-    sizeChange(value) {
-      this.MatchTableListVO.matchTable.pageSize = value;
-      this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
-        this.matchTableData = res.data.data.list;
-      });
-    },
-    currentChange(value) {
-      this.MatchTableListVO.matchTable.pageNum = value;
-      this.$axios.post("/matchTable/getStageList", this.MatchTableListVO.matchTable).then(res => {
-        this.matchTableData = res.data.data.list;
-      });
-    },
     knockoutSearch() {
       this.$axios.post("/aaaaaaaa", this.Knockout).then(res => {
         this.knockoutData = res.data.data.list;
@@ -258,15 +258,11 @@ export default {
     },
     KnockoutSizeChange(value) {
       this.Knockout.pageSize = value;
-      this.$axios.post("/matchTable/getStageList", this.Knockout).then(res => {
-        this.matchTableData = res.data.data.list;
-      });
+      this.knockoutSearch();
     },
     KnockoutCurrentChange(value) {
       this.Knockout.pageNum = value;
-      this.$axios.post("/matchTable/getStageList", this.Knockout).then(res => {
-        this.matchTableData = res.data.data.list;
-      });
+      this.knockoutSearch();
     },
     stageClick(value) {
       const data = Object.assign(value, { competitionName: this.MatchTableListVO.competitionname });

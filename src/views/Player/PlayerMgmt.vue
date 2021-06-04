@@ -576,6 +576,13 @@ export default {
         this.dialog.email = "";
       }
     },
+    checkPhone() {
+      const reg = /^(?:(?:\+|00)86)?1[3-9]\d{9}$/;
+      if (!reg.test(this.dialog.phone)) {
+        this.$message(`【${this.$t("all.tip429")}】${this.$t("all.tip572")}`);
+        this.dialog.phone = "";
+      }
+    },
     getAllCompetitionName(userId) {
       this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
         if (res.data.data) {
@@ -583,13 +590,6 @@ export default {
           this.competitionNameList = res.data.data;
         }
       });
-    },
-    checkPhone() {
-      const reg = /^(?:(?:\+|00)86)?1[3-9]\d{9}$/;
-      if (!reg.test(this.dialog.phone)) {
-        this.$message(`【${this.$t("all.tip429")}】${this.$t("all.tip572")}`);
-        this.dialog.phone = "";
-      }
     },
     getCounry(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
@@ -618,6 +618,16 @@ export default {
         this.creteList = res.data.data;
       });
     },
+    competitionSearch() {
+      this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
+        if (res.data.code === 1000) {
+          this.SearchByCompetitionTableData = res.data.data.list;
+          this.leagueTotal = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
+        }
+      });
+    },
     handleSizeChange(value) {
       this.searchByCompetition.pageSize = value;
       this.competitionSearch();
@@ -626,6 +636,16 @@ export default {
       this.searchByCompetition.pageNum = value;
       this.competitionSearch();
     },
+    PlayerSearch() {
+      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
+        if (res.data.code === 1000) {
+          this.SearchPlayerPageTotal = res.data.data.total;
+          this.SearchPlayerTableData = res.data.data.list;
+        } else {
+          this.$message(res.data.msg);
+        }
+      });
+    },
     SearchPlayerHandleSizeChange(value) {
       this.searchPlayer.pageSize = value;
       this.PlayerSearch();
@@ -633,22 +653,6 @@ export default {
     SearchPlayerHandleCurrentChange(value) {
       this.searchPlayer.pageNum = value;
       this.PlayerSearch();
-    },
-    PlayerSearch() {
-      this.$axios.post("/getPlayperList", this.searchPlayer).then(res => {
-        if (res.data.data) {
-          this.SearchPlayerPageTotal = res.data.data.total;
-          this.SearchPlayerTableData = res.data.data.list;
-        }
-      });
-    },
-    competitionSearch() {
-      this.$axios.post("/getPlayperCompList", this.searchByCompetition).then(res => {
-        if (res.data.data) {
-          this.SearchByCompetitionTableData = res.data.data.list;
-          this.leagueTotal = res.data.data.total;
-        }
-      });
     },
     getShopList(userId) {
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
@@ -668,7 +672,6 @@ export default {
       });
     },
     save() {
-      //  vm.$qs.stringify(vm.PlayerMgmtVO.dialog)
       const vm = this;
       // this.dialog.password = md5(`${this.password}kitekey`).toUpperCase();
       this.dialog.password = this.password;

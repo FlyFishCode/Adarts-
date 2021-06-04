@@ -172,8 +172,17 @@ export default {
             i.display = Boolean(i.display);
           });
           this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
         }
       });
+    },
+    sizeChange(value) {
+      this.infoVO.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.infoVO.pageNum = value;
+      this.search();
     },
     deleteNews(id) {
       this.$axios.post("/delleaguenewsbyid", this.$qs.stringify({ id })).then(res => {
@@ -214,14 +223,6 @@ export default {
       if (this.infoVO.registerEndDate && this.infoVO.registerEndDate < data) {
         this.infoVO.registerEndDate = "";
       }
-    },
-    sizeChange(value) {
-      this.infoVO.pageSize = value;
-      this.search();
-    },
-    currentChange(value) {
-      this.infoVO.pageNum = value;
-      this.search();
     },
     getOoperatorList() {
       this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.userId })).then(res => {

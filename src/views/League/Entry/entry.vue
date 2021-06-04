@@ -7,12 +7,12 @@
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="EntryMgmt.countryId" clearable :placeholder="$t('all.tip516')" @change="change">
-            <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+            <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col :span="3" id="divBoxWidth">
           <el-select v-model="EntryMgmt.areaId" clearable :placeholder="$t('all.tip516')" @change="areaIdChange">
-            <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+            <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
           </el-select>
         </el-col>
         <el-col class="label-g" :span="3">
@@ -101,7 +101,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('all.tip1')" min-width="10%">
+        <el-table-column :label="$t('all.tip1')" min-width="20%">
           <template slot-scope="scope">
             <div class="tableLink" @click="push(scope.row)">{{ scope.row.competitionName }}</div>
           </template>
@@ -170,7 +170,6 @@ export default {
   data() {
     const vm = this;
     return {
-      userId: "",
       competitionOptions: {
         disabledDate(time) {
           const date1 = new Date(vm.EntryMgmt.competitionStartPeriod);
@@ -186,8 +185,8 @@ export default {
       operList: [],
       creteList: [],
       competitionNameList: [],
-      ContinentArr: [],
-      CountryArr: [],
+      countryList: [],
+      areaList: [],
       total: 1,
       EntryMgmt: {
         areaId: null,
@@ -201,7 +200,7 @@ export default {
         competitionEndPeriod: null,
         entryStartPeriod: null,
         entryEndPeriod: null,
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -209,30 +208,35 @@ export default {
     };
   },
   mounted() {
-    const vm = this;
-    this.userId = sessionStorage.getItem("LeagueUserId");
-    this.$axios.post("/getcountry", vm.$qs.stringify({ creatorId: vm.userId })).then(res => {
-      vm.ContinentArr = res.data.data;
-    });
-    this.search();
-    this.getOperationdata();
-    this.getCretetionData();
-    this.getAllCompetitionName();
+    this.init();
   },
   methods: {
-    getOperationdata() {
+    init() {
+      this.EntryMgmt.userId = sessionStorage.getItem("LeagueUserId");
+      this.search();
+      this.getCountry(this.EntryMgmt.userId);
+      this.getOperationdata(this.EntryMgmt.userId);
+      this.getCretetionData(this.EntryMgmt.userId);
+      this.getAllCompetitionName(this.EntryMgmt.userId);
+    },
+    getCountry(creatorId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
+        this.countryList = res.data.data;
+      });
+    },
+    getOperationdata(userId) {
       // 获取操作者
-      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId: this.userId })).then(res => {
+      this.$axios.post("/operation/getoperationlist", this.$qs.stringify({ userId })).then(res => {
         this.operList = res.data.data.list;
       });
     },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
         this.competitionNameList = res.data.data;
       });
     },
-    getCretetionData() {
-      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId: this.userId })).then(res => {
+    getCretetionData(userId) {
+      this.$axios.post("/operation/getcreatorlist", this.$qs.stringify({ userId })).then(res => {
         this.creteList = res.data.data;
       });
     },
@@ -249,7 +253,7 @@ export default {
     change(value) {
       if (value) {
         this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
-          this.CountryArr = res.data.data;
+          this.areaList = res.data.data;
         });
       } else {
         this.EntryMgmt.countryId = null;
@@ -265,11 +269,22 @@ export default {
       return new Date(value);
     },
     search() {
-      const vm = this;
       this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
+        if (res.data.code === 1000) {
+          this.tableData = res.data.data.list;
+          this.total = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
+    },
+    sizeChange(value) {
+      this.EntryMgmt.pageSize = value;
+      this.search();
+    },
+    currentChange(value) {
+      this.EntryMgmt.pageNum = value;
+      this.search();
     },
     push(data) {
       saveQuery("entryList", data);
@@ -296,22 +311,6 @@ export default {
         query: {
           data: JSON.stringify(value)
         }
-      });
-    },
-    sizeChange(value) {
-      const vm = this;
-      this.EntryMgmt.pageSize = value;
-      this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
-      });
-    },
-    currentChange(value) {
-      const vm = this;
-      this.EntryMgmt.pageNum = value;
-      this.$axios.post("/getCompetitionList", this.EntryMgmt).then(res => {
-        vm.tableData = res.data.data.list;
-        vm.total = res.data.data.total;
       });
     }
   }

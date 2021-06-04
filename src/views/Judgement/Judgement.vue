@@ -90,7 +90,7 @@
             <div>{{ scope.row.type === 1 ? $t("all.tip40") : $t("all.tip41") }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('all.tip1')" min-width="7%">
+        <el-table-column :label="$t('all.tip1')" min-width="10%">
           <template slot-scope="scope">
             <div class="tableLink" @click="push(scope.row)">{{ scope.row.competitionName }}</div>
           </template>
@@ -180,7 +180,7 @@ export default {
         creatorId: "",
         competitionStartPeriod: "",
         competitionEndPeriod: "",
-        userId: sessionStorage.getItem("LeagueUserId"),
+        userId: "",
         pageNum: 1,
         pageSize: 10
       },
@@ -190,19 +190,19 @@ export default {
     };
   },
   mounted() {
-    this.userId = sessionStorage.getItem("LeagueUserId");
-    this.init(this.userId);
+    this.init();
   },
   methods: {
-    init(userId) {
-      this.getCountry(userId);
-      this.getAllCompetitionName(userId);
-      this.getOperationdata(userId);
-      this.getCretetionData(userId);
+    init() {
+      this.judgementVO.userId = sessionStorage.getItem("LeagueUserId");
+      this.getCountry(this.judgementVO.userId);
+      this.getAllCompetitionName(this.judgementVO.userId);
+      this.getOperationdata(this.judgementVO.userId);
+      this.getCretetionData(this.judgementVO.userId);
       this.search();
     },
-    getCountry(userId) {
-      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
+    getCountry(creatorId) {
+      this.$axios.post("/getcountry", this.$qs.stringify({ creatorId })).then(res => {
         this.ContinentArr = res.data.data;
       });
     },

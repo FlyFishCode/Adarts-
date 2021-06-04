@@ -312,8 +312,8 @@ export default {
   methods: {
     init() {
       this.LeagueMgmtVO.userId = sessionStorage.getItem("LeagueUserId");
-      this.getCountry(this.LeagueMgmtVO.userId);
       this.search();
+      this.getCountry(this.LeagueMgmtVO.userId);
       this.getOperationdata(this.LeagueMgmtVO.userId);
       this.getCretetionData(this.LeagueMgmtVO.userId);
       this.getAllCompetitionName(this.LeagueMgmtVO.userId);
@@ -415,7 +415,6 @@ export default {
       });
     },
     ModularConfirm() {
-      const vm = this;
       this.ModularVisible = false;
       this.$store.commit("changeMenuList", [
         {
@@ -430,7 +429,7 @@ export default {
         query: {
           id: 1,
           first: true,
-          type: `${vm.dialog.DialogMoudleRadio}`
+          type: `${this.dialog.DialogMoudleRadio}`
         }
       });
     },
