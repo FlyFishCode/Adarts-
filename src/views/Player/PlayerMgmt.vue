@@ -337,11 +337,11 @@
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip8") }}
+              {{ $t("all.tip9") }}
             </el-col>
-            <el-col :span="3" class="lineClass">
-              <el-select v-model="searchByCompetition.competitionName" clearable filterable :placeholder="$t('all.tip516')">
-                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
+            <el-col :span="3">
+              <el-select v-model="searchByCompetition.operId" clearable :placeholder="$t('all.tip516')">
+                <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
               </el-select>
             </el-col>
           </el-row>
@@ -376,11 +376,11 @@
           </el-row>
           <el-row class="center-Row">
             <el-col class="label-g" :span="3">
-              {{ $t("all.tip9") }}
+              {{ $t("all.tip8") }}
             </el-col>
-            <el-col :span="3">
-              <el-select v-model="searchByCompetition.operId" clearable :placeholder="$t('all.tip516')">
-                <el-option v-for="item in operList" :key="item.id" :label="item.operName" :value="item.id"></el-option>
+            <el-col :span="3" class="lineClass">
+              <el-select v-model="searchByCompetition.competitionName" clearable filterable :placeholder="$t('all.tip516')">
+                <el-option v-for="(item, index) in competitionNameList" :key="index" :label="item" :value="item"> </el-option>
               </el-select>
             </el-col>
             <el-col :span="2" class="buttonBox">
