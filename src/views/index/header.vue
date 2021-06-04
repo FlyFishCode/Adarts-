@@ -19,7 +19,7 @@
       </el-col>
       <el-col :span="2">
         <div @click="loginOut" class="loginOut">
-          {{ $t("all.tip385") }}
+          {{ $t("all.tip535") }}
         </div>
       </el-col>
     </el-row>

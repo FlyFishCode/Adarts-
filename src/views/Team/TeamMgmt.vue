@@ -34,13 +34,13 @@
               {{ $t("all.tip442") }}
             </el-col>
             <el-col :span="3" id="divBoxWidth">
-              <el-select v-model="Competition.countryId" clearable :placeholder="$t('all.tip516')" @change="areaChange">
-                <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+              <el-select v-model="Competition.countryId" clearable :placeholder="$t('all.tip516')" @change="countryChange">
+                <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" id="divBoxWidth">
               <el-select v-model="Competition.areaId" clearable :placeholder="$t('all.tip516')">
-                <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
           </el-row>
@@ -79,7 +79,7 @@
         </el-row>
         <el-row>
           <el-col :span="1" class="lineClass">
-            <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
+            <el-button type="primary" size="mini" @click="() => (this.dialogVisible = true)">{{ $t("all.tip16") }}</el-button>
           </el-col>
         </el-row>
 
@@ -151,12 +151,12 @@
             </el-col>
             <el-col :span="3" class="lineClass">
               <el-select v-model="TeamMgmt.countryId" clearable :placeholder="$t('all.tip516')" @change="areaIdChange">
-                <el-option v-for="item in ContinentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" class="lineClass">
               <el-select v-model="TeamMgmt.areaId" clearable :placeholder="$t('all.tip516')">
-                <el-option v-for="item in CountryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
@@ -363,8 +363,8 @@ export default {
       operList: [],
       shopList: [],
       playerList: [],
-      ContinentArr: [],
-      CountryArr: [],
+      countryList: [],
+      areaList: [],
       Dialog: {
         teamName: "",
         captainId: "",
@@ -397,7 +397,7 @@ export default {
     this.name = this.$route.params.name;
     this.search();
     this.leagueSearch();
-    this.getShopList();
+    this.getShopList(userId);
     this.getAreaList(userId);
     this.getCretetionData(userId);
     this.getOperationdata(userId);
@@ -430,66 +430,61 @@ export default {
     },
     getAreaList(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
-        this.ContinentArr = res.data.data;
+        this.countryList = res.data.data;
       });
     },
-    areaChange(value) {
+    countryChange(value) {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
-        this.CountryArr = res.data.data;
+        this.areaList = res.data.data;
       });
       this.Competition.areaId = "";
     },
     areaIdChange(value) {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
-        this.CountryArr = res.data.data;
+        this.areaList = res.data.data;
       });
       this.TeamMgmt.areaId = "";
     },
-    getShopList() {
-      const userId = sessionStorage.getItem("LeagueUserId");
+    getShopList(userId) {
       this.$axios.post("/getshop", this.$qs.stringify({ userId })).then(res => {
         this.shopList = res.data.data.list;
       });
     },
     search() {
       this.$axios.post("/getTeamList", this.Competition).then(res => {
-        this.SearchTeamPageTotal = res.data.data.total;
-        this.SearchTeamTableData = res.data.data.list;
+        if (res.data.code === 1000) {
+          this.SearchTeamPageTotal = res.data.data.total;
+          this.SearchTeamTableData = res.data.data.list;
+        } else {
+          this.$message(res.data.msg);
+        }
       });
     },
     SearchTeamSizeChange(val) {
       this.Competition.pageSize = val;
-      this.$axios.post("/getTeamList", this.Competition).then(res => {
-        this.SearchTeamTableData = res.data.data.list;
-      });
+      this.search();
     },
     SearchTeamCurrentChange(val) {
       this.Competition.pageNum = val;
-      this.$axios.post("/getTeamList", this.Competition).then(res => {
-        this.SearchTeamTableData = res.data.data.list;
-      });
+      this.search();
     },
     leagueSearch() {
       this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
-        if (res.data.errorCode) {
-          this.$message(res.data.msg);
-        } else {
+        if (res.data.code === 1000) {
           this.tableData = res.data.data.list;
           this.TeamPageTotal = res.data.data.total;
+        } else {
+          this.$message(res.data.msg);
         }
       });
     },
     TeamSizeChange(val) {
       this.TeamMgmt.pageSize = val;
-      this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
-        this.tableData = res.data.data.list;
-      });
+      this.leagueSearch();
     },
     TeamCurrentChange(val) {
       this.TeamMgmt.pageNum = val;
-      this.$axios.post("/getTeamListComp", this.TeamMgmt).then(res => {
-        this.tableData = res.data.data.list;
-      });
+      this.leagueSearch();
     },
     save() {
       this.Dialog.regDate = new Date(this.Dialog.regDate);
@@ -507,9 +502,6 @@ export default {
       });
     },
     download() {},
-    create() {
-      this.dialogVisible = true;
-    },
     mgmt() {
       this.$router.push({
         name: "entryList"

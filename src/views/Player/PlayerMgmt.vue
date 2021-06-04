@@ -39,12 +39,12 @@
             </el-col>
             <el-col :span="3">
               <el-select v-model="searchPlayer.countryId" clearable :placeholder="$t('all.tip516')" @change="countryChange">
-                <el-option v-for="item in continentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3">
               <el-select v-model="searchPlayer.areaId" clearable :placeholder="$t('all.tip516')">
-                <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col class="label-g" :span="2">
@@ -116,7 +116,7 @@
         </el-row>
         <el-row>
           <el-col :span="1" class="buttonBox">
-            <el-button type="primary" size="mini" @click="create">{{ $t("all.tip16") }}</el-button>
+            <el-button type="primary" size="mini" @click="() => (this.playerDialog = true)">{{ $t("all.tip16") }}</el-button>
           </el-col>
         </el-row>
         <div class="table">
@@ -317,12 +317,12 @@
             </el-col>
             <el-col :span="3" class="lineClass">
               <el-select v-model="searchByCompetition.countryId" clearable :placeholder="$t('all.tip516')" @change="otherCountryChange">
-                <el-option v-for="item in continentArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in countryList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col :span="3" class="lineClass">
               <el-select v-model="searchByCompetition.areaId" clearable :placeholder="$t('all.tip516')">
-                <el-option v-for="item in countryArr" :key="item.id" :label="item.label" :value="item.id"></el-option>
+                <el-option v-for="item in areaList" :key="item.id" :label="item.label" :value="item.id"></el-option>
               </el-select>
             </el-col>
             <el-col class="label-g" :span="3">
@@ -489,7 +489,7 @@
 
 <script>
 // @ is an alias to /src
-import md5 from "blueimp-md5";
+// import md5 from "blueimp-md5";
 import { downloadFile, staticObj } from "@/components/common/Utils";
 
 export default {
@@ -506,8 +506,8 @@ export default {
       activeName: "first",
       ratingGrade: "league",
       shopList: [],
-      continentArr: [],
-      countryArr: [],
+      countryList: [],
+      areaList: [],
       operList: [],
       creteList: [],
       leagueTotal: 0,
@@ -566,7 +566,7 @@ export default {
     this.getShopList(this.userId);
     this.getOperationdata(this.userId);
     this.getCretetionData(this.userId);
-    this.getAllCompetitionName();
+    this.getAllCompetitionName(this.userId);
   },
   methods: {
     checkEmail() {
@@ -576,8 +576,8 @@ export default {
         this.dialog.email = "";
       }
     },
-    getAllCompetitionName() {
-      this.$axios.get(`/getAllCompetitionName?userId=${sessionStorage.getItem("LeagueUserId")}`).then(res => {
+    getAllCompetitionName(userId) {
+      this.$axios.get(`/getAllCompetitionName?userId=${userId}`).then(res => {
         if (res.data.data) {
           this.password = res.data.data.password;
           this.competitionNameList = res.data.data;
@@ -593,18 +593,18 @@ export default {
     },
     getCounry(userId) {
       this.$axios.post("/getcountry", this.$qs.stringify({ creatorId: userId })).then(res => {
-        this.continentArr = res.data.data;
+        this.countryList = res.data.data;
       });
     },
     countryChange(value) {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
-        this.countryArr = res.data.data;
+        this.areaList = res.data.data;
       });
       this.searchPlayer.areaId = "";
     },
     otherCountryChange(value) {
       this.$axios.post("/getareabycountryid", this.$qs.stringify({ countryId: value })).then(res => {
-        this.countryArr = res.data.data;
+        this.areaList = res.data.data;
       });
       this.searchByCompetition.areaId = "";
     },
@@ -670,7 +670,8 @@ export default {
     save() {
       //  vm.$qs.stringify(vm.PlayerMgmtVO.dialog)
       const vm = this;
-      this.dialog.password = md5(`${this.password}kitekey`).toUpperCase();
+      // this.dialog.password = md5(`${this.password}kitekey`).toUpperCase();
+      this.dialog.password = this.password;
       this.$axios.post("/createPlayer", vm.dialog).then(res => {
         if (res.data.code === 1000) {
           this.PlayerSearch();
@@ -691,9 +692,6 @@ export default {
           this.$message(res.data.msg);
         }
       });
-    },
-    create() {
-      this.playerDialog = true;
     },
     push(id) {
       this.$router.push({
