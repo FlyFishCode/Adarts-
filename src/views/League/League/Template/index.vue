@@ -68,7 +68,7 @@ export default {
       legName: [
         {
           value: 0,
-          label: "all.tip521"
+          label: "all.tip44"
         },
         {
           value: 1,

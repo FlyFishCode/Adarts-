@@ -899,7 +899,7 @@ export default {
       let type = "";
       switch (id) {
         case 0:
-          type = "all.tip521";
+          type = "all.tip44";
           break;
         case 1:
           type = "all.tip499";

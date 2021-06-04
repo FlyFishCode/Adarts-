@@ -382,9 +382,9 @@ export default {
       this.getShopList();
       this.getPlayerInfomation(id);
       this.getCountry(id);
-      this.initYear();
+      this.initStyle();
     },
-    initYear() {
+    initStyle() {
       const upLoad = document.getElementsByClassName("el-upload")[0];
       upLoad.style.visibility = "hidden";
     },

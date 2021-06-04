@@ -1049,6 +1049,25 @@ export default {
           const data = Object.assign({}, res.data.data);
           const list = [];
           vm.AddCompetitionRequest = res.data.data;
+          vm.AddCompetitionRequest.operatorList = list;
+          switch (vm.AddCompetitionRequest.competitionOption.machineType) {
+            case 0:
+              this.A1 = false;
+              this.W1 = false;
+              break;
+            case 1:
+              this.A1 = true;
+              this.W1 = false;
+              break;
+            case 2:
+              this.W1 = true;
+              this.A1 = false;
+              break;
+            default:
+              this.A1 = true;
+              this.W1 = true;
+              break;
+          }
           vm.timeRangeBeforehours = data.competitionBasicOption.timeRangeBefore % 24;
           vm.timeRangeAfterhours = data.competitionBasicOption.timeRangeAfter % 24;
           if (data.competitionBasicOption.timeRangeBefore / 24 > 1) {
@@ -1067,7 +1086,6 @@ export default {
           data.operatorList.forEach(i => {
             list.push(i.operatorId);
           });
-          vm.AddCompetitionRequest.operatorList = list;
           this.CompetitionAreaList = res.data.data.countryList;
           this.CountryShowArr = res.data.data.countryList;
           // 显示图片
@@ -1262,10 +1280,15 @@ export default {
       let href = "";
       if (this.A1 && !this.W1) {
         this.AddCompetitionRequest.competitionOption.machineType = 1;
-      } else if (this.W1 && !this.A1) {
+      }
+      if (!this.A1 && this.W1) {
         this.AddCompetitionRequest.competitionOption.machineType = 2;
-      } else {
+      }
+      if (this.A1 && this.W1) {
         this.AddCompetitionRequest.competitionOption.machineType = 3;
+      }
+      if (!this.A1 && !this.W1) {
+        this.AddCompetitionRequest.competitionOption.machineType = 0;
       }
       this.AddCompetitionRequest.countryList = [];
       this.CountryShowArr.forEach(i => {
@@ -1291,14 +1314,6 @@ export default {
       vm.AddCompetitionRequest.competitionBasicOption.timeRangeAfter = vm.timeRangeAfter * 24 + vm.timeRangeAfterhours;
       vm.AddCompetitionRequest.competitionBasicOption.fromMatchTimeBefore = this.totalMinute;
       const saveMethods = () => {
-        // 保存 结果查询时间
-        // sessionStorage.setItem(
-        //   "time",
-        //   JSON.stringify({
-        //     begin: this.AddCompetitionRequest.competition.competitionStartPeriod,
-        //     end: this.AddCompetitionRequest.competition.competitionEndPeriod
-        //   })
-        // );
         this.$axios.post(`/${href}`, vm.AddCompetitionRequest).then(res => {
           if (res.data) {
             const url = "competition";
