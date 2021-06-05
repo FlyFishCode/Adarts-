@@ -585,6 +585,7 @@ export default {
         year: new Date().getFullYear()
       },
       captain: "",
+      captainId: "",
       quarterList: [],
       monthList: [],
       changeCaptain: false,
@@ -868,16 +869,11 @@ export default {
     },
     playerListCurrentChange(val) {
       this.playerVO.pageNum = val;
-      this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
-        this.playerList = res.data.data.list;
-      });
+      this.getPlayerList();
     },
     playerListSizeChange(val) {
       this.playerVO.pageSize = val;
-      this.$axios.post("/getPlayerTeamList", this.playerVO).then(res => {
-        this.playerList = res.data.data.list;
-        this.playerListTotal = res.data.data.total;
-      });
+      this.getPlayerList();
     },
     getScheduleResultList() {
       this.$axios.post("/teamConfrontation", this.scheduleResultVO).then(res => {
@@ -984,13 +980,14 @@ export default {
       });
     },
     radioChange(data) {
-      this.captain = `${data.userId}/${data.userName}`;
+      this.captain = `${data.account}/${data.userName}`;
+      this.captainId = data.userId;
     },
     showCaptianList() {
       this.changeCaptain = true;
     },
     addCaptain() {
-      if (this.captain) {
+      if (this.captainId) {
         this.TeamInformationVO.captainId = this.captain;
         this.changeCaptain = false;
       } else {
@@ -1049,15 +1046,15 @@ export default {
     },
     save() {
       this.editTeamInfo.id = this.TeamInformationVO.id;
-      this.editTeamInfo.captainId = Number(this.TeamInformationVO.captainId.split("/")[0]);
+      this.editTeamInfo.captainId = this.captainId.split("/")[0];
       this.editTeamInfo.creatorId = this.TeamInformationVO.creatorId;
       this.editTeamInfo.shopId = this.TeamInformationVO.shopId;
       this.editTeamInfo.teamName = this.TeamInformationVO.teamName;
-      if (this.shopList.find(i => i.shopId === this.TeamInformationVO.homeShopId)) {
-        this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
-      } else {
-        this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
-      }
+      // if (this.shopList.find(i => i.shopId === this.TeamInformationVO.homeShopId)) {
+      //   this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
+      // } else {
+      //   this.editTeamInfo.shopId = this.TeamInformationVO.homeShopId;
+      // }
       this.$axios.post("/editorTeamInfo", this.editTeamInfo).then(res => {
         this.$message(res.data.msg);
         this.getPlayerList();
