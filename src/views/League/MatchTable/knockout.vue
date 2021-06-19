@@ -255,7 +255,7 @@
                 <template slot-scope="scope">
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
-                      <img src="../../../assets/team.jpg" alt />
+                      <img src="../../../assets/img/team.jpg" alt />
                     </div>
                   </div>
                 </template>
@@ -284,7 +284,7 @@
                 <template slot-scope="scope">
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
-                      <img src="../../../assets/team.jpg" alt />
+                      <img src="../../../assets/img/team.jpg" alt />
                     </div>
                   </div>
                 </template>

@@ -116,8 +116,8 @@ function changeHash(hash, type, id) {
 }
 
 const staticObj = {
-    leagueImg: require("@/assets/League.png"),
-    adartsImg: require("@/assets/Adarts.png")
+    leagueImg: require("@/assets/img/League.png"),
+    adartsImg: require("@/assets/img/Adarts.png")
 };
 const getYearList = () => {
     const year = new Date().getFullYear();

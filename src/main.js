@@ -26,14 +26,9 @@ import "./assets/fonts/iconfont.css";
 import { getQuery } from "@/components/common/Utils";
 
 Vue.use(ElementUI);
-const http = Axiso.create({
-    baseURL: "/aps/", // url = base url + request url
-    // withCredentials: true, // send cookies when cross-domain requests
-    timeout: 20000 // request timeout
-});
-Vue.prototype.$axios = http;
+Vue.prototype.$axios = Axiso;
 
-http.interceptors.request.use(
+Axiso.interceptors.request.use(
     config => {
         NProgress.start();
         const token = sessionStorage.getItem("LeagueToken");
@@ -48,7 +43,7 @@ http.interceptors.request.use(
     err => Promise.reject(err)
 );
 
-http.interceptors.response.use(
+Axiso.interceptors.response.use(
     response => {
         if (response.data.errorCode === "100406") {
             const that = new Vue();

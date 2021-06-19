@@ -41,7 +41,7 @@
         <el-table-column prop="date" :label="$t('all.tip258')" min-width="8%">
           <template>
             <div class="formImgBox">
-              <img src="../../assets/2.jpg" alt="" />
+              <img src="../../assets/img/2.jpg" alt="" />
             </div>
           </template>
         </el-table-column>

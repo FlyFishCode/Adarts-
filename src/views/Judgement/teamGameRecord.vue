@@ -156,7 +156,7 @@
           <template slot-scope="scope">
             <div v-if="scope.row.photo">
               <div class="formImgBox">
-                <img src="@/assets/2.jpg" alt="" />
+                <img src="@/assets/img/2.jpg" alt="" />
               </div>
               <div>{{ scope.row.homeName }}</div>
               <div>
@@ -177,7 +177,7 @@
           <template slot-scope="scope">
             <div v-if="scope.row.photo">
               <div class="formImgBox">
-                <img src="@/assets/2.jpg" alt="" />
+                <img src="@/assets/img/2.jpg" alt="" />
               </div>
               <div>{{ scope.row.awayName }}</div>
               <div>

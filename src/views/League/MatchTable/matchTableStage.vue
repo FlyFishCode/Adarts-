@@ -453,7 +453,7 @@
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
                       <img v-if="scope.row.homeImg" :src="scope.row.homeImg" alt />
-                      <img v-else src="../../../assets/team.jpg" />
+                      <img v-else src="../../../assets/img/team.jpg" />
                     </div>
                     <div>{{ scope.row.teamName }}</div>
                   </div>
@@ -527,7 +527,7 @@
                   <div v-if="scope.row.photo">
                     <div class="formImgBox">
                       <img v-if="scope.row.awayImg" :src="scope.row.awayImg" alt />
-                      <img v-else src="../../../assets/team.jpg" />
+                      <img v-else src="../../../assets/img/team.jpg" />
                     </div>
                     <div>{{ scope.row.awayName }}</div>
                   </div>
@@ -557,7 +557,7 @@
                 <div v-if="scope.row.photo">
                   <div class="formImgBox">
                     <img v-if="scope.row.homeImg" :src="scope.row.homeImg" alt />
-                    <img v-else src="../../../assets/team.jpg" />
+                    <img v-else src="../../../assets/img/team.jpg" />
                   </div>
                   <div>{{ scope.row.teamName }}</div>
                 </div>
@@ -631,7 +631,7 @@
                 <div v-if="scope.row.photo">
                   <div class="formImgBox">
                     <img v-if="scope.row.awayImg" :src="scope.row.awayImg" alt />
-                    <img v-else src="../../../assets/team.jpg" />
+                    <img v-else src="../../../assets/img/team.jpg" />
                   </div>
                   <div>{{ scope.row.awayName }}</div>
                 </div>

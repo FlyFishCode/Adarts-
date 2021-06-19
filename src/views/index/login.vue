@@ -22,6 +22,7 @@
 
 <script>
 // @ is an alias to /src
+import { loginHttp } from "@/assets/config/config";
 
 export default {
   name: "home",
@@ -38,14 +39,6 @@ export default {
       flag: true
     };
   },
-  // created() {
-  //   const vm = this;
-  //   document.addEventListener("keydown", vm.login, false);
-  // },
-  // destroyed() {
-  //   const vm = this;
-  //   document.removeEventListener("keydown", vm.login);
-  // },
   methods: {
     login() {
       const vm = this;
@@ -57,7 +50,7 @@ export default {
         this.check(this.$t("all.tip536"));
         return;
       }
-      this.$axios.post("/login/login", vm.user).then(res => {
+      this.$axios.post(loginHttp, vm.user).then(res => {
         if (res.data.code === 1000) {
           sessionStorage.setItem("LeagueToken", res.data.data.token);
           sessionStorage.setItem("LeagueUserId", res.data.data.id);

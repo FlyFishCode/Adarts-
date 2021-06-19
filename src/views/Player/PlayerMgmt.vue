@@ -498,7 +498,7 @@ export default {
   data() {
     return {
       staticObj,
-      person: require("../../assets/person.jpg"),
+      person: require("../../assets/img/person.jpg"),
       password: "",
       userId: "",
       playerDialog: false,

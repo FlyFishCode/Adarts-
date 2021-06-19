@@ -335,7 +335,7 @@ export default {
   components: {},
   data() {
     return {
-      team: require("../../assets/team.jpg"),
+      team: require("../../assets/img/team.jpg"),
       dialogVisible: false,
       SearchTeamPageTotal: 0,
       TeamPageTotal: 1,

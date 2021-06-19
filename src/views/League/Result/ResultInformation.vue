@@ -951,7 +951,7 @@ export default {
       LeagueResultsDialog: false,
       activeName: "1",
       diaLogTotal: 0,
-      defaultImg: require("@/assets/person.jpg"),
+      defaultImg: require("@/assets/img/person.jpg"),
       allScore: "",
       matchId: "",
       gameResultList: [{ id: 1, label: "all.tip107" }, { id: 2, label: "all.tip108" }, { id: 3, label: "all.tip109" }],

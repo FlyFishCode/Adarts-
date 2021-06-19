@@ -410,7 +410,7 @@ export default {
         if (res.data.portrait) {
           imgUrl = res.data.portrait;
         } else {
-          imgUrl = require("../../assets/person.jpg");
+          imgUrl = require("../../assets/img/person.jpg");
         }
         this.fileList.push({ url: imgUrl });
         this.playerInformationVO = res.data;

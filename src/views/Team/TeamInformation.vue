@@ -572,7 +572,7 @@ export default {
     return {
       id: "",
       staticObj,
-      personImg: require("../../assets/person.jpg"),
+      personImg: require("../../assets/img/person.jpg"),
       fileList: [],
       shopList: [],
       captainList: [],
@@ -703,7 +703,7 @@ export default {
         if (res.data.data.imgUrl) {
           imgUrl = `${res.data.data.localhostImg}${res.data.data.imgUrl}`;
         } else {
-          imgUrl = require("../../assets/team.jpg");
+          imgUrl = require("../../assets/img/team.jpg");
         }
         vm.fileList.push({ url: imgUrl });
         vm.TeamInformationVO = res.data.data;
